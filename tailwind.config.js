@@ -55,8 +55,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Poppins"', '"Segoe UI"', 'sans-serif'],
-        body: ['"Inter"', '"Segoe UI"', 'sans-serif'],
+        display: ['"Rajdhani"', '"Segoe UI"', 'sans-serif'],
+        body: ['"Manrope"', '"Segoe UI"', 'sans-serif'],
       },
       boxShadow: {
         card: '0 10px 30px -12px rgba(22, 30, 37, 0.25)',
@@ -78,11 +78,22 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        radarPulse: {
+          '0%': { transform: 'scale(0.92)', opacity: '0.15' },
+          '50%': { transform: 'scale(1)', opacity: '0.35' },
+          '100%': { transform: 'scale(1.08)', opacity: '0.1' },
+        },
+        spinSlow: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         fadeUp: 'fadeUp 0.7s ease forwards',
         marquee: 'marquee 30s linear infinite',
         floatY: 'floatY 4s ease-in-out infinite',
+        radarPulse: 'radarPulse 6s ease-in-out infinite',
+        spinSlow: 'spinSlow 18s linear infinite',
       },
     },
   },

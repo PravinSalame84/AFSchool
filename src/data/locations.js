@@ -3,34 +3,7 @@
 
 const locations = {
   Maharashtra: {
-    Mumbai: ['Airforce School International School, Andheri', 'Airforce School International School, Parel'],
-    Pune: ['Airforce School International School, Wakad', 'Airforce School International School, Hinjewadi'],
-    Nagpur: ['Airforce School International School, Nagpur Central'],
-  },
-  Karnataka: {
-    Bengaluru: ['Airforce School International School, Whitefield', 'Airforce School International School, JP Nagar'],
-    Mysuru: ['Airforce School International School, Mysuru'],
-  },
-  Gujarat: {
-    Ahmedabad: ['Airforce School International School, SG Highway'],
-    Surat: ['Airforce School International School, Surat'],
-  },
-  'Madhya Pradesh': {
-    Indore: ['Airforce School International School, Indore'],
-    Ujjain: ['Airforce School International School, Ujjain'],
-  },
-  Telangana: {
-    Hyderabad: ['Airforce School International School, Gachibowli', 'Airforce School International School, Kukatpally'],
-  },
-  'West Bengal': {
-    Kolkata: ['Airforce School International School, Salt Lake'],
-  },
-  Punjab: {
-    Ludhiana: ['Airforce School International School, Ludhiana'],
-    Amritsar: ['Airforce School International School, Amritsar'],
-  },
-  Goa: {
-    Panaji: ['Airforce School International School, Panaji'],
+    Nagpur: ['Air Force School, VayuSena Nagar'],
   },
 }
 

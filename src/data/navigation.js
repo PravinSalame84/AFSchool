@@ -3,44 +3,36 @@
 
 const navigation = [
   { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Campus Life', to: '/why-us' },
+  { label: 'Admissions', to: '/admissions' },
   {
-    label: 'About Us',
-    to: '/about',
+    label: 'Resources',
+    to: 'https://www.airforce.skoolmate.in/important-documents/',
     children: [
-      { label: 'About Airforce School', to: '/about' },
-      { label: "Chairperson's Message", to: '/about#message' },
-      { label: 'Our Initiatives', to: '/about#initiatives' },
-      { label: 'News & Achievements', to: '/blog' },
-      { label: 'Awards', to: '/about#awards' },
-      { label: 'Social Outreach', to: '/about#outreach' },
+      {
+        label: 'Mandatory Public Disclosure',
+        to: 'https://www.airforce.skoolmate.in/important-documents/',
+        external: true,
+      },
+      {
+        label: 'Parent Corner',
+        to: 'https://www.airforce.skoolmate.in/parent-corner/',
+        external: true,
+      },
+      {
+        label: 'Pay Fee',
+        to: 'https://www.airforce.skoolmate.in/payfee/',
+        external: true,
+      },
+      {
+        label: 'Photo Gallery',
+        to: 'https://www.airforce.skoolmate.in/photo-gallery/',
+        external: true,
+      },
     ],
   },
-  {
-    label: 'Why Airforce School',
-    to: '/why-us',
-    children: [
-      { label: 'The Right Curriculum', to: '/why-us#curriculum' },
-      { label: 'The Right Faculty', to: '/why-us#faculty' },
-      { label: 'The Right Environment', to: '/why-us#environment' },
-      { label: 'The Right Approach', to: '/why-us#approach' },
-      { label: 'The Right Skills', to: '/why-us#skills' },
-    ],
-  },
-  {
-    label: 'Admissions',
-    to: '/admissions',
-    children: [
-      { label: 'Admissions AY 2026–27', to: '/admissions' },
-      { label: 'Transfer Within Network', to: '/admissions#transfer' },
-      { label: 'Fee Structure', to: '/admissions#fees' },
-      { label: 'Scholarship Programme', to: '/admissions#scholarship' },
-    ],
-  },
-  { label: 'Locations', to: '/locations' },
-  { label: 'Careers', to: 'https://careers.example.com', external: true },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Alumni', to: '/alumni' },
-  { label: 'Contact Us', to: '/contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default navigation
