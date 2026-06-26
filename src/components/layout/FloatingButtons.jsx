@@ -21,7 +21,7 @@ export default function FloatingButtons() {
       )}
       {siteConfig.features.floatingWhatsapp && (
         <a
-          href={`https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Brightland`}
+          href={`https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Air%20Force%20School%20Nagpur`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"

@@ -1,55 +1,35 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react'
+import { ChevronRight, Mail, MapPin, Phone } from 'lucide-react'
 import Container from '../ui/Container'
 import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
-import { states } from '../../data/locations'
+import schoolContent from '../../data/schoolContent'
 
 const quickLinks = [
   { label: 'About Us', to: '/about' },
-  { label: 'Why Airforce School', to: '/why-us' },
+  { label: 'Campus Life', to: '/why-us' },
   { label: 'Admissions', to: '/admissions' },
-  { label: 'Locations', to: '/locations' },
-]
-
-const resourceLinks = [
-  { label: 'Blog', to: '/blog' },
-  { label: 'Alumni', to: '/alumni' },
-  { label: 'FAQs', to: '/about#faqs' },
-  { label: 'Contact Us', to: '/contact' },
-]
-
-const socialIcons = [
-  { Icon: Facebook, href: siteConfig.social.facebook, label: 'Facebook' },
-  { Icon: Twitter, href: siteConfig.social.twitter, label: 'Twitter' },
-  { Icon: Instagram, href: siteConfig.social.instagram, label: 'Instagram' },
-  { Icon: Linkedin, href: siteConfig.social.linkedin, label: 'LinkedIn' },
-  { Icon: Youtube, href: siteConfig.social.youtube, label: 'YouTube' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-sky back-light/85">
-      <Container className="px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative overflow-hidden bg-primary-900 text-white">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      <div className="pointer-events-none absolute -top-20 right-0 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+      <Container className="relative px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.8fr_0.9fr_1fr]">
           <div>
             <Logo tone="light" />
-            <p className="mt-4 text-sm leading-relaxed text-skyback-light/70">
-              Educating ambitious, kind and capable learners since {siteConfig.yearFounded} — across{' '}
-              {states.length}+ states and counting.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
+              A redesigned school experience for Air Force School VayuSena Nagar, with a stronger digital
+              identity, modern visuals and clear parent access points.
             </p>
-            <div className="mt-5 flex gap-3">
-              {socialIcons.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="focus-ring flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-accent"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {schoolContent.hero.badges.map((badge) => (
+                <span key={badge} className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
+                  {badge}
+                </span>
               ))}
             </div>
           </div>
@@ -59,8 +39,8 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring text-sm transition hover:text-accent">
-                    {link.label}
+                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent">
+                    <ChevronRight className="h-4 w-4" /> {link.label}
                   </Link>
                 </li>
               ))}
@@ -70,11 +50,16 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wide text-white">Resources</h4>
             <ul className="space-y-2.5">
-              {resourceLinks.map((link) => (
+              {schoolContent.resources.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring text-sm transition hover:text-accent">
-                    {link.label}
-                  </Link>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent"
+                  >
+                    <ChevronRight className="h-4 w-4" /> {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -99,18 +84,22 @@ export default function Footer() {
                   {siteConfig.contact.email}
                 </a>
               </li>
+              <li className="pt-2">
+                <a
+                  href={schoolContent.contact.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex rounded-full border border-white/15 px-4 py-2 font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-accent hover:text-accent"
+                >
+                  Open Campus Map
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-5">
-          <p className="text-xs leading-relaxed text-skyback-light/60">
-            Campuses across {states.join(' \u00b7 ')}
-          </p>
-        </div>
-
         <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-skyback-light/60 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.brandName} {siteConfig.brandSuffix}. Copyright. All rights reserved. Air Force School, Nagpur.</p>
+          <p>&copy; {new Date().getFullYear()} {siteConfig.brandName}, {siteConfig.brandSuffix}. All rights reserved.</p>
           <div className="flex gap-5">
             <Link to="/privacy-policy" className="focus-ring hover:text-accent">
               Privacy Policy

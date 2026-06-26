@@ -1,18 +1,17 @@
 import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
-import SectionHeading from '../components/ui/SectionHeading'
-import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Input from '../components/ui/Input'
 import Button from '../components/ui/Button'
 import siteConfig from '../data/siteConfig'
+import schoolContent from '../data/schoolContent'
 
 const infoCards = [
-  { icon: MapPin, title: 'Head Office', value: siteConfig.contact.address },
-  { icon: Phone, title: 'Call Us', value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
-  { icon: Mail, title: 'Email Us', value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
-  { icon: Clock, title: 'Office Hours', value: 'Mon – Sat, 9:00 AM – 5:30 PM' },
+  { icon: MapPin, title: 'Campus Address', value: schoolContent.contact.address },
+  { icon: Phone, title: 'Call Us', value: schoolContent.contact.phone, href: `tel:${siteConfig.contact.phone}` },
+  { icon: Mail, title: 'Email Us', value: schoolContent.contact.email, href: `mailto:${siteConfig.contact.email}` },
+  { icon: Clock, title: 'Office Support', value: 'Please contact the school office during working hours.' },
 ]
 
 export default function Contact() {
@@ -20,10 +19,10 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
 
-  const update = (field) => (e) => setForm((p) => ({ ...p, [field]: e.target.value }))
+  const update = (field) => (event) => setForm((prev) => ({ ...prev, [field]: event.target.value }))
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (event) => {
+    event.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your name'
     if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email'
@@ -35,42 +34,43 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        crumb="Contact Us"
-        eyebrow="We're Here to Help"
-        title="Get in Touch with Airforce School"
-        subtitle="Questions about admissions, campuses or anything else — our team typically replies within one business day."
+        crumb="Contact"
+        eyebrow="Get In Touch"
+        title="Reach the school office, find the campus and start a conversation."
+        subtitle="Questions about admissions, facilities or school details can be shared through the form below or by contacting the school directly."
+        image="https://www.airforce.skoolmate.in/wp-content/uploads/2021/11/CHIEF.jpg"
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
+      <section className="section-pad px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {infoCards.map((card, i) => (
-              <RevealOnScroll key={card.title} delay={i * 80}>
-                <div className="h-full rounded-xl2 bg-white p-6 shadow-soft">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-skyback-soft text-primary-700">
-                    <card.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 text-sm font-bold text-primary-900">{card.title}</h3>
-                  {card.href ? (
-                    <a href={card.href} className="focus-ring mt-1 block text-sm text-primary-500 hover:text-accent-dark">
-                      {card.value}
-                    </a>
-                  ) : (
-                    <p className="mt-1 text-sm leading-relaxed text-primary-500">{card.value}</p>
-                  )}
-                </div>
-              </RevealOnScroll>
+            {infoCards.map((card, index) => (
+              <div key={card.title} className="frost-card rounded-[1.8rem] p-6" style={{ animationDelay: `${index * 90}ms` }}>
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-900 text-white">
+                  <card.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 text-sm font-bold uppercase tracking-[0.16em] text-primary-400">{card.title}</h3>
+                {card.href ? (
+                  <a href={card.href} className="focus-ring mt-2 block text-sm leading-relaxed text-primary-700 hover:text-accent-dark">
+                    {card.value}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-sm leading-relaxed text-primary-700">{card.value}</p>
+                )}
+              </div>
             ))}
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2">
-            <RevealOnScroll>
-              <SectionHeading eyebrow="Send a Message" title="Drop us a line" />
+          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="frost-card rounded-[2.2rem] p-8">
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Send A Message</p>
+              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900">We’ll help you quickly.</h2>
+
               {sent ? (
-                <div className="mt-8 flex flex-col items-start gap-3 rounded-xl2 bg-white p-7 shadow-soft">
+                <div className="mt-8 flex flex-col items-start gap-3 rounded-[1.8rem] bg-white p-7 shadow-soft">
                   <CheckCircle2 className="h-10 w-10 text-accent" />
-                  <h3 className="text-lg font-bold text-primary-900">Message sent — thank you!</h3>
-                  <p className="text-sm text-primary-500">We'll get back to you at {form.email} shortly.</p>
+                  <h3 className="text-lg font-bold uppercase text-primary-900">Message sent successfully.</h3>
+                  <p className="text-sm text-primary-500">The school team will get back to you at {form.email}.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-7 space-y-4" noValidate>
@@ -88,31 +88,42 @@ export default function Contact() {
                       rows={5}
                       value={form.message}
                       onChange={update('message')}
-                      className={`focus-ring w-full rounded-lg border px-4 py-2.5 text-[15px] text-primary-900 transition ${
+                      className={`focus-ring w-full rounded-[1.2rem] border px-4 py-3 text-[15px] text-primary-900 transition ${
                         errors.message ? 'border-red-400 bg-red-50' : 'border-primary-100 bg-white focus:border-accent'
                       }`}
                       placeholder="How can we help?"
                     />
                     {errors.message && <p className="mt-1 text-xs font-medium text-red-500">{errors.message}</p>}
                   </div>
-                  <Button type="submit" variant="primary" className="w-full">
+                  <Button type="submit" variant="dark" className="w-full">
                     Send Message
                   </Button>
                 </form>
               )}
-            </RevealOnScroll>
+            </div>
 
-            <RevealOnScroll delay={100}>
-              <SectionHeading eyebrow="Find Us" title="Head Office Location" />
-              <div className="mt-7 overflow-hidden rounded-xl2 shadow-soft">
-                <iframe
-                  title="Airforce School head office map"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=72.83%2C19.10%2C72.89%2C19.14&layer=mapnik"
-                  className="h-[360px] w-full border-0"
-                  loading="lazy"
-                />
+            <div className="overflow-hidden rounded-[2.2rem] border border-white/70 bg-white/70 p-4 shadow-card backdrop-blur-xl">
+              <div className="mb-4 flex items-center justify-between px-2">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Campus Location</p>
+                  <h2 className="text-2xl font-bold uppercase text-primary-900">Air Force School VayuSena Nagar</h2>
+                </div>
+                <a
+                  href={schoolContent.contact.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring rounded-full bg-primary-900 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white"
+                >
+                  Open Map
+                </a>
               </div>
-            </RevealOnScroll>
+              <iframe
+                title="Air Force School VayuSena Nagar map"
+                src={schoolContent.contact.mapEmbed}
+                className="h-[480px] w-full rounded-[1.8rem] border-0"
+                loading="lazy"
+              />
+            </div>
           </div>
         </Container>
       </section>
