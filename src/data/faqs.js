@@ -1,33 +1,33 @@
 const faqs = [
   {
-    question: 'What boards/curricula does Airforce School offer?',
+    question: 'Which classes are currently available at Air Force School, VayuSena Nagar?',
     answer:
-      'Our campuses offer CBSE, ICSE (CISCE), the state SSC board, Cambridge International (IGCSE) and the International Baccalaureate (IB), depending on the campus — so families can choose the pathway that fits their child best.',
+      'The school currently has classes from LKG to Class IX, as described on the official school website.',
   },
   {
-    question: 'How many campuses does Airforce School operate?',
+    question: 'Is the school affiliated to CBSE?',
     answer:
-      'Airforce School Educational & Cultural Society runs 142 owned campuses and partners with 96 additional schools across India, offering programmes from Pre-Nursery through Grade 12.',
+      'Yes. Air Force School, VayuSena Nagar, Nagpur publishes CBSE Affiliation No. 1130860 in its official school information.',
   },
   {
-    question: 'Is Airforce School International School privately owned?',
+    question: 'How do I begin the admission process?',
     answer:
-      'Yes — all Airforce School campuses are privately owned and managed, while following the academic standards and curriculum frameworks of the network.',
+      'Families can contact the school office or submit an admission enquiry through the website. The admissions team then guides class availability, required documents and next steps.',
   },
   {
-    question: 'How do I start the admissions process?',
+    question: 'What facilities are available on campus?',
     answer:
-      'Admissions are rolling and processed on a first-come, first-served basis. Use the enquiry form on this site or visit the Admissions page to start an application for your nearest campus.',
+      'The school highlights Smartboards, laboratory and library access, outdoor stage, play area, synthetic court, dedicated music and art-craft rooms, sports spaces, counselling support, safe drinking water and hygienic washrooms.',
   },
   {
-    question: 'Do you offer transport and other facilities?',
+    question: 'Where can parents find official documents and updates?',
     answer:
-      'Most campuses offer supervised transport on fixed routes, along with labs, libraries, sports facilities and after-school care. Availability varies by campus — check with your local school office for specifics.',
+      'Parents can use the Mandatory Public Disclosure section, Parent Corner, Pay Fee link, school downloads and notice resources published through the official school website.',
   },
   {
-    question: 'Can I transfer my child between Airforce School campuses?',
+    question: 'How can I contact the school office directly?',
     answer:
-      'Yes. Our Inter-Network Transfer programme makes it simple for families relocating between cities to re-enrol their child at another Airforce School campus with minimal paperwork.',
+      'You can reach the school office by phone at 0712-2511407 or by email at airforceschoolvsn@gmail.com. The admin contact published on the official site is 9146071487.',
   },
 ]
 

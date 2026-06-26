@@ -7,6 +7,18 @@
   --page-bg: #eef3f8;
   --panel: rgba(255, 255, 255, 0.78);
   --ink: #111a24;
+  --muted: #455468;
+  --panel-border: rgba(255, 255, 255, 0.7);
+  --field-bg: rgba(255, 255, 255, 0.9);
+}
+
+.dark {
+  --page-bg: #09111b;
+  --panel: rgba(11, 19, 31, 0.72);
+  --ink: #f3f7fb;
+  --muted: #c5d1de;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --field-bg: rgba(13, 22, 36, 0.92);
 }
 
 * {
@@ -20,11 +32,22 @@ html, body {
     linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%);
 }
 
+.dark html,
+.dark body,
+html.dark,
+body.dark {
+  background:
+    radial-gradient(circle at top left, rgba(0, 212, 250, 0.08), transparent 24%),
+    radial-gradient(circle at top right, rgba(255, 103, 31, 0.08), transparent 20%),
+    linear-gradient(180deg, #08111c 0%, #0d1624 100%);
+}
+
 body {
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 250ms ease, color 250ms ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .frost-card {
   background: var(--panel);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--panel-border);
   box-shadow: 0 24px 60px -32px rgba(12, 24, 41, 0.4);
   backdrop-filter: blur(24px);
 }
@@ -106,9 +129,13 @@ h1, h2, h3, h4, h5, h6 {
 .nav-curve {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--panel-border);
   backdrop-filter: blur(24px);
   box-shadow: 0 18px 40px -28px rgba(22, 30, 37, 0.55);
+}
+
+.dark .nav-curve {
+  background: rgba(9, 17, 28, 0.72);
 }
 
 .contour-lines {
@@ -191,6 +218,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 0.48rem;
   border-radius: 999px;
   background: linear-gradient(180deg, #00d4fa, #ff671f);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.glass-input {
+  background: var(--field-bg);
 }
 
 .hero-index {
