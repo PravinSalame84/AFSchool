@@ -4,6 +4,9 @@
 
 :root {
   --header-height: 88px;
+  --page-bg: #eef3f8;
+  --panel: rgba(255, 255, 255, 0.78);
+  --ink: #111a24;
 }
 
 * {
@@ -11,17 +14,22 @@
 }
 
 html, body {
-  background-color: #BAE2EE;
+  background:
+    radial-gradient(circle at top left, rgba(93, 138, 168, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(255, 103, 31, 0.08), transparent 24%),
+    linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%);
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: #161E25;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  letter-spacing: 0.01em;
 }
 
 /* Custom scrollbar */
@@ -68,4 +76,135 @@ h1, h2, h3, h4, h5, h6 {
 .focus-ring:focus-visible {
   outline: 3px solid #F0934B;
   outline-offset: 2px;
+}
+
+.mesh-surface {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.64)),
+    radial-gradient(circle at 20% 20%, rgba(0, 212, 250, 0.12), transparent 24%),
+    radial-gradient(circle at 80% 0%, rgba(255, 103, 31, 0.12), transparent 20%);
+  backdrop-filter: blur(22px);
+}
+
+.frost-card {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 24px 60px -32px rgba(12, 24, 41, 0.4);
+  backdrop-filter: blur(24px);
+}
+
+.panel-hover {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.panel-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px -34px rgba(12, 24, 41, 0.42);
+  border-color: rgba(93, 138, 168, 0.35);
+}
+
+.nav-curve {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 18px 40px -28px rgba(22, 30, 37, 0.55);
+}
+
+.contour-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 42%, rgba(0,0,0,0.03) 43%, rgba(255,255,255,0) 44%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 52%, rgba(0,0,0,0.03) 53%, rgba(255,255,255,0) 54%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 62%, rgba(0,0,0,0.03) 63%, rgba(255,255,255,0) 64%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.spiral-wire {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(28, 45, 68, 0.12);
+  animation: orbitDrift 18s linear infinite;
+}
+
+.spiral-wire.delay {
+  animation-direction: reverse;
+  animation-duration: 22s;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(circle, rgba(255, 147, 75, 0.45) 0%, rgba(255, 147, 75, 0.18) 32%, rgba(255, 147, 75, 0) 66%);
+  filter: blur(4px);
+}
+
+.student-mask {
+  clip-path: polygon(12% 0%, 100% 0%, 100% 84%, 86% 100%, 10% 100%, 0% 12%);
+}
+
+.slant-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.slant-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 auto;
+  width: 42%;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.26) 100%);
+  clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+}
+
+.marquee-shell {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  min-width: max-content;
+  gap: 1rem;
+  animation: marqueeFlow 28s linear infinite;
+}
+
+.marquee-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(17, 26, 36, 0.86);
+  color: white;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.marquee-chip::before {
+  content: '';
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #00d4fa, #ff671f);
+}
+
+.hero-index {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+@keyframes orbitDrift {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.04); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes marqueeFlow {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
