@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-height: 88px;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background-color: #BAE2EE;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #161E25;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #D7EFF6;
+}
+::-webkit-scrollbar-thumb {
+  background: #526F86;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2A3946;
+}
+
+/* Hide scrollbar for horizontal carousels but keep it scrollable */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Reveal-on-scroll utility, toggled by useOnScreen hook */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
+.section-pad {
+  padding-top: clamp(3rem, 6vw, 5.5rem);
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid #F0934B;
+  outline-offset: 2px;
+}
