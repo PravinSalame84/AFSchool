@@ -1,0 +1,43 @@
+// ─────────────────────────────────────────────────────────────────────────
+// SITE CONFIG — the single source of truth for branding & contact details.
+// Change the values here to re-skin the entire site (name, logo text,
+// contact info, socials, CTAs) without touching any component code.
+// ─────────────────────────────────────────────────────────────────────────
+
+const siteConfig = {
+  brandName: 'Air Force School',
+  brandSuffix: 'VayuSena Nagar, Nagpur',
+  shortName: 'AFS Nagpur',
+  tagline: 'Discipline, care and future-ready learning for every child',
+  yearsOfExperience: 58,
+  yearFounded: 1968,
+
+  contact: {
+    address: 'Airforce School House, Air Force School VayuSena Nagar, Nagpur - 440007, Maharashtra, India',
+    email: 'airforceschoolvsn@gmail.com',
+    phone: '0712-2511407',
+    whatsapp: '9146071487', // digits only, with country code
+  },
+
+  social: {
+    website: 'https://www.airforce.skoolmate.in/',
+    maps: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7',
+    gallery: 'https://www.airforce.skoolmate.in/photo-gallery/',
+  },
+
+  cta: {
+    enquire: 'Schedule an Enquiry',
+    brochure: 'Request School Details',
+    admissions: 'Start Admission Enquiry',
+  },
+
+  // Toggle features on/off without deleting code — flip to false to hide a
+  // whole section across the site from one place.
+  features: {
+    floatingWhatsapp: true,
+    floatingEnquire: true,
+    announcementBar: true,
+  },
+}
+
+export default siteConfig
