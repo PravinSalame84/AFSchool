@@ -4,63 +4,102 @@ import { ArrowRight } from 'lucide-react'
 import { Link as RouterLink } from 'react-router-dom'
 
 const sizes = {
-  sm: { px: 2.2, py: 1.1, fontSize: '0.875rem' },
-  md: { px: 3, py: 1.45, fontSize: '0.95rem' },
-  lg: { px: 4, py: 1.75, fontSize: '1rem' },
+  sm: { px: 3.2, py: 1.35, fontSize: '0.875rem' },
+  md: { px: 4.2, py: 1.7, fontSize: '0.95rem' },
+  lg: { px: 5, py: 2, fontSize: '1rem' },
 }
 
 const variantSx = {
   primary: (theme) => ({
     color: '#fff',
-    background: 'linear-gradient(90deg, #f0934b 0%, #d97a2e 100%)',
-    boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
+    backgroundColor: 'var(--primary, #F7943D)',
+    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : 'transparent'}`,
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? '0 14px 30px rgba(0, 0, 0, 0.34)'
+        : '0 10px 20px rgba(15, 35, 56, 0.16)',
     '&:hover': {
-      background: 'linear-gradient(90deg, #d97a2e 0%, #b96728 100%)',
+      backgroundColor: 'var(--primary-hover, #E67E22)',
+      boxShadow:
+        theme.palette.mode === 'dark'
+          ? '0 18px 34px rgba(0, 0, 0, 0.4)'
+          : '0 14px 28px rgba(15, 35, 56, 0.2)',
     },
   }),
-  dark: () => ({
-    color: '#fff',
-    background: 'linear-gradient(90deg, #1d213c 0%, #2a3946 100%)',
-    boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
+  dark: (theme) => ({
+    color: theme.palette.mode === 'dark' ? '#1d213c' : '#fff',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(215,239,246,0.94) 100%)'
+        : 'linear-gradient(90deg, #1d213c 0%, #2a3946 100%)',
+    border: `1px solid ${
+      theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#1d213c', 0.04)
+    }`,
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? '0 14px 30px rgba(0, 0, 0, 0.28)'
+        : '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
-      background: 'linear-gradient(90deg, #161e25 0%, #344656 100%)',
+      background:
+        theme.palette.mode === 'dark'
+          ? 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 100%)'
+          : 'linear-gradient(90deg, #161e25 0%, #344656 100%)',
+      boxShadow:
+        theme.palette.mode === 'dark'
+          ? '0 18px 34px rgba(0, 0, 0, 0.34)'
+          : '0 14px 28px rgba(17, 35, 56, 0.16)',
     },
   }),
   outline: (theme) => ({
     color: theme.palette.mode === 'dark' ? '#f7fbff' : '#161e25',
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.75))'
+        ? 'linear-gradient(135deg, rgba(16,24,36,0.94), rgba(35,49,67,0.82))'
         : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.78))',
     border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.12) : alpha('#161e25', 0.12)}`,
-    boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? '0 12px 28px rgba(0, 0, 0, 0.26)'
+        : '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
       color: theme.palette.mode === 'dark' ? '#161e25' : '#fff',
       background:
         theme.palette.mode === 'dark'
-          ? 'linear-gradient(135deg, rgba(255,255,255,1), rgba(241,245,249,1))'
+          ? 'linear-gradient(135deg, rgba(255,255,255,1), rgba(228,246,251,1))'
           : 'linear-gradient(90deg, #161e25 0%, #2a3946 100%)',
       borderColor: 'transparent',
+      boxShadow:
+        theme.palette.mode === 'dark'
+          ? '0 18px 34px rgba(0, 0, 0, 0.32)'
+          : '0 14px 28px rgba(17, 35, 56, 0.16)',
     },
   }),
-  ghost: () => ({
+  ghost: (theme) => ({
     color: '#fff',
-    backgroundColor: alpha('#ffffff', 0.1),
-    border: `1px solid ${alpha('#ffffff', 0.3)}`,
+    backgroundColor: theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : alpha('#ffffff', 0.1),
+    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#ffffff', 0.3)}`,
     backdropFilter: 'blur(16px)',
+    boxShadow: theme.palette.mode === 'dark' ? '0 10px 24px rgba(0, 0, 0, 0.22)' : 'none',
     '&:hover': {
-      backgroundColor: alpha('#ffffff', 0.18),
+      backgroundColor: theme.palette.mode === 'dark' ? alpha('#ffffff', 0.14) : alpha('#ffffff', 0.18),
     },
   }),
   light: (theme) => ({
     color: theme.palette.mode === 'dark' ? '#161e25' : '#161e25',
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(241,245,249,1) 100%)'
+        ? 'linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(215,239,246,0.94) 100%)'
         : 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(228,246,251,1) 100%)',
-    boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
+    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#ffffff', 0.6)}`,
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? '0 14px 30px rgba(0, 0, 0, 0.28)'
+        : '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
-      background: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%)',
+      background:
+        theme.palette.mode === 'dark'
+          ? 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%)'
+          : 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%)',
     },
   }),
 }
@@ -95,10 +134,11 @@ export default function Button({
       sx={(theme) => ({
         minWidth: 0,
         borderRadius: '999px',
-        fontWeight: 700,
+        fontWeight: 600,
         letterSpacing: '0.01em',
         lineHeight: 1.1,
-        transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease',
+        textTransform: 'none',
+        transition: 'all 0.3s ease',
         '&:hover': {
           transform: 'translateY(-1px)',
         },

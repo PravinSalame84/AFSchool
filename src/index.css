@@ -10,7 +10,7 @@
   --page-bg-alt: #B8DBEA;
 
   /* Cards */
-  --surface: #FFFFFF;
+  --surface: #ffffff;
   --surface-soft: rgba(255,255,255,0.82);
   --surface-strong: rgba(255,255,255,0.94);
 
@@ -60,6 +60,13 @@
   --submenu-border: rgba(186, 226, 238, 0.12);
   --field-bg: rgba(13, 22, 36, 0.96);
   --hero-grid: rgba(186, 226, 238, 0.08);
+
+  /* Dark Accent */
+  --primary: #F7943D;
+  --primary-hover: #E67E22;
+
+  --icon-bg: rgba(247, 148, 61, 0.14);
+  --icon-color: #FFB56C;
 }
 
 * {
@@ -83,20 +90,20 @@ body.dark {
 }
 
 .btn-primary{
-    background:#F7943D;
+    background:var(--primary);
     color:#fff;
     border:none;
 }
 
 .btn-primary:hover{
-    background:#E67E22;
+    background:var(--primary-hover);
 }
 
 .button-gradient{
     background:linear-gradient(
         90deg,
-        #F9A14D 0%,
-        #F7943D 100%
+        color-mix(in srgb, var(--primary) 88%, white) 0%,
+        var(--primary) 100%
     );
 
     color:white;
@@ -106,7 +113,7 @@ body.dark {
     width:64px;
     height:64px;
     border-radius:50%;
-    background:#F8EEE8;
+    background:var(--icon-bg);
 
     display:flex;
     align-items:center;
@@ -114,7 +121,7 @@ body.dark {
 }
 
 .icon-circle svg{
-    color:#D67A2D;
+    color:var(--icon-color);
 }
 
 body {
