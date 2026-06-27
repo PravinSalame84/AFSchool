@@ -1,10 +1,12 @@
 import iconMap from './iconMap'
 
 const tones = {
-  primary: { blobFrom: '#486276', blobTo: '#2A3946', iconColor: '#FFFFFF', ringColor: '#BAE2EE' },
-  accent: { blobFrom: '#F0934B', blobTo: '#D97A2E', iconColor: '#FFFFFF', ringColor: '#161E25' },
-  sky: { blobFrom: '#D7EFF6', blobTo: '#6789A6', iconColor: '#161E25', ringColor: '#F0934B' },
-  dark: { blobFrom: '#161E25', blobTo: '#0E1418', iconColor: '#BAE2EE', ringColor: '#F0934B' },
+  primary: { blobFrom: '#D7EFF6', blobTo: '#A8C5D7', iconColor: '#F0934B', ringColor: '#161E25' },
+  accent: { blobFrom: '#FCE4D0', blobTo: '#F6C090', iconColor: '#D97A2E', ringColor: '#161E25' },
+  success: { blobFrom: '#D9EEDC', blobTo: '#A9D1B2', iconColor: '#046A38', ringColor: '#F0934B' },
+  earth: { blobFrom: '#EFE2D4', blobTo: '#D5BA9A', iconColor: '#8A6742', ringColor: '#526F86' },
+  slate: { blobFrom: '#E7EEF3', blobTo: '#C0D0DC', iconColor: '#526F86', ringColor: '#F0934B' },
+  dark: { blobFrom: '#D7DEE6', blobTo: '#AFBCC8', iconColor: '#2A3946', ringColor: '#046A38' },
 }
 
 // A handful of organic blob outlines so illustrations don't feel identical

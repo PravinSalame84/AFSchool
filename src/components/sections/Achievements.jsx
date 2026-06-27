@@ -28,7 +28,7 @@ export default function Achievements() {
                 data-carousel-item
                 className="w-[260px] flex-shrink-0 snap-start rounded-xl2 bg-white p-6 shadow-soft sm:w-[300px]"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent-dark">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-accent/20 to-[#fbc998] text-accent-dark">
                   <Award className="h-6 w-6" />
                 </div>
                 <p className="mt-4 text-xs font-bold uppercase tracking-wide text-accent-dark">{item.year}</p>

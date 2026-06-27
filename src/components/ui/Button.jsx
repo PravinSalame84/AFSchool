@@ -31,8 +31,8 @@ const variantSx = {
     background:
       theme.palette.mode === 'dark'
         ? 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.75))'
-        : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.7))',
-    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.12) : alpha('#161e25', 0.16)}`,
+        : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.78))',
+    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.12) : alpha('#161e25', 0.12)}`,
     boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
       color: theme.palette.mode === 'dark' ? '#161e25' : '#fff',

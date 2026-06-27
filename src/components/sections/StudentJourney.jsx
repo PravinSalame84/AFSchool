@@ -6,6 +6,8 @@ import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import studentJourney from '../../data/studentJourney'
 
+const iconTones = ['accent', 'success', 'earth', 'slate', 'dark', 'primary']
+
 export default function StudentJourney() {
   return (
     <section className="section-pad bg-skyback">
@@ -23,7 +25,7 @@ export default function StudentJourney() {
           {studentJourney.map((item, i) => (
             <RevealOnScroll key={item.title} delay={(i % 3) * 90}>
               <Card className="h-full p-7">
-                <BlobIcon icon={item.icon} tone={i % 2 === 0 ? 'primary' : 'accent'} blobIndex={i} size={76} />
+                <BlobIcon icon={item.icon} tone={iconTones[i % iconTones.length]} blobIndex={i} size={76} />
                 <h3 className="mt-5 text-lg font-bold text-primary-900">{item.title}</h3>
                 <p className="mt-2.5 text-sm leading-relaxed text-primary-500">{item.description}</p>
               </Card>

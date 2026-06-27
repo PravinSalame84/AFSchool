@@ -14,7 +14,7 @@ export default function SectionHeading({
     <div className={`max-w-2xl ${alignment} ${className}`}>
       {eyebrow && (
         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-dark">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+          <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-b from-[#00d4fa] to-[#ff671f]" aria-hidden="true" />
           {eyebrow}
         </span>
       )}

@@ -16,6 +16,8 @@ const iconForImage = {
   tours: 'Plane',
 }
 
+const iconTones = ['primary', 'accent', 'success', 'earth', 'slate', 'dark']
+
 export default function Initiatives() {
   return (
     <section className="section-pad bg-skyback-soft">
@@ -30,10 +32,14 @@ export default function Initiatives() {
 
         <div className="mt-10">
           <Carousel ariaLabel="Airforce School initiatives">
-            {initiatives.map((item) => (
+            {initiatives.map((item, index) => (
               <div key={item.title} data-carousel-item className="w-[280px] flex-shrink-0 snap-start sm:w-[320px]">
                 <Card className="flex h-full flex-col p-7">
-                  <BlobIcon icon={iconForImage[item.image] || 'Sparkles'} tone="primary" size={72} />
+                  <BlobIcon
+                    icon={iconForImage[item.image] || 'Sparkles'}
+                    tone={iconTones[index % iconTones.length]}
+                    size={72}
+                  />
                   <h3 className="mt-5 text-base font-bold text-primary-900">{item.title}</h3>
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-primary-500">{item.description}</p>
                   <a href={item.href} className="focus-ring mt-4 text-sm font-bold text-accent-dark hover:underline">

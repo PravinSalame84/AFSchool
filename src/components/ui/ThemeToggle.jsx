@@ -31,7 +31,7 @@ export default function ThemeToggle({ className = '' }) {
           background:
             theme.palette.mode === 'dark'
               ? 'linear-gradient(135deg, rgba(18,28,42,0.95), rgba(41,57,70,0.86))'
-              : 'linear-gradient(135deg, rgba(255,255,255,1), rgba(255,255,255,1))',
+              : 'linear-gradient(135deg, rgba(255,255,255,1), rgba(228,246,251,1))',
         },
       })}
     >

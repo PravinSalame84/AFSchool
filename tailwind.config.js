@@ -23,6 +23,9 @@ export default {
           honey: '#E7AB33',
           saffron: '#FF671F',
           green: '#046A38',
+          brown: '#8A6742',
+          grayBlue: '#6B8093',
+          charcoal: '#2A3946',
           white: '#FFFFFF',
           red: '#FF0000',
         },
@@ -93,9 +96,9 @@ export default {
         body: ['"Manrope"', '"Segoe UI"', 'sans-serif'],
       },
       boxShadow: {
-        card: '0 20px 50px -28px rgba(10, 28, 45, 0.34)',
-        soft: '0 10px 28px rgba(17, 35, 56, 0.1)',
-        menu: '0 22px 48px -24px rgba(10, 28, 45, 0.32)',
+        card: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+        soft: '0 12px 28px rgba(17, 26, 36, 0.08)',
+        menu: '0 24px 52px -24px rgba(17, 26, 36, 0.26)',
       },
       borderRadius: {
         xl2: '1.25rem',

@@ -194,8 +194,8 @@ export default function Hero() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-400">{slide.label}</p>
-                          <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{slide.title}</p>
-                          <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{slide.description}</p>
+                          {/* <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{slide.title}</p> */}
+                          {/* <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{slide.description}</p> */}
                         </div>
                         <ArrowUpRight
                           className={`mt-0.5 h-4 w-4 flex-shrink-0 transition ${

@@ -5,8 +5,8 @@ import OptimizedImage from './OptimizedImage'
 
 export default function PageHero({ eyebrow, title, subtitle, crumb, image }) {
   return (
-    <section className="relative overflow-hidden bg-primary-900 py-16 sm:py-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.25),transparent_28%),radial-gradient(circle_at_left,rgba(93,138,168,0.28),transparent_24%)]" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-primary-900 to-[#214f79] py-16 sm:py-20">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.25),transparent_28%),radial-gradient(circle_at_left,rgba(88,102,61,0.28),transparent_24%)]" />
       <div className="contour-lines opacity-30" />
       <Container className="relative px-4 sm:px-6 lg:px-8">
         <nav className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-skyback-light/60">

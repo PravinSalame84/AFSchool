@@ -177,7 +177,7 @@ export default function Home() {
               </div>
 
               <div className="relative overflow-hidden rounded-[2.2rem] bg-primary-900 p-6 text-white shadow-card">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.3),transparent_28%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.3),transparent_28%)]" />
                 <p className="relative text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Parent Access</p>
                 <div className="relative mt-4 flex flex-wrap gap-3">
                   {schoolContent.resources.slice(0, 3).map((resource) => (
@@ -398,7 +398,7 @@ export default function Home() {
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
           <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-secondary via-primary-900 to-[#214f79] p-8 text-white shadow-card sm:p-10">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(0,212,250,0.12),transparent_20%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(107,124,70,0.12),transparent_20%)]" />
             <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.9fr]">
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
                 <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Admissions</p>

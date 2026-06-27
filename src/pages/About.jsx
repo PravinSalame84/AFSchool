@@ -86,7 +86,7 @@ export default function About() {
               </motion.div>
 
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.22} variants={reveal} className="relative overflow-hidden rounded-[2rem] bg-primary-900 p-6 text-white shadow-card">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.28),transparent_28%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.28),transparent_28%)]" />
                 <div className="relative">
                   <div className="flex items-center gap-3">
                     <ShieldCheck className="h-5 w-5 text-accent" />

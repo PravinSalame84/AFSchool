@@ -19,7 +19,7 @@ export default function Modal({ open, onClose, title, children }) {
       slotProps={{
         backdrop: {
           sx: {
-            backgroundColor: 'rgba(10, 28, 45, 0.6)',
+            backgroundColor: 'rgba(17, 26, 36, 0.56)',
             backdropFilter: 'blur(6px)',
           },
         },
@@ -31,12 +31,12 @@ export default function Modal({ open, onClose, title, children }) {
             backgroundImage: 'none',
             background:
               theme.palette.mode === 'dark'
-                ? 'linear-gradient(180deg, rgba(14,20,24,0.96), rgba(29,33,60,0.92))'
-                : 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(228,246,251,0.9))',
+                ? 'linear-gradient(180deg, rgba(13,22,32,0.96), rgba(32,50,71,0.92))'
+                : 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(239,244,248,0.92))',
             border: `1px solid ${
-              theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : alpha('#1d213c', 0.08)
+              theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : alpha('#111a24', 0.08)
             }`,
-            boxShadow: '0 20px 50px -28px rgba(10, 28, 45, 0.34)',
+            boxShadow: '0 20px 50px -30px rgba(17, 26, 36, 0.24)',
           }),
         },
       }}

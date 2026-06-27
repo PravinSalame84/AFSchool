@@ -20,14 +20,14 @@ export default function NavigationTitleBadge({ className = '' }) {
 
       <div className="min-w-0">
         <div className="nav-title-stack leading-[0.86]">
-          <span className="block text-[1.02rem] font-black uppercase tracking-[0.018em] text-[#283648]">
+          <span className="block text-[1.02rem] font-black uppercase tracking-[0.018em] text-primary-800">
             AIR FORCE
           </span>
-          <span className="block text-[1.02rem] font-black uppercase tracking-[0.018em] text-[#1b2532]">
+          <span className="block text-[1.02rem] font-black uppercase tracking-[0.018em] text-primary-900">
             SCHOOL
           </span>
         </div>
-        <span className="mt-1.5 block text-[0.78rem] font-bold uppercase tracking-[0.06em] text-[#5e7690]">
+        <span className="mt-1.5 block text-[0.78rem] font-bold uppercase tracking-[0.06em] text-primary-400">
           {siteConfig.brandSuffix}
         </span>
       </div>
