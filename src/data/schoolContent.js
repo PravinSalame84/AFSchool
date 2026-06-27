@@ -9,19 +9,19 @@ const schoolContent = {
 
   hero: {
     eyebrow: 'Air Force School, Nagpur',
-    title: 'Modern learning with discipline, creativity and an Air Force spirit.',
+    title: 'Modern learning with discipline, confidence and an Indian Air Force spirit.',
     subtitle:
       'Established in 1968, Air Force School VayuSena Nagar blends strong academics, caring mentorship and vibrant student life for the wards of Air Force personnel and the wider community.',
     motto: 'Teaching is Learning',
-    badges: ['Established 1968', 'CBSE Affiliation 1130860', 'Classes LKG to IX'],
+    badges: ['Established 1968', 'CBSE Affiliation 1130860', 'Student-Centred Campus'],
     slides: [
       {
-        id: 'unity-run',
+        id: 'student-life',
         label: 'Student Life',
-        title: 'Energy, teamwork and school pride in every experience.',
+        title: 'Joyful, disciplined and deeply child-centred school life.',
         description:
-          'A disciplined environment paired with activities, celebrations and inter-school exposure that help students grow beyond the classroom.',
-        image: siteAssets.images.unityRun,
+          'Warm classrooms, celebration-rich learning and thoughtful mentoring help students feel confident from the first day onward.',
+        image: siteAssets.images.campusActivities,
       },
       {
         id: 'award',
@@ -71,21 +71,21 @@ const schoolContent = {
       value: 'Smart Classrooms',
       description: 'Digital boards, child-friendly furniture and structured learning support.',
       image: siteAssets.images.smartClassroom,
-      accent: 'from-[#ff7b3d] to-[#ffb16a]',
+      accent: 'from-[#1f3f63] to-[#5d8aa8]',
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
-      image: siteAssets.images.unityRun,
-      accent: 'from-[#2146d0] to-[#5b44ff]',
+      image: siteAssets.images.campusActivities,
+      accent: 'from-[#224870] to-[#2d6fa1]',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
       description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
       image: siteAssets.images.campusLearning,
-      accent: 'from-[#118ba3] to-[#35d5d0]',
+      accent: 'from-[#2d7589] to-[#69a9bd]',
     },
   ],
 

@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, ArrowUpRight, BookOpenCheck, GraduationCap, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, BookOpenCheck, GraduationCap, ShieldCheck, Sparkles, Star } from 'lucide-react'
 import Container from '../ui/Container'
 import Button from '../ui/Button'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import OptimizedImage from '../ui/OptimizedImage'
+import { ArrowUpRight } from "lucide-react";
 
 const featureIcons = [BookOpenCheck, GraduationCap, ShieldCheck]
 
@@ -24,6 +25,7 @@ export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0)
   const slides = schoolContent.hero.slides
   const currentSlide = slides[activeSlide]
+  const supportingImage = schoolContent.gallery[1].image
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -36,52 +38,26 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8 lg:pb-20">
       <div className="contour-lines" />
-      <div className="pointer-events-none absolute left-[8%] top-24 hidden h-64 w-64 rounded-full border border-primary-900/10 lg:block" />
-      <div className="pointer-events-none absolute right-[10%] top-24 hidden h-80 w-80 rounded-full border border-primary-900/10 dark:border-white/10 lg:block animate-spinSlow" />
-      <div className="pointer-events-none absolute left-[58%] top-24 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
+      <div className="hero-orb sky left-[4%] top-20 h-44 w-44" />
+      <div className="hero-orb sun right-[10%] top-24 h-56 w-56" />
+      <div className="pointer-events-none absolute left-[8%] top-28 hidden h-64 w-64 rounded-full border border-primary-900/8 lg:block" />
+      <div className="pointer-events-none absolute right-[8%] top-20 hidden h-80 w-80 rounded-full border border-primary-900/8 dark:border-white/10 lg:block animate-spinSlow" />
 
       <Container className="relative">
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[92px_1.05fr_0.95fr] xl:items-center">
-          <div className="hidden xl:flex xl:flex-col xl:items-center xl:gap-8">
-            <div className="rounded-full border border-primary-900/10 bg-white/60 p-3 text-primary-700 shadow-soft dark:border-white/10 dark:bg-primary-950/70 dark:text-white">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <div className="hero-index flex gap-4 text-sm font-bold uppercase tracking-[0.55em] text-primary-400 dark:text-white/45">
-              {slides.map((slide, index) => (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => setActiveSlide(index)}
-                  className={`${index === activeSlide ? 'text-primary-900 dark:text-white' : ''}`}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </button>
-              ))}
-            </div>
-            <ArrowDown className="h-5 w-5 text-primary-500 dark:text-white/60" />
-          </div>
-
-          <div>
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[1.02fr_0.98fr] xl:items-center">
+          <div className="max-w-3xl">
             <motion.div initial="hidden" animate="show" custom={0} variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary-700 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-primary-950/72 dark:text-white">
+              <span className="eyebrow-pill inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary-700 dark:text-white">
                 <Sparkles className="h-3.5 w-3.5 text-accent" />
                 {schoolContent.hero.eyebrow}
               </span>
             </motion.div>
 
             <motion.div initial="hidden" animate="show" custom={0.08} variants={fadeUp}>
-              <div className="mt-7 flex items-start gap-5">
-                <div className="hidden pt-2 sm:block">
-                  <div className="h-24 w-2 rounded-full bg-gradient-to-b from-[#00d4fa] via-[#5b44ff] to-[#ff671f]" />
-                </div>
-                <h1 className="max-w-3xl text-[3.15rem] font-bold uppercase leading-[0.88] text-primary-900 dark:text-white sm:text-[4.6rem]">
-                  Modern
-                  <span className="block text-primary-500 dark:text-sky-300">Schooling</span>
-                  <span className="block text-[0.56em] font-medium uppercase tracking-[0.14em] text-primary-500 dark:text-white/70">
-                    With Indian Air Force Spirit
-                  </span>
-                </h1>
-              </div>
+              <h1 className="mt-7 max-w-4xl text-[3rem] font-bold uppercase leading-[0.9] text-primary-900 dark:text-white sm:text-[4.6rem]">
+                Premium Schooling
+                <span className="block text-[#2d6fa1] dark:text-sky-300">With Air Force Character</span>
+              </h1>
             </motion.div>
 
             <motion.p
@@ -104,7 +80,7 @@ export default function Hero() {
               {schoolContent.hero.badges.map((badge) => (
                 <span
                   key={badge}
-                  className="rounded-full border border-primary-900/10 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-700 shadow-soft dark:border-white/10 dark:bg-primary-950/72 dark:text-white"
+                  className="eyebrow-pill rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-700 dark:text-white"
                 >
                   {badge}
                 </span>
@@ -125,6 +101,29 @@ export default function Hero() {
                 Explore School Story
               </Button>
             </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate="show"
+              custom={0.38}
+              variants={fadeUp}
+              className="mt-10 grid gap-4 sm:grid-cols-3"
+            >
+              {[
+                'Disciplined academics with modern tools',
+                'Student wellbeing and safe infrastructure',
+                'Co-curricular growth with parent-friendly access',
+              ].map((point) => (
+                <div key={point} className="frost-card rounded-[1.6rem] p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 rounded-full bg-primary-900/8 p-2 text-primary-700 dark:bg-white/10 dark:text-white">
+                      <Star className="h-4 w-4" />
+                    </div>
+                    <p className="text-sm font-semibold leading-relaxed text-primary-800 dark:text-slate-200">{point}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
           <motion.div
@@ -133,26 +132,56 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="relative mx-auto w-full max-w-[560px]"
           >
-            <div className="spiral-wire left-[8%] top-[10%] h-[72%] w-[72%]" />
-            <div className="spiral-wire delay right-[4%] top-[4%] h-[86%] w-[86%]" />
-            <div className="hero-glow absolute right-[16%] top-[10%] h-36 w-36 rounded-full animate-radarPulse" />
-            <div className="student-mask relative overflow-hidden rounded-[2.8rem] border border-white/70 bg-white/40 p-4 shadow-card backdrop-blur-xl">
-              <OptimizedImage
-                src={currentSlide.image}
-                alt={currentSlide.title}
-                priority
-                wrapperClassName="rounded-[2.2rem]"
-                className="h-[420px] w-full rounded-[2.2rem] object-cover object-center"
-              />
+            <div className="spiral-wire left-[4%] top-[12%] h-[72%] w-[72%]" />
+            <div className="spiral-wire delay right-[2%] top-[4%] h-[88%] w-[88%]" />
+            <div className="hero-glow absolute right-[18%] top-[12%] h-36 w-36 rounded-full animate-radarPulse" />
+
+            <div className="hero-stage p-4 sm:p-5">
+              <div className="grid gap-4 sm:grid-cols-[1fr_0.42fr]">
+                <div className="hero-cutout p-3">
+                  <OptimizedImage
+                    src={currentSlide.image}
+                    alt={currentSlide.title}
+                    priority
+                    wrapperClassName="rounded-[2rem]"
+                    className="h-[440px] w-full rounded-[2rem] object-cover object-center"
+                  />
+                </div>
+                <div className="flex flex-col gap-4">
+                  <div className="frost-card rounded-[1.7rem] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Featured</p>
+                    <p className="mt-2 text-lg font-bold uppercase text-primary-900 dark:text-white">{currentSlide.label}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{currentSlide.description}</p>
+                  </div>
+
+                  <div className="hero-cutout p-2">
+                    <OptimizedImage
+                      src={supportingImage}
+                      alt="Student moments"
+                      wrapperClassName="rounded-[1.5rem]"
+                      className="h-[180px] w-full rounded-[1.5rem] object-cover object-center"
+                    />
+                  </div>
+
+                  <div className="rounded-[1.7rem] bg-primary-900 px-5 py-4 text-white shadow-card dark:bg-white dark:text-primary-950">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60 dark:text-primary-700">
+                      School Motto
+                    </p>
+                    <p className="mt-2 text-xl font-bold uppercase">{schoolContent.hero.motto}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="absolute -left-3 bottom-10 max-w-[240px] frost-card rounded-[1.75rem] p-4 shadow-card">
-              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">{currentSlide.label}</p>
-              <p className="mt-1 text-lg font-bold uppercase text-primary-900 dark:text-white">{currentSlide.title}</p>
-              <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{currentSlide.description}</p>
+
+            <div className="absolute -left-3 bottom-10 hidden max-w-[260px] rounded-[1.8rem] bg-white px-4 py-4 shadow-card sm:block dark:bg-primary-950">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary-400">Why Parents Choose Us</p>
+              <p className="mt-2 text-lg font-bold uppercase text-primary-900 dark:text-white">{currentSlide.title}</p>
+              <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-700 dark:text-slate-200">
+                Explore academics
+                <ArrowRight className="h-4 w-4" />
+              </div>
             </div>
-            <div className="absolute -right-2 top-12 rounded-full bg-primary-900 px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white shadow-card dark:bg-white dark:text-primary-950">
-              {schoolContent.hero.motto}
-            </div>
+
             <div className="absolute bottom-6 right-6 flex flex-wrap gap-2">
               {slides.map((slide, index) => (
                 <button
@@ -162,7 +191,7 @@ export default function Hero() {
                   className={`focus-ring inline-flex items-center gap-2 rounded-full px-3 py-2 text-[11px] font-bold uppercase tracking-[0.14em] backdrop-blur-xl transition ${
                     index === activeSlide
                       ? 'bg-primary-900 text-white dark:bg-white dark:text-primary-950'
-                      : 'bg-white/78 text-primary-700 hover:bg-white dark:bg-primary-950/82 dark:text-white'
+                      : 'bg-white/92 text-primary-700 hover:bg-white dark:bg-primary-950/92 dark:text-white'
                   }`}
                 >
                   {slide.label}

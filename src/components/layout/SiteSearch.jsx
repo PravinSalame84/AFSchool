@@ -50,7 +50,7 @@ export default function SiteSearch() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Search the website"
-        className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/72 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-primary-700 shadow-soft backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-primary-950/70 dark:text-white"
+        className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/60 bg-gradient-to-r from-white/92 to-skyback-soft/80 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-primary-700 shadow-soft backdrop-blur-xl transition hover:from-white hover:to-white dark:border-white/10 dark:bg-gradient-to-r dark:from-primary-950/88 dark:to-primary-900/80 dark:text-white"
       >
         <Search className="h-4 w-4" />
         Search
@@ -58,7 +58,7 @@ export default function SiteSearch() {
 
       {open ? (
         <div className="fixed inset-0 z-[110] flex items-start justify-center bg-primary-950/55 p-4 pt-20 backdrop-blur-md">
-          <div className="w-full max-w-3xl rounded-[2rem] border border-white/70 bg-white/90 p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-primary-950/92">
+          <div className="w-full max-w-3xl rounded-[2rem] border border-white/70 bg-gradient-to-br from-white/95 via-white/92 to-skyback-soft/88 p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-primary-950/94 dark:to-primary-900/86">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-900 text-white">
                 <Search className="h-4.5 w-4.5" />
@@ -73,7 +73,7 @@ export default function SiteSearch() {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search notices, pages, downloads, parent links..."
-                  className="focus-ring w-full rounded-full border border-primary-100 bg-white px-4 py-3 text-[15px] text-primary-900 placeholder:text-primary-300 dark:border-white/10 dark:bg-primary-900 dark:text-white dark:placeholder:text-white/35"
+                  className="focus-ring w-full rounded-full border border-primary-100 bg-white/92 px-4 py-3 text-[15px] text-primary-900 placeholder:text-primary-300 dark:border-white/10 dark:bg-primary-900 dark:text-white dark:placeholder:text-white/35"
                 />
               </div>
               <button
@@ -95,7 +95,7 @@ export default function SiteSearch() {
                       href={item.to}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="focus-ring flex items-start justify-between rounded-[1.3rem] border border-transparent px-4 py-3 transition hover:border-primary-100 hover:bg-slate-50 dark:hover:border-white/10 dark:hover:bg-primary-900/80"
+                      className="focus-ring flex items-start justify-between rounded-[1.3rem] border border-transparent px-4 py-3 transition hover:border-primary-100 hover:bg-gradient-to-r hover:from-white hover:to-skyback-soft/70 dark:hover:border-white/10 dark:hover:bg-primary-900/80"
                     >
                       <div>
                         <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-400">{item.group}</p>
@@ -109,7 +109,7 @@ export default function SiteSearch() {
                       key={`${item.group}-${item.label}`}
                       to={item.to}
                       onClick={() => setOpen(false)}
-                      className="focus-ring block rounded-[1.3rem] border border-transparent px-4 py-3 transition hover:border-primary-100 hover:bg-slate-50 dark:hover:border-white/10 dark:hover:bg-primary-900/80"
+                      className="focus-ring block rounded-[1.3rem] border border-transparent px-4 py-3 transition hover:border-primary-100 hover:bg-gradient-to-r hover:from-white hover:to-skyback-soft/70 dark:hover:border-white/10 dark:hover:bg-primary-900/80"
                     >
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-400">{item.group}</p>
                       <p className="mt-1 text-sm font-semibold text-primary-900 dark:text-white">{item.label}</p>

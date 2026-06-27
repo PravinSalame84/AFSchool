@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import siteConfig from '../../data/siteConfig'
 
 export default function Logo({ tone = 'dark', className = '' }) {
-  const textTone = tone === 'light' ? 'text-white' : 'text-primary-900'
-  const subTone = tone === 'light' ? 'text-white/65' : 'text-primary-500'
+  const textTone = tone === 'light' ? 'text-white' : 'text-primary-900 dark:text-white'
+  const subTone = tone === 'light' ? 'text-white/65' : 'text-primary-500 dark:text-sky-200/75'
 
   return (
     <Link to="/" className={`focus-ring flex items-center gap-3 ${className}`} aria-label="Air Force School home">

@@ -5,8 +5,12 @@ import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import useRuntimeContent from '../hooks/useRuntimeContent'
 
 export default function Downloads() {
+  const { content: runtimeContent, source } = useRuntimeContent()
+  const downloads = runtimeContent.downloads?.length ? runtimeContent.downloads : schoolContent.downloads
+
   return (
     <>
       <Seo
@@ -26,7 +30,7 @@ export default function Downloads() {
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {schoolContent.downloads.map((file) => (
+            {downloads.map((file) => (
               <a
                 key={file.label}
                 href={file.href}
@@ -56,6 +60,9 @@ export default function Downloads() {
               <div className="flex items-center gap-3">
                 <FileBadge2 className="h-5 w-5 text-accent" />
                 <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">More Official Resources</h3>
+                <span className="rounded-full bg-primary-900/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary-700 dark:bg-white/10 dark:text-slate-200">
+                  {source === 'live' ? 'Live' : 'Local'}
+                </span>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">
                 Parent access points and formal documentation are also published through the internal school resource links below.

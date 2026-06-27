@@ -5,8 +5,13 @@ import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import useRuntimeContent from '../hooks/useRuntimeContent'
 
 export default function NoticeBoard() {
+  const { content: runtimeContent, source } = useRuntimeContent()
+  const notices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
+  const events = runtimeContent.events?.length ? runtimeContent.events : schoolContent.events
+
   return (
     <>
       <Seo
@@ -27,7 +32,7 @@ export default function NoticeBoard() {
         <Container>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-5">
-              {schoolContent.notices.map((notice) => (
+              {notices.map((notice) => (
                 <Link key={notice.title} to={notice.to} className="frost-card panel-hover block rounded-[2rem] p-6">
                   <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary-400">
                     <span className="rounded-full bg-primary-900 px-3 py-1 text-white dark:bg-white dark:text-primary-950">
@@ -51,9 +56,12 @@ export default function NoticeBoard() {
                 <div className="flex items-center gap-3">
                   <CalendarDays className="h-5 w-5 text-accent" />
                   <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Event Highlights</h3>
+                  <span className="rounded-full bg-primary-900/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary-700 dark:bg-white/10 dark:text-slate-200">
+                    {source === 'live' ? 'Live' : 'Local'}
+                  </span>
                 </div>
                 <div className="mt-5 space-y-4">
-                  {schoolContent.events.map((event) => (
+                  {events.map((event) => (
                     <Link
                       key={event.title}
                       to={event.to}

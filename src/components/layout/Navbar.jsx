@@ -18,7 +18,7 @@ function DesktopItem({ item }) {
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white hover:text-primary-900 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white/85 hover:text-primary-900 dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white"
       >
         {item.label} <ExternalLink className="h-3 w-3" />
       </a>
@@ -33,7 +33,7 @@ function DesktopItem({ item }) {
           `focus-ring rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${
             isActive
               ? 'bg-primary-900 text-white dark:bg-white dark:text-primary-950'
-              : 'text-primary-700 hover:bg-white hover:text-primary-900 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white'
+              : 'text-primary-700 hover:bg-white/85 hover:text-primary-900 dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white'
           }`
         }
       >
@@ -48,13 +48,13 @@ function DesktopItem({ item }) {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white hover:text-primary-900 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white/85 hover:text-primary-900 dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white"
       >
         {item.label}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       <div
-        className={`absolute left-0 top-full z-30 mt-3 min-w-[280px] rounded-[1.7rem] border border-white/70 bg-white/88 p-2 shadow-card backdrop-blur-xl transition-all duration-200 dark:border-white/10 dark:bg-primary-950/92 ${
+        className={`submenu-surface absolute left-0 top-full z-30 mt-3 min-w-[300px] rounded-[1.7rem] p-2 transition-all duration-200 ${
           open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
         }`}
       >
@@ -65,7 +65,7 @@ function DesktopItem({ item }) {
               href={child.to}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-700 transition hover:bg-skyback-soft hover:text-primary-900 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft hover:to-white hover:text-primary-900 dark:text-white dark:hover:bg-white/10 dark:hover:text-white"
             >
               {child.label}
               <ExternalLink className="h-3.5 w-3.5" />
@@ -74,7 +74,7 @@ function DesktopItem({ item }) {
             <Link
               key={child.label}
               to={child.to}
-              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-700 transition hover:bg-skyback-soft hover:text-primary-900 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft hover:to-white hover:text-primary-900 dark:text-white dark:hover:bg-white/10 dark:hover:text-white"
             >
               {child.label}
             </Link>
@@ -94,7 +94,7 @@ function MobileItem({ item, onNavigate }) {
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center justify-between border-b border-primary-50 px-1 py-3.5 text-[15px] font-semibold text-primary-800 dark:border-white/10 dark:text-white"
+        className="focus-ring flex items-center justify-between border-b border-primary-100/90 px-1 py-3.5 text-[15px] font-semibold text-primary-800 dark:border-white/10 dark:text-white"
       >
         {item.label}
         <ExternalLink className="h-4 w-4 text-primary-300" />
@@ -107,7 +107,7 @@ function MobileItem({ item, onNavigate }) {
       <Link
         to={item.to}
         onClick={onNavigate}
-        className="focus-ring block border-b border-primary-50 px-1 py-3.5 text-[15px] font-semibold text-primary-800 dark:border-white/10 dark:text-white"
+        className="focus-ring block border-b border-primary-100/90 px-1 py-3.5 text-[15px] font-semibold text-primary-800 dark:border-white/10 dark:text-white"
       >
         {item.label}
       </Link>
@@ -115,7 +115,7 @@ function MobileItem({ item, onNavigate }) {
   }
 
   return (
-    <div className="border-b border-primary-50 dark:border-white/10">
+    <div className="border-b border-primary-100/90 dark:border-white/10">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -133,7 +133,7 @@ function MobileItem({ item, onNavigate }) {
               href={child.to}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-lg px-4 py-2 text-[14px] text-primary-600 hover:bg-skyback-soft dark:text-slate-300 dark:hover:bg-white/10"
+              className="focus-ring flex items-center justify-between rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-skyback-soft hover:to-white dark:text-slate-200 dark:hover:bg-white/10"
             >
               {child.label}
               <ExternalLink className="h-3.5 w-3.5" />
@@ -143,7 +143,7 @@ function MobileItem({ item, onNavigate }) {
               key={child.label}
               to={child.to}
               onClick={onNavigate}
-              className="focus-ring block rounded-lg px-4 py-2 text-[14px] text-primary-600 hover:bg-skyback-soft dark:text-slate-300 dark:hover:bg-white/10"
+              className="focus-ring block rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-skyback-soft hover:to-white dark:text-slate-200 dark:hover:bg-white/10"
             >
               {child.label}
             </Link>
@@ -187,7 +187,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="focus-ring rounded-full bg-primary-900 p-2 text-white dark:bg-white dark:text-primary-950 xl:hidden"
+          className="focus-ring rounded-full bg-gradient-to-r from-secondary to-primary-700 p-2 text-white dark:bg-white dark:text-primary-950 xl:hidden"
           aria-label="Toggle menu"
           onClick={() => setMobileOpen((prev) => !prev)}
         >
@@ -201,7 +201,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white/96 p-5 shadow-card backdrop-blur-xl transition-transform duration-300 dark:bg-primary-950/96 ${
+          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto border-l border-white/40 bg-gradient-to-b from-white/96 via-white/94 to-skyback-soft/90 p-5 shadow-card backdrop-blur-xl transition-transform duration-300 dark:border-white/10 dark:bg-gradient-to-b dark:from-primary-950/96 dark:via-primary-950/94 dark:to-primary-900/90 ${
             mobileOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >

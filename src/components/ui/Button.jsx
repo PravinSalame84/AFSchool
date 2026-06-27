@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 const variants = {
-  primary: 'bg-accent text-white hover:bg-accent-dark shadow-soft',
-  dark: 'bg-primary-900 text-white hover:bg-primary-800 shadow-soft',
+  primary:
+    'bg-gradient-to-r from-accent to-accent-dark text-white shadow-soft hover:from-accent-dark hover:to-[#b96728]',
+  dark:
+    'bg-gradient-to-r from-secondary to-primary-700 text-white shadow-soft hover:from-primary-900 hover:to-primary-600',
   outline:
-    'border border-primary-900/20 bg-white/55 text-primary-900 hover:bg-primary-900 hover:text-white dark:border-white/12 dark:bg-primary-950/55 dark:text-white dark:hover:bg-white dark:hover:text-primary-950',
-  ghost: 'bg-white/10 text-white border border-white/40 hover:bg-white/20',
-  light: 'bg-white text-primary-900 hover:bg-skyback-soft shadow-soft dark:bg-white dark:text-primary-950',
+    'border border-primary-900/16 bg-gradient-to-br from-white/88 to-skyback-soft/70 text-primary-900 shadow-soft hover:from-primary-900 hover:to-primary-700 hover:text-white dark:border-white/12 dark:bg-gradient-to-br dark:from-primary-950/92 dark:to-primary-900/75 dark:text-white dark:hover:from-white dark:hover:to-slate-100 dark:hover:text-primary-950',
+  ghost: 'border border-white/30 bg-white/10 text-white backdrop-blur-xl hover:bg-white/18',
+  light:
+    'bg-gradient-to-r from-white to-skyback-soft text-primary-900 shadow-soft hover:from-white hover:to-white dark:bg-white dark:text-primary-950',
 }
 
 const sizes = {

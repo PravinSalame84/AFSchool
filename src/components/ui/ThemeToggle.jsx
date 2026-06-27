@@ -9,7 +9,7 @@ export default function ThemeToggle({ className = '' }) {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className={`focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/72 text-primary-800 shadow-soft backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-primary-950/70 dark:text-white ${className}`}
+      className={`focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-gradient-to-br from-white/92 to-skyback-soft/80 text-primary-800 shadow-soft backdrop-blur-xl transition hover:-translate-y-0.5 hover:from-white hover:to-white dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950/90 dark:to-primary-900/80 dark:text-white ${className}`}
     >
       {isDark ? <SunMedium className="h-4.5 w-4.5" /> : <MoonStar className="h-4.5 w-4.5" />}
     </button>

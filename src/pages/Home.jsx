@@ -24,6 +24,7 @@ import OptimizedImage from '../components/ui/OptimizedImage'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import useRuntimeContent from '../hooks/useRuntimeContent'
 
 const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Trophy]
 
@@ -38,6 +39,10 @@ const rise = {
 
 export default function Home() {
   const { openEnquiry } = useEnquiryModal()
+  const { content: runtimeContent, source } = useRuntimeContent()
+  const liveMarquee = runtimeContent.marquee?.length ? runtimeContent.marquee : schoolContent.marquee
+  const liveNotices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
+  const liveDownloads = runtimeContent.downloads?.length ? runtimeContent.downloads : schoolContent.downloads
 
   return (
     <>
@@ -51,9 +56,9 @@ export default function Home() {
 
       <section className="px-4 sm:px-6 lg:px-8">
         <Container>
-          <div className="marquee-shell rounded-full border border-primary-900/8 bg-white/70 px-3 py-3 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-primary-950/75">
+          <div className="marquee-shell rounded-full border border-primary-900/8 bg-gradient-to-r from-white/86 via-skyback-soft/76 to-white/86 px-3 py-3 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-r dark:from-primary-950/78 dark:via-primary-900/74 dark:to-primary-950/78">
             <div className="marquee-track">
-              {[...schoolContent.marquee, ...schoolContent.marquee].map((item, index) => (
+              {[...liveMarquee, ...liveMarquee].map((item, index) => (
                 <span key={`${item}-${index}`} className="marquee-chip">
                   {item}
                 </span>
@@ -314,13 +319,16 @@ export default function Home() {
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="frost-card rounded-[2.4rem] p-8">
+            <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/80 to-skyback-soft/58 p-8 dark:bg-gradient-to-br dark:from-primary-950/76 dark:to-primary-900/66">
               <div className="mb-6 flex items-center gap-3">
                 <CalendarDays className="h-5 w-5 text-accent" />
                 <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Notice Board</p>
+                <span className="rounded-full bg-primary-900/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary-700 dark:bg-white/10 dark:text-slate-200">
+                  {source === 'live' ? 'Live Feed' : 'School Archive'}
+                </span>
               </div>
               <div className="space-y-4">
-                {schoolContent.notices.slice(0, 4).map((notice, index) => (
+                {liveNotices.slice(0, 4).map((notice, index) => (
                   <motion.div
                     key={notice.title}
                     initial={{ opacity: 0, x: -16 }}
@@ -351,13 +359,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="frost-card rounded-[2.4rem] p-8">
+            <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/80 to-skyback-soft/58 p-8 dark:bg-gradient-to-br dark:from-primary-950/76 dark:to-primary-900/66">
               <div className="mb-6 flex items-center gap-3">
                 <DownloadCloud className="h-5 w-5 text-accent" />
                 <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Downloads</p>
               </div>
               <div className="space-y-4">
-                {schoolContent.downloads.map((file, index) => (
+                {liveDownloads.map((file, index) => (
                   <motion.a
                     key={file.label}
                     href={file.href}
@@ -389,7 +397,7 @@ export default function Home() {
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-primary-900 p-8 text-white shadow-card sm:p-10">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-secondary via-primary-900 to-[#214f79] p-8 text-white shadow-card sm:p-10">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(0,212,250,0.12),transparent_20%)]" />
             <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.9fr]">
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
@@ -436,7 +444,7 @@ export default function Home() {
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-            <div className="frost-card rounded-[2.3rem] p-8">
+            <div className="frost-card rounded-[2.3rem] bg-gradient-to-br from-white/80 to-skyback-soft/58 p-8 dark:bg-gradient-to-br dark:from-primary-950/76 dark:to-primary-900/66">
               <div className="flex items-center gap-3">
                 <FileText className="h-5 w-5 text-accent" />
                 <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Leadership Preview</p>
@@ -446,7 +454,7 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.leadership.intro}</p>
               <div className="mt-6 space-y-3">
-                {schoolContent.leadership.resources.slice(0, 3).map((resource) => (
+                  {schoolContent.leadership.resources.slice(0, 3).map((resource) => (
                   <Link
                     key={resource.title}
                     to={resource.to}
@@ -464,7 +472,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[2.3rem] border border-white/70 bg-white/72 p-4 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-primary-950/72">
+            <div className="overflow-hidden rounded-[2.3rem] border border-white/70 bg-gradient-to-br from-white/84 to-skyback-soft/68 p-4 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950/84 dark:to-primary-900/70">
               <div className="mb-4 flex flex-col gap-3 px-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary-400">Campus Contact</p>

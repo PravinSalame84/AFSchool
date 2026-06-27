@@ -31,6 +31,12 @@ const siteConfig = {
     admissions: 'Start Admission Enquiry',
   },
 
+  runtimeContent: {
+    endpoint: '',
+    revalidateMs: 5 * 60 * 1000,
+    storageKey: 'afs-runtime-content-cache-v1',
+  },
+
   // Toggle features on/off without deleting code — flip to false to hide a
   // whole section across the site from one place.
   features: {

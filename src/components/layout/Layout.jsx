@@ -4,9 +4,11 @@ import Header from './Header'
 import Footer from './Footer'
 import FloatingButtons from './FloatingButtons'
 import BackToTopButton from './BackToTopButton'
+import useHomeIntroScroll from '../../hooks/useHomeIntroScroll'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
+  useHomeIntroScroll(pathname)
 
   useEffect(() => {
     if (hash) {

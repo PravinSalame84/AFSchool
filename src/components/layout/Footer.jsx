@@ -1,17 +1,23 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, Mail, MapPin, Phone } from 'lucide-react'
+import { ChevronRight, Globe, Images, Mail, MapPin, Phone } from 'lucide-react'
 import Container from '../ui/Container'
 import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 
 const quickLinks = schoolContent.quickLinks.slice(0, 4)
+const socialLinks = [
+  { label: 'Website', href: siteConfig.social.website, icon: Globe, internal: true },
+  { label: 'Gallery', href: siteConfig.social.gallery, icon: Images, internal: true },
+  { label: 'Map', href: siteConfig.social.maps, icon: MapPin },
+]
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary-900 text-white">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-secondary via-primary-900 to-[#183d5d] text-white">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
       <div className="pointer-events-none absolute -top-20 right-0 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-skyback/10 blur-3xl" />
       <Container className="relative px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.8fr_0.9fr_1fr]">
           <div>
@@ -26,6 +32,31 @@ export default function Footer() {
                   {badge}
                 </span>
               ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {socialLinks.map(({ label, href, icon: Icon, internal }) =>
+                internal ? (
+                  <Link
+                    key={label}
+                    to={href}
+                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/28 hover:bg-white/12"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/28 hover:bg-white/12"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {label}
+                  </a>
+                ),
+              )}
             </div>
           </div>
 
@@ -88,7 +119,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-4 backdrop-blur-md lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mt-10 grid grid-cols-1 gap-4 rounded-[2rem] border border-white/10 bg-gradient-to-r from-white/8 to-white/4 p-4 backdrop-blur-md lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">School Snapshot</p>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/72">
