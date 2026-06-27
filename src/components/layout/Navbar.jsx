@@ -170,7 +170,6 @@ export default function Navbar() {
       <div className="container mx-auto nav-curve relative flex items-center justify-between gap-4 px-4 py-3 sm:px-5">
         <div className="pointer-events-none absolute inset-y-3 left-[22%] hidden w-px bg-gradient-to-b from-transparent via-primary-900/12 to-transparent dark:via-white/10 xl:block" />
         <Logo />
-
         <div className="hidden flex-1 items-center justify-center gap-1 xl:flex">
           {navigation.map((item) => (
             <DesktopItem key={item.label} item={item} />

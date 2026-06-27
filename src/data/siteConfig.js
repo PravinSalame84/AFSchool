@@ -23,6 +23,13 @@ const siteConfig = {
     website: '/',
     maps: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7',
     gallery: '/gallery',
+    // Add official school profile URLs here when available.
+    facebook: 'https://www.facebook.com/airforceschoolvsn',
+    instagram: 'https://www.instagram.com/airforceschoolvsn/',
+    x: 'https://x.com/vayusenanagar',
+    youtube: 'https://www.youtube.com/@airforceschoolvsnnagpur4141',
+    linkedIn: 'https://www.linkedin.com/in/airforceschoolvsnnagpur/',
+
   },
 
   cta: {
