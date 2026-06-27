@@ -5,9 +5,12 @@ import Footer from './Footer'
 import FloatingButtons from './FloatingButtons'
 import BackToTopButton from './BackToTopButton'
 import useHomeIntroScroll from '../../hooks/useHomeIntroScroll'
+import useRuntimeContent from '../../hooks/useRuntimeContent'
+import Maintenance from '../../pages/Maintenance'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
+  const { content } = useRuntimeContent()
   useHomeIntroScroll(pathname)
 
   useEffect(() => {
@@ -21,11 +24,21 @@ export default function Layout() {
     window.scrollTo(0, 0)
   }, [pathname, hash])
 
+  const maintenanceMode = content.siteStatus?.mode === 'maintenance' && pathname !== '/maintenance'
+
   return (
     <div className="flex min-h-screen flex-col bg-transparent">
       <Header />
       <main className="flex-1 text-[color:var(--ink)]">
-        <Outlet />
+        {maintenanceMode ? (
+          <Maintenance
+            title={content.siteStatus?.title}
+            message={content.siteStatus?.message}
+            updatedAt={content.siteStatus?.updatedAt}
+          />
+        ) : (
+          <Outlet />
+        )}
       </main>
       <Footer />
       <FloatingButtons />

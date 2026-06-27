@@ -1,20 +1,20 @@
-import { Compass } from 'lucide-react'
-import Container from '../components/ui/Container'
-import Button from '../components/ui/Button'
 import Seo from '../components/ui/Seo'
+import StatusScreen from '../components/ui/StatusScreen'
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[60vh] items-center">
+    <>
       <Seo title="Page Not Found" description="The page you are looking for could not be found." path="/404" />
-      <Container className="px-4 text-center sm:px-6 lg:px-8">
-        <Compass className="mx-auto h-14 w-14 text-accent" />
-        <h1 className="mt-6 text-4xl font-extrabold text-primary-900 dark:text-white">404</h1>
-        <p className="mt-3 text-lg text-primary-600 dark:text-slate-300">We couldn&apos;t find the page you were looking for.</p>
-        <Button to="/" variant="primary" className="mt-7">
-          Back to Home
-        </Button>
-      </Container>
-    </section>
+      <StatusScreen
+        badge="Page Not Found"
+        code="404"
+        title="This page is not on the current flight path."
+        message="The link may have changed, the page may have moved, or the information is not published yet."
+        icon="notFound"
+        primaryAction={{ label: 'Back To Home', to: '/', variant: 'dark' }}
+        secondaryAction={{ label: 'Open Notice Board', to: '/notice-board', variant: 'outline' }}
+        note="If you expected a notice, result, timetable or PDF here, please check the latest updates section or contact the school office."
+      />
+    </>
   )
 }

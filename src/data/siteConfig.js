@@ -31,8 +31,13 @@ const siteConfig = {
     admissions: 'Start Admission Enquiry',
   },
 
+  // DYNAMIC CONTENTS:
+  // Put your public Google Apps Script web app URL here, or use the
+  // `VITE_RUNTIME_CONTENT_ENDPOINT` environment variable during deployment.
+  // The site will fetch live notices, events, results/timetable PDFs,
+  // admission updates and marquee text from this endpoint at runtime.
   runtimeContent: {
-    endpoint: '',
+    endpoint: import.meta.env.VITE_RUNTIME_CONTENT_ENDPOINT || '',
     revalidateMs: 5 * 60 * 1000,
     storageKey: 'afs-runtime-content-cache-v1',
   },
