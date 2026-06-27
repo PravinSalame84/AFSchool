@@ -15,7 +15,7 @@ export default function Accordion({ items, allowMultiple = false }) {
   }
 
   return (
-    <div className="divide-y divide-primary-50 rounded-xl2 bg-white shadow-soft overflow-hidden">
+    <div className="overflow-hidden rounded-xl2 bg-white shadow-soft divide-y divide-primary-50 dark:divide-white/10 dark:bg-primary-950/80">
       {items.map((item, i) => {
         const isOpen = openIndexes.includes(i)
         return (
@@ -26,7 +26,7 @@ export default function Accordion({ items, allowMultiple = false }) {
               aria-expanded={isOpen}
               className="focus-ring flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7"
             >
-              <span className="text-base font-semibold text-primary-900 sm:text-lg">{item.question}</span>
+              <span className="text-base font-semibold text-primary-900 dark:text-white sm:text-lg">{item.question}</span>
               <ChevronDown
                 className={`h-5 w-5 flex-shrink-0 text-accent transition-transform duration-300 ${
                   isOpen ? 'rotate-180' : ''
@@ -39,7 +39,7 @@ export default function Accordion({ items, allowMultiple = false }) {
                 isOpen ? 'max-h-96' : 'max-h-0'
               }`}
             >
-              <p className="px-5 pb-5 text-[15px] leading-relaxed text-primary-500 sm:px-7">{item.answer}</p>
+              <p className="px-5 pb-5 text-[15px] leading-relaxed text-primary-500 dark:text-slate-300 sm:px-7">{item.answer}</p>
             </div>
           </div>
         )

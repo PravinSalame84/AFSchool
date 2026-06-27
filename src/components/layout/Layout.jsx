@@ -3,6 +3,7 @@ import { useLocation, Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import FloatingButtons from './FloatingButtons'
+import BackToTopButton from './BackToTopButton'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
@@ -19,13 +20,14 @@ export default function Layout() {
   }, [pathname, hash])
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-transparent">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 text-[color:var(--ink)]">
         <Outlet />
       </main>
       <Footer />
       <FloatingButtons />
+      <BackToTopButton />
     </div>
   )
 }

@@ -70,10 +70,10 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
     return (
       <div className="flex flex-col items-center gap-3 py-8 text-center">
         <CheckCircle2 className="h-14 w-14 text-accent" />
-        <h4 className="text-lg font-bold uppercase text-primary-900">Thank you, {form.firstName}.</h4>
-        <p className="max-w-sm text-sm text-primary-500">
+        <h4 className="text-lg font-bold uppercase text-primary-900 dark:text-white">Thank you, {form.firstName}.</h4>
+        <p className="max-w-sm text-sm text-primary-500 dark:text-slate-300">
           Your {context.toLowerCase()} has been received. The school team will contact you on{' '}
-          <span className="font-semibold text-primary-700">{form.phone}</span>.
+          <span className="font-semibold text-primary-700 dark:text-white">{form.phone}</span>.
         </p>
       </div>
     )
@@ -136,7 +136,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
       />
 
       <div className="sm:col-span-2">
-        <label htmlFor="captcha" className="mb-1.5 block text-sm font-semibold text-primary-800">
+        <label htmlFor="captcha" className="mb-1.5 block text-sm font-semibold text-primary-800 dark:text-white">
           Quick check - what is {challenge.a} + {challenge.b}? <span className="text-accent">*</span>
         </label>
         <div className="flex gap-2">
@@ -145,8 +145,8 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             inputMode="numeric"
             value={form.captcha}
             onChange={update('captcha')}
-            className={`focus-ring w-full rounded-[1rem] border px-4 py-2.5 text-[15px] text-primary-900 transition ${
-              errors.captcha ? 'border-red-400 bg-red-50' : 'border-primary-100 bg-white focus:border-accent'
+            className={`focus-ring glass-input w-full rounded-[1rem] border px-4 py-2.5 text-[15px] text-primary-900 transition dark:text-white ${
+              errors.captcha ? 'border-red-400 bg-red-50 dark:bg-red-500/10' : 'border-primary-100 bg-white focus:border-accent dark:border-white/10'
             }`}
             placeholder="Your answer"
           />
@@ -154,7 +154,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             type="button"
             onClick={refreshChallenge}
             aria-label="Get a new question"
-            className="focus-ring flex-shrink-0 rounded-[1rem] border border-primary-100 px-3 text-primary-500 transition hover:bg-skyback-soft"
+            className="focus-ring flex-shrink-0 rounded-[1rem] border border-primary-100 px-3 text-primary-500 transition hover:bg-skyback-soft dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10"
           >
             <RefreshCw className="h-4 w-4" />
           </button>
@@ -163,7 +163,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
       </div>
 
       <div className="sm:col-span-2">
-        <label className="flex items-start gap-2.5 text-sm text-primary-600">
+        <label className="flex items-start gap-2.5 text-sm text-primary-600 dark:text-slate-300">
           <input
             type="checkbox"
             checked={form.agree}

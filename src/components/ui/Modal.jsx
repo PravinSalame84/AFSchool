@@ -26,15 +26,15 @@ export default function Modal({ open, onClose, title, children }) {
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl2 bg-white p-6 shadow-card animate-[fadeUp_0.35s_ease] sm:p-8"
+        className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl2 bg-white p-6 shadow-card animate-[fadeUp_0.35s_ease] dark:bg-primary-950/96 sm:p-8"
       >
         <div className="mb-5 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-primary-900">{title}</h3>
+          <h3 className="text-xl font-bold text-primary-900 dark:text-white">{title}</h3>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="focus-ring rounded-full p-1.5 text-primary-400 transition hover:bg-skyback-soft hover:text-primary-900"
+            className="focus-ring rounded-full p-1.5 text-primary-400 transition hover:bg-skyback-soft hover:text-primary-900 dark:hover:bg-white/10 dark:hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>

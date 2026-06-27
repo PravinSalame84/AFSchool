@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, DownloadCloud, FileBadge2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
+import siteAssets from '../data/siteAssets'
 
 export default function Downloads() {
   return (
@@ -11,14 +13,14 @@ export default function Downloads() {
         title="Downloads"
         description="Access school calendars, book lists, holiday homework and official downloadable documents from Air Force School, VayuSena Nagar, Nagpur."
         path="/downloads"
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg"
+        image={siteAssets.images.smartClassroom}
       />
       <PageHero
         crumb="Downloads"
         eyebrow="Download Centre"
         title="Official school files, homework sheets and academic resources."
         subtitle="Important downloadable documents published by the school are organised here for faster parent and student access."
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg"
+        image={siteAssets.images.smartClassroom}
       />
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
@@ -56,22 +58,20 @@ export default function Downloads() {
                 <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">More Official Resources</h3>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">
-                Parent access points and formal documentation are also published through the official school resource links below.
+                Parent access points and formal documentation are also published through the internal school resource links below.
               </p>
             </div>
 
             <div className="grid gap-3">
               {schoolContent.resources.map((resource) => (
-                <a
+                <Link
                   key={resource.label}
-                  href={resource.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={resource.to}
                   className="frost-card flex items-center justify-between rounded-[1.5rem] px-5 py-4 text-sm font-semibold text-primary-700 dark:text-white"
                 >
                   {resource.label}
                   <ArrowUpRight className="h-4 w-4 text-primary-300" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>

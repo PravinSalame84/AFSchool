@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import Container from './Container'
+import OptimizedImage from './OptimizedImage'
 
 export default function PageHero({ eyebrow, title, subtitle, crumb, image }) {
   return (
@@ -24,7 +25,12 @@ export default function PageHero({ eyebrow, title, subtitle, crumb, image }) {
           {image ? (
             <div className="relative mx-auto w-full max-w-md">
               <div className="absolute inset-0 rounded-[2rem] bg-white/10 blur-2xl" />
-              <img src={image} alt="" className="student-mask relative h-[280px] w-full rounded-[2rem] object-cover shadow-card sm:h-[320px]" />
+              <OptimizedImage
+                src={image}
+                alt={title}
+                wrapperClassName="student-mask relative"
+                className="h-[280px] w-full rounded-[2rem] object-cover shadow-card sm:h-[320px]"
+              />
             </div>
           ) : null}
         </div>

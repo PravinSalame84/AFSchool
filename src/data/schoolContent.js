@@ -1,3 +1,5 @@
+import siteAssets from './siteAssets'
+
 const schoolContent = {
   meta: {
     title: 'Air Force School, VayuSena Nagar, Nagpur',
@@ -19,7 +21,7 @@ const schoolContent = {
         title: 'Energy, teamwork and school pride in every experience.',
         description:
           'A disciplined environment paired with activities, celebrations and inter-school exposure that help students grow beyond the classroom.',
-        image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/UNITY-RUN-COLLAGE-2.png',
+        image: siteAssets.images.unityRun,
       },
       {
         id: 'award',
@@ -27,7 +29,7 @@ const schoolContent = {
         title: 'Recognising effort, excellence and collective achievement.',
         description:
           'The school celebrates meaningful student milestones and creates opportunities for every learner to participate, compete and progress.',
-        image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/BEST-AWARD.png',
+        image: siteAssets.images.bestAward,
       },
       {
         id: 'campus',
@@ -35,17 +37,17 @@ const schoolContent = {
         title: 'A safe and modern school environment built for learning.',
         description:
           'Smartboards, activity spaces, counselling support and child-friendly infrastructure shape a campus that feels focused, warm and future-ready.',
-        image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2023/11/DSC00069-scaled-e1700192856657.jpg',
+        image: siteAssets.images.campusLearning,
       },
     ],
   },
 
   announcementBar: {
-    message: 'Admissions, downloads, academic session notices and school information are available across the official parent resources.',
+    message: 'Admissions, downloads, academic session notices and school information are now organised directly inside this website.',
     actions: [
-      { label: 'Mandatory Disclosure', href: 'https://www.airforce.skoolmate.in/important-documents/' },
-      { label: 'Parent Corner', href: 'https://www.airforce.skoolmate.in/parent-corner/' },
-      { label: 'Pay Fee', href: 'https://www.airforce.skoolmate.in/payfee/' },
+      { label: 'Mandatory Disclosure', to: '/mandatory-disclosure' },
+      { label: 'Parent Corner', to: '/parent-corner' },
+      { label: 'Fee Support', to: '/fee-support' },
     ],
   },
 
@@ -68,21 +70,21 @@ const schoolContent = {
       title: 'Academics',
       value: 'Smart Classrooms',
       description: 'Digital boards, child-friendly furniture and structured learning support.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg',
+      image: siteAssets.images.smartClassroom,
       accent: 'from-[#ff7b3d] to-[#ffb16a]',
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/UNITY-RUN-COLLAGE-2.png',
+      image: siteAssets.images.unityRun,
       accent: 'from-[#2146d0] to-[#5b44ff]',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
       description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2023/11/DSC00069-scaled-e1700192856657.jpg',
+      image: siteAssets.images.campusLearning,
       accent: 'from-[#118ba3] to-[#35d5d0]',
     },
   ],
@@ -100,32 +102,32 @@ const schoolContent = {
 
   leadership: {
     intro:
-      'School governance and administrative transparency are important parts of the institution. Families can access governance, staff and formal school records through the official resources listed below.',
+      'School governance and administrative transparency are important parts of the institution. Families can access governance, staff and formal school records through the internal resources listed below.',
     resources: [
       {
         title: 'School Management Committee',
-        description: 'Official governance and committee information from the school website.',
-        href: 'https://www.airforce.skoolmate.in/school-mangement-comittee/',
+        description: 'Leadership and governance information presented locally for parent access.',
+        to: '/leadership',
       },
       {
         title: 'School Information',
         description: 'Published school profile and institutional information.',
-        href: 'https://www.airforce.skoolmate.in/school-information-2/',
+        to: '/school-information',
       },
       {
         title: 'School Staff Details',
-        description: 'Official staff information resource maintained by the school.',
-        href: 'https://www.airforce.skoolmate.in/school-staff-detals/',
+        description: 'Administrative and staff-facing overview for parents and stakeholders.',
+        to: '/staff-details',
       },
       {
         title: 'Annual Report',
-        description: 'Formal reporting and annual documentation from the school.',
-        href: 'https://www.airforce.skoolmate.in/annual-report-2019-20/',
+        description: 'Report-style highlights about school growth and participation.',
+        to: '/annual-report',
       },
       {
         title: 'Transfer Certificate',
-        description: 'Access formal transfer certificate information and process reference.',
-        href: 'https://www.airforce.skoolmate.in/transfer-certificate/',
+        description: 'Parent guidance for transfer certificate requests and readiness.',
+        to: '/transfer-certificate',
       },
     ],
   },
@@ -161,25 +163,25 @@ const schoolContent = {
         title: 'Curricular Learning',
         description:
           'Classroom instruction is built to strengthen core concepts, structured habits and age-appropriate academic rigour.',
-        href: 'https://www.airforce.skoolmate.in/curricular-activities/',
+        to: '/academics/curricular-activities',
       },
       {
         title: 'Co-Curricular Development',
         description:
           'Students participate in assemblies, events, cultural activities and collaborative opportunities that broaden expression and confidence.',
-        href: 'https://www.airforce.skoolmate.in/co-curricular-activity/',
+        to: '/academics/co-curricular-activities',
       },
       {
         title: 'Sports & Physical Activity',
         description:
           'Sports participation and physical activity develop resilience, discipline, coordination and team spirit.',
-        href: 'https://www.airforce.skoolmate.in/sports-activity/',
+        to: '/academics/sports-activities',
       },
       {
         title: 'Other School Activities',
         description:
           'Additional school activities reinforce holistic development and active student participation throughout the academic year.',
-        href: 'https://www.airforce.skoolmate.in/other-school-activity/',
+        to: '/academics/other-school-activities',
       },
     ],
   },
@@ -197,22 +199,22 @@ const schoolContent = {
     {
       title: 'Curricular Activities',
       description: 'Structured classroom learning that builds concepts, confidence and academic habits.',
-      href: 'https://www.airforce.skoolmate.in/curricular-activities/',
+      to: '/academics/curricular-activities',
     },
     {
       title: 'Co-Curricular Activities',
       description: 'Assemblies, celebrations, clubs and creativity-led opportunities that broaden perspective.',
-      href: 'https://www.airforce.skoolmate.in/co-curricular-activity/',
+      to: '/academics/co-curricular-activities',
     },
     {
       title: 'Sports Activities',
       description: 'Physical training, games and team spirit that support endurance, coordination and resilience.',
-      href: 'https://www.airforce.skoolmate.in/sports-activity/',
+      to: '/academics/sports-activities',
     },
     {
       title: 'Educational Trips & Competitions',
       description: 'Inter-school exposure and learning beyond the classroom strengthen communication and confidence.',
-      href: 'https://www.airforce.skoolmate.in/other-school-activity/',
+      to: '/academics/other-school-activities',
     },
   ],
 
@@ -221,43 +223,43 @@ const schoolContent = {
       title: 'Class VI To XII Summer Holiday Homework 2024-25',
       category: 'Notice',
       date: 'May 2024',
-      href: 'https://www.airforce.skoolmate.in/class-vi-to-xii-summer-holiday-homework-2024-25/',
+      to: '/updates/class-6-to-12-summer-holiday-homework-2024-25',
       excerpt: 'Published holiday homework guidance for students in middle and senior classes.',
     },
     {
       title: 'Book List 2024-25',
       category: 'Download',
       date: 'March 2024',
-      href: 'https://www.airforce.skoolmate.in/book-list-2024-25/',
+      to: '/updates/book-list-2024-25',
       excerpt: 'Reference the official book list for the academic session 2024-25.',
     },
     {
       title: 'School Calendar 2024-2025',
       category: 'Calendar',
       date: 'March 2024',
-      href: 'https://www.airforce.skoolmate.in/4336-2/',
+      to: '/updates/school-calendar-2024-2025',
       excerpt: 'Academic session calendar and key dates for the school year.',
     },
     {
       title: 'Primary Summer Holiday Homework 2024-25',
       category: 'Notice',
       date: 'May 2024',
-      href: 'https://www.airforce.skoolmate.in/annual-parent-teacher-meeting-ptm-2023-24-will-be-held-on-27-march-2024-wednesday/',
+      to: '/updates/primary-summer-holiday-homework-2024-25',
       excerpt: 'Primary section holiday homework information and class preparation support.',
     },
     {
       title: 'Pre-Primary Activities 2023-24',
       category: 'Event',
       date: '2023-24',
-      href: 'https://www.airforce.skoolmate.in/pre-primary-activities-2022-23/',
+      to: '/updates/pre-primary-activities-2023-24',
       excerpt: 'Highlights from pre-primary student participation and school activity.',
     },
     {
       title: 'Mandatory Public Disclosure',
       category: 'Compliance',
       date: 'Current',
-      href: 'https://www.airforce.skoolmate.in/important-documents/',
-      excerpt: 'Official mandatory public disclosure and important documents.',
+      to: '/mandatory-disclosure',
+      excerpt: 'Local access to mandatory public disclosure style information and important documents.',
     },
   ],
 
@@ -265,39 +267,39 @@ const schoolContent = {
     {
       title: 'Pre-Primary Activities 2023-24',
       date: 'Academic Session 2023-24',
-      href: 'https://www.airforce.skoolmate.in/pre-primary-activities-2022-23/',
+      to: '/updates/pre-primary-activities-2023-24',
     },
     {
       title: 'Mandatory Public Disclosure',
       date: 'Official Publication',
-      href: 'https://www.airforce.skoolmate.in/important-documents/',
+      to: '/mandatory-disclosure',
     },
   ],
 
   downloads: [
     {
       label: 'CCA Calendar 2023-24',
-      href: 'https://www.airforce.skoolmate.in/wp-content/uploads/2022/04/BOOK-AIR-FORCE-SCHOOL-8.25-X-6.25-19.04.2023-3-2.pdf',
+      href: siteAssets.downloads.ccaCalendar,
       category: 'Calendar',
     },
     {
       label: 'Primary Summer Holiday Homework 2024-25',
-      href: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/05/Primary-Summer-Holiday-HW-6.pdf',
+      href: siteAssets.downloads.primaryHomework,
       category: 'Homework',
     },
     {
       label: 'School Calendar 2024-2025',
-      href: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/03/school-calender-24-25.pdf',
+      href: siteAssets.downloads.schoolCalendar,
       category: 'Calendar',
     },
     {
       label: 'Book List 2024-2025',
-      href: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/03/book-list-2024-25.pdf',
+      href: siteAssets.downloads.bookList,
       category: 'Book List',
     },
     {
       label: 'Class VI To XII Summer Holiday Homework 2024-25',
-      href: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/05/VI_XII_merged_Holiday_HW.pdf',
+      href: siteAssets.downloads.class6To12Homework,
       category: 'Homework',
     },
   ],
@@ -306,32 +308,32 @@ const schoolContent = {
     {
       title: 'Campus Moments',
       caption: 'Student experiences and day-to-day learning energy across the campus.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2023/11/DSC00069-scaled-e1700192856657.jpg',
+      image: siteAssets.images.campusLearning,
     },
     {
       title: 'Unity & Participation',
       caption: 'Community-driven events that shape teamwork, discipline and shared pride.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/UNITY-RUN-COLLAGE-2.png',
+      image: siteAssets.images.unityRun,
     },
     {
       title: 'Recognition & Achievement',
       caption: 'Celebrating milestones, effort and student accomplishment.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/BEST-AWARD.png',
+      image: siteAssets.images.bestAward,
     },
     {
       title: 'Leadership & Guidance',
       caption: 'A culture of mentorship, responsibility and values-based growth.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2021/11/CHIEF.jpg',
+      image: siteAssets.images.chief,
     },
     {
       title: 'Unity Day Participation',
       caption: 'National spirit and participation reflected in school events and observances.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2021/09/%E2%80%98Unity-Run-on-Rashtriya-Ekta-Divas-National-Unity-Day.jpg',
+      image: siteAssets.images.unityDay,
     },
     {
       title: 'Campus Activities',
       caption: 'Snapshots from activity-driven learning across academic and co-curricular spaces.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2022/04/WhatsApp-Image-2023-04-20-at-21.18.32.jpeg',
+      image: siteAssets.images.campusActivities,
     },
   ],
 
@@ -350,28 +352,28 @@ const schoolContent = {
   resources: [
     {
       label: 'Mandatory Public Disclosure',
-      href: 'https://www.airforce.skoolmate.in/important-documents/',
-      description: 'Official compliance and disclosure documents.',
+      to: '/mandatory-disclosure',
+      description: 'Compliance-ready downloads and official document access.',
     },
     {
       label: 'Parent Corner',
-      href: 'https://www.airforce.skoolmate.in/parent-corner/',
+      to: '/parent-corner',
       description: 'Parent-facing information and school access points.',
     },
     {
-      label: 'Pay Fee',
-      href: 'https://www.airforce.skoolmate.in/payfee/',
-      description: 'Official fee payment entry point.',
+      label: 'Fee Support',
+      to: '/fee-support',
+      description: 'School office and accounts guidance for fee-related help.',
     },
     {
-      label: 'Photo Gallery',
-      href: 'https://www.airforce.skoolmate.in/photo-gallery/',
-      description: 'Browse published school photo collections.',
+      label: 'School Information',
+      to: '/school-information',
+      description: 'Published school profile and institutional overview.',
     },
     {
       label: 'New Academic Session 2024-2025',
-      href: 'https://www.airforce.skoolmate.in/new-academic-session-2024-2025/',
-      description: 'Session-specific update published by the school.',
+      to: '/new-academic-session-2024-2025',
+      description: 'Session-specific guidance and essential files.',
     },
   ],
 
@@ -414,12 +416,12 @@ const schoolContent = {
     { group: 'Pages', label: 'Downloads', to: '/downloads', description: 'Homework, calendars and published files.' },
     { group: 'Pages', label: 'Gallery', to: '/gallery', description: 'Campus photo highlights.' },
     { group: 'Pages', label: 'Contact', to: '/contact', description: 'Campus address, map and enquiry support.' },
-    { group: 'Resources', label: 'Mandatory Public Disclosure', to: 'https://www.airforce.skoolmate.in/important-documents/', external: true, description: 'Official disclosure and compliance documents.' },
-    { group: 'Resources', label: 'Parent Corner', to: 'https://www.airforce.skoolmate.in/parent-corner/', external: true, description: 'Parent-facing information and resources.' },
-    { group: 'Resources', label: 'Pay Fee', to: 'https://www.airforce.skoolmate.in/payfee/', external: true, description: 'Official fee payment resource.' },
-    { group: 'Resources', label: 'School Staff Details', to: 'https://www.airforce.skoolmate.in/school-staff-detals/', external: true, description: 'Official school staff resource.' },
-    { group: 'Downloads', label: 'School Calendar 2024-2025', to: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/03/school-calender-24-25.pdf', external: true, description: 'Published school calendar PDF.' },
-    { group: 'Downloads', label: 'Book List 2024-2025', to: 'https://www.airforce.skoolmate.in/wp-content/uploads/2024/03/book-list-2024-25.pdf', external: true, description: 'Published book list PDF.' },
+    { group: 'Resources', label: 'Mandatory Public Disclosure', to: '/mandatory-disclosure', description: 'Compliance and disclosure-style school information.' },
+    { group: 'Resources', label: 'Parent Corner', to: '/parent-corner', description: 'Parent-facing information and resources.' },
+    { group: 'Resources', label: 'Fee Support', to: '/fee-support', description: 'School fee support information.' },
+    { group: 'Resources', label: 'School Staff Details', to: '/staff-details', description: 'Administrative and staff overview.' },
+    { group: 'Downloads', label: 'School Calendar 2024-2025', to: siteAssets.downloads.schoolCalendar, external: true, description: 'Published school calendar PDF.' },
+    { group: 'Downloads', label: 'Book List 2024-2025', to: siteAssets.downloads.bookList, external: true, description: 'Published book list PDF.' },
   ],
 }
 

@@ -5,12 +5,7 @@ import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 
-const quickLinks = [
-  { label: 'About Us', to: '/about' },
-  { label: 'Campus Life', to: '/why-us' },
-  { label: 'Admissions', to: '/admissions' },
-  { label: 'Contact', to: '/contact' },
-]
+const quickLinks = schoolContent.quickLinks.slice(0, 4)
 
 export default function Footer() {
   return (
@@ -22,8 +17,8 @@ export default function Footer() {
           <div>
             <Logo tone="light" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
-              A redesigned school experience for Air Force School VayuSena Nagar, with a stronger digital
-              identity, modern visuals and clear parent access points.
+              A premium digital presence for Air Force School VayuSena Nagar, designed around parent access,
+              student achievement and a disciplined Air Force inspired identity.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {schoolContent.hero.badges.map((badge) => (
@@ -52,14 +47,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {schoolContent.resources.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent"
-                  >
+                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent">
                     <ChevronRight className="h-4 w-4" /> {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -95,6 +85,24 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-4 backdrop-blur-md lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">School Snapshot</p>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/72">
+              Disciplined learning, inclusive growth, academic structure, co-curricular opportunity and parent-friendly
+              digital access built into one modern school experience.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {schoolContent.statistics.map((stat) => (
+              <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-white/8 px-4 py-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/55">{stat.label}</p>
+                <p className="mt-2 text-lg font-bold uppercase text-white">{stat.value}</p>
+              </div>
+            ))}
           </div>
         </div>
 

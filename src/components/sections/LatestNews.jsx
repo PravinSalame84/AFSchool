@@ -19,7 +19,7 @@ export default function LatestNews() {
             <SectionHeading eyebrow="Newsroom" title="Latest News" />
           </RevealOnScroll>
           <RevealOnScroll delay={100}>
-            <Button to="/blog" variant="outline" size="sm">
+            <Button to="/notice-board" variant="outline" size="sm">
               View All News
             </Button>
           </RevealOnScroll>
@@ -28,7 +28,7 @@ export default function LatestNews() {
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((item, i) => (
             <RevealOnScroll key={item.id} delay={i * 90}>
-              <Card as={Link} to="/blog" className="flex h-full flex-col p-6">
+              <Card as={Link} to={item.href} className="flex h-full flex-col p-6">
                 <Badge tone="accent">{item.category}</Badge>
                 <h3 className="mt-4 line-clamp-2 text-base font-bold leading-snug text-primary-900">
                   {item.title}

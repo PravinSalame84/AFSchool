@@ -1,35 +1,46 @@
-// Edit this array to change the entire site navigation.
-// `children` creates a dropdown. `external: true` opens in a new tab.
-
 const navigation = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Campus Life', to: '/why-us' },
+  {
+    label: 'About School',
+    to: '/about',
+    children: [
+      { label: 'About Us', to: '/about' },
+      { label: 'Leadership & Governance', to: '/leadership' },
+      { label: 'School Information', to: '/school-information' },
+      { label: 'School Staff Details', to: '/staff-details' },
+    ],
+  },
+  {
+    label: 'Academics',
+    to: '/academics',
+    children: [
+      { label: 'Academic Overview', to: '/academics' },
+      { label: 'Curricular Activities', to: '/academics/curricular-activities' },
+      { label: 'Co-Curricular Activity', to: '/academics/co-curricular-activities' },
+      { label: 'Sports Activity', to: '/academics/sports-activities' },
+      { label: 'Other School Activity', to: '/academics/other-school-activities' },
+    ],
+  },
   { label: 'Admissions', to: '/admissions' },
   {
-    label: 'Resources',
-    to: 'https://www.airforce.skoolmate.in/important-documents/',
+    label: 'Updates',
+    to: '/notice-board',
     children: [
-      {
-        label: 'Mandatory Public Disclosure',
-        to: 'https://www.airforce.skoolmate.in/important-documents/',
-        external: true,
-      },
-      {
-        label: 'Parent Corner',
-        to: 'https://www.airforce.skoolmate.in/parent-corner/',
-        external: true,
-      },
-      {
-        label: 'Pay Fee',
-        to: 'https://www.airforce.skoolmate.in/payfee/',
-        external: true,
-      },
-      {
-        label: 'Photo Gallery',
-        to: 'https://www.airforce.skoolmate.in/photo-gallery/',
-        external: true,
-      },
+      { label: 'Notice Board', to: '/notice-board' },
+      { label: 'Downloads', to: '/downloads' },
+      { label: 'Gallery', to: '/gallery' },
+      { label: 'New Academic Session', to: '/new-academic-session-2024-2025' },
+    ],
+  },
+  {
+    label: 'Resources',
+    to: '/mandatory-disclosure',
+    children: [
+      { label: 'Mandatory Public Disclosure', to: '/mandatory-disclosure' },
+      { label: 'Parent Corner', to: '/parent-corner' },
+      { label: 'Fee Support', to: '/fee-support' },
+      { label: 'Transfer Certificate', to: '/transfer-certificate' },
+      { label: 'Annual Report', to: '/annual-report' },
     ],
   },
   { label: 'Contact', to: '/contact' },

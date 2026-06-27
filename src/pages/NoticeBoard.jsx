@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, CalendarDays, Newspaper } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
+import siteAssets from '../data/siteAssets'
 
 export default function NoticeBoard() {
   return (
@@ -11,14 +13,14 @@ export default function NoticeBoard() {
         title="Notice Board"
         description="Stay updated with school notices, calendar updates, publications and official announcements from Air Force School, VayuSena Nagar, Nagpur."
         path="/notice-board"
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/BEST-AWARD.png"
+        image={siteAssets.images.bestAward}
       />
       <PageHero
         crumb="Notice Board"
         eyebrow="Announcements & Updates"
         title="Important school notices and official updates in one place."
-        subtitle="Browse current notices, downloadable resources and school publications referenced from the official school site."
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/BEST-AWARD.png"
+        subtitle="Browse current notices, downloads and school publications directly within this website."
+        image={siteAssets.images.bestAward}
       />
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
@@ -26,13 +28,7 @@ export default function NoticeBoard() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-5">
               {schoolContent.notices.map((notice) => (
-                <a
-                  key={notice.title}
-                  href={notice.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="frost-card panel-hover block rounded-[2rem] p-6"
-                >
+                <Link key={notice.title} to={notice.to} className="frost-card panel-hover block rounded-[2rem] p-6">
                   <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary-400">
                     <span className="rounded-full bg-primary-900 px-3 py-1 text-white dark:bg-white dark:text-primary-950">
                       {notice.category}
@@ -46,7 +42,7 @@ export default function NoticeBoard() {
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent-dark dark:text-accent">
                     Open Notice <ArrowUpRight className="h-4 w-4" />
                   </span>
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -58,16 +54,14 @@ export default function NoticeBoard() {
                 </div>
                 <div className="mt-5 space-y-4">
                   {schoolContent.events.map((event) => (
-                    <a
+                    <Link
                       key={event.title}
-                      href={event.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to={event.to}
                       className="block rounded-[1.4rem] border border-primary-900/8 bg-white/80 px-4 py-4 transition hover:border-primary-200 dark:border-white/10 dark:bg-primary-950/70"
                     >
                       <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-400">{event.date}</p>
                       <p className="mt-2 text-sm font-semibold text-primary-800 dark:text-white">{event.title}</p>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -79,16 +73,14 @@ export default function NoticeBoard() {
                 </div>
                 <div className="mt-5 space-y-3">
                   {schoolContent.resources.slice(0, 4).map((resource) => (
-                    <a
+                    <Link
                       key={resource.label}
-                      href={resource.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to={resource.to}
                       className="flex items-center justify-between rounded-[1.2rem] border border-primary-900/8 bg-white/80 px-4 py-3 text-sm font-semibold text-primary-700 transition hover:border-primary-200 dark:border-white/10 dark:bg-primary-950/70 dark:text-white"
                     >
                       {resource.label}
                       <ArrowUpRight className="h-4 w-4 text-primary-300" />
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

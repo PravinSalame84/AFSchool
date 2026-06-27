@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, BookOpenCheck, ClipboardPenLine, Dumbbell, Sparkles } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
+import siteAssets from '../data/siteAssets'
 
 const icons = [BookOpenCheck, ClipboardPenLine, Dumbbell, Sparkles]
 
@@ -13,14 +15,14 @@ export default function Academics() {
         title="Academics"
         description="Explore curriculum, co-curricular activity, sports and school learning culture at Air Force School, VayuSena Nagar, Nagpur."
         path="/academics"
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg"
+        image={siteAssets.images.smartClassroom}
       />
       <PageHero
         crumb="Academics"
         eyebrow="Learning Experience"
         title="Balanced academics with activity, discipline and creative growth."
         subtitle="Air Force School follows a broad, well-balanced and relevant approach to teaching, supported by co-curricular, sports and whole-child development."
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg"
+        image={siteAssets.images.smartClassroom}
       />
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
@@ -47,11 +49,9 @@ export default function Academics() {
               {schoolContent.academics.programmes.map((item, index) => {
                 const Icon = icons[index]
                 return (
-                  <a
+                  <Link
                     key={item.title}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={item.to}
                     className={`frost-card panel-hover rounded-[1.9rem] p-6 ${index === 0 ? 'md:col-span-2' : ''}`}
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -66,7 +66,7 @@ export default function Academics() {
                       </div>
                       <ArrowUpRight className="mt-1 h-5 w-5 text-primary-300" />
                     </div>
-                  </a>
+                  </Link>
                 )
               })}
             </div>

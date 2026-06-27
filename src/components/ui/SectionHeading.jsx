@@ -8,7 +8,7 @@ export default function SectionHeading({
 }) {
   const alignment = align === 'center' ? 'text-center mx-auto' : 'text-left'
   const titleTone = tone === 'light' ? 'text-white' : 'text-primary-900'
-  const subTone = tone === 'light' ? 'text-skyback-light/90' : 'text-primary-500'
+  const subTone = tone === 'light' ? 'text-skyback-light/90' : 'text-primary-500 dark:text-slate-300'
 
   return (
     <div className={`max-w-2xl ${alignment} ${className}`}>
@@ -18,7 +18,7 @@ export default function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className={`mt-3 text-3xl sm:text-4xl font-bold leading-tight ${titleTone}`}>{title}</h2>
+      <h2 className={`mt-3 text-3xl font-bold leading-tight sm:text-4xl ${titleTone} ${tone === 'light' ? '' : 'dark:text-white'}`}>{title}</h2>
       {subtitle && <p className={`mt-4 text-base sm:text-lg leading-relaxed ${subTone}`}>{subtitle}</p>}
     </div>
   )

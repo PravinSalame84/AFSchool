@@ -20,9 +20,9 @@ const siteConfig = {
   },
 
   social: {
-    website: 'https://www.airforce.skoolmate.in/',
+    website: '/',
     maps: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7',
-    gallery: 'https://www.airforce.skoolmate.in/photo-gallery/',
+    gallery: '/gallery',
   },
 
   cta: {

@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, FileText, ShieldCheck, Users2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
+import siteAssets from '../data/siteAssets'
 
 export default function Leadership() {
   return (
@@ -11,14 +13,14 @@ export default function Leadership() {
         title="Leadership & Governance"
         description="Explore management committee, school information, staff details, annual report and governance resources for Air Force School, VayuSena Nagar, Nagpur."
         path="/leadership"
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2021/11/CHIEF.jpg"
+        image={siteAssets.images.chief}
       />
       <PageHero
         crumb="Leadership"
         eyebrow="Leadership & Governance"
         title="Institutional transparency, governance and school leadership access."
         subtitle="Families can view official governance, staff and institutional resources through the school’s published information channels."
-        image="https://www.airforce.skoolmate.in/wp-content/uploads/2021/11/CHIEF.jpg"
+        image={siteAssets.images.chief}
       />
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
@@ -34,7 +36,7 @@ export default function Leadership() {
               </h2>
               <p className="mt-5 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.leadership.intro}</p>
               <div className="mt-8 rounded-[1.8rem] bg-primary-900 p-5 text-white dark:bg-primary-950/90">
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Published Through Official Resources</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Published Through Local Resources</p>
                 <ul className="mt-4 space-y-2 text-sm text-white/80">
                   <li>School Management Committee details</li>
                   <li>School Information and institutional profile</li>
@@ -46,11 +48,9 @@ export default function Leadership() {
 
             <div className="grid gap-5 md:grid-cols-2">
               {schoolContent.leadership.resources.map((resource, index) => (
-                <a
+                <Link
                   key={resource.title}
-                  href={resource.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={resource.to}
                   className={`frost-card panel-hover rounded-[1.9rem] p-6 ${index === 0 ? 'md:col-span-2' : ''}`}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -63,7 +63,7 @@ export default function Leadership() {
                     </div>
                     <ArrowUpRight className="mt-1 h-5 w-5 text-primary-300" />
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -92,17 +92,15 @@ export default function Leadership() {
                 <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Compliance & Reporting</h3>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">
-                Mandatory public disclosure, annual reporting and institutional documents are maintained through the official school portal for easy stakeholder access.
+                Mandatory public disclosure, annual reporting and institutional documents are now maintained inside this site for easier stakeholder access.
               </p>
-              <a
-                href="https://www.airforce.skoolmate.in/important-documents/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/mandatory-disclosure"
                 className="focus-ring mt-6 inline-flex items-center gap-2 rounded-full bg-primary-900 px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary-800 dark:bg-white dark:text-primary-950"
               >
                 Open Mandatory Disclosure
                 <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
