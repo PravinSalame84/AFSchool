@@ -5,6 +5,7 @@ import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Button from '../components/ui/Button'
+import Input from '../components/ui/Input'
 import locations, { states } from '../data/locations'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 
@@ -42,18 +43,22 @@ export default function Locations() {
       <section className="section-pad bg-skyback">
         <Container className="px-4 sm:px-6 lg:px-8">
           <RevealOnScroll className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="relative w-full max-w-sm">
-              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-300" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by campus, city or state"
-                className="focus-ring w-full rounded-full border border-primary-100 bg-white py-2.5 pl-10 pr-4 text-sm text-primary-900 placeholder:text-primary-300"
-              />
-            </div>
+            <Input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search by campus, city or state"
+              className="w-full max-w-sm"
+              startAdornment={<Search className="h-4 w-4 text-primary-300" />}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '999px',
+                },
+              }}
+            />
 
             <div className="flex flex-wrap gap-2">
               <button
+                type="button"
                 onClick={() => setParams({})}
                 className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
                   activeState === 'All' ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
@@ -64,6 +69,7 @@ export default function Locations() {
               {states.map((state) => (
                 <button
                   key={state}
+                  type="button"
                   onClick={() => setParams({ state })}
                   className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
                     activeState === state ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
@@ -87,6 +93,7 @@ export default function Locations() {
                     {c.city}, {c.state}
                   </p>
                   <button
+                    type="button"
                     onClick={() => openEnquiry('Campus Enquiry')}
                     className="focus-ring mt-4 text-left text-sm font-bold text-accent-dark hover:underline"
                   >

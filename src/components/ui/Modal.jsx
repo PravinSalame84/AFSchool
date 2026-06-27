@@ -1,46 +1,76 @@
-import { useEffect } from 'react'
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import IconButton from '@mui/material/IconButton'
+import { alpha } from '@mui/material/styles'
+import { useId } from 'react'
 import { X } from 'lucide-react'
 
 export default function Modal({ open, onClose, title, children }) {
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [open, onClose])
-
-  if (!open) return null
+  const titleId = useId()
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-primary-900/60 backdrop-blur-sm animate-[fadeUp_0.3s_ease]"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl2 bg-white p-6 shadow-card animate-[fadeUp_0.35s_ease] dark:bg-primary-950/96 sm:p-8"
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby={titleId}
+      fullWidth
+      maxWidth="sm"
+      slotProps={{
+        backdrop: {
+          sx: {
+            backgroundColor: 'rgba(10, 28, 45, 0.6)',
+            backdropFilter: 'blur(6px)',
+          },
+        },
+        paper: {
+          sx: (theme) => ({
+            borderRadius: '24px',
+            overflow: 'hidden',
+            color: 'text.primary',
+            backgroundImage: 'none',
+            background:
+              theme.palette.mode === 'dark'
+                ? 'linear-gradient(180deg, rgba(14,20,24,0.96), rgba(29,33,60,0.92))'
+                : 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(228,246,251,0.9))',
+            border: `1px solid ${
+              theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : alpha('#1d213c', 0.08)
+            }`,
+            boxShadow: '0 20px 50px -28px rgba(10, 28, 45, 0.34)',
+          }),
+        },
+      }}
+    >
+      <DialogTitle
+        id={titleId}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 2,
+          pb: 1.5,
+          fontSize: '1.25rem',
+          fontWeight: 700,
+        }}
       >
-        <div className="mb-5 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-primary-900 dark:text-white">{title}</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close dialog"
-            className="focus-ring rounded-full p-1.5 text-primary-400 transition hover:bg-skyback-soft hover:text-primary-900 dark:hover:bg-white/10 dark:hover:text-white"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
+        {title}
+        <IconButton
+          onClick={onClose}
+          aria-label="Close dialog"
+          sx={{
+            color: 'text.secondary',
+            '&:hover': {
+              backgroundColor: 'rgba(186, 226, 238, 0.14)',
+              color: 'text.primary',
+            },
+          }}
+        >
+          <X className="h-5 w-5" />
+        </IconButton>
+      </DialogTitle>
+      <DialogContent sx={{ pt: 0, px: { xs: 3, sm: 4 }, pb: { xs: 3, sm: 4 } }}>
         {children}
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

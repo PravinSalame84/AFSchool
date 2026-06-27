@@ -8,6 +8,7 @@ import Seo from '../components/ui/Seo'
 import siteConfig from '../data/siteConfig'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import { isValidEmail } from '../utils/formValidation'
 
 const infoCards = [
   { icon: MapPin, title: 'Campus Address', value: schoolContent.contact.address },
@@ -21,13 +22,21 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
 
-  const update = (field) => (event) => setForm((prev) => ({ ...prev, [field]: event.target.value }))
+  const update = (field) => (event) => {
+    setForm((prev) => ({ ...prev, [field]: event.target.value }))
+    setErrors((prev) => {
+      if (!prev[field]) return prev
+      const next = { ...prev }
+      delete next[field]
+      return next
+    })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your name'
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email'
+    if (!isValidEmail(form.email)) next.email = 'Please enter a valid email'
     if (!form.message.trim()) next.message = 'Please enter a message'
     setErrors(next)
     if (Object.keys(next).length === 0) setSent(true)
@@ -87,22 +96,17 @@ export default function Contact() {
                     <Input id="cemail" type="email" label="Email" required value={form.email} onChange={update('email')} error={errors.email} />
                     <Input id="cphone" type="tel" label="Phone (optional)" value={form.phone} onChange={update('phone')} />
                   </div>
-                  <div>
-                    <label htmlFor="cmessage" className="mb-1.5 block text-sm font-semibold text-primary-800 dark:text-white">
-                      Message <span className="text-accent">*</span>
-                    </label>
-                    <textarea
-                      id="cmessage"
-                      rows={5}
-                      value={form.message}
-                      onChange={update('message')}
-                      className={`focus-ring glass-input w-full rounded-[1.2rem] border px-4 py-3 text-[15px] text-primary-900 transition dark:text-white dark:placeholder:text-white/35 ${
-                        errors.message ? 'border-red-400 bg-red-50 dark:bg-red-500/10' : 'border-primary-100 bg-white focus:border-accent dark:border-white/10'
-                      }`}
-                      placeholder="How can we help?"
-                    />
-                    {errors.message && <p className="mt-1 text-xs font-medium text-red-500">{errors.message}</p>}
-                  </div>
+                  <Input
+                    id="cmessage"
+                    label="Message"
+                    required
+                    multiline
+                    rows={5}
+                    value={form.message}
+                    onChange={update('message')}
+                    error={errors.message}
+                    placeholder="How can we help?"
+                  />
                   <Button type="submit" variant="dark" className="w-full">
                     Send Message
                   </Button>

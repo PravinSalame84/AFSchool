@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLink, Search, X } from 'lucide-react'
 import schoolContent from '../../data/schoolContent'
+import Input from '../ui/Input'
 
 export default function SiteSearch() {
   const [open, setOpen] = useState(false)
@@ -44,6 +45,10 @@ export default function SiteSearch() {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [])
 
+  useEffect(() => {
+    if (!open) setQuery('')
+  }, [open])
+
   return (
     <>
       <button
@@ -60,20 +65,19 @@ export default function SiteSearch() {
         <div className="fixed inset-0 z-[110] flex items-start justify-center bg-primary-950/55 p-4 pt-20 backdrop-blur-md">
           <div className="w-full max-w-3xl rounded-[2rem] border border-white/70 bg-gradient-to-br from-white/95 via-white/92 to-skyback-soft/88 p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-primary-950/94 dark:to-primary-900/86">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-900 text-white">
-                <Search className="h-4.5 w-4.5" />
-              </div>
               <div className="flex-1">
-                <label htmlFor="site-search" className="sr-only">
-                  Search the website
-                </label>
-                <input
+                <Input
                   id="site-search"
                   autoFocus
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search notices, pages, downloads, parent links..."
-                  className="focus-ring w-full rounded-full border border-primary-100 bg-white/92 px-4 py-3 text-[15px] text-primary-900 placeholder:text-primary-300 dark:border-white/10 dark:bg-primary-900 dark:text-white dark:placeholder:text-white/35"
+                  startAdornment={<Search className="h-4.5 w-4.5 text-primary-300" />}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '999px',
+                    },
+                  }}
                 />
               </div>
               <button

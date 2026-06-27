@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react'
+import IconButton from '@mui/material/IconButton'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CheckCircle2, RefreshCw } from 'lucide-react'
+import CheckboxField from '../ui/CheckboxField'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
 import Button from '../ui/Button'
 import { states, citiesForState, schoolsForCity } from '../../data/locations'
+import { isValidEmail, isValidIndianMobile } from '../../utils/formValidation'
 
 const standards = ['LKG', 'UKG', ...Array.from({ length: 9 }, (_, index) => `Class ${index + 1}`)]
 
@@ -31,21 +34,38 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [challenge, setChallenge] = useState(randomMathChallenge)
+  const closeTimerRef = useRef(null)
 
   const cities = useMemo(() => citiesForState(form.state), [form.state])
   const schools = useMemo(() => schoolsForCity(form.state, form.city), [form.state, form.city])
 
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current) {
+        window.clearTimeout(closeTimerRef.current)
+      }
+    },
+    [],
+  )
+
   const update = (field) => (event) => {
     const value = field === 'agree' ? event.target.checked : event.target.value
     setForm((prev) => ({ ...prev, [field]: value }))
+
+    setErrors((prev) => {
+      if (!prev[field]) return prev
+      const next = { ...prev }
+      delete next[field]
+      return next
+    })
   }
 
   const validate = () => {
     const next = {}
     if (!form.firstName.trim()) next.firstName = 'Please enter your child\'s name'
     if (!form.standard) next.standard = 'Please select the applying class'
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email address'
-    if (!/^[0-9]{10}$/.test(form.phone)) next.phone = 'Please enter a valid 10-digit mobile number'
+    if (!isValidEmail(form.email)) next.email = 'Please enter a valid email address'
+    if (!isValidIndianMobile(form.phone)) next.phone = 'Please enter a valid 10-digit mobile number'
     if (Number(form.captcha) !== challenge.answer) next.captcha = 'That answer does not look right'
     if (!form.agree) next.agree = 'Please accept the terms to continue'
     return next
@@ -54,6 +74,12 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
   const refreshChallenge = () => {
     setChallenge(randomMathChallenge())
     setForm((prev) => ({ ...prev, captcha: '' }))
+    setErrors((prev) => {
+      if (!prev.captcha) return prev
+      const next = { ...prev }
+      delete next.captcha
+      return next
+    })
   }
 
   const handleSubmit = (event) => {
@@ -62,7 +88,9 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
     setErrors(next)
     if (Object.keys(next).length === 0) {
       setSubmitted(true)
-      onSuccess && setTimeout(onSuccess, 1800)
+      if (onSuccess) {
+        closeTimerRef.current = window.setTimeout(onSuccess, 1800)
+      }
     }
   }
 
@@ -134,46 +162,35 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         className="sm:col-span-2"
         error={errors.phone}
       />
-
-      <div className="sm:col-span-2">
-        <label htmlFor="captcha" className="mb-1.5 block text-sm font-semibold text-primary-800 dark:text-white">
-          Quick check - what is {challenge.a} + {challenge.b}? <span className="text-accent">*</span>
-        </label>
-        <div className="flex gap-2">
-          <input
-            id="captcha"
-            inputMode="numeric"
-            value={form.captcha}
-            onChange={update('captcha')}
-            className={`focus-ring glass-input w-full rounded-[1rem] border px-4 py-2.5 text-[15px] text-primary-900 transition dark:text-white ${
-              errors.captcha ? 'border-red-400 bg-red-50 dark:bg-red-500/10' : 'border-primary-100 bg-white focus:border-accent dark:border-white/10'
-            }`}
-            placeholder="Your answer"
-          />
-          <button
-            type="button"
+      <Input
+        id="captcha"
+        label={`Quick check - what is ${challenge.a} + ${challenge.b}?`}
+        required
+        inputMode="numeric"
+        value={form.captcha}
+        onChange={update('captcha')}
+        placeholder="Your answer"
+        className="sm:col-span-2"
+        error={errors.captcha}
+        endAdornment={
+          <IconButton
+            edge="end"
             onClick={refreshChallenge}
             aria-label="Get a new question"
-            className="focus-ring flex-shrink-0 rounded-[1rem] border border-primary-100 px-3 text-primary-500 transition hover:bg-skyback-soft dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10"
+            sx={{ color: 'text.secondary' }}
           >
             <RefreshCw className="h-4 w-4" />
-          </button>
-        </div>
-        {errors.captcha && <p className="mt-1 text-xs font-medium text-red-500">{errors.captcha}</p>}
-      </div>
+          </IconButton>
+        }
+      />
 
-      <div className="sm:col-span-2">
-        <label className="flex items-start gap-2.5 text-sm text-primary-600 dark:text-slate-300">
-          <input
-            type="checkbox"
-            checked={form.agree}
-            onChange={update('agree')}
-            className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-primary-300 text-accent focus:ring-accent"
-          />
-          <span>By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry.</span>
-        </label>
-        {errors.agree && <p className="mt-1 text-xs font-medium text-red-500">{errors.agree}</p>}
-      </div>
+      <CheckboxField
+        checked={form.agree}
+        onChange={update('agree')}
+        error={errors.agree}
+        className="sm:col-span-2"
+        label="By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry."
+      />
 
       <Button type="submit" variant="dark" className="w-full sm:col-span-2">
         Send {context.includes('Details') ? 'Request' : 'Enquiry'}

@@ -1,26 +1,68 @@
-export default function Select({ label, error, required, options = [], placeholder, className = '', id, ...rest }) {
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import { dropdownPaperSx, sharedTextFieldSx } from './muiFieldStyles'
+
+function normalizeOption(option) {
+  if (typeof option === 'object' && option !== null) return option
+  return { label: option, value: option }
+}
+
+export default function Select({
+  label,
+  error,
+  helperText,
+  required,
+  options = [],
+  placeholder,
+  className = '',
+  id,
+  sx,
+  ...rest
+}) {
   return (
     <div className={className}>
-      {label && (
-        <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-primary-800 dark:text-white">
-          {label} {required && <span className="text-accent">*</span>}
-        </label>
-      )}
-      <select
+      <TextField
+        select
         id={id}
-        className={`focus-ring glass-input w-full rounded-lg border bg-white px-4 py-2.5 text-[15px] text-primary-900 transition dark:text-white ${
-          error ? 'border-red-400 bg-red-50 dark:bg-red-500/10' : 'border-primary-100 focus:border-accent dark:border-white/10'
-        }`}
+        label={label}
+        required={required}
+        error={Boolean(error)}
+        helperText={error || helperText}
+        fullWidth
+        size="small"
+        SelectProps={{
+          displayEmpty: Boolean(placeholder),
+          MenuProps: {
+            PaperProps: {
+              sx: (theme) => dropdownPaperSx(theme),
+            },
+          },
+        }}
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
+        sx={[
+          (theme) => sharedTextFieldSx(theme),
+          ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+        ]}
         {...rest}
       >
-        {placeholder && <option value="">{placeholder}</option>}
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
-      </select>
-      {error && <p className="mt-1 text-xs font-medium text-red-500">{error}</p>}
+        {placeholder ? (
+          <MenuItem value="" disabled>
+            {placeholder}
+          </MenuItem>
+        ) : null}
+        {options.map((option) => {
+          const normalized = normalizeOption(option)
+          return (
+            <MenuItem key={normalized.value} value={normalized.value}>
+              {normalized.label}
+            </MenuItem>
+          )
+        })}
+      </TextField>
     </div>
   )
 }
