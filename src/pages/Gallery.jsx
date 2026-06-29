@@ -21,8 +21,8 @@ export default function Gallery() {
       <PageHero
         crumb="Gallery"
         eyebrow="School Highlights"
-        title="A visual glimpse into school life, events and achievements."
-        subtitle="Browse published school moments that reflect student participation, campus activity and institutional pride."
+        title="The complete school photo gallery from campus and student life."
+        subtitle={`Browse all ${schoolContent.gallery.length} published images from the media archive, covering student participation, campus activity and school achievements.`}
         image={schoolContent.gallery[0].image}
       />
 
@@ -35,6 +35,9 @@ export default function Gallery() {
             <div className="min-w-0">
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Interactive Gallery</p>
               <h2 className="text-2xl font-bold uppercase text-primary-900 dark:text-white sm:text-3xl">Campus, events and achievement moments.</h2>
+              <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-skyback-light/78">
+                Every available photo from the current `media/school` and `media/students` archive is included below.
+              </p>
             </div>
           </div>
 

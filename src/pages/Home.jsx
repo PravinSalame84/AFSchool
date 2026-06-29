@@ -320,14 +320,14 @@ export default function Home() {
             </Carousel>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.92fr_1.08fr]" style={{backgroundColor: 'red'}}>
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[0.96fr_1.04fr]">
             <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               custom={0}
               variants={rise}
-              className="frost-card airforce-sheen rounded-[2.2rem] p-8"
+              className="frost-card rounded-[2.2rem] p-6 sm:p-8"
             >
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-airforce-saffron">Campus Life</p>
               <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
@@ -349,46 +349,52 @@ export default function Home() {
                 </span>
               </div>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {schoolContent.activities.map((activity, index) => {
                   const tone = activityTones[index % activityTones.length]
 
                   return (
-                  <Link
-                    key={activity.title}
-                    to={activity.to}
-                    className={`block rounded-[1.6rem] border p-4 shadow-soft transition hover:-translate-y-1 ${tone.card}`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <OptimizedImage
-                        src={activity.image}
-                        alt={activity.title}
-                        wrapperClassName="h-20 w-20 flex-shrink-0 rounded-[1.1rem]"
-                        className="h-20 w-20 rounded-[1.1rem] object-cover"
-                      />
-                      <div className="flex-1">
-                        <div className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.16em] ${tone.badge}`}>
-                          0{index + 1}
+                    <Link
+                      key={activity.title}
+                      to={activity.to}
+                      className={`block rounded-[1.6rem] border p-4 shadow-soft transition hover:-translate-y-1 ${tone.card}`}
+                    >
+                      <div className="flex gap-4">
+                        <OptimizedImage
+                          src={activity.image}
+                          alt={activity.title}
+                          wrapperClassName="h-20 w-20 flex-shrink-0 rounded-[1.1rem]"
+                          className="h-20 w-20 rounded-[1.1rem] object-cover"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <div className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.16em] ${tone.badge}`}>
+                            0{index + 1}
+                          </div>
+                          <div className="mt-3 flex items-start justify-between gap-3">
+                            <h3 className="text-base font-bold uppercase leading-tight text-primary-900 dark:text-white">
+                              {activity.title}
+                            </h3>
+                            <ArrowUpRight className={`mt-0.5 h-4 w-4 flex-shrink-0 ${tone.icon}`} />
+                          </div>
+                          <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">
+                            {activity.description}
+                          </p>
                         </div>
-                        <h3 className="text-lg font-bold uppercase text-primary-900 dark:text-white">{activity.title}</h3>
-                        <p className="mt-1 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">{activity.description}</p>
                       </div>
-                      <ArrowUpRight className={`mt-2 h-4 w-4 flex-shrink-0 ${tone.icon}`} />
-                    </div>
-                  </Link>
+                    </Link>
                   )
                 })}
               </div>
             </motion.div>
 
-            <div className="grid gap-6">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid items-start gap-6">
+              <div className="grid items-start grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
                 <article className="frost-card overflow-hidden rounded-[2rem] p-4">
                   <OptimizedImage
                     src={siteAssets.images.campusActivities}
                     alt="School campus life highlights"
                     wrapperClassName="rounded-[1.5rem]"
-                    className="h-56 w-full rounded-[1.5rem] object-cover"
+                    className="h-64 w-full rounded-[1.5rem] object-cover sm:h-72"
                   />
                   <div className="px-2 pb-2 pt-4">
                     <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-airforce-saffron dark:text-airforce-gold">
@@ -401,16 +407,17 @@ export default function Home() {
                   </div>
                 </article>
 
-                <div className="grid gap-4">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
                   <article className="frost-card overflow-hidden rounded-[1.8rem] p-3">
                     <OptimizedImage
                       src={siteAssets.images.studentGroupStudy}
                       alt="Students studying together"
                       wrapperClassName="rounded-[1.2rem]"
-                      className="h-32 w-full rounded-[1.2rem] object-cover"
+                      className="h-40 w-full rounded-[1.2rem] object-cover"
                     />
                     <div className="px-2 pb-1 pt-3">
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-airforce-cyan">Shared Learning</p>
+                      <p className="mt-2 text-sm font-semibold text-primary-900 dark:text-white">Students collaborate, revise and learn together.</p>
                     </div>
                   </article>
                   <article className="frost-card overflow-hidden rounded-[1.8rem] p-3">
@@ -418,34 +425,58 @@ export default function Home() {
                       src={siteAssets.images.studentYoga}
                       alt="Students in yoga activity"
                       wrapperClassName="rounded-[1.2rem]"
-                      className="h-32 w-full rounded-[1.2rem] object-cover"
+                      className="h-40 w-full rounded-[1.2rem] object-cover"
                     />
                     <div className="px-2 pb-1 pt-3">
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-airforce-saffron dark:text-airforce-gold">Wellbeing & Balance</p>
+                      <p className="mt-2 text-sm font-semibold text-primary-900 dark:text-white">Movement and mindfulness remain part of school life.</p>
                     </div>
                   </article>
                 </div>
               </div>
 
+              <div className="frost-card rounded-[2rem] p-4 sm:p-5">
+                <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-airforce-cyan">Gallery Highlights</p>
+                    <h3 className="mt-2 text-2xl font-bold uppercase text-primary-900 dark:text-white">
+                      Real moments from classrooms, campus and student activities.
+                    </h3>
+                  </div>
+                  <Link
+                    to="/gallery"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-airforce-saffron dark:text-skyback-light dark:hover:text-airforce-gold"
+                  >
+                    Open full gallery
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
+
               <Carousel autoPlay interval={3600} ariaLabel="Campus gallery highlights">
                 {schoolContent.gallery.slice(0, 8).map((item, index) => (
-                <motion.article
-                  key={item.title}
-                  data-carousel-item
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.72, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="frost-card panel-hover self-start w-[290px] flex-shrink-0 overflow-hidden rounded-[2rem] p-4 sm:w-[340px]"
-                >
-                  <OptimizedImage src={item.image} alt={item.title} wrapperClassName="rounded-[1.5rem]" className="h-56 w-full rounded-[1.5rem] object-cover" />
-                  <div className="px-2 pb-2 pt-4">
-                    <h3 className="text-xl font-bold uppercase text-primary-900 dark:text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">{item.caption}</p>
-                  </div>
-                </motion.article>
+                  <motion.article
+                    key={item.title}
+                    data-carousel-item
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ duration: 0.72, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    className="panel-hover self-start w-[290px] flex-shrink-0 overflow-hidden rounded-[1.8rem] border border-primary-900/8 bg-white/90 p-3 shadow-soft dark:border-white/10 dark:bg-primary-900/84 sm:w-[340px]"
+                  >
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      wrapperClassName="rounded-[1.35rem]"
+                      className="h-52 w-full rounded-[1.35rem] object-cover"
+                    />
+                    <div className="px-2 pb-2 pt-4">
+                      <h3 className="text-lg font-bold uppercase text-primary-900 dark:text-white">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">{item.caption}</p>
+                    </div>
+                  </motion.article>
                 ))}
               </Carousel>
+              </div>
             </div>
           </div>
         </Container>
