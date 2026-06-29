@@ -74,7 +74,7 @@ export default function Hero() {
             <motion.div initial="hidden" animate="show" custom={0.08} variants={fadeUp}>
               <h1 className="mt-7 max-w-4xl text-[3rem] font-bold uppercase leading-[0.88] text-primary-900 dark:text-white sm:text-[4.6rem]">
                 Premium Schooling
-                <span className="block bg-gradient-to-r from-primary-600 via-airforce-blue to-skyback bg-clip-text text-transparent dark:from-skyback-light dark:via-skyback dark:to-info">
+                <span className="block bg-gradient-to-r from-secondary via-airforce-blue to-airforce-cyan bg-clip-text text-transparent dark:from-airforce-gold dark:via-skyback-light dark:to-airforce-cyan">
                   With Air Force Character
                 </span>
               </h1>
@@ -85,7 +85,7 @@ export default function Hero() {
               animate="show"
               custom={0.16}
               variants={fadeUp}
-              className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-600 dark:text-slate-300"
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-600 dark:text-skyback-light/82"
             >
               {schoolContent.hero.title} {schoolContent.hero.subtitle}
             </motion.p>
@@ -154,19 +154,19 @@ export default function Hero() {
 
             <div className="hero-stage p-4 sm:p-5">
               <div className="relative">
-                <div className="hero-cutout p-3">
+                <div className="hero-cutout rounded-[2.2rem] p-3">
                   <OptimizedImage
                     src={currentSlide.image}
                     alt={currentSlide.title}
                     priority
                     wrapperClassName="rounded-[2rem]"
-                    className="h-[500px] w-full rounded-[2rem] object-cover object-center"
+                    className="h-[420px] w-full rounded-[2rem] object-cover object-center sm:h-[500px]"
                   />
                 </div>
 
                 <div className="absolute right-4 top-4 hidden max-w-[220px] sm:block">
                   <div className="glass-plate rounded-[1.6rem] p-3">
-                    <div className="hero-cutout p-2">
+                    <div className="rounded-[1.4rem] border border-white/10 bg-primary-900/8 p-2 dark:border-white/10 dark:bg-primary-950/34">
                       <OptimizedImage
                         src={supportingImage}
                         alt="Student moments"
@@ -174,8 +174,8 @@ export default function Hero() {
                         className="h-[155px] w-full rounded-[1.4rem] object-cover object-center"
                       />
                     </div>
-                    <div className="mt-3 rounded-[1.35rem] bg-gradient-to-r from-secondary via-primary-800 to-primary-600 px-4 py-3 text-white dark:from-white dark:to-skyback-light dark:text-primary-950">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/60 dark:text-primary-700">
+                    <div className="mt-3 rounded-[1.35rem] bg-gradient-to-r from-white via-skyback-soft to-skyback-light px-4 py-3 text-primary-950 dark:from-secondary dark:via-primary-800 dark:to-primary-700 dark:text-white">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary-500 dark:text-airforce-gold/76">
                         School Motto
                       </p>
                       <p className="mt-2 text-sm font-bold uppercase">{schoolContent.hero.motto}</p>
@@ -193,14 +193,13 @@ export default function Hero() {
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-400">{slide.label}</p>
-                          {/* <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{slide.title}</p> */}
-                          {/* <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{slide.description}</p> */}
+                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-400 dark:text-airforce-gold/80">{slide.label}</p>
+                          <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{slide.title}</p>
                         </div>
                         <ArrowUpRight
                           className={`mt-0.5 h-4 w-4 flex-shrink-0 transition ${
                             index === activeSlide
-                              ? 'text-primary-700 dark:text-sky-200'
+                              ? 'text-primary-700 dark:text-airforce-gold'
                               : 'text-primary-300 dark:text-slate-400'
                           }`}
                         />
@@ -211,10 +210,10 @@ export default function Hero() {
 
                 <div className="mt-4 flex items-center gap-3 sm:hidden">
                   <div className="glass-plate flex-1 rounded-[1.35rem] px-4 py-3">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary-400">School Motto</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary-400 dark:text-airforce-gold/76">School Motto</p>
                     <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{schoolContent.hero.motto}</p>
                   </div>
-                  <div className="hero-cutout w-[108px] p-2">
+                  <div className="w-[108px] rounded-[1rem] border border-white/10 bg-primary-900/8 p-2 dark:border-white/10 dark:bg-primary-950/34">
                     <OptimizedImage
                       src={supportingImage}
                       alt="Student moments"
@@ -226,10 +225,10 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="absolute -left-3 bottom-36 hidden max-w-[260px] rounded-[1.8rem] bg-white/92 px-4 py-4 shadow-card backdrop-blur-xl sm:block dark:bg-primary-950/92">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary-400">Why Parents Choose Us</p>
-              <p className="mt-2 text-lg font-bold uppercase text-primary-900 dark:text-white">{currentSlide.title}</p>
-              <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-700 dark:text-slate-200">
+            <div className="absolute -left-3 bottom-32 hidden max-w-[260px] rounded-[1.8rem] border border-white/12 bg-primary-950/82 px-4 py-4 text-white shadow-card backdrop-blur-xl sm:block">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-skyback-light/60">Why Parents Choose Us</p>
+              <p className="mt-2 text-lg font-bold uppercase text-white">{currentSlide.title}</p>
+              <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-skyback-light/88">
                 Explore academics
                 <ArrowRight className="h-4 w-4" />
               </div>

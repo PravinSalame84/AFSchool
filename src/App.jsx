@@ -1,8 +1,9 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import AppErrorBoundary from './components/system/AppErrorBoundary'
 import PageLoader from './components/ui/PageLoader'
+import SplashScreen from './components/ui/SplashScreen'
 import { EnquiryModalProvider } from './context/EnquiryModalContext'
 import { RuntimeContentProvider } from './context/RuntimeContentContext'
 import { hubIndex } from './data/contentHub'
@@ -24,10 +25,21 @@ const Terms = lazy(() => import('./pages/Terms'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowSplash(false)
+    }, 1900)
+
+    return () => window.clearTimeout(timer)
+  }, [])
+
   return (
     <AppErrorBoundary>
       <RuntimeContentProvider>
         <EnquiryModalProvider>
+          <SplashScreen visible={showSplash} />
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route element={<Layout />}>

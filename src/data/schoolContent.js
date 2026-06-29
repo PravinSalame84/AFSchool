@@ -21,7 +21,7 @@ const schoolContent = {
         label: 'Student Life',
         title: 'Joyful, disciplined and deeply child-centred school life.',
         // description: 'Warm classrooms, celebration-rich learning and thoughtful mentoring help students feel confident from the first day onward.',
-        image: siteAssets.images.campusActivities,
+        image: siteAssets.images.studentCampusEvent,
       },
       {
         id: 'award',
@@ -64,7 +64,7 @@ const schoolContent = {
       caption: 'A long-standing culture of discipline and student growth.',
     },
     {
-      image: siteAssets.images.campusActivities,
+      image: siteAssets.images.studentCampusEvent,
       label: 'Students',
       value: '530+',
       caption: 'A vibrant student body learning, participating and growing together.',
@@ -95,7 +95,7 @@ const schoolContent = {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
-      image: siteAssets.images.campusActivities,
+      image: siteAssets.images.studentUnityRun,
       accent: 'from-[#5b44ff] to-[#9a64ff]',
     },
     {
@@ -224,19 +224,19 @@ const schoolContent = {
       title: 'Co-Curricular Activities',
       description: 'Assemblies, celebrations, clubs and creativity-led opportunities that broaden perspective.',
       to: '/academics/co-curricular-activities',
-      image: siteAssets.images.campusActivities,
+      image: siteAssets.images.studentCampusEvent,
     },
     {
       title: 'Sports Activities',
       description: 'Physical training, games and team spirit that support endurance, coordination and resilience.',
       to: '/academics/sports-activities',
-      image: siteAssets.images.unityRun,
+      image: siteAssets.images.studentUnityRun,
     },
     {
       title: 'Educational Trips & Competitions',
       description: 'Inter-school exposure and learning beyond the classroom strengthen communication and confidence.',
       to: '/academics/other-school-activities',
-      image: siteAssets.images.bestAward,
+      image: siteAssets.images.studentClassPhoto,
     },
   ],
 
@@ -244,13 +244,13 @@ const schoolContent = {
     {
       title: 'Student Energy',
       badge: 'Campus Life',
-      image: siteAssets.images.campusActivities,
+      image: siteAssets.images.studentCampusEvent,
       caption: 'Everyday student participation across events, school gatherings and guided activities.',
     },
     {
       title: 'Learning Focus',
       badge: 'Academics',
-      image: siteAssets.images.smartClassroom,
+      image: siteAssets.images.studentClassPhoto,
       caption: 'Classroom experiences designed to feel structured, modern and encouraging.',
     },
     {
@@ -262,7 +262,7 @@ const schoolContent = {
     {
       title: 'Confident Growth',
       badge: 'School Spirit',
-      image: siteAssets.images.unityRun,
+      image: siteAssets.images.studentUnityRun,
       caption: 'A culture of teamwork, discipline and visible school pride across student life.',
     },
   ],
@@ -355,9 +355,24 @@ const schoolContent = {
 
   gallery: [
     {
+      title: 'School Entrance',
+      caption: 'The front entrance creates the first impression of discipline, welcome and institutional pride.',
+      image: siteAssets.images.schoolGate,
+    },
+    {
+      title: 'Campus Gate View',
+      caption: 'A broader gate-side view that reflects the school environment and everyday arrival experience.',
+      image: siteAssets.images.gates,
+    },
+    {
+      title: 'Gateway Landmark',
+      caption: 'A recognizable campus landmark that helps frame the school identity for families and visitors.',
+      image: siteAssets.images.gateAvif,
+    },
+    {
       title: 'Campus Moments',
       caption: 'Student experiences and day-to-day learning energy across the campus.',
-      image: siteAssets.images.campusLearning,
+      image: siteAssets.images.studentCampusEvent,
     },
     {
       title: 'Unity & Participation',
@@ -375,14 +390,114 @@ const schoolContent = {
       image: siteAssets.images.chief,
     },
     {
-      title: 'Unity Day Participation',
-      caption: 'National spirit and participation reflected in school events and observances.',
-      image: siteAssets.images.unityDay,
+      title: 'Teacher Collaboration',
+      caption: 'Faculty planning and staff interaction that support stronger classroom preparation and student care.',
+      image: siteAssets.images.teacherMeeting,
+    },
+    {
+      title: 'Campus Learning',
+      caption: 'A school atmosphere shaped for structured study, growth and confidence-building.',
+      image: siteAssets.images.campusLearning,
+    },
+    {
+      title: 'Smart Classroom',
+      caption: 'Technology-enabled teaching spaces that make lessons more engaging and future-ready.',
+      image: siteAssets.images.smartClassroom,
     },
     {
       title: 'Campus Activities',
       caption: 'Snapshots from activity-driven learning across academic and co-curricular spaces.',
       image: siteAssets.images.campusActivities,
+    },
+    {
+      title: 'Student Activities',
+      caption: 'Group participation moments that show how students learn through doing and collaborating.',
+      image: siteAssets.images.studentActivities,
+    },
+    {
+      title: 'Student Seating',
+      caption: 'Simple classroom moments that reflect routine, discipline and everyday school life.',
+      image: siteAssets.images.studentBenches,
+    },
+    {
+      title: 'Student Celebration',
+      caption: 'Celebratory school moments that bring joy, participation and shared pride to the campus.',
+      image: siteAssets.images.studentCelebration,
+    },
+    {
+      title: 'Classroom Belonging',
+      caption: 'Student group moments that make the school experience feel warm, collective and memorable.',
+      image: siteAssets.images.studentClassPhoto,
+    },
+    {
+      title: 'Classroom Learning',
+      caption: 'A closer look at students engaged in structured learning and guided classroom participation.',
+      image: siteAssets.images.studentClass,
+    },
+    {
+      title: 'Digital Learning',
+      caption: 'Students learning with modern tools that support attention, clarity and curiosity.',
+      image: siteAssets.images.studentDigitalLearning,
+    },
+    {
+      title: 'Study Focus',
+      caption: 'Academic concentration and group learning moments that reflect steady classroom culture.',
+      image: siteAssets.images.studentGroupStudy,
+    },
+    {
+      title: 'Student Classroom',
+      caption: 'A snapshot of students in an active classroom environment built around participation and support.',
+      image: siteAssets.images.studentClassroom,
+    },
+    {
+      title: 'Student Library',
+      caption: 'Reading and quiet-study spaces that encourage reflection, curiosity and independent learning.',
+      image: siteAssets.images.studentLibrary,
+    },
+    {
+      title: 'Library Moments',
+      caption: 'Another perspective on school reading culture and student access to learning resources.',
+      image: siteAssets.images.studentLibraryAlt,
+    },
+    {
+      title: 'Parent Teacher Meeting',
+      caption: 'Parent-school conversations that strengthen guidance, support and shared responsibility.',
+      image: siteAssets.images.studentPtm,
+    },
+    {
+      title: 'Student Conference',
+      caption: 'Formal participation settings where students learn confidence, listening and presentation skills.',
+      image: siteAssets.images.studentConference,
+    },
+    {
+      title: 'Student Canteen',
+      caption: 'Informal school-life moments that add comfort, routine and social connection to the day.',
+      image: siteAssets.images.studentCanteen,
+    },
+    {
+      title: 'Student Group Fun',
+      caption: 'Natural friendship and peer-energy moments that make school life lively and memorable.',
+      image: siteAssets.images.studentGroupFun,
+    },
+    {
+      title: 'Student Care & Cleanliness',
+      caption: 'Responsible habits and shared care for the school environment reflected through student action.',
+      image: siteAssets.images.studentCleaning,
+    },
+    {
+      title: 'Unity Day Participation',
+      caption: 'National spirit and participation reflected in school events and observances.',
+      image: siteAssets.images.studentUnityRun,
+    },
+    {
+      title: 'Yoga Practice',
+      caption: 'Wellbeing-focused activity that supports balance, concentration and physical awareness.',
+      image: siteAssets.images.studentYoga,
+    },
+    {
+      title: 'Yoga Session',
+      caption: 'Another wellness snapshot showing calm, discipline and collective participation.',
+      image: siteAssets.images.studentYogaOne,
     },
   ],
 

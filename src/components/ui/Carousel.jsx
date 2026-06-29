@@ -45,9 +45,11 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
 
   return (
     <div className="relative" role="region" aria-label={ariaLabel}>
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-12 bg-gradient-to-r from-white via-white/72 to-transparent dark:from-primary-950 dark:via-primary-950/74 md:block" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-12 bg-gradient-to-l from-white via-white/72 to-transparent dark:from-primary-950 dark:via-primary-950/74 md:block" />
       <div
         ref={trackRef}
-        className="no-scrollbar flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
+        className="no-scrollbar flex items-start gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
       >
         {children}
       </div>
@@ -58,7 +60,7 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
           aria-label="Previous"
           disabled={atStart}
           onClick={() => scrollByCard(-1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-white text-primary-900 transition disabled:opacity-30 hover:bg-primary-900 hover:text-white disabled:hover:bg-white disabled:hover:text-primary-900"
+          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-gradient-to-br from-white to-skyback-soft text-primary-900 transition disabled:opacity-30 hover:border-accent/40 hover:bg-gradient-to-br hover:from-secondary hover:to-primary-700 hover:text-white disabled:hover:from-white disabled:hover:to-skyback-soft disabled:hover:text-primary-900 dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-900 dark:to-secondary dark:text-skyback-light dark:hover:border-skyback/30 dark:hover:from-skyback-light dark:hover:to-white dark:hover:text-primary-950"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -67,7 +69,7 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
           aria-label="Next"
           disabled={atEnd}
           onClick={() => scrollByCard(1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-white text-primary-900 transition disabled:opacity-30 hover:bg-primary-900 hover:text-white disabled:hover:bg-white disabled:hover:text-primary-900"
+          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-gradient-to-br from-white to-skyback-soft text-primary-900 transition disabled:opacity-30 hover:border-accent/40 hover:bg-gradient-to-br hover:from-secondary hover:to-primary-700 hover:text-white disabled:hover:from-white disabled:hover:to-skyback-soft disabled:hover:text-primary-900 dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-900 dark:to-secondary dark:text-skyback-light dark:hover:border-skyback/30 dark:hover:from-skyback-light dark:hover:to-white dark:hover:text-primary-950"
         >
           <ChevronRight className="h-5 w-5" />
         </button>

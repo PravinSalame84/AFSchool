@@ -12,6 +12,8 @@ import NavigationTitleBadge from './NavigationTitleBadge'
 
 function DesktopItem({ item }) {
   const [open, setOpen] = useState(false)
+  const baseInactive =
+    'text-primary-700 hover:bg-gradient-to-r hover:from-skyback-light hover:via-white hover:to-airforce-gold/12 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold'
 
   if (item.external) {
     return (
@@ -19,7 +21,7 @@ function DesktopItem({ item }) {
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-gradient-to-r hover:from-skyback-light hover:to-white hover:text-primary-900 hover:shadow-soft dark:text-white/88 dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-primary-700/90 dark:hover:text-white"
+        className={`focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${baseInactive}`}
       >
         {item.label} <ExternalLink className="h-3 w-3" />
       </a>
@@ -33,8 +35,8 @@ function DesktopItem({ item }) {
         className={({ isActive }) =>
           `focus-ring rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${
             isActive
-              ? 'bg-primary-900 text-white dark:bg-white dark:text-primary-950'
-              : 'text-primary-700 hover:bg-gradient-to-r hover:from-skyback-light hover:to-white hover:text-primary-900 hover:shadow-soft dark:text-white/88 dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-primary-700/90 dark:hover:text-white'
+              ? 'bg-primary-900 text-white dark:bg-gradient-to-r dark:from-airforce-gold dark:to-airforce-honey dark:text-secondary'
+              : baseInactive
           }`
         }
       >
@@ -49,7 +51,7 @@ function DesktopItem({ item }) {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-gradient-to-r hover:from-skyback-light hover:to-white hover:text-primary-900 hover:shadow-soft dark:text-white/88 dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-primary-700/90 dark:hover:text-white"
+        className={`focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${baseInactive}`}
       >
         {item.label}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -66,7 +68,7 @@ function DesktopItem({ item }) {
               href={child.to}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-accent/16 hover:via-skyback-soft hover:to-white hover:text-primary-900 hover:shadow-soft dark:text-white dark:hover:bg-gradient-to-r dark:hover:from-primary-800/95 dark:hover:via-primary-700/90 dark:hover:to-secondary dark:hover:text-white"
+              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:via-skyback-soft hover:to-airforce-gold/10 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold"
             >
               {child.label}
               <ExternalLink className="h-3.5 w-3.5" />
@@ -75,7 +77,7 @@ function DesktopItem({ item }) {
             <Link
               key={child.label}
               to={child.to}
-              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-accent/16 hover:via-skyback-soft hover:to-white hover:text-primary-900 hover:shadow-soft dark:text-white dark:hover:bg-gradient-to-r dark:hover:from-primary-800/95 dark:hover:via-primary-700/90 dark:hover:to-secondary dark:hover:text-white"
+              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:via-skyback-soft hover:to-airforce-gold/10 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold"
             >
               {child.label}
             </Link>
@@ -95,10 +97,10 @@ function MobileItem({ item, onNavigate }) {
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center justify-between rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-skyback-soft/70 dark:border-white/10 dark:text-white dark:hover:bg-primary-800/60"
+        className="focus-ring flex items-center justify-between rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:border-white/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
       >
         {item.label}
-        <ExternalLink className="h-4 w-4 text-primary-300" />
+        <ExternalLink className="h-4 w-4 text-primary-300 dark:text-airforce-gold" />
       </a>
     )
   }
@@ -108,7 +110,7 @@ function MobileItem({ item, onNavigate }) {
       <Link
         to={item.to}
         onClick={onNavigate}
-        className="focus-ring block rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-skyback-soft/70 dark:border-white/10 dark:text-white dark:hover:bg-primary-800/60"
+        className="focus-ring block rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:border-white/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
       >
         {item.label}
       </Link>
@@ -121,7 +123,7 @@ function MobileItem({ item, onNavigate }) {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="focus-ring flex w-full items-center justify-between rounded-xl px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-skyback-soft/70 dark:text-white dark:hover:bg-primary-800/60"
+        className="focus-ring flex w-full items-center justify-between rounded-xl px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
       >
         {item.label}
         <ChevronDown className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -134,7 +136,7 @@ function MobileItem({ item, onNavigate }) {
               href={child.to}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-accent/12 hover:to-skyback-soft hover:text-primary-900 dark:text-slate-200 dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-primary-700/80 dark:hover:text-white"
+              className="focus-ring flex items-center justify-between rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:to-skyback-soft hover:text-primary-900 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
             >
               {child.label}
               <ExternalLink className="h-3.5 w-3.5" />
@@ -144,7 +146,7 @@ function MobileItem({ item, onNavigate }) {
               key={child.label}
               to={child.to}
               onClick={onNavigate}
-              className="focus-ring block rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-accent/12 hover:to-skyback-soft hover:text-primary-900 dark:text-slate-200 dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-primary-700/80 dark:hover:text-white"
+              className="focus-ring block rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:to-skyback-soft hover:text-primary-900 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
             >
               {child.label}
             </Link>
@@ -201,7 +203,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 h-full w-[90%] max-w-sm overflow-y-auto border-l border-white/40 bg-gradient-to-b from-white/96 via-white/94 to-skyback-soft/90 p-4 shadow-card backdrop-blur-xl transition-transform duration-300 sm:p-5 dark:border-white/10 dark:bg-gradient-to-b dark:from-primary-950/96 dark:via-primary-950/94 dark:to-primary-900/90 ${
+          className={`absolute right-0 top-0 h-full w-[90%] max-w-sm overflow-y-auto border-l border-white/40 bg-gradient-to-b from-white/96 via-white/94 to-skyback-soft/90 p-4 shadow-card backdrop-blur-xl transition-transform duration-300 sm:p-5 dark:border-white/10 dark:bg-gradient-to-b dark:from-primary-950/98 dark:via-secondary dark:to-primary-900/92 ${
             mobileOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >

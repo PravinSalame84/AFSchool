@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Camera, X } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
+import Carousel from '../components/ui/Carousel'
 import Seo from '../components/ui/Seo'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
@@ -37,7 +38,40 @@ export default function Gallery() {
             </div>
           </div>
 
-          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="mb-10">
+            <Carousel autoPlay interval={3000} ariaLabel="Featured gallery carousel">
+              {schoolContent.gallery.slice(0, 5).map((item) => (
+                <button
+                  key={`featured-${item.title}`}
+                  type="button"
+                  data-carousel-item
+                  onClick={() => setActiveImage(item)}
+                  className="group relative min-h-[260px] w-[300px] flex-shrink-0 overflow-hidden rounded-[2rem] border border-white/50 text-left shadow-card sm:w-[420px]"
+                >
+                  <OptimizedImage
+                    src={item.image}
+                    alt={item.title}
+                    wrapperClassName="absolute inset-0"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-primary-900/54 to-transparent" />
+                  <div className="relative flex min-h-[260px] flex-col justify-end p-5 text-white">
+                    <span className="inline-flex w-fit rounded-full border border-white/16 bg-gradient-to-r from-white/14 to-skyback-light/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/92 backdrop-blur-sm">
+                      Featured
+                    </span>
+                    <h3 className="mt-3 text-xl font-bold uppercase">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/80">{item.caption}</p>
+                  </div>
+                </button>
+              ))}
+            </Carousel>
+          </div>
+
+          {/*
+            Intentionally disabled to avoid repeating the same student showcase
+            cards above the main gallery grid.
+          */}
+          {/* <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {schoolContent.studentShowcase.slice(0, 3).map((item) => (
               <article key={item.title} className="relative overflow-hidden rounded-[1.8rem] border border-white/50 shadow-card">
                 <OptimizedImage
@@ -56,15 +90,15 @@ export default function Gallery() {
                 </div>
               </article>
             ))}
-          </div>
+          </div> */}
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid items-start grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {schoolContent.gallery.map((item, index) => (
               <button
                 key={item.title}
                 type="button"
                 onClick={() => setActiveImage(item)}
-                className={`frost-card panel-hover overflow-hidden rounded-[2rem] p-4 text-left ${index === 0 ? 'xl:col-span-2' : ''}`}
+                className={`frost-card panel-hover self-start overflow-hidden rounded-[2rem] p-4 text-left ${index === 0 ? 'xl:col-span-2' : ''}`}
               >
                 <OptimizedImage
                   src={item.image}

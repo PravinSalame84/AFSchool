@@ -12,14 +12,17 @@ const sizes = {
 const variantSx = {
   primary: (theme) => ({
     color: '#fff',
-    backgroundColor: 'var(--primary, #F7943D)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(90deg, #f0934b 0%, #ff671f 100%)'
+        : 'linear-gradient(90deg, #f0934b 0%, #ff671f 100%)',
     border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : 'transparent'}`,
     boxShadow:
       theme.palette.mode === 'dark'
         ? '0 14px 30px rgba(0, 0, 0, 0.34)'
         : '0 10px 20px rgba(15, 35, 56, 0.16)',
     '&:hover': {
-      backgroundColor: 'var(--primary-hover, #E67E22)',
+      background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
       boxShadow:
         theme.palette.mode === 'dark'
           ? '0 18px 34px rgba(0, 0, 0, 0.4)'
@@ -76,12 +79,18 @@ const variantSx = {
   }),
   ghost: (theme) => ({
     color: '#fff',
-    backgroundColor: theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : alpha('#ffffff', 0.1),
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(120deg, rgba(186,226,238,0.12), rgba(255,255,255,0.04))'
+        : 'linear-gradient(120deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08))',
     border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#ffffff', 0.3)}`,
     backdropFilter: 'blur(16px)',
     boxShadow: theme.palette.mode === 'dark' ? '0 10px 24px rgba(0, 0, 0, 0.22)' : 'none',
     '&:hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? alpha('#ffffff', 0.14) : alpha('#ffffff', 0.18),
+      background:
+        theme.palette.mode === 'dark'
+          ? 'linear-gradient(120deg, rgba(240,147,75,0.18), rgba(186,226,238,0.08))'
+          : 'linear-gradient(120deg, rgba(255,255,255,0.24), rgba(240,147,75,0.12))',
     },
   }),
   light: (theme) => ({
@@ -140,7 +149,7 @@ export default function Button({
         textTransform: 'none',
         transition: 'all 0.3s ease',
         '&:hover': {
-          transform: 'translateY(-1px)',
+          transform: 'translateY(-2px)',
         },
         '&:active': {
           transform: 'scale(0.98)',
