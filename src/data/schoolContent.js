@@ -447,7 +447,7 @@ const schoolContent = {
     {
       title: 'Student Classroom',
       caption: 'A snapshot of students in an active classroom environment built around participation and support.',
-      image: siteAssets.images.studentClassroom,
+      image: siteAssets.images.studentClass,
     },
     {
       title: 'Student Library',

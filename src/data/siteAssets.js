@@ -19,7 +19,6 @@ const siteAssets = {
     studentCelebration: '/media/students/student-celebration.jpg',
     studentClassPhoto: '/media/students/student-class-photo.jpg',
     studentClass: '/media/students/student-class.jpeg',
-    studentClassroom: '/media/students/student-classroom.jpg',
     studentCleaning: '/media/students/student-cleaning.jpeg',
     studentConference: '/media/students/student-conference.jpeg',
     studentDigitalLearning: '/media/students/student-digital-learning.jpeg',
