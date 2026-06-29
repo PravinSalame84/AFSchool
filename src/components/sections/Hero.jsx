@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, BookOpenCheck, GraduationCap, ShieldCheck, Sparkles } from 'lucide-react'
 import Container from '../ui/Container'
@@ -9,6 +9,11 @@ import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import OptimizedImage from '../ui/OptimizedImage'
 
 const featureIcons = [BookOpenCheck, GraduationCap, ShieldCheck]
+const supportingPoints = [
+  { label: 'Academic Discipline', value: 'Modern classrooms and structured learning' },
+  { label: 'Student Wellbeing', value: 'Safe campus and caring teacher guidance' },
+  { label: 'Holistic Growth', value: 'Sports, activities and parent-friendly access' },
+]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -22,11 +27,12 @@ const fadeUp = {
 export default function Hero() {
   const { openEnquiry } = useEnquiryModal()
   const [activeSlide, setActiveSlide] = useState(0)
-  const slides = schoolContent.hero.slides
+  const slides = useMemo(() => schoolContent.hero.slides, [])
   const currentSlide = slides[activeSlide]
-  const supportingImage = schoolContent.gallery[1].image
+  const supportingImage = useMemo(() => schoolContent.gallery[1]?.image ?? schoolContent.hero.slides[0].image, [])
 
   useEffect(() => {
+    if (slides.length <= 1) return undefined
     const interval = window.setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length)
     }, 4800)
@@ -129,11 +135,7 @@ export default function Hero() {
               variants={fadeUp}
               className="mt-10 grid gap-4 sm:grid-cols-3"
             >
-              {[
-                { label: 'Academic Discipline', value: 'Modern classrooms and structured learning' },
-                { label: 'Student Wellbeing', value: 'Safe campus and caring teacher guidance' },
-                { label: 'Holistic Growth', value: 'Sports, activities and parent-friendly access' },
-              ].map((point) => (
+              {supportingPoints.map((point) => (
                 <div key={point.label} className="frost-card rounded-[1.6rem] p-4">
                   <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{point.label}</p>
                   <p className="mt-2 text-sm font-semibold leading-relaxed text-primary-800 dark:text-slate-200">{point.value}</p>
@@ -250,21 +252,24 @@ export default function Hero() {
                 className="slant-card frost-card panel-hover rounded-[2rem] p-4"
               >
                 <div className={`relative overflow-hidden rounded-[1.6rem] bg-gradient-to-br ${card.accent} p-5 text-white`}>
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,16,28,0.12),rgba(8,16,28,0.02)_42%,rgba(255,255,255,0.02))]" />
                   <div className="flex items-start justify-between">
-                    <div>
+                    <div className="relative">
                       <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-white/70">{card.title}</p>
                       <h3 className="mt-4 max-w-[12rem] text-3xl font-bold uppercase leading-none">{card.value}</h3>
                     </div>
-                    <div className="rounded-full bg-white/18 p-3">
+                    <div className="relative rounded-full bg-white/18 p-3 backdrop-blur-sm">
                       <Icon className="h-5 w-5" />
                     </div>
                   </div>
-                  <OptimizedImage
-                    src={card.image}
-                    alt={card.title}
-                    wrapperClassName="mt-5 rounded-[1.2rem]"
-                    className="h-44 w-full rounded-[1.2rem] object-cover shadow-card"
-                  />
+                  <div className="relative mt-5 overflow-hidden rounded-[1.25rem] border border-white/18 bg-primary-950/12 p-1.5 backdrop-blur-[2px]">
+                    <OptimizedImage
+                      src={card.image}
+                      alt={card.title}
+                      wrapperClassName="rounded-[1rem]"
+                      className="h-44 w-full rounded-[1rem] object-cover shadow-card"
+                    />
+                  </div>
                 </div>
                 <div className="flex items-start justify-between gap-3 px-2 pb-2 pt-4">
                   <p className="text-sm leading-relaxed text-primary-600 dark:text-slate-300">{card.description}</p>

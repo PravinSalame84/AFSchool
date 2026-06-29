@@ -11,18 +11,18 @@ const sizes = {
 
 const variantSx = {
   primary: (theme) => ({
-    color: '#fff',
+    color: '#1d213c',
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(90deg, #f0934b 0%, #ff671f 100%)'
-        : 'linear-gradient(90deg, #f0934b 0%, #ff671f 100%)',
+        ? 'linear-gradient(90deg, #ffd707 0%, #e7ab33 100%)'
+        : 'linear-gradient(90deg, #ffd707 0%, #e7ab33 100%)',
     border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.08) : 'transparent'}`,
     boxShadow:
       theme.palette.mode === 'dark'
         ? '0 14px 30px rgba(0, 0, 0, 0.34)'
         : '0 10px 20px rgba(15, 35, 56, 0.16)',
     '&:hover': {
-      background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
+      background: 'linear-gradient(90deg, #ffe45c 0%, #ffd707 45%, #e7ab33 100%)',
       boxShadow:
         theme.palette.mode === 'dark'
           ? '0 18px 34px rgba(0, 0, 0, 0.4)'
@@ -33,7 +33,7 @@ const variantSx = {
     color: theme.palette.mode === 'dark' ? '#1d213c' : '#fff',
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(215,239,246,0.94) 100%)'
+        ? 'linear-gradient(90deg, rgba(255,215,7,0.98) 0%, rgba(231,171,51,0.94) 100%)'
         : 'linear-gradient(90deg, #1d213c 0%, #2a3946 100%)',
     border: `1px solid ${
       theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#1d213c', 0.04)
@@ -45,8 +45,8 @@ const variantSx = {
     '&:hover': {
       background:
         theme.palette.mode === 'dark'
-          ? 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 100%)'
-          : 'linear-gradient(90deg, #161e25 0%, #344656 100%)',
+          ? 'linear-gradient(90deg, rgba(255,228,92,1) 0%, rgba(255,215,7,0.98) 100%)'
+          : 'linear-gradient(90deg, #8a6742 0%, #e7ab33 100%)',
       boxShadow:
         theme.palette.mode === 'dark'
           ? '0 18px 34px rgba(0, 0, 0, 0.34)'
@@ -54,22 +54,22 @@ const variantSx = {
     },
   }),
   outline: (theme) => ({
-    color: theme.palette.mode === 'dark' ? '#f7fbff' : '#161e25',
+    color: theme.palette.mode === 'dark' ? '#ffd707' : '#8a6742',
     background:
       theme.palette.mode === 'dark'
         ? 'linear-gradient(135deg, rgba(16,24,36,0.94), rgba(35,49,67,0.82))'
-        : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.78))',
-    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.12) : alpha('#161e25', 0.12)}`,
+        : 'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(250,244,220,0.86))',
+    border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffd707', 0.24) : alpha('#8a6742', 0.18)}`,
     boxShadow:
       theme.palette.mode === 'dark'
         ? '0 12px 28px rgba(0, 0, 0, 0.26)'
         : '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
-      color: theme.palette.mode === 'dark' ? '#161e25' : '#fff',
+      color: '#1d213c',
       background:
         theme.palette.mode === 'dark'
-          ? 'linear-gradient(135deg, rgba(255,255,255,1), rgba(228,246,251,1))'
-          : 'linear-gradient(90deg, #161e25 0%, #2a3946 100%)',
+          ? 'linear-gradient(135deg, rgba(255,228,92,1), rgba(255,215,7,1))'
+          : 'linear-gradient(90deg, #ffd707 0%, #e7ab33 100%)',
       borderColor: 'transparent',
       boxShadow:
         theme.palette.mode === 'dark'
@@ -89,26 +89,24 @@ const variantSx = {
     '&:hover': {
       background:
         theme.palette.mode === 'dark'
-          ? 'linear-gradient(120deg, rgba(240,147,75,0.18), rgba(186,226,238,0.08))'
-          : 'linear-gradient(120deg, rgba(255,255,255,0.24), rgba(240,147,75,0.12))',
+          ? 'linear-gradient(120deg, rgba(255,215,7,0.22), rgba(231,171,51,0.12))'
+          : 'linear-gradient(120deg, rgba(255,248,214,0.34), rgba(231,171,51,0.18))',
     },
   }),
   light: (theme) => ({
-    color: theme.palette.mode === 'dark' ? '#161e25' : '#161e25',
+    color: '#8a6742',
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(215,239,246,0.94) 100%)'
-        : 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(228,246,251,1) 100%)',
+        ? 'linear-gradient(90deg, rgba(255,240,184,0.98) 0%, rgba(255,215,7,0.94) 100%)'
+        : 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(250,244,220,1) 100%)',
     border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#ffffff', 0.18) : alpha('#ffffff', 0.6)}`,
     boxShadow:
       theme.palette.mode === 'dark'
         ? '0 14px 30px rgba(0, 0, 0, 0.28)'
         : '0 10px 28px rgba(17, 35, 56, 0.1)',
     '&:hover': {
-      background:
-        theme.palette.mode === 'dark'
-          ? 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%)'
-          : 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%)',
+      color: '#1d213c',
+      background: 'linear-gradient(90deg, rgba(255,228,92,1) 0%, rgba(255,215,7,1) 100%)',
     },
   }),
 }

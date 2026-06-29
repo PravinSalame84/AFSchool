@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Carousel({ children, autoPlay = false, interval = 4000, ariaLabel = 'Carousel' }) {
   const trackRef = useRef(null)
+  const frameRef = useRef(0)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
 
@@ -13,25 +14,33 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
     setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
   }, [])
 
-  const scrollByCard = (dir) => {
+  const scrollByCard = useCallback((dir) => {
     const el = trackRef.current
     if (!el) return
     const card = el.querySelector('[data-carousel-item]')
     const distance = card ? card.offsetWidth + 24 : el.clientWidth * 0.8
     el.scrollBy({ left: dir * distance, behavior: 'smooth' })
-  }
+  }, [])
 
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
     updateEdges()
-    el.addEventListener('scroll', updateEdges, { passive: true })
-    return () => el.removeEventListener('scroll', updateEdges)
+    const onScroll = () => {
+      cancelAnimationFrame(frameRef.current)
+      frameRef.current = requestAnimationFrame(updateEdges)
+    }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      cancelAnimationFrame(frameRef.current)
+      el.removeEventListener('scroll', onScroll)
+    }
   }, [updateEdges])
 
   useEffect(() => {
     if (!autoPlay) return
     const id = setInterval(() => {
+      if (document.hidden) return
       const el = trackRef.current
       if (!el) return
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
@@ -41,7 +50,7 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
       }
     }, interval)
     return () => clearInterval(id)
-  }, [autoPlay, interval])
+  }, [autoPlay, interval, scrollByCard])
 
   return (
     <div className="relative" role="region" aria-label={ariaLabel}>

@@ -21,6 +21,7 @@ import FAQSection from '../components/sections/FAQSection'
 import Container from '../components/ui/Container'
 import Button from '../components/ui/Button'
 import Carousel from '../components/ui/Carousel'
+import Eyebrow from '../components/ui/Eyebrow'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
@@ -91,7 +92,7 @@ export default function Home() {
         <Container>
           <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Quick Navigation</p>
+              <Eyebrow>Quick Navigation</Eyebrow>
               <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
                 Everything families usually need, faster.
               </h2>
@@ -143,7 +144,7 @@ export default function Home() {
               variants={rise}
               className="frost-card rounded-[2.2rem] p-8 sm:p-10"
             >
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">About The School</p>
+              <Eyebrow>About The School</Eyebrow>
               <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
                 Built on values. Designed for the next generation.
               </h2>
@@ -225,7 +226,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
             <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Infrastructure</p>
+                <Eyebrow>Infrastructure</Eyebrow>
                 <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
                   A campus shaped for safety, curiosity and everyday excellence.
                 </h2>
@@ -329,7 +330,7 @@ export default function Home() {
               variants={rise}
               className="frost-card rounded-[2.2rem] p-6 sm:p-8"
             >
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-airforce-saffron">Campus Life</p>
+              <Eyebrow tone="saffron">Campus Life</Eyebrow>
               <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
                 Learning that moves beyond the classroom.
               </h2>
@@ -488,7 +489,7 @@ export default function Home() {
             <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/92 via-surface-soft to-airforce-gold/8 p-8 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-secondary dark:to-primary-900/94">
               <div className="mb-6 flex items-center gap-3">
                 <CalendarDays className="h-5 w-5 text-airforce-saffron" />
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-airforce-saffron">Notice Board</p>
+                <Eyebrow tone="saffron">Notice Board</Eyebrow>
                 <span className="rounded-full bg-gradient-to-r from-airforce-gold/18 to-airforce-honey/18 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-airforce-brown dark:bg-gradient-to-r dark:from-airforce-gold/18 dark:to-airforce-saffron/12 dark:text-airforce-gold">
                   {source === 'live' ? 'Live Feed' : 'School Archive'}
                 </span>
@@ -528,7 +529,7 @@ export default function Home() {
             <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/92 via-surface-soft to-airforce-cyan/8 p-8 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-secondary dark:to-primary-900/94">
               <div className="mb-6 flex items-center gap-3">
                 <DownloadCloud className="h-5 w-5 text-airforce-cyan" />
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-airforce-cyan">Downloads</p>
+                <Eyebrow tone="cyan">Downloads</Eyebrow>
               </div>
               <div className="space-y-4">
                 {liveDownloads.map((file, index) => (
@@ -567,7 +568,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(215,166,37,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(93,138,168,0.14),transparent_20%)]" />
             <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.9fr]">
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Admissions</p>
+                <Eyebrow>Admissions</Eyebrow>
                 <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-white sm:text-5xl">
                   Start your school enquiry with clarity and confidence.
                 </h2>
@@ -613,7 +614,7 @@ export default function Home() {
             <div className="frost-card rounded-[2.3rem] bg-gradient-to-br from-white/80 to-skyback-soft/58 p-8 dark:bg-gradient-to-br dark:from-primary-950/76 dark:to-primary-900/66">
               <div className="flex items-center gap-3">
                 <FileText className="h-5 w-5 text-accent" />
-                <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Leadership Preview</p>
+                <Eyebrow>Leadership Preview</Eyebrow>
               </div>
               <h2 className="mt-4 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
                 Transparent school governance and parent access.

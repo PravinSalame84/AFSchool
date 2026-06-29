@@ -15,10 +15,13 @@ import {
   Twitter,
   Youtube,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Container from '../ui/Container'
 import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
+import ActionPill from '../ui/ActionPill'
+import OptimizedImage from '../ui/OptimizedImage'
 
 const quickLinks = schoolContent.quickLinks.slice(0, 4)
 const socialLinks = [
@@ -114,25 +117,13 @@ export default function Footer() {
             <div className="mt-6 flex flex-wrap gap-3">
               {connectLinks.map(({ label, href, icon: Icon, internal }) =>
                 internal ? (
-                  <Link
-                    key={label}
-                    to={href}
-                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-accent/50 hover:from-accent/28 hover:to-info/16 hover:text-white"
-                  >
-                    <Icon className="h-3.5 w-3.5" />
+                  <ActionPill key={label} to={href} icon={Icon} variant="footerSoft">
                     {label}
-                  </Link>
+                  </ActionPill>
                 ) : (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-accent/50 hover:from-accent/28 hover:to-info/16 hover:text-white"
-                  >
-                    <Icon className="h-3.5 w-3.5" />
+                  <ActionPill key={label} href={href} icon={Icon} variant="footerSoft">
                     {label}
-                  </a>
+                  </ActionPill>
                 ),
               )}
             </div>
@@ -143,9 +134,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm text-white/82 transition hover:bg-white/10 hover:text-white">
-                    <ChevronRight className="h-4 w-4" /> {link.label}
-                  </Link>
+                  <ActionPill to={link.to} icon={ChevronRight} variant="footerText">
+                    {link.label}
+                  </ActionPill>
                 </li>
               ))}
             </ul>
@@ -156,27 +147,19 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {schoolContent.resources.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm text-white/82 transition hover:bg-white/10 hover:text-white">
-                    <ChevronRight className="h-4 w-4" /> {link.label}
-                  </Link>
+                  <ActionPill to={link.to} icon={ChevronRight} variant="footerText">
+                    {link.label}
+                  </ActionPill>
                 </li>
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                to="/privacy-policy"
-                className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/24 hover:text-accent"
-              >
-                <ShieldCheck className="h-3.5 w-3.5" />
+              <ActionPill to="/privacy-policy" icon={ShieldCheck} variant="footerSoft" className="border-white/12 bg-white/8">
                 Privacy Policy
-              </Link>
-              <Link
-                to="/terms"
-                className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/24 hover:text-accent"
-              >
-                <FileText className="h-3.5 w-3.5" />
+              </ActionPill>
+              <ActionPill to="/terms" icon={FileText} variant="footerSoft" className="border-white/12 bg-white/8">
                 Terms &amp; Conditions
-              </Link>
+              </ActionPill>
             </div>
           </div>
 
@@ -184,18 +167,18 @@ export default function Footer() {
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wide text-white">Contact Us</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-airforce-gold" />
                 <span>{siteConfig.contact.address}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 flex-shrink-0 text-accent" />
-                <a href={`tel:${siteConfig.contact.phone}`} className="focus-ring hover:text-accent">
+                <Phone className="h-4 w-4 flex-shrink-0 text-airforce-gold" />
+                <a href={`tel:${siteConfig.contact.phone}`} className="focus-ring hover:text-airforce-gold">
                   {siteConfig.contact.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 flex-shrink-0 text-accent" />
-                <a href={`mailto:${siteConfig.contact.email}`} className="focus-ring hover:text-accent">
+                <Mail className="h-4 w-4 flex-shrink-0 text-airforce-gold" />
+                <a href={`mailto:${siteConfig.contact.email}`} className="focus-ring hover:text-airforce-gold">
                   {siteConfig.contact.email}
                 </a>
               </li>
@@ -204,7 +187,7 @@ export default function Footer() {
                   href={schoolContent.contact.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring inline-flex rounded-full border border-white/15 px-4 py-2 font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-accent hover:text-accent"
+                  className="focus-ring inline-flex rounded-full border border-white/15 px-4 py-2 font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-airforce-gold hover:bg-gradient-to-r hover:from-airforce-gold/20 hover:to-airforce-honey/16 hover:text-airforce-gold"
                 >
                   Open Campus Map
                 </a>
@@ -222,11 +205,29 @@ export default function Footer() {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {schoolContent.statistics.map((stat) => (
-              <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-gradient-to-br from-white/12 to-white/6 px-4 py-3">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/55">{stat.label}</p>
-                <p className="mt-2 text-lg font-bold uppercase text-white">{stat.value}</p>
-              </div>
+            {schoolContent.statistics.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="frost-card overflow-hidden rounded-[1.8rem] p-3"
+              >
+                <div className="grid gap-4 sm:grid-cols-[92px_1fr] sm:items-center">
+                  <OptimizedImage
+                    src={stat.image}
+                    alt={stat.label}
+                    wrapperClassName="rounded-[1.2rem]"
+                    className="h-24 w-full rounded-[1.2rem] object-cover"
+                  />
+                  <div className="px-2 py-2">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
+                    <p className="mt-2 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-primary-600 dark:text-slate-300">{stat.caption}</p>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -234,10 +235,10 @@ export default function Footer() {
         <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-skyback-light/60 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {siteConfig.brandName}, {siteConfig.brandSuffix}. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link to="/privacy-policy" className="focus-ring hover:text-accent">
+            <Link to="/privacy-policy" className="focus-ring hover:text-airforce-gold">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="focus-ring hover:text-accent">
+            <Link to="/terms" className="focus-ring hover:text-airforce-gold">
               Terms &amp; Conditions
             </Link>
           </div>

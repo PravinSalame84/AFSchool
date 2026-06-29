@@ -36,11 +36,29 @@ export default function Academics() {
               <p className="mt-5 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.academics.overview}</p>
 
               <div className="mt-8 grid grid-cols-2 gap-4">
-                {schoolContent.statistics.map((stat) => (
-                  <div key={stat.label} className="rounded-[1.4rem] border border-primary-900/8 bg-white/75 p-4 shadow-soft dark:border-white/10 dark:bg-primary-950/65">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
-                    <p className="mt-2 text-xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
-                  </div>
+                 {schoolContent.statistics.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 26 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    className="frost-card overflow-hidden rounded-[1.8rem] p-3"
+                  >
+                    <div className="grid gap-4 sm:grid-cols-[92px_1fr] sm:items-center">
+                      <OptimizedImage
+                        src={stat.image}
+                        alt={stat.label}
+                        wrapperClassName="rounded-[1.2rem]"
+                        className="h-24 w-full rounded-[1.2rem] object-cover"
+                      />
+                      <div className="px-2 py-2">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
+                        <p className="mt-2 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
+                        <p className="mt-2 text-xs leading-relaxed text-primary-600 dark:text-slate-300">{stat.caption}</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

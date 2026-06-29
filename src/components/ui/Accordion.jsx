@@ -35,10 +35,10 @@ export default function Accordion({ items, allowMultiple = false }) {
               overflow: 'hidden',
               background:
                 theme.palette.mode === 'dark'
-                  ? 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.76))'
-                  : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.78))',
+                  ? 'linear-gradient(135deg, rgba(23,19,14,0.94), rgba(29,33,60,0.76))'
+                  : 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(250,244,220,0.82))',
               border: `1px solid ${
-                theme.palette.mode === 'dark' ? alpha('#ffffff', 0.1) : alpha('#1d213c', 0.08)
+                theme.palette.mode === 'dark' ? alpha('#ffd707', 0.16) : alpha('#8a6742', 0.12)
               }`,
               boxShadow: 'none',
               '&::before': {
@@ -54,8 +54,8 @@ export default function Accordion({ items, allowMultiple = false }) {
                 <span
                   className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
                     isOpen
-                      ? 'border-primary-200 bg-primary-900 text-white dark:border-white/20 dark:bg-white dark:text-primary-950'
-                      : 'border-primary-100 bg-white/72 text-primary-700 dark:border-white/10 dark:bg-primary-900/70 dark:text-white'
+                      ? 'border-airforce-gold/40 bg-gradient-to-br from-airforce-gold to-airforce-honey text-secondary dark:border-airforce-gold/30 dark:bg-gradient-to-br dark:from-airforce-gold dark:to-airforce-honey dark:text-secondary'
+                      : 'border-airforce-brown/16 bg-white/76 text-airforce-brown dark:border-airforce-gold/16 dark:bg-primary-900/70 dark:text-airforce-honey'
                   }`}
                 >
                   <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
@@ -70,12 +70,12 @@ export default function Accordion({ items, allowMultiple = false }) {
                 },
               }}
             >
-              <Typography className="text-base font-semibold leading-relaxed text-primary-900 dark:text-white sm:text-lg">
+              <Typography className="text-base font-semibold leading-relaxed text-airforce-brown dark:text-airforce-honey sm:text-lg">
                 {item.question}
               </Typography>
             </MuiAccordionSummary>
             <MuiAccordionDetails sx={{ px: { xs: 2.5, sm: 3.5 }, pt: 0, pb: 3 }}>
-              <Typography className="text-[15px] leading-relaxed text-primary-600 dark:text-slate-300">
+              <Typography className="text-[15px] leading-relaxed text-airforce-brown/82 dark:text-airforce-honey/84">
                 {item.answer}
               </Typography>
             </MuiAccordionDetails>

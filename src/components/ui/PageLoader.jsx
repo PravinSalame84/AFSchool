@@ -1,17 +1,28 @@
+import Box from '@mui/material/Box'
+import Skeleton from '@mui/material/Skeleton'
+import Stack from '@mui/material/Stack'
+import Container from './Container'
+
 export default function PageLoader() {
   return (
-    <div className="min-h-[50vh] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
-        <div className="animate-pulse space-y-6">
-          <div className="h-5 w-40 rounded-full bg-slate-200 dark:bg-slate-800" />
-          <div className="h-20 max-w-3xl rounded-[2rem] bg-slate-200 dark:bg-slate-800" />
-          <div className="grid gap-6 lg:grid-cols-3">
+    <Box sx={{ minHeight: '50vh', px: { xs: 2, sm: 3, lg: 4 }, py: 12 }}>
+      <Container>
+        <Stack spacing={3}>
+          <Skeleton variant="rounded" width={160} height={20} sx={{ borderRadius: 999 }} />
+          <Skeleton variant="rounded" width="100%" height={80} sx={{ maxWidth: '48rem', borderRadius: '2rem' }} />
+          <Box
+            sx={{
+              display: 'grid',
+              gap: 3,
+              gridTemplateColumns: { xs: '1fr', lg: 'repeat(3, 1fr)' },
+            }}
+          >
             {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="h-64 rounded-[2rem] bg-slate-200 dark:bg-slate-800" />
+              <Skeleton key={index} variant="rounded" height={256} sx={{ borderRadius: '2rem' }} />
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Stack>
+      </Container>
+    </Box>
   )
 }

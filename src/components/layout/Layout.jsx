@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Box from '@mui/material/Box'
 import { useLocation, Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
@@ -27,9 +28,9 @@ export default function Layout() {
   const maintenanceMode = content.siteStatus?.mode === 'maintenance' && pathname !== '/maintenance'
 
   return (
-    <div className="flex min-h-screen flex-col bg-transparent">
+    <Box sx={{ display: 'flex', minHeight: '100vh', flexDirection: 'column', backgroundColor: 'transparent' }}>
       <Header />
-      <main className="flex-1 text-[color:var(--ink)]">
+      <Box component="main" sx={{ flex: 1, color: 'text.primary' }}>
         {maintenanceMode ? (
           <Maintenance
             title={content.siteStatus?.title}
@@ -39,10 +40,10 @@ export default function Layout() {
         ) : (
           <Outlet />
         )}
-      </main>
+      </Box>
       <Footer />
       <FloatingButtons />
       <BackToTopButton />
-    </div>
+    </Box>
   )
 }

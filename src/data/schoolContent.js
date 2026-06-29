@@ -95,8 +95,8 @@ const schoolContent = {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
-      image: siteAssets.images.studentUnityRun,
-      accent: 'from-[#5b44ff] to-[#9a64ff]',
+      image: siteAssets.images.studentActivities,
+      accent: 'from-[#1d213c] via-[#5d8aa8] to-[#00d4fa]',
     },
     {
       title: 'Wellbeing',
