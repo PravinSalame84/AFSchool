@@ -1,285 +1,418 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, BookOpenCheck, GraduationCap, ShieldCheck, Sparkles } from 'lucide-react'
-import Container from '../ui/Container'
+import { Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { alpha } from '@mui/material/styles'
+import {
+  Box,
+  Chip,
+  Container,
+  Grid,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import { ChevronLeft, ChevronRight, MapPin, Phone } from 'lucide-react'
 import Button from '../ui/Button'
-import siteConfig from '../../data/siteConfig'
-import schoolContent from '../../data/schoolContent'
-import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import OptimizedImage from '../ui/OptimizedImage'
-
-const featureIcons = [BookOpenCheck, GraduationCap, ShieldCheck]
-const supportingPoints = [
-  { label: 'Academic Discipline', value: 'Modern classrooms and structured learning' },
-  { label: 'Student Wellbeing', value: 'Safe campus and caring teacher guidance' },
-  { label: 'Holistic Growth', value: 'Sports, activities and parent-friendly access' },
-]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] },
-  }),
-}
+import schoolContent from '../../data/schoolContent'
+import siteConfig from '../../data/siteConfig'
+import siteAssets from '../../data/siteAssets'
+import { useEnquiryModal } from '../../context/EnquiryModalContext'
 
 export default function Hero() {
+  const theme = useTheme()
   const { openEnquiry } = useEnquiryModal()
-  const [activeSlide, setActiveSlide] = useState(0)
-  const slides = useMemo(() => schoolContent.hero.slides, [])
-  const currentSlide = slides[activeSlide]
-  const supportingImage = useMemo(() => schoolContent.gallery[1]?.image ?? schoolContent.hero.slides[0].image, [])
+  const slides = schoolContent.hero.slides
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    if (slides.length <= 1) return undefined
-    const interval = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length)
-    }, 4800)
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % slides.length)
+    }, 5200)
 
-    return () => window.clearInterval(interval)
+    return () => window.clearInterval(timer)
   }, [slides.length])
 
+  const activeSlide = slides[activeIndex]
+  const stats = useMemo(() => schoolContent.facts.slice(0, 4), [])
+
+  const navigateSlide = (direction) => {
+    setActiveIndex((current) => (current + direction + slides.length) % slides.length)
+  }
+
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8 lg:pb-20">
-      <div className="contour-lines" />
-      <div className="hero-orb sky left-[4%] top-20 h-44 w-44" />
-      <div className="hero-orb sun right-[10%] top-24 h-52 w-52" />
-      <div className="pointer-events-none absolute left-[8%] top-28 hidden h-64 w-64 rounded-full border border-primary-900/8 lg:block" />
-      <div className="pointer-events-none absolute right-[8%] top-20 hidden h-80 w-80 rounded-full border border-primary-900/8 dark:border-white/10 lg:block animate-spinSlow" />
+    <Box
+      component="section"
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        pt: { xs: 6, md: 7 },
+        pb: { xs: 7, md: 9 },
+      }}
+    >
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            theme.palette.mode === 'dark'
+              ? 'linear-gradient(180deg, rgba(8,14,22,0.98), rgba(17,28,43,0.9) 48%, rgba(11,19,32,0.95))'
+              : 'linear-gradient(180deg, rgba(186,226,238,0.96), rgba(215,239,246,0.88) 48%, rgba(228,246,251,0.96))',
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          background:
+            'radial-gradient(circle at top right, rgba(240,147,75,0.18), transparent 24%), radial-gradient(circle at left, rgba(93,138,168,0.18), transparent 30%)',
+        }}
+      />
+      <Box className="contour-lines" sx={{ opacity: theme.palette.mode === 'dark' ? 0.22 : 0.14 }} />
 
-      <Container className="relative">
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[86px_1.02fr_0.98fr] xl:items-center">
-          <div className="hidden xl:flex xl:flex-col xl:items-center xl:gap-8">
-            <div className="eyebrow-pill rounded-full p-3 text-primary-700 dark:text-white">
-              <Sparkles className="h-4.5 w-4.5" />
-            </div>
-            <div className="hero-index flex gap-4 text-sm font-bold uppercase tracking-[0.5em] text-primary-300 dark:text-white/40">
-              {slides.map((slide, index) => (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => setActiveSlide(index)}
-                  className={`transition ${index === activeSlide ? 'text-primary-900 dark:text-white' : 'hover:text-primary-600 dark:hover:text-white/75'}`}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </button>
-              ))}
-            </div>
-            <div className="h-16 w-px bg-gradient-to-b from-primary-900/25 via-primary-400/40 to-transparent dark:from-white/20 dark:via-white/12" />
-          </div>
-
-          <div className="max-w-3xl">
-            <motion.div initial="hidden" animate="show" custom={0} variants={fadeUp}>
-              <span className="eyebrow-pill inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary-700 dark:text-white">
-                <Sparkles className="h-3.5 w-3.5 text-accent" />
-                {schoolContent.hero.eyebrow}
-              </span>
-            </motion.div>
-
-            <motion.div initial="hidden" animate="show" custom={0.08} variants={fadeUp}>
-              <h1 className="mt-7 max-w-4xl text-[3rem] font-bold uppercase leading-[0.88] text-primary-900 dark:text-white sm:text-[4.6rem]">
-                Premium Schooling
-                <span className="block bg-gradient-to-r from-secondary via-airforce-blue to-airforce-cyan bg-clip-text text-transparent dark:from-airforce-gold dark:via-skyback-light dark:to-airforce-cyan">
-                  With Air Force Character
-                </span>
-              </h1>
-            </motion.div>
-
-            <motion.p
-              initial="hidden"
-              animate="show"
-              custom={0.16}
-              variants={fadeUp}
-              className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-600 dark:text-skyback-light/82"
-            >
-              {schoolContent.hero.title} {schoolContent.hero.subtitle}
-            </motion.p>
-
-            <motion.div
-              initial="hidden"
-              animate="show"
-              custom={0.22}
-              variants={fadeUp}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              {schoolContent.hero.badges.map((badge) => (
-                <span
-                  key={badge}
-                  className="eyebrow-pill rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-700 dark:text-white"
-                >
-                  {badge}
-                </span>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate="show"
-              custom={0.3}
-              variants={fadeUp}
-              className="mt-9 flex flex-wrap items-center gap-4"
-            >
-              <Button size="lg" variant="dark" onClick={() => openEnquiry('Admissions Enquiry')}>
-                {siteConfig.cta.admissions}
-              </Button>
-              <Button size="lg" variant="outline" to="/about" icon={false}>
-                Explore School Story
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate="show"
-              custom={0.38}
-              variants={fadeUp}
-              className="mt-10 grid gap-4 sm:grid-cols-3"
-            >
-              {supportingPoints.map((point) => (
-                <div key={point.label} className="frost-card rounded-[1.6rem] p-4">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{point.label}</p>
-                  <p className="mt-2 text-sm font-semibold leading-relaxed text-primary-800 dark:text-slate-200">{point.value}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-[620px]"
-          >
-            <div className="spiral-wire left-[4%] top-[12%] h-[72%] w-[72%]" />
-            <div className="spiral-wire delay right-[2%] top-[4%] h-[88%] w-[88%]" />
-            <div className="hero-glow absolute right-[18%] top-[12%] h-36 w-36 rounded-full animate-radarPulse" />
-
-            <div className="hero-stage p-4 sm:p-5">
-              <div className="relative">
-                <div className="hero-cutout rounded-[2.2rem] p-3">
-                  <OptimizedImage
-                    src={currentSlide.image}
-                    alt={currentSlide.title}
-                    priority
-                    wrapperClassName="rounded-[2rem]"
-                    className="h-[420px] w-full rounded-[2rem] object-cover object-center sm:h-[500px]"
-                  />
-                </div>
-
-                <div className="absolute right-4 top-4 hidden max-w-[220px] sm:block">
-                  <div className="glass-plate rounded-[1.6rem] p-3">
-                    <div className="rounded-[1.4rem] border border-white/10 bg-primary-900/8 p-2 dark:border-white/10 dark:bg-primary-950/34">
-                      <OptimizedImage
-                        src={supportingImage}
-                        alt="Student moments"
-                        wrapperClassName="rounded-[1.4rem]"
-                        className="h-[155px] w-full rounded-[1.4rem] object-cover object-center"
-                      />
-                    </div>
-                    <div className="mt-3 rounded-[1.35rem] bg-gradient-to-r from-white via-skyback-soft to-skyback-light px-4 py-3 text-primary-950 dark:from-secondary dark:via-primary-800 dark:to-primary-700 dark:text-white">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary-500 dark:text-airforce-gold/76">
-                        School Motto
-                      </p>
-                      <p className="mt-2 text-sm font-bold uppercase">{schoolContent.hero.motto}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 grid gap-3 md:grid-cols-3">
-                  {slides.map((slide, index) => (
-                    <button
-                      key={slide.id}
-                      type="button"
-                      onClick={() => setActiveSlide(index)}
-                      className={`focus-ring hero-slide-card p-4 text-left ${index === activeSlide ? 'active' : ''}`}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-400 dark:text-airforce-gold/80">{slide.label}</p>
-                          <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{slide.title}</p>
-                        </div>
-                        <ArrowUpRight
-                          className={`mt-0.5 h-4 w-4 flex-shrink-0 transition ${
-                            index === activeSlide
-                              ? 'text-primary-700 dark:text-airforce-gold'
-                              : 'text-primary-300 dark:text-slate-400'
-                          }`}
-                        />
-                      </div>
-                    </button>
-                  ))}
-                </div>
-
-                <div className="mt-4 flex items-center gap-3 sm:hidden">
-                  <div className="glass-plate flex-1 rounded-[1.35rem] px-4 py-3">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary-400 dark:text-airforce-gold/76">School Motto</p>
-                    <p className="mt-2 text-sm font-bold uppercase text-primary-900 dark:text-white">{schoolContent.hero.motto}</p>
-                  </div>
-                  <div className="w-[108px] rounded-[1rem] border border-white/10 bg-primary-900/8 p-2 dark:border-white/10 dark:bg-primary-950/34">
-                    <OptimizedImage
-                      src={supportingImage}
-                      alt="Student moments"
-                      wrapperClassName="rounded-[1rem]"
-                      className="h-[90px] w-full rounded-[1rem] object-cover object-center"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -left-3 bottom-32 hidden max-w-[260px] rounded-[1.8rem] border border-white/12 bg-primary-950/82 px-4 py-4 text-white shadow-card backdrop-blur-xl sm:block">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-skyback-light/60">Why Parents Choose Us</p>
-              <p className="mt-2 text-lg font-bold uppercase text-white">{currentSlide.title}</p>
-              <div className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-skyback-light/88">
-                Explore academics
-                <ArrowRight className="h-4 w-4" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {schoolContent.quickStats.map((card, index) => {
-            const Icon = featureIcons[index]
-            return (
-              <motion.article
-                key={card.title}
-                initial={{ opacity: 0, y: 42 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -8 }}
-                className="slant-card frost-card panel-hover rounded-[2rem] p-4"
+      <Container maxWidth="xl" sx={{ position: 'relative', px: { xs: 2, sm: 3, md: 4 } }}>
+        <Grid container spacing={{ xs: 4, lg: 5 }} alignItems="center">
+          <Grid item xs={12} lg={6}>
+            <Box sx={{ maxWidth: 720 }}>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: 'secondary.main',
+                  fontWeight: 800,
+                  letterSpacing: '0.28em',
+                }}
               >
-                <div className={`relative overflow-hidden rounded-[1.6rem] bg-gradient-to-br ${card.accent} p-5 text-white`}>
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,16,28,0.12),rgba(8,16,28,0.02)_42%,rgba(255,255,255,0.02))]" />
-                  <div className="flex items-start justify-between">
-                    <div className="relative">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-white/70">{card.title}</p>
-                      <h3 className="mt-4 max-w-[12rem] text-3xl font-bold uppercase leading-none">{card.value}</h3>
-                    </div>
-                    <div className="relative rounded-full bg-white/18 p-3 backdrop-blur-sm">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <div className="relative mt-5 overflow-hidden rounded-[1.25rem] border border-white/18 bg-primary-950/12 p-1.5 backdrop-blur-[2px]">
+                {schoolContent.hero.eyebrow}
+              </Typography>
+
+              <Typography
+                component="h1"
+                sx={{
+                  mt: 1.5,
+                  color: 'text.primary',
+                  fontWeight: 800,
+                  lineHeight: 0.92,
+                  fontSize: { xs: '2.5rem', sm: '3.3rem', lg: '4.25rem' },
+                }}
+              >
+                {schoolContent.hero.title}
+              </Typography>
+
+              <Typography
+                sx={{
+                  mt: 2.5,
+                  maxWidth: 640,
+                  color: 'text.secondary',
+                  fontSize: { xs: '1rem', sm: '1.05rem' },
+                  lineHeight: 1.85,
+                }}
+              >
+                {schoolContent.hero.subtitle}
+              </Typography>
+
+              <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 3 }}>
+                {schoolContent.hero.badges.map((badge) => (
+                  <Chip
+                    key={badge}
+                    label={badge}
+                    sx={{
+                      borderRadius: 4,
+                      color: 'text.primary',
+                      bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha('#fff', 0.8),
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  />
+                ))}
+              </Stack>
+
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
+                <Button size="lg" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                  Start General Enquiry
+                </Button>
+                <Button size="lg" variant="outline" onClick={() => openEnquiry('School Details Request')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                  Request School Details
+                </Button>
+              </Stack>
+
+              <Grid container spacing={2} sx={{ mt: 3 }}>
+                <Grid item xs={12} sm={6}>
+                  <Box
+                    component={Link}
+                    to="/contact"
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.25,
+                      p: 2,
+                      borderRadius: 4,
+                      textDecoration: 'none',
+                      color: 'text.primary',
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
+                    }}
+                  >
+                    <MapPin size={18} color={theme.palette.secondary.main} />
+                    <Box>
+                      <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em' }}>
+                        Campus Location
+                      </Typography>
+                      <Typography sx={{ mt: 0.4, fontSize: '0.92rem', color: 'text.secondary' }}>
+                        {siteConfig.brandSuffix}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <Box
+                    component="a"
+                    href={`tel:${siteConfig.contact.phone}`}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.25,
+                      p: 2,
+                      borderRadius: 4,
+                      textDecoration: 'none',
+                      color: 'text.primary',
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
+                    }}
+                  >
+                    <Phone size={18} color={theme.palette.secondary.main} />
+                    <Box>
+                      <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em' }}>
+                        School Office
+                      </Typography>
+                      <Typography sx={{ mt: 0.4, fontSize: '0.92rem', color: 'text.secondary' }}>
+                        {siteConfig.contact.phone}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={2} sx={{ mt: 2 }}>
+                {stats.map((fact) => (
+                  <Grid item xs={6} sm={3} key={fact.label}>
+                    <Box
+                      sx={{
+                        p: 2,
+                        borderRadius: '1.4rem',
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fafdff', 0.82),
+                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                        backdropFilter: 'blur(16px)',
+                      }}
+                    >
+                      <Typography sx={{ fontSize: '0.66rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'text.secondary' }}>
+                        {fact.label}
+                      </Typography>
+                      <Typography sx={{ mt: 1, fontSize: { xs: '1.2rem', sm: '1.35rem' }, fontWeight: 800, color: 'text.primary' }}>
+                        {fact.value}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} lg={6}>
+            <Box
+              sx={{
+                position: 'relative',
+                borderRadius: 4,
+                p: { xs: 1.5, md: 2 },
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.5) : alpha('#fafdff', 0.86),
+                boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+                backdropFilter: 'blur(18px)',
+              }}
+            >
+              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, minHeight: { xs: 360, sm: 460, lg: 560 } }}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeSlide.id}
+                    initial={{ opacity: 0.4, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0.35, scale: 0.99 }}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ position: 'absolute', inset: 0 }}
+                  >
                     <OptimizedImage
-                      src={card.image}
-                      alt={card.title}
-                      wrapperClassName="rounded-[1rem]"
-                      className="h-44 w-full rounded-[1rem] object-cover shadow-card"
+                      src={activeSlide.image}
+                      alt={activeSlide.title}
+                      priority
+                      wrapperSx={{ height: '100%' }}
+                      sx={{ height: { xs: 360, sm: 460, lg: 560 } }}
                     />
-                  </div>
-                </div>
-                <div className="flex items-start justify-between gap-3 px-2 pb-2 pt-4">
-                  <p className="text-sm leading-relaxed text-primary-600 dark:text-slate-300">{card.description}</p>
-                  <ArrowUpRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary-300" />
-                </div>
-              </motion.article>
-            )
-          })}
-        </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(180deg, rgba(17,26,36,0.08), rgba(17,26,36,0.24) 38%, rgba(17,26,36,0.88))',
+                  }}
+                />
+
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{
+                    position: 'absolute',
+                    top: 16,
+                    right: 16,
+                  }}
+                >
+                  <IconButton
+                    onClick={() => navigateSlide(-1)}
+                    aria-label="Previous slide"
+                    sx={{
+                      width: 42,
+                      height: 42,
+                      bgcolor: 'rgba(255,255,255,0.14)',
+                      color: '#fff',
+                      backdropFilter: 'blur(12px)',
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
+                    }}
+                  >
+                    <ChevronLeft size={18} />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => navigateSlide(1)}
+                    aria-label="Next slide"
+                    sx={{
+                      width: 42,
+                      height: 42,
+                      bgcolor: 'rgba(255,255,255,0.14)',
+                      color: '#fff',
+                      backdropFilter: 'blur(12px)',
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
+                    }}
+                  >
+                    <ChevronRight size={18} />
+                  </IconButton>
+                </Stack>
+
+                <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, p: { xs: 2.5, sm: 3 } }}>
+                  <Box
+                    sx={{
+                      mb: 2,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 1.25,
+                      borderRadius: 4,
+                      bgcolor: alpha('#fafdff', 0.9),
+                      px: 1.2,
+                      py: 0.8,
+                      color: theme.palette.primary.main,
+                      boxShadow: '0 14px 32px rgba(17, 26, 36, 0.14)',
+                      maxWidth: '100%',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 38,
+                        height: 38,
+                        overflow: 'hidden',
+                        borderRadius: '25%',
+                        border: `2px solid ${alpha('#fff', 0.9)}`,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <OptimizedImage
+                        src={siteAssets.images.studentGroupFun}
+                        alt="Air Force School students"
+                        wrapperSx={{ height: '100%' }}
+                        sx={{ height: 38 }}
+                      />
+                    </Box>
+                    <Typography sx={{ fontSize: '0.76rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'normal' }}>
+                      Learning with discipline, warmth and confidence.
+                    </Typography>
+                  </Box>
+                  <Chip
+                    label={activeSlide.label}
+                    sx={{
+                      borderRadius: 4,
+                      color: '#fff',
+                      bgcolor: 'rgba(255,255,255,0.14)',
+                      border: '1px solid rgba(255,255,255,0.16)',
+                      letterSpacing: '0.16em',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                    }}
+                  />
+                  <Typography sx={{ mt: 2, color: '#fff', fontWeight: 800, lineHeight: 1, fontSize: { xs: '1.8rem', sm: '2.5rem' } }}>
+                    {activeSlide.title}
+                  </Typography>
+                  <Typography sx={{ mt: 1.5, maxWidth: 520, color: alpha('#fff', 0.8), fontSize: '0.95rem', lineHeight: 1.8 }}>
+                    {schoolContent.hero.motto}
+                  </Typography>
+
+                  <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+                    {slides.map((slide, index) => (
+                      <Box
+                        key={slide.id}
+                        onClick={() => setActiveIndex(index)}
+                        sx={{
+                          width: index === activeIndex ? 34 : 10,
+                          height: 10,
+                          borderRadius: 4,
+                          cursor: 'pointer',
+                          transition: 'all 0.25s ease',
+                          bgcolor: index === activeIndex ? 'secondary.main' : alpha('#fff', 0.4),
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </Box>
+              </Box>
+            </Box>
+
+            <Paper
+              sx={{
+                mt: { xs: 2, md: -6 },
+                ml: { md: 'auto' },
+                width: { xs: '100%', sm: 340 },
+                maxWidth: '100%',
+                p: 1.25,
+                borderRadius: 4,
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.92) : alpha('#fafdff', 0.96),
+                boxShadow: '0 20px 40px rgba(17, 26, 36, 0.12)',
+              }}
+            >
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'flex-start', sm: 'center' }}>
+                <OptimizedImage
+                  src={siteAssets.images.studentClassPhoto}
+                  alt="Students at Air Force School"
+                  wrapperSx={{ width: { xs: '100%', sm: 86 }, flexShrink: 0, borderRadius: 4 }}
+                  sx={{ width: { xs: '100%', sm: 86 }, height: { xs: 160, sm: 86 }, borderRadius: 4 }}
+                />
+                <Box>
+                  <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'secondary.main' }}>
+                    School Promise
+                  </Typography>
+                  <Typography variant="h6" sx={{ mt: 0.6, fontWeight: 800, lineHeight: 1.2 }}>
+                    Strong values and future-ready learning for every child.
+                  </Typography>
+                </Box>
+              </Stack>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
-    </section>
+    </Box>
   )
 }

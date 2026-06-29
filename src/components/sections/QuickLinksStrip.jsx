@@ -1,7 +1,19 @@
-import { Link } from 'react-router-dom'
-import { Star, Rocket, MapPin, ExternalLink } from 'lucide-react'
-import Container from '../ui/Container'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import { Link as RouterLink } from 'react-router-dom'
+import {
+  Box,
+  Container,
+  Stack,
+  Typography,
+  Link,
+  alpha,
+} from '@mui/material'
+
+import {
+  Star,
+  Rocket,
+  MapPin,
+  ExternalLink,
+} from 'lucide-react'
 
 const links = [
   { icon: Star, label: 'About Us', to: '/about' },
@@ -12,34 +24,73 @@ const links = [
 
 export default function QuickLinksStrip() {
   return (
-    <section className="border-y border-primary-100/40 bg-skyback-soft py-8">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <RevealOnScroll>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {links.map(({ icon: Icon, label, to, external }) =>
-              external ? (
-                <a
-                  key={label}
-                  href={to}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-accent-dark"
-                >
-                  <Icon className="h-4 w-4" /> {label}
-                </a>
-              ) : (
-                <Link
-                  key={label}
-                  to={to}
-                  className="focus-ring flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-accent-dark"
-                >
-                  <Icon className="h-4 w-4" /> {label}
-                </Link>
-              ),
-            )}
-          </div>
-        </RevealOnScroll>
+    <Box
+      component="section"
+      sx={{
+        py: 3,
+        borderTop: '1px solid',
+        borderBottom: '1px solid',
+        borderColor: alpha('#0B1F3A', 0.1),
+        background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      }}
+    >
+      <Container maxWidth="lg">
+
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+          useFlexGap
+        >
+          {links.map(({ icon: Icon, label, to, external }) => {
+            const commonStyles = {
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              color: '#0B1F3A',
+              textDecoration: 'none',
+              transition: '0.25s ease',
+              '&:hover': {
+                color: '#F57C00',
+                transform: 'translateY(-2px)',
+              },
+            }
+
+            const content = (
+              <>
+                <Icon size={16} />
+                {label}
+              </>
+            )
+
+            return external ? (
+              <Link
+                key={label}
+                href={to}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={commonStyles}
+              >
+                {content}
+              </Link>
+            ) : (
+              <Link
+                key={label}
+                component={RouterLink}
+                to={to}
+                sx={commonStyles}
+              >
+                {content}
+              </Link>
+            )
+          })}
+        </Stack>
+
       </Container>
-    </section>
+    </Box>
   )
 }

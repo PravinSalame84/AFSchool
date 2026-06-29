@@ -39,6 +39,7 @@ const navigation = [
       { label: 'Mandatory Public Disclosure', to: '/mandatory-disclosure' },
       { label: 'Parent Corner', to: '/parent-corner' },
       { label: 'Fee Support', to: '/fee-support' },
+      { label: 'Careers', to: '/careers' },
       { label: 'Transfer Certificate', to: '/transfer-certificate' },
       { label: 'Annual Report', to: '/annual-report' },
     ],

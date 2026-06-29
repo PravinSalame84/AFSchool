@@ -19,6 +19,7 @@ const NoticeBoard = lazy(() => import('./pages/NoticeBoard'))
 const Downloads = lazy(() => import('./pages/Downloads'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const Contact = lazy(() => import('./pages/Contact'))
+const Careers = lazy(() => import('./pages/Careers'))
 const ContentHubPage = lazy(() => import('./pages/ContentHubPage'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const Terms = lazy(() => import('./pages/Terms'))
@@ -52,6 +53,7 @@ export default function App() {
                 <Route path="/notice-board" element={<NoticeBoard />} />
                 <Route path="/downloads" element={<Downloads />} />
                 <Route path="/gallery" element={<Gallery />} />
+                <Route path="/careers" element={<Careers />} />
                 {hubIndex.map((item) => (
                   <Route key={item.path} path={item.path} element={<ContentHubPage />} />
                 ))}

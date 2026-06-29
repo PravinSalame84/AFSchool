@@ -1,49 +1,158 @@
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { Calendar } from 'lucide-react'
-import Container from '../ui/Container'
-import SectionHeading from '../ui/SectionHeading'
-import Card from '../ui/Card'
-import Badge from '../ui/Badge'
-import Button from '../ui/Button'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  Button,
+  Stack,
+  alpha,
+} from '@mui/material'
+
 import news from '../../data/news'
 
 export default function LatestNews() {
   const featured = news.slice(0, 3)
 
   return (
-    <section className="section-pad bg-skyback">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <RevealOnScroll>
-            <SectionHeading eyebrow="Newsroom" title="Latest News" />
-          </RevealOnScroll>
-          <RevealOnScroll delay={100}>
-            <Button to="/notice-board" variant="outline" size="sm">
-              View All News
-            </Button>
-          </RevealOnScroll>
-        </div>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 8, md: 12 },
+        background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      }}
+    >
+      <Container maxWidth="lg">
+        
+        {/* HEADER */}
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          justifyContent="space-between"
+          alignItems={{ xs: 'flex-start', sm: 'flex-end' }}
+          spacing={2}
+        >
+          <Box>
+            <Typography
+              variant="overline"
+              sx={{ color: '#F57C00', fontWeight: 700, letterSpacing: 2 }}
+            >
+              Newsroom
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: 800, color: '#0B1F3A', mt: 0.5 }}
+            >
+              Latest News
+            </Typography>
+          </Box>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((item, i) => (
-            <RevealOnScroll key={item.id} delay={i * 90}>
-              <Card as={Link} to={item.href} className="flex h-full flex-col p-6">
-                <Badge tone="accent">{item.category}</Badge>
-                <h3 className="mt-4 line-clamp-2 text-base font-bold leading-snug text-primary-900">
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 line-clamp-3 flex-1 text-sm leading-relaxed text-primary-500">
-                  {item.excerpt}
-                </p>
-                <div className="mt-4 flex items-center gap-1.5 text-xs text-primary-400">
-                  <Calendar className="h-3.5 w-3.5" /> {item.date}
-                </div>
+          <Button
+            component={RouterLink}
+            to="/notice-board"
+            variant="outlined"
+            sx={{
+              borderRadius: 4,
+              fontWeight: 700,
+              borderColor: alpha('#0B1F3A', 0.3),
+              color: '#0B1F3A',
+              '&:hover': {
+                borderColor: '#0B1F3A',
+                backgroundColor: alpha('#0B1F3A', 0.04),
+              },
+            }}
+          >
+            View All News
+          </Button>
+        </Stack>
+
+        {/* GRID */}
+        <Grid container spacing={3} sx={{ mt: 5 }}>
+          {featured.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              
+              <Card
+                component={RouterLink}
+                to={item.href}
+                sx={{
+                  height: '100%',
+                  borderRadius: 4,
+                  p: 2,
+                  textDecoration: 'none',
+                  background: alpha('#ffffff', 0.9),
+                  backdropFilter: 'blur(12px)',
+                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  transition: '0.25s ease',
+                  '&:hover': {
+                    transform: 'translateY(-6px)',
+                    boxShadow: '0 18px 40px rgba(11, 31, 58, 0.12)',
+                  },
+                }}
+              >
+                <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  
+                  {/* CATEGORY */}
+                  <Chip
+                    label={item.category}
+                    size="small"
+                    sx={{
+                      width: 'fit-content',
+                      fontWeight: 700,
+                      backgroundColor: alpha('#F57C00', 0.12),
+                      color: '#F57C00',
+                    }}
+                  />
+
+                  {/* TITLE */}
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: 800,
+                      mt: 2,
+                      color: '#0B1F3A',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  {/* EXCERPT */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      mt: 1.5,
+                      color: alpha('#0B1F3A', 0.7),
+                      flexGrow: 1,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {item.excerpt}
+                  </Typography>
+
+                  {/* DATE */}
+                  <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2 }}>
+                    <Calendar size={14} color="#64748B" />
+                    <Typography variant="caption" sx={{ color: '#64748B' }}>
+                      {item.date}
+                    </Typography>
+                  </Stack>
+
+                </CardContent>
               </Card>
-            </RevealOnScroll>
+
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </Container>
-    </section>
+    </Box>
   )
 }

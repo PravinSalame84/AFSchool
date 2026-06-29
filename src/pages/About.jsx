@@ -1,10 +1,24 @@
 import { motion } from 'framer-motion'
-import { Compass, Flag, ShieldCheck, Sparkles } from 'lucide-react'
+import { alpha } from '@mui/material/styles'
+import {
+  Avatar,
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import { Compass, Flag, HeartHandshake, Leaf, Quote, ShieldCheck, Sparkles, Users2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
+import Initiatives from '../components/sections/Initiatives'
+import Achievements from '../components/sections/Achievements'
+import FAQSection from '../components/sections/FAQSection'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import siteConfig from '../data/siteConfig'
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -15,96 +29,262 @@ const reveal = {
   }),
 }
 
+const outreachPrograms = [
+  {
+    icon: Leaf,
+    title: 'Green Campus Initiative',
+    description: 'Student-led cleanliness, recycling and campus care habits encourage responsibility beyond the classroom.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Parent & Community Partnership',
+    description: 'School events, PTMs and guided participation help families stay connected to student growth.',
+  },
+  {
+    icon: Users2,
+    title: 'Learning Beyond School Walls',
+    description: 'Trips, competitions and guided exposure activities support confidence, expression and teamwork.',
+  },
+]
+
+function panelSx(theme, tone = 'light') {
+  if (tone === 'dark') {
+    return {
+      borderRadius: 4,
+      color: '#fff',
+      background: 'linear-gradient(135deg, #1d213c 0%, #24364a 55%, #344656 100%)',
+      boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+    }
+  }
+
+  return {
+    borderRadius: 4,
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, rgba(14,20,24,0.94), rgba(29,33,60,0.84))'
+        : 'linear-gradient(135deg, rgba(250,253,255,0.98), rgba(237,249,253,0.94))',
+    boxShadow: '0 20px 48px -30px rgba(17, 26, 36, 0.2)',
+  }
+}
+
 export default function About() {
+  const theme = useTheme()
+
   return (
     <>
       <Seo
         title="About School"
-        description="Learn about the legacy, vision, mission and school story of Air Force School, VayuSena Nagar, Nagpur."
+        description="Learn about the Air Force School story, vision, mission, initiatives and school life."
         path="/about"
         image={siteAssets.images.chief}
       />
+
       <PageHero
-        crumb="About"
-        eyebrow="School Story"
-        title="A values-led school legacy in VayuSena Nagar, Nagpur."
-        subtitle="Air Force School was established to provide quality education with discipline, care and a broad learning experience for every child."
+        crumb="About Us"
+        eyebrow="Our Story"
+        title={`About ${siteConfig.brandName} ${siteConfig.brandSuffix}`}
+        subtitle="Established to provide quality education with discipline, care and inclusive development for the wards of Air Force personnel and the wider school community."
         image={siteAssets.images.chief}
       />
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={reveal} className="frost-card rounded-[2.2rem] p-8 sm:p-10">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Who We Are</p>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
-                Education rooted in discipline, inclusion and growth.
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.narrative}</p>
-              <p className="mt-4 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.extended}</p>
+      <Box sx={{ py: { xs: 7, md: 10 }, background: theme.palette.mode === 'dark' ? 'transparent' : 'linear-gradient(180deg, rgba(215,239,246,0.62), rgba(186,226,238,0.34))' }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={3.5}>
+            <Grid item xs={12} lg={7}>
+              <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} variants={reveal}>
+                <Paper sx={{ ...panelSx(theme), p: { xs: 3, sm: 4 } }}>
+                  <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: '0.2em' }}>
+                    Who We Are
+                  </Typography>
+                  <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.96, fontSize: { xs: '2.2rem', sm: '3rem' } }}>
+                    A values-led school built on structure, warmth and steady growth.
+                  </Typography>
+                  <Typography sx={{ mt: 3, color: 'text.secondary', lineHeight: 1.9 }}>
+                    Established in {siteConfig.yearFounded}, Air Force School VayuSena Nagar functions under the Indian Air Force Educational and Cultural Society, New Delhi, and serves students from LKG to IX.
+                  </Typography>
+                  <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.9 }}>
+                    {schoolContent.about.narrative}
+                  </Typography>
+                  <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.9 }}>
+                    {schoolContent.about.extended}
+                  </Typography>
 
-              <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-                {schoolContent.facts.map((fact, index) => (
-                  <motion.div
-                    key={fact.label}
-                    custom={0.08 + index * 0.05}
-                    variants={reveal}
-                    className="rounded-[1.5rem] border border-primary-900/8 bg-white/80 p-4 shadow-soft dark:border-white/10 dark:bg-primary-950/70"
-                  >
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{fact.label}</p>
-                    <p className="mt-2 text-2xl font-bold uppercase text-primary-900 dark:text-white">{fact.value}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <div className="grid gap-6">
-              <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.1} variants={reveal} className="frost-card rounded-[2rem] p-6">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-primary-900 p-3 text-white dark:bg-white dark:text-primary-950">
-                    <Compass className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Vision</p>
-                    <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Confident & Self-Sustaining</h3>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.vision}</p>
+                  <Grid container spacing={2} sx={{ mt: 2 }}>
+                    {schoolContent.facts.map((fact, index) => (
+                      <Grid item xs={6} md={3} key={fact.label}>
+                        <motion.div custom={0.08 + index * 0.05} initial="hidden" whileInView="show" viewport={{ once: true }} variants={reveal}>
+                          <Paper
+                            elevation={0}
+                            sx={{
+                              p: 2,
+                              borderRadius: '1.4rem',
+                              border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fff', 0.82),
+                            }}
+                          >
+                            <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                              {fact.label}
+                            </Typography>
+                            <Typography sx={{ mt: 1, fontSize: { xs: '1.3rem', sm: '1.55rem' }, fontWeight: 800, color: 'text.primary' }}>
+                              {fact.value}
+                            </Typography>
+                          </Paper>
+                        </motion.div>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Paper>
               </motion.div>
+            </Grid>
 
-              <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.16} variants={reveal} className="frost-card rounded-[2rem] p-6">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-accent p-3 text-white">
-                    <Flag className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Mission</p>
-                    <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Inclusive Child Development</h3>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.mission}</p>
-              </motion.div>
+            <Grid item xs={12} lg={5}>
+              <Stack spacing={3}>
+                {[
+                  {
+                    label: 'Vision',
+                    title: 'Confident and self-sustaining individuals',
+                    body: schoolContent.about.vision,
+                    icon: Compass,
+                    color: 'primary.main',
+                  },
+                  {
+                    label: 'Mission',
+                    title: 'Inclusive education for every child',
+                    body: schoolContent.about.mission,
+                    icon: Flag,
+                    color: 'secondary.main',
+                  },
+                ].map((item, index) => {
+                  const Icon = item.icon
 
-              <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.22} variants={reveal} className="relative overflow-hidden rounded-[2rem] bg-primary-900 p-6 text-white shadow-card">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,147,75,0.28),transparent_28%)]" />
-                <div className="relative">
-                  <div className="flex items-center gap-3">
-                    <ShieldCheck className="h-5 w-5 text-accent" />
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-white/60">Registered With</p>
-                  </div>
-                  <p className="mt-4 text-xl font-bold uppercase leading-tight">
-                    Indian Air Force Educational and Cultural Society, New Delhi
-                  </p>
-                  <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/75">
-                    <Sparkles className="h-3.5 w-3.5 text-accent" />
-                    Teaching is Learning
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
+                  return (
+                    <motion.div
+                      key={item.label}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      custom={0.12 + index * 0.06}
+                      variants={reveal}
+                    >
+                      <Paper sx={{ ...panelSx(theme), p: 3 }}>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ xs: 'flex-start', sm: 'center' }}>
+                          <Avatar sx={{ bgcolor: item.color, color: '#fff', width: 48, height: 48 }}>
+                            <Icon size={20} />
+                          </Avatar>
+                          <Box>
+                            <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                              {item.label}
+                            </Typography>
+                            <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                              {item.title}
+                            </Typography>
+                          </Box>
+                        </Stack>
+                        <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.8 }}>
+                          {item.body}
+                        </Typography>
+                      </Paper>
+                    </motion.div>
+                  )
+                })}
+
+                <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.24} variants={reveal}>
+                  <Paper sx={{ ...panelSx(theme, 'dark'), p: 3.5 }}>
+                    <Typography variant="caption" sx={{ opacity: 0.72, textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+                      Registered With
+                    </Typography>
+                    <Typography variant="h6" sx={{ mt: 2, fontWeight: 800, lineHeight: 1.4 }}>
+                      Indian Air Force Educational and Cultural Society, New Delhi
+                    </Typography>
+                    <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mt: 3 }}>
+                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha('#fff', 0.12) }}>
+                        <Sparkles size={14} />
+                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Teaching is Learning</Typography>
+                      </Stack>
+                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha('#fff', 0.12) }}>
+                        <ShieldCheck size={14} />
+                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Legacy Since 1968</Typography>
+                      </Stack>
+                    </Stack>
+                  </Paper>
+                </motion.div>
+              </Stack>
+            </Grid>
+          </Grid>
         </Container>
-      </section>
+      </Box>
+
+      <Box sx={{ py: { xs: 7, md: 9 }, background: theme.palette.mode === 'dark' ? 'transparent' : 'linear-gradient(180deg, rgba(228,246,251,0.7), rgba(244,251,254,0.9))' }}>
+        <Container maxWidth="md">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={reveal}>
+            <Paper sx={{ ...panelSx(theme), p: { xs: 3, sm: 4.5 }, textAlign: 'center' }}>
+              <Quote size={38} color={theme.palette.secondary.main} />
+              <Typography sx={{ mt: 2.5, fontSize: { xs: '1.12rem', sm: '1.45rem' }, fontWeight: 700, lineHeight: 1.8, color: 'text.primary', fontStyle: 'italic' }}>
+                "Education is not about filling a vessel, it is about lighting a fire. Every decision we make starts with the question: will this help a child think, grow and stand confidently on their own?"
+              </Typography>
+              <Typography sx={{ mt: 3, fontWeight: 800, color: 'primary.main' }}>
+                School Leadership Message
+              </Typography>
+              <Typography sx={{ mt: 0.6, fontSize: '0.84rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'text.secondary' }}>
+                {siteConfig.brandName} {siteConfig.brandSuffix}
+              </Typography>
+            </Paper>
+          </motion.div>
+        </Container>
+      </Box>
+
+      <div id="initiatives">
+        <Initiatives />
+      </div>
+
+      <div id="awards">
+        <Achievements />
+      </div>
+
+      <Box id="outreach" sx={{ py: { xs: 7, md: 10 }, background: theme.palette.mode === 'dark' ? 'transparent' : 'linear-gradient(180deg, rgba(228,246,251,0.88), rgba(215,239,246,0.94))' }}>
+        <Container maxWidth="xl">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={reveal}>
+            <Box sx={{ maxWidth: 700, mx: 'auto', textAlign: 'center' }}>
+              <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: '0.2em' }}>
+                Giving Back
+              </Typography>
+              <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.98, fontSize: { xs: '2rem', sm: '2.8rem' } }}>
+                School life works best when it reaches beyond the classroom.
+              </Typography>
+              <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.8 }}>
+                The school experience is strengthened through care for the campus, parent partnership and activity-led exposure for students.
+              </Typography>
+            </Box>
+          </motion.div>
+
+          <Grid container spacing={2.5} sx={{ mt: 3 }}>
+            {outreachPrograms.map((item, index) => {
+              const Icon = item.icon
+
+              return (
+                <Grid item xs={12} md={4} key={item.title}>
+                  <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.08 + index * 0.05} variants={reveal}>
+                    <Paper sx={{ ...panelSx(theme), p: 3, height: '100%' }}>
+                      <Avatar sx={{ width: 54, height: 54, bgcolor: alpha(theme.palette.secondary.main, 0.14), color: 'secondary.main' }}>
+                        <Icon size={22} />
+                      </Avatar>
+                      <Typography variant="h6" sx={{ mt: 2, fontWeight: 800 }}>
+                        {item.title}
+                      </Typography>
+                      <Typography sx={{ mt: 1.25, color: 'text.secondary', lineHeight: 1.8 }}>
+                        {item.description}
+                      </Typography>
+                    </Paper>
+                  </motion.div>
+                </Grid>
+              )
+            })}
+          </Grid>
+        </Container>
+      </Box>
+
+      <FAQSection />
     </>
   )
 }

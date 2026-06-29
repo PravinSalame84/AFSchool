@@ -1,248 +1,312 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { ChevronDown, ExternalLink, Menu, X } from 'lucide-react'
-import Logo from './Logo'
-import Button from '../ui/Button'
-import ThemeToggle from '../ui/ThemeToggle'
+import {
+  alpha,
+  AppBar,
+  Box,
+  Button,
+  Collapse,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Stack,
+  Toolbar,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import LaunchIcon from '@mui/icons-material/Launch'
 import navigation from '../../data/navigation'
 import siteConfig from '../../data/siteConfig'
-import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import Logo from './Logo'
+import ThemeToggle from '../ui/ThemeToggle'
 import SiteSearch from './SiteSearch'
-import NavigationTitleBadge from './NavigationTitleBadge'
+import { useEnquiryModal } from '../../context/EnquiryModalContext'
+
+const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
+  px: 1.6,
+  py: 1.1,
+  minWidth: 0,
+  color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+  fontWeight: 800,
+  fontSize: '0.92rem',
+  letterSpacing: '0.02em',
+  textTransform: 'none',
+  borderRadius: 4,
+  backgroundColor: isActive ? alpha(theme.palette.secondary.main, 0.14) : 'transparent',
+  border: `1px solid ${isActive ? alpha(theme.palette.secondary.main, 0.24) : 'transparent'}`,
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.secondary.main, 0.1),
+    borderColor: alpha(theme.palette.secondary.main, 0.18),
+  },
+  ...(hasChildren && {
+    pr: 1.2,
+  }),
+})
 
 function DesktopItem({ item }) {
-  const [open, setOpen] = useState(false)
-  const baseInactive =
-    'text-primary-700 hover:bg-gradient-to-r hover:from-skyback-light hover:via-white hover:to-airforce-gold/12 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold'
-
-  if (item.external) {
-    return (
-      <a
-        href={item.to}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${baseInactive}`}
-      >
-        {item.label} <ExternalLink className="h-3 w-3" />
-      </a>
-    )
-  }
-
-  if (!item.children) {
-    return (
-      <NavLink
-        to={item.to}
-        className={({ isActive }) =>
-          `focus-ring rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${
-            isActive
-              ? 'bg-primary-900 text-white dark:bg-gradient-to-r dark:from-airforce-gold dark:to-airforce-honey dark:text-secondary'
-              : baseInactive
-          }`
-        }
-      >
-        {item.label}
-      </NavLink>
-    )
-  }
-
-  return (
-    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        aria-expanded={open}
-        className={`focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${baseInactive}`}
-      >
-        {item.label}
-        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      <div
-        className={`submenu-surface absolute left-0 top-full z-30 mt-3 min-w-[300px] rounded-[1.7rem] p-2 transition-all duration-200 ${
-          open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
-        }`}
-      >
-        {item.children.map((child) =>
-          child.external ? (
-            <a
-              key={child.label}
-              href={child.to}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:via-skyback-soft hover:to-airforce-gold/10 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold"
-            >
-              {child.label}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : (
-            <Link
-              key={child.label}
-              to={child.to}
-              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-800 transition hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:via-skyback-soft hover:to-airforce-gold/10 hover:text-primary-900 hover:shadow-soft dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90 dark:hover:text-airforce-gold"
-            >
-              {child.label}
-            </Link>
-          ),
-        )}
-      </div>
-    </div>
-  )
-}
-
-function MobileItem({ item, onNavigate }) {
-  const [open, setOpen] = useState(false)
-
-  if (item.external) {
-    return (
-      <a
-        href={item.to}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="focus-ring flex items-center justify-between rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:border-white/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
-      >
-        {item.label}
-        <ExternalLink className="h-4 w-4 text-primary-300 dark:text-airforce-gold" />
-      </a>
-    )
-  }
-
-  if (!item.children) {
-    return (
-      <Link
-        to={item.to}
-        onClick={onNavigate}
-        className="focus-ring block rounded-xl border-b border-primary-100/90 px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:border-white/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
-      >
-        {item.label}
-      </Link>
-    )
-  }
-
-  return (
-    <div className="border-b border-primary-100/90 dark:border-white/10">
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        aria-expanded={open}
-        className="focus-ring flex w-full items-center justify-between rounded-xl px-2 py-3.5 text-[15px] font-semibold text-primary-800 transition hover:bg-gradient-to-r hover:from-skyback-soft/70 hover:to-airforce-gold/10 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
-      >
-        {item.label}
-        <ChevronDown className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      <div className={`overflow-hidden transition-all ${open ? 'max-h-96 pb-2' : 'max-h-0'}`}>
-        {item.children.map((child) =>
-          child.external ? (
-            <a
-              key={child.label}
-              href={child.to}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:to-skyback-soft hover:text-primary-900 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
-            >
-              {child.label}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : (
-            <Link
-              key={child.label}
-              to={child.to}
-              onClick={onNavigate}
-              className="focus-ring block rounded-xl px-4 py-2 text-[14px] font-medium text-primary-700 hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:to-skyback-soft hover:text-primary-900 dark:text-skyback-light dark:hover:bg-gradient-to-r dark:hover:from-primary-800/90 dark:hover:to-airforce-brown/80 dark:hover:text-airforce-gold"
-            >
-              {child.label}
-            </Link>
-          ),
-        )}
-      </div>
-    </div>
-  )
-}
-
-export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const theme = useTheme()
   const location = useLocation()
+  const [open, setOpen] = useState(false)
+  const isActive = item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)
+
+  if (item.external) {
+    return (
+      <Button href={item.to} target="_blank" endIcon={<LaunchIcon fontSize="small" />} sx={desktopButtonSx(theme, false)}>
+        {item.label}
+      </Button>
+    )
+  }
+
+  if (!item.children) {
+    return (
+      <Button component={NavLink} to={item.to} sx={desktopButtonSx(theme, isActive)}>
+        {item.label}
+      </Button>
+    )
+  }
+
+  return (
+    <Box
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      sx={{ position: 'relative' }}
+    >
+      <Button endIcon={<ExpandMoreIcon fontSize="small" />} sx={desktopButtonSx(theme, isActive, true)}>
+        {item.label}
+      </Button>
+
+      <Collapse in={open} timeout={160} sx={{ position: 'absolute', top: '100%', left: 0, pt: 1.25, zIndex: 1300 }}>
+        <Paper
+          elevation={0}
+          sx={{
+            minWidth: 320,
+            maxWidth: 360,
+            p: 1.25,
+            borderRadius: 4,
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.96) : alpha('#fff', 0.98),
+            boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+            backdropFilter: 'blur(18px)',
+          }}
+        >
+          <Typography sx={{ px: 1.25, pt: 0.5, pb: 1, fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+            {item.label}
+          </Typography>
+          <Box sx={{ display: 'grid', gap: 0.5 }}>
+            {item.children.map((child) => {
+              const childActive = location.pathname === child.to
+
+              return (
+                <Box
+                  key={child.label}
+                  component={child.external ? 'a' : Link}
+                  to={!child.external ? child.to : undefined}
+                  href={child.external ? child.to : undefined}
+                  target={child.external ? '_blank' : undefined}
+                  rel={child.external ? 'noopener noreferrer' : undefined}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 2,
+                    borderRadius: 4,
+                    px: 1.25,
+                    py: 1.15,
+                    color: 'text.primary',
+                    textDecoration: 'none',
+                    bgcolor: childActive ? alpha(theme.palette.secondary.main, 0.12) : 'transparent',
+                    '&:hover': { bgcolor: alpha(theme.palette.secondary.main, 0.08) },
+                  }}
+                >
+                  <Box>
+                    <Typography sx={{ fontWeight: 700, fontSize: '0.94rem' }}>
+                      {child.label}
+                    </Typography>
+                    <Typography sx={{ mt: 0.25, fontSize: '0.76rem', color: 'text.secondary' }}>
+                      {item.label} resource
+                    </Typography>
+                  </Box>
+                  {child.external ? <LaunchIcon fontSize="small" /> : <ExpandMoreIcon sx={{ transform: 'rotate(-90deg)', fontSize: 18, color: 'text.secondary' }} />}
+                </Box>
+              )
+            })}
+          </Box>
+        </Paper>
+      </Collapse>
+    </Box>
+  )
+}
+
+function MobileItem({ item, onClose }) {
+  const theme = useTheme()
+  const [open, setOpen] = useState(false)
+
+  if (!item.children) {
+    return (
+      <ListItemButton
+        component={Link}
+        to={item.to}
+        onClick={onClose}
+        sx={{ borderRadius: 4, mb: 0.5 }}
+      >
+        <ListItemText primaryTypographyProps={{ fontWeight: 700 }} primary={item.label} />
+      </ListItemButton>
+    )
+  }
+
+  return (
+    <>
+      <ListItemButton
+        onClick={() => setOpen((value) => !value)}
+        sx={{
+          borderRadius: 4,
+          mb: 0.5,
+          bgcolor: open ? alpha(theme.palette.secondary.main, 0.08) : 'transparent',
+        }}
+      >
+        <ListItemText primaryTypographyProps={{ fontWeight: 700 }} primary={item.label} />
+        <ExpandMoreIcon sx={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }} />
+      </ListItemButton>
+
+      <Collapse in={open}>
+        <List disablePadding sx={{ pl: 1.5, pb: 0.5 }}>
+          {item.children.map((child) => (
+            <ListItemButton
+              key={child.label}
+              component={child.external ? 'a' : Link}
+              to={!child.external ? child.to : undefined}
+              href={child.external ? child.to : undefined}
+              target={child.external ? '_blank' : undefined}
+              rel={child.external ? 'noopener noreferrer' : undefined}
+              onClick={onClose}
+              sx={{ borderRadius: '0.9rem', mb: 0.5 }}
+            >
+              <ListItemText
+                primary={child.label}
+                primaryTypographyProps={{ fontSize: '0.92rem', fontWeight: 600 }}
+              />
+              {child.external ? <LaunchIcon fontSize="small" /> : null}
+            </ListItemButton>
+          ))}
+        </List>
+      </Collapse>
+    </>
+  )
+}
+
+export default function Navbar({ compact = false }) {
+  const theme = useTheme()
+  const [mobileOpen, setMobileOpen] = useState(false)
   const { openEnquiry } = useEnquiryModal()
+  const location = useLocation()
 
   useEffect(() => setMobileOpen(false), [location.pathname])
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-  }, [mobileOpen])
+  const headerNote = useMemo(
+    () => `${siteConfig.brandName} • ${siteConfig.brandSuffix}`,
+    [],
+  )
 
   return (
-    <nav className="px-4 pb-4 pt-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto nav-curve relative flex items-center justify-between gap-3 px-3 py-3 sm:gap-4 sm:px-5">
-        <div className="pointer-events-none absolute inset-y-3 left-[22%] hidden w-px bg-gradient-to-b from-transparent via-primary-900/12 to-transparent dark:via-white/10 xl:block" />
-        <Logo />
-        <div className="hidden flex-1 items-center justify-center gap-1 xl:flex">
-          {navigation.map((item) => (
-            <DesktopItem key={item.label} item={item} />
-          ))}
-        </div>
+    <>
+      <AppBar
+        position="static"
+        elevation={0}
+        color="inherit"
+        sx={{
+          borderBottom: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.9) : alpha('#fff', 0.9),
+          backdropFilter: 'blur(18px)',
+          boxShadow: compact ? '0 14px 36px rgba(17, 26, 36, 0.12)' : 'none',
+          transition: 'box-shadow 260ms ease, background-color 260ms ease',
+        }}
+      >
+        <Toolbar sx={{ minHeight: { xs: 78, lg: 86 }, justifyContent: 'space-between', gap: 2 }}>
+          <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0, flex: { xs: 1, xl: '0 0 auto' } }}>
+            <Logo />
+            <Box sx={{ display: { xs: 'none', md: 'block', xl: 'none' }, minWidth: 0, maxWidth: 230 }}>
+              <Typography noWrap sx={{ fontSize: '0.78rem', fontWeight: 700, color: 'text.secondary' }}>
+                {headerNote}
+              </Typography>
+            </Box>
+          </Stack>
 
-        <div className="hidden items-center gap-3 lg:flex xl:flex-shrink-0">
-          <SiteSearch />
-          <ThemeToggle />
-          <Button size="sm" variant="dark" onClick={() => openEnquiry('General Enquiry')} icon={false}>
-            {siteConfig.cta.enquire}
-          </Button>
-        </div>
+          <Box sx={{ display: { xs: 'none', xl: 'flex' }, gap: 0.5, alignItems: 'center', flex: 1, justifyContent: 'center' }}>
+            {navigation.map((item) => (
+              <DesktopItem key={item.label} item={item} />
+            ))}
+          </Box>
 
-        <button
-          type="button"
-          className="focus-ring rounded-full bg-gradient-to-r from-secondary to-primary-700 p-2 text-white dark:bg-white dark:text-primary-950 xl:hidden"
-          aria-label="Toggle menu"
-          onClick={() => setMobileOpen((prev) => !prev)}
-        >
-          {mobileOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-        </button>
-      </div>
-
-      <div className={`fixed inset-0 z-40 xl:hidden ${mobileOpen ? 'visible' : 'invisible'}`} aria-hidden={!mobileOpen}>
-        <div
-          className={`absolute inset-0 bg-primary-900/50 transition-opacity ${mobileOpen ? 'opacity-100' : 'opacity-0'}`}
-          onClick={() => setMobileOpen(false)}
-        />
-        <div
-          className={`absolute right-0 top-0 h-full w-[90%] max-w-sm overflow-y-auto border-l border-white/40 bg-gradient-to-b from-white/96 via-white/94 to-skyback-soft/90 p-4 shadow-card backdrop-blur-xl transition-transform duration-300 sm:p-5 dark:border-white/10 dark:bg-gradient-to-b dark:from-primary-950/98 dark:via-secondary dark:to-primary-900/92 ${
-            mobileOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="mb-4 flex items-start justify-between gap-3">
-            <Logo className="min-w-0 pr-2" />
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-              className="focus-ring rounded-lg p-2 text-primary-500 dark:text-white/70"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-
-          <div className="mb-4 flex items-center gap-3">
+          <Stack direction="row" spacing={1.2} alignItems="center" sx={{ display: { xs: 'none', lg: 'flex' } }}>
             <SiteSearch />
             <ThemeToggle />
-          </div>
+            <Button variant="contained" onClick={() => openEnquiry('General Enquiry')}>
+              {siteConfig.cta.enquire}
+            </Button>
+          </Stack>
 
-          <div>
+          <IconButton
+            sx={{
+              display: { xl: 'none' },
+              width: 44,
+              height: 44,
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fff', 0.9),
+            }}
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}>
+        <Box sx={{ width: { xs: 'min(100vw, 320px)', sm: 360 }, maxWidth: '100vw', p: { xs: 1.5, sm: 2.25 } }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+            <Logo />
+            <IconButton onClick={() => setMobileOpen(false)} aria-label="Close menu">
+              <CloseIcon />
+            </IconButton>
+          </Stack>
+
+          <Typography sx={{ mt: 1, mb: 2, fontSize: '0.8rem', color: 'text.secondary' }}>
+            {headerNote}
+          </Typography>
+
+          <Stack direction="row" spacing={1} sx={{ mb: 2, minWidth: 0 }}>
+            <SiteSearch compact />
+            <ThemeToggle />
+          </Stack>
+
+          <Divider sx={{ mb: 1.5 }} />
+
+          <List sx={{ py: 0 }}>
             {navigation.map((item) => (
-              <MobileItem key={item.label} item={item} onNavigate={() => setMobileOpen(false)} />
+              <MobileItem key={item.label} item={item} onClose={() => setMobileOpen(false)} />
             ))}
-          </div>
+          </List>
 
           <Button
-            className="mt-5 w-full"
-            variant="dark"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 2 }}
             onClick={() => {
               setMobileOpen(false)
               openEnquiry('General Enquiry')
             }}
-            icon={false}
           >
             {siteConfig.cta.enquire}
           </Button>
-        </div>
-      </div>
-    </nav>
+        </Box>
+      </Drawer>
+    </>
   )
 }

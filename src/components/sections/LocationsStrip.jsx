@@ -1,30 +1,77 @@
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
-import Container from '../ui/Container'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import {
+  Box,
+  Container,
+  Stack,
+  Typography,
+  Chip,
+  alpha,
+} from '@mui/material'
+
 import { states } from '../../data/locations'
 
 export default function LocationsStrip() {
   return (
-    <section className="bg-skyback py-10">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <RevealOnScroll>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="flex items-center gap-2 text-sm font-bold text-primary-700">
-              <MapPin className="h-4 w-4 text-accent" /> Campuses in:
-            </span>
+    <Box
+      component="section"
+      sx={{
+        py: 4,
+        background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      }}
+    >
+      <Container maxWidth="lg">
+
+        <Stack
+          direction="row"
+          spacing={2}
+          flexWrap="wrap"
+          alignItems="center"
+        >
+          {/* LABEL */}
+          <Stack direction="row" spacing={1} alignItems="center">
+            <MapPin size={18} color="#F57C00" />
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 800,
+                color: '#0B1F3A',
+                letterSpacing: 0.5,
+              }}
+            >
+              Campuses in:
+            </Typography>
+          </Stack>
+
+          {/* CHIPS */}
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {states.map((state) => (
-              <Link
+              <Chip
                 key={state}
+                component={RouterLink}
                 to={`/locations?state=${encodeURIComponent(state)}`}
-                className="focus-ring rounded-full bg-white px-4 py-1.5 text-sm font-medium text-primary-600 shadow-soft transition hover:bg-primary-900 hover:text-white"
-              >
-                {state}
-              </Link>
+                label={state}
+                clickable
+                sx={{
+                  fontWeight: 600,
+                  borderRadius: 4,
+                  backgroundColor: '#ffffff',
+                  color: '#0B1F3A',
+                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  transition: '0.25s ease',
+                  '&:hover': {
+                    backgroundColor: '#0B1F3A',
+                    color: '#ffffff',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 10px 20px rgba(11, 31, 58, 0.15)',
+                  },
+                }}
+              />
             ))}
-          </div>
-        </RevealOnScroll>
+          </Stack>
+
+        </Stack>
       </Container>
-    </section>
+    </Box>
   )
 }

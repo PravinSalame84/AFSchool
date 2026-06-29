@@ -91,16 +91,16 @@ src/
 
   App.jsx        – route table
   main.jsx       – React + Router root
-  index.css      – Tailwind + small set of global utility classes
+  index.css      – global CSS tokens + shared utility classes
 ```
 
 This separation means:
 - **Rebrand the whole site** → edit `src/data/siteConfig.js` only.
 - **Change the menu** → edit `src/data/navigation.js` only.
 - **Add a campus / state** → edit `src/data/locations.js` only.
-- **Restyle colors globally** → edit `tailwind.config.js` (`primary`,
-  `accent`, `skyback` color objects). Every component reads from these
-  tokens, nothing is hard-coded.
+- **Restyle colors globally** → edit `src/theme/muiTheme.js` and the CSS
+  tokens in `src/index.css`. Shared surfaces and page backgrounds are
+  centralized there.
 - **Add a brand-new page** → create `src/pages/NewPage.jsx`, add one
   `<Route>` in `App.jsx`, add one entry in `src/data/navigation.js`.
 
@@ -130,11 +130,10 @@ This separation means:
 
 - **react-router-dom** – client-side routing
 - **lucide-react** – icon set (tree-shaken, very light)
-- **framer-motion** – installed and ready if you want to add richer
-  animation later; the current build relies on lightweight CSS/IntersectionObserver
-  animations so the bundle stays small (production JS bundle ≈ 81 KB gzip).
-- **tailwindcss** – utility-first styling, fully configured with your brand
-  tokens in `tailwind.config.js`
+- **framer-motion** – used for page motion, carousels, and staggered
+  reveals while keeping interactions smooth
+- **@mui/material** – the UI system, theme tokens, component primitives,
+  and responsive behavior
 
 ## 7. Accessibility & performance notes
 

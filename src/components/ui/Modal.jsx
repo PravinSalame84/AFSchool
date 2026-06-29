@@ -25,7 +25,7 @@ export default function Modal({ open, onClose, title, children }) {
         },
         paper: {
           sx: (theme) => ({
-            borderRadius: '24px',
+            borderRadius: 4,
             overflow: 'hidden',
             color: 'text.primary',
             backgroundImage: 'none',
@@ -65,7 +65,7 @@ export default function Modal({ open, onClose, title, children }) {
             },
           }}
         >
-          <X className="h-5 w-5" />
+          <X size={20} />
         </IconButton>
       </DialogTitle>
       <DialogContent sx={{ pt: 0, px: { xs: 3, sm: 4 }, pb: { xs: 3, sm: 4 } }}>

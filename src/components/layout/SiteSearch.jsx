@@ -1,50 +1,65 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  alpha,
+  Box,
+  Chip,
+  Dialog,
+  DialogContent,
+  IconButton,
+  InputAdornment,
+  List,
+  ListItemButton,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import { ExternalLink, Search, X } from 'lucide-react'
 import schoolContent from '../../data/schoolContent'
-import Input from '../ui/Input'
 
-export default function SiteSearch() {
+function scoreItem(item, query) {
+  const q = query.toLowerCase()
+  let score = 0
+
+  if (item.label.toLowerCase().startsWith(q)) score += 5
+  if (item.label.toLowerCase().includes(q)) score += 3
+  if (item.group?.toLowerCase().includes(q)) score += 2
+  if (item.description?.toLowerCase().includes(q)) score += 1
+
+  return score
+}
+
+export default function SiteSearch({ compact = false }) {
+  const theme = useTheme()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
-  const resultItemClass =
-    'focus-ring group rounded-[1.3rem] border border-transparent bg-white/90 px-4 py-3 transition hover:border-primary-100 hover:bg-gradient-to-r hover:from-airforce-saffron/12 hover:via-skyback-soft hover:to-airforce-gold/10 hover:shadow-soft dark:bg-primary-950/34 dark:hover:border-white/10 dark:hover:bg-gradient-to-r dark:hover:from-secondary dark:hover:via-primary-800/95 dark:hover:to-airforce-brown/90'
 
   const results = useMemo(() => {
     const items = schoolContent.directory
+
     if (!query.trim()) return items.slice(0, 8)
-    const needle = query.toLowerCase()
-    return items.filter((item) =>
-      [item.label, item.group, item.description].filter(Boolean).some((field) => field.toLowerCase().includes(needle)),
-    )
+
+    return [...items]
+      .map((item) => ({ ...item, score: scoreItem(item, query) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12)
   }, [query])
 
   useEffect(() => {
-    if (!open) return
-    const onKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+    const handler = (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault()
-        setOpen(false)
+        setOpen((current) => !current)
       }
+
       if (event.key === 'Escape') setOpen(false)
     }
-    document.addEventListener('keydown', onKeyDown)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = ''
-    }
-  }, [open])
 
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        setOpen(true)
-      }
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
   }, [])
 
   useEffect(() => {
@@ -53,112 +68,185 @@ export default function SiteSearch() {
 
   return (
     <>
-      <button
-        type="button"
+      <Box
         onClick={() => setOpen(true)}
-        aria-label="Search the website"
-        className="focus-ring inline-flex items-center gap-2 rounded-full border border-primary-900/10 bg-gradient-to-r from-white/96 via-surface-soft to-skyback-soft/88 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-airforce-brown shadow-soft backdrop-blur-xl transition hover:border-airforce-gold/34 hover:bg-gradient-to-r hover:from-airforce-gold/24 hover:via-airforce-honey/16 hover:to-airforce-gold/24 hover:text-airforce-brown dark:border-white/10 dark:bg-gradient-to-r dark:from-primary-950/96 dark:via-secondary dark:to-primary-900/90 dark:text-airforce-honey dark:hover:border-airforce-gold/30 dark:hover:bg-gradient-to-r dark:hover:from-airforce-gold/28 dark:hover:via-airforce-honey/18 dark:hover:to-airforce-gold/26 dark:hover:text-airforce-brown"
+        sx={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: compact ? 'center' : 'space-between',
+          gap: 1,
+          minWidth: compact ? 44 : { xs: 132, sm: 156 },
+          width: compact ? '100%' : 'auto',
+          px: compact ? 1.2 : 1.75,
+          py: compact ? 1.2 : 1.1,
+          borderRadius: 4,
+          cursor: 'pointer',
+          border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fff', 0.92),
+          color: 'text.primary',
+          backdropFilter: 'blur(12px)',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            transform: 'translateY(-1px)',
+            borderColor: alpha(theme.palette.secondary.main, 0.28),
+          },
+        }}
       >
-        <Search className="h-4 w-4" />
-        Search
-      </button>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Search size={16} />
+          {!compact ? (
+            <Typography sx={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+              Search
+            </Typography>
+          ) : null}
+        </Stack>
 
-      {open ? (
-        <div className="fixed inset-0 z-[110] flex items-start justify-center bg-primary-950/72 p-4 pt-20 backdrop-blur-lg">
-          <div className="w-full max-w-3xl rounded-[2rem] border border-primary-900/8 bg-white p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950 dark:via-secondary dark:to-primary-900/96">
-            <div className="mb-4 flex items-center gap-3">
-              <div className="flex-1">
-                <Input
-                  id="site-search"
-                  autoFocus
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search notices, pages, downloads, parent links..."
-                  startAdornment={<Search className="h-4.5 w-4.5 text-primary-300" />}
-                  sx={(theme) => ({
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '999px',
-                      background:
-                        theme.palette.mode === 'dark'
-                          ? 'linear-gradient(135deg, rgba(14,20,30,0.98), rgba(29,33,60,0.92))'
-                          : 'linear-gradient(135deg, rgba(246,248,251,0.98), rgba(227,239,246,0.9))',
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      color: theme.palette.mode === 'dark' ? '#f7fbff' : '#202c36',
-                    },
-                    '& .MuiOutlinedInput-input::placeholder': {
-                      color: theme.palette.mode === 'dark' ? 'rgba(215,239,246,0.72)' : 'rgba(69, 84, 104, 0.88)',
-                      opacity: 1,
-                    },
-                  })}
+        {!compact ? (
+          <Chip
+            label="Ctrl K"
+            size="small"
+            sx={{
+              height: 22,
+              fontSize: '0.62rem',
+              fontWeight: 800,
+              bgcolor: alpha(theme.palette.primary.main, 0.08),
+              '& .MuiChip-label': { px: 1 },
+            }}
+          />
+        ) : null}
+      </Box>
+
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        fullWidth
+        maxWidth="md"
+        PaperProps={{
+          sx: {
+            borderRadius: 4,
+            color: 'text.primary',
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+            background:
+              theme.palette.mode === 'dark'
+                ? 'linear-gradient(180deg, rgba(13,22,32,0.98), rgba(32,50,71,0.94))'
+                : 'linear-gradient(180deg, rgba(255,255,255,0.99), rgba(239,244,248,0.96))',
+            boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+          },
+        }}
+      >
+        <DialogContent sx={{ p: { xs: 2, sm: 3 } }}>
+          <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2, minWidth: 0 }}>
+            <TextField
+              fullWidth
+              autoFocus
+              placeholder="Search admissions, notices, downloads, careers..."
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search size={18} />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 4,
+                  bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.06) : alpha('#fff', 0.86),
+                },
+              }}
+            />
+
+            <IconButton onClick={() => setOpen(false)} aria-label="Close search">
+              <X size={18} />
+            </IconButton>
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={1.5} sx={{ mb: 2 }}>
+            <Typography sx={{ fontSize: '0.85rem', color: 'text.secondary' }}>
+              {query.trim() ? `${results.length} matching results` : 'Popular pages and quick-access resources'}
+            </Typography>
+            <Stack direction="row" spacing={1} flexWrap="wrap">
+              {['Admissions', 'Downloads', 'Notice Board', 'Careers'].map((item) => (
+                <Chip
+                  key={item}
+                  label={item}
+                  size="small"
+                  onClick={() => setQuery(item)}
+                  sx={{
+                    cursor: 'pointer',
+                    bgcolor: alpha(theme.palette.secondary.main, 0.1),
+                    color: 'text.primary',
+                  }}
                 />
-              </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close search"
-                className="focus-ring rounded-full p-2 text-primary-500 transition hover:bg-skyback-soft hover:text-primary-900 dark:text-skyback-light/76 dark:hover:bg-white/10 dark:hover:text-white"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+              ))}
+            </Stack>
+          </Stack>
 
-            <div className="max-h-[60vh] space-y-2 overflow-y-auto rounded-[1.6rem] border border-primary-900/8 bg-slate-50/96 p-2 pr-3 dark:border-white/10 dark:bg-primary-950/40">
-              {results.length ? (
-                results.map((item) =>
-                  item.external ? (
-                    <a
-                      key={`${item.group}-${item.label}`}
-                      href={item.to}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${resultItemClass} flex items-start justify-between`}
-                    >
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-airforce-brown/76 transition group-hover:text-airforce-brown dark:text-airforce-honey/82 dark:group-hover:text-airforce-brown">
-                          {item.group}
-                        </p>
-                        <p className="mt-1 text-sm font-semibold text-airforce-brown transition group-hover:text-airforce-brown dark:text-airforce-honey dark:group-hover:text-airforce-brown">
-                          {item.label}
-                        </p>
-                        {item.description ? (
-                          <p className="mt-1 text-sm text-airforce-brown/76 transition group-hover:text-airforce-brown dark:text-airforce-honey/76 dark:group-hover:text-airforce-brown">
-                            {item.description}
-                          </p>
-                        ) : null}
-                      </div>
-                      <ExternalLink className="mt-1 h-4 w-4 text-airforce-brown/76 transition group-hover:text-airforce-brown dark:text-airforce-honey dark:group-hover:text-airforce-brown" />
-                    </a>
-                  ) : (
-                    <Link
-                      key={`${item.group}-${item.label}`}
-                      to={item.to}
-                      onClick={() => setOpen(false)}
-                      className={`${resultItemClass} block`}
-                    >
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-airforce-brown/76 transition group-hover:text-airforce-brown dark:text-airforce-honey/82 dark:group-hover:text-airforce-brown">
+          <Paper
+            elevation={0}
+            sx={{
+              borderRadius: 4,
+              maxHeight: '60vh',
+              overflowY: 'auto',
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+              bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.04) : alpha('#fff', 0.72),
+            }}
+          >
+            {results.length ? (
+              <List sx={{ py: 1 }}>
+                {results.map((item) => (
+                  <ListItemButton
+                  key={`${item.group}-${item.label}`}
+                    component={item.external ? 'a' : Link}
+                    to={!item.external ? item.to : undefined}
+                    href={item.external ? item.to : undefined}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    onClick={() => setOpen(false)}
+                    sx={{
+                      mx: 1,
+                      mb: 0.75,
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                      flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                      gap: 2,
+                      borderRadius: 4,
+                      px: 2,
+                      py: 1.5,
+                      '&:hover': {
+                        bgcolor: alpha(theme.palette.secondary.main, 0.08),
+                      },
+                    }}
+                  >
+                    <Box>
+                      <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
                         {item.group}
-                      </p>
-                      <p className="mt-1 text-sm font-semibold text-airforce-brown transition group-hover:text-airforce-brown dark:text-airforce-honey dark:group-hover:text-airforce-brown">
+                      </Typography>
+                      <Typography sx={{ mt: 0.5, fontWeight: 800, color: 'text.primary' }}>
                         {item.label}
-                      </p>
+                      </Typography>
                       {item.description ? (
-                        <p className="mt-1 text-sm text-airforce-brown/76 transition group-hover:text-airforce-brown dark:text-airforce-honey/76 dark:group-hover:text-airforce-brown">
+                        <Typography sx={{ mt: 0.5, fontSize: '0.86rem', lineHeight: 1.6, color: 'text.secondary' }}>
                           {item.description}
-                        </p>
+                        </Typography>
                       ) : null}
-                    </Link>
-                  ),
-                )
-              ) : (
-                <div className="rounded-[1.5rem] bg-slate-50 px-4 py-8 text-center text-sm text-primary-500 dark:bg-primary-900/70 dark:text-skyback-light/76">
-                  No results found. Try searching for admissions, gallery, disclosures or parent corner.
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      ) : null}
+                    </Box>
+                    {item.external ? <ExternalLink size={16} /> : null}
+                  </ListItemButton>
+                ))}
+              </List>
+            ) : (
+              <Box sx={{ px: 3, py: 5, textAlign: 'center' }}>
+                <Typography sx={{ fontWeight: 700 }}>No matching pages found</Typography>
+                <Typography sx={{ mt: 1, color: 'text.secondary', fontSize: '0.9rem' }}>
+                  Try terms like admissions, leadership, calendar or careers.
+                </Typography>
+              </Box>
+            )}
+          </Paper>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

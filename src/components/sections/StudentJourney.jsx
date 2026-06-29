@@ -1,44 +1,147 @@
-import Container from '../ui/Container'
-import SectionHeading from '../ui/SectionHeading'
-import Card from '../ui/Card'
-import BlobIcon from '../ui/BlobIcon'
-import Button from '../ui/Button'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  Stack,
+  alpha,
+} from '@mui/material'
+
 import studentJourney from '../../data/studentJourney'
 
-const iconTones = ['accent', 'success', 'earth', 'slate', 'dark', 'primary']
+const colors = ['#F57C00', '#2E7D32', '#1565C0', '#455A64', '#0B1F3A', '#8E24AA']
 
 export default function StudentJourney() {
   return (
-    <section className="section-pad bg-skyback">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <RevealOnScroll>
-          <SectionHeading
-            eyebrow="A Glimpse Into Campus Life"
-            title="A Airforce School education adapts to become whatever your child needs"
-            align="center"
-            className="mx-auto"
-          />
-        </RevealOnScroll>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 8, md: 12 },
+        backgroundColor: '#F5FAFF',
+      }}
+    >
+      <Container maxWidth="lg">
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* HEADER */}
+        <Typography
+          align="center"
+          variant="overline"
+          sx={{ color: '#F57C00', fontWeight: 800, letterSpacing: 2 }}
+        >
+          A Glimpse Into Campus Life
+        </Typography>
+
+        <Typography
+          align="center"
+          variant="h4"
+          sx={{
+            fontWeight: 800,
+            mt: 1,
+            maxWidth: 800,
+            mx: 'auto',
+            color: '#0B1F3A',
+            lineHeight: 1.2,
+            fontSize: { xs: '1.8rem', sm: '2.125rem' },
+          }}
+        >
+          An Air Force School education adapts to become whatever your child needs
+        </Typography>
+
+        {/* GRID */}
+        <Grid container spacing={3} sx={{ mt: 6 }}>
           {studentJourney.map((item, i) => (
-            <RevealOnScroll key={item.title} delay={(i % 3) * 90}>
-              <Card className="h-full p-7">
-                <BlobIcon icon={item.icon} tone={iconTones[i % iconTones.length]} blobIndex={i} size={76} />
-                <h3 className="mt-5 text-lg font-bold text-primary-900">{item.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-primary-500">{item.description}</p>
-              </Card>
-            </RevealOnScroll>
-          ))}
-        </div>
+            <Grid item xs={12} sm={6} md={4} key={item.title}>
+              
+              <Card
+                sx={{
+                  height: '100%',
+                  borderRadius: 4,
+                  p: 1,
+                  background: '#ffffff',
+                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  transition: '0.25s ease',
+                  '&:hover': {
+                    transform: 'translateY(-6px)',
+                    boxShadow: '0 16px 40px rgba(11, 31, 58, 0.12)',
+                  },
+                }}
+              >
+                <CardContent>
 
-        <div className="mt-10 flex justify-center">
-          <Button to="/why-us" variant="dark">
+                  {/* ICON PLACEHOLDER (BlobIcon replacement style) */}
+                  <Box
+                    sx={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: '25%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: alpha(colors[i % colors.length], 0.12),
+                      color: colors[i % colors.length],
+                      mb: 2,
+                      fontSize: 22,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {item.icon}
+                  </Box>
+
+                  {/* TITLE */}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 800,
+                      color: '#0B1F3A',
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  {/* DESCRIPTION */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      mt: 1.5,
+                      color: alpha('#0B1F3A', 0.7),
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
+
+                </CardContent>
+              </Card>
+
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* CTA */}
+        <Stack alignItems="center" sx={{ mt: 6 }}>
+          <Button
+            variant="contained"
+            href="/why-us"
+            sx={{
+              px: { xs: 2.5, sm: 4 },
+              py: 1.3,
+              fontWeight: 700,
+              borderRadius: 4,
+              width: { xs: '100%', sm: 'auto' },
+              background: 'linear-gradient(135deg, #0B1F3A, #123A63)',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #123A63, #0B1F3A)',
+              },
+            }}
+          >
             Enter the Student Journey
           </Button>
-        </div>
+        </Stack>
+
       </Container>
-    </section>
+    </Box>
   )
 }

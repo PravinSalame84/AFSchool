@@ -1,149 +1,232 @@
 import { useState } from 'react'
-import { Camera, X } from 'lucide-react'
+import {
+  alpha,
+  Box,
+  Chip,
+  Container,
+  Dialog,
+  Grid,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
+import PhotoCamera from '@mui/icons-material/PhotoCamera'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
-import Carousel from '../components/ui/Carousel'
 import Seo from '../components/ui/Seo'
+import Carousel from '../components/ui/Carousel'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
 
+function galleryCardSx(theme) {
+  return {
+    borderRadius: '1.7rem',
+    overflow: 'hidden',
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, rgba(14,20,24,0.94), rgba(29,33,60,0.84))'
+        : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(228,246,251,0.76))',
+    boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+  }
+}
+
 export default function Gallery() {
+  const theme = useTheme()
   const [activeImage, setActiveImage] = useState(null)
 
   return (
     <>
       <Seo
         title="Gallery"
-        description="View school activity, campus life and achievement highlights from Air Force School, VayuSena Nagar, Nagpur."
+        description="School activities and campus life gallery."
         path="/gallery"
         image={schoolContent.gallery[0].image}
       />
+
       <PageHero
         crumb="Gallery"
         eyebrow="School Highlights"
-        title="The complete school photo gallery from campus and student life."
-        subtitle={`Browse all ${schoolContent.gallery.length} published images from the media archive, covering student participation, campus activity and school achievements.`}
+        title="Campus life, events and achievements"
+        subtitle={`Browse ${schoolContent.gallery.length} curated images from school archives`}
         image={schoolContent.gallery[0].image}
       />
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="mb-8 flex items-start gap-3 sm:items-center">
-            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary via-primary-800 to-primary-600 text-white dark:from-skyback-light dark:via-white dark:to-accent dark:text-primary-950">
-              <Camera className="h-5 w-5" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Interactive Gallery</p>
-              <h2 className="text-2xl font-bold uppercase text-primary-900 dark:text-white sm:text-3xl">Campus, events and achievement moments.</h2>
-              <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-skyback-light/78">
-                Every available photo from the current `media/school` and `media/students` archive is included below.
-              </p>
-            </div>
-          </div>
+      <Box sx={{ py: { xs: 7, md: 9 } }}>
+        <Container maxWidth="xl">
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ xs: 'flex-start', sm: 'center' }} sx={{ mb: 4 }}>
+            <Box
+              sx={{
+                width: 50,
+                height: 50,
+                borderRadius: 4,
+                display: 'grid',
+                placeItems: 'center',
+                background: 'linear-gradient(135deg, #1e3a8a, #0f172a)',
+                color: '#fff',
+              }}
+            >
+              <PhotoCamera />
+            </Box>
+            <Box>
+              <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: '0.2em' }}>
+                Interactive Gallery
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                Campus, events and achievements
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Featured carousel with archive browsing across desktop and mobile.
+              </Typography>
+            </Box>
+          </Stack>
 
-          <div className="mb-10">
-            <Carousel autoPlay interval={3000} ariaLabel="Featured gallery carousel">
-              {schoolContent.gallery.slice(0, 5).map((item) => (
-                <button
-                  key={`featured-${item.title}`}
-                  type="button"
-                  data-carousel-item
+          <Box sx={{ mb: 6 }}>
+            <Carousel autoPlay interval={3200} ariaLabel="Featured gallery highlights">
+              {schoolContent.gallery.slice(0, 8).map((item) => (
+                <Box key={item.title} data-carousel-item sx={{ width: { xs: 'min(88vw, 320px)', sm: 'min(360px, 84vw)' }, flexShrink: 0 }}>
+                  <Paper
+                    onClick={() => setActiveImage(item)}
+                    sx={{
+                      ...galleryCardSx(theme),
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      wrapperSx={{ height: 260 }}
+                      sx={{ height: 260 }}
+                    />
+
+                    <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,26,36,0.06), rgba(17,26,36,0.82))' }} />
+
+                    <Box sx={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', p: 2.25, color: '#fff' }}>
+                      <Chip
+                        label="Featured"
+                        size="small"
+                        sx={{
+                          alignSelf: 'flex-start',
+                          mb: 1.25,
+                          bgcolor: 'rgba(255,255,255,0.16)',
+                          color: '#fff',
+                          border: '1px solid rgba(255,255,255,0.18)',
+                        }}
+                      />
+                      <Typography sx={{ fontWeight: 800, fontSize: '1.1rem' }}>
+                        {item.title}
+                      </Typography>
+                      <Typography variant="caption" sx={{ mt: 0.5, color: alpha('#fff', 0.82), lineHeight: 1.7 }}>
+                        {item.caption}
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </Box>
+              ))}
+            </Carousel>
+          </Box>
+
+          <Box sx={{ mb: 5 }}>
+            <Typography variant="h5" sx={{ fontWeight: 800, mb: 2.5 }}>
+              Auto-Scrolling Archive Strip
+            </Typography>
+            <Carousel autoPlay interval={2600} ariaLabel="Full gallery archive strip">
+              {schoolContent.gallery.map((item) => (
+                <Box key={`strip-${item.title}`} data-carousel-item sx={{ width: { xs: 'min(82vw, 260px)', sm: 'min(280px, 72vw)' }, flexShrink: 0 }}>
+                  <Paper
+                    onClick={() => setActiveImage(item)}
+                    sx={{
+                      ...galleryCardSx(theme),
+                      cursor: 'pointer',
+                      p: 1.25,
+                    }}
+                  >
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      wrapperSx={{ borderRadius: 4 }}
+                      sx={{ height: 170, borderRadius: 4 }}
+                    />
+                    <Typography sx={{ mt: 1.5, fontWeight: 700, color: 'text.primary' }}>
+                      {item.title}
+                    </Typography>
+                  </Paper>
+                </Box>
+              ))}
+            </Carousel>
+          </Box>
+
+          <Grid container spacing={2.5}>
+            {schoolContent.gallery.map((item, index) => (
+              <Grid item xs={12} sm={6} xl={index % 5 === 0 ? 6 : 3} key={item.title}>
+                <Paper
                   onClick={() => setActiveImage(item)}
-                  className="group relative min-h-[260px] w-[300px] flex-shrink-0 overflow-hidden rounded-[2rem] border border-white/50 text-left shadow-card sm:w-[420px]"
+                  sx={{
+                    ...galleryCardSx(theme),
+                    cursor: 'pointer',
+                    transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 30px 60px -32px rgba(17, 26, 36, 0.3)',
+                    },
+                  }}
                 >
                   <OptimizedImage
                     src={item.image}
                     alt={item.title}
-                    wrapperClassName="absolute inset-0"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    wrapperSx={{}}
+                    sx={{ height: { xs: 220, sm: index % 5 === 0 ? 300 : 260 } }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-primary-900/54 to-transparent" />
-                  <div className="relative flex min-h-[260px] flex-col justify-end p-5 text-white">
-                    <span className="inline-flex w-fit rounded-full border border-white/16 bg-gradient-to-r from-white/14 to-skyback-light/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/92 backdrop-blur-sm">
-                      Featured
-                    </span>
-                    <h3 className="mt-3 text-xl font-bold uppercase">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/80">{item.caption}</p>
-                  </div>
-                </button>
-              ))}
-            </Carousel>
-          </div>
 
-          {/*
-            Intentionally disabled to avoid repeating the same student showcase
-            cards above the main gallery grid.
-          */}
-          {/* <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {schoolContent.studentShowcase.slice(0, 3).map((item) => (
-              <article key={item.title} className="relative overflow-hidden rounded-[1.8rem] border border-white/50 shadow-card">
-                <OptimizedImage
-                  src={item.image}
-                  alt={item.title}
-                  wrapperClassName="absolute inset-0"
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-primary-900/60 to-accent/10" />
-                <div className="relative flex min-h-[220px] flex-col justify-end p-5 text-white">
-                  <span className="inline-flex w-fit rounded-full border border-white/16 bg-white/16 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/95 backdrop-blur-sm">
-                    {item.badge}
-                  </span>
-                  <h3 className="mt-3 text-lg font-bold uppercase">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/86">{item.caption}</p>
-                </div>
-              </article>
+                  <Box sx={{ p: 2 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.75, lineHeight: 1.7 }}>
+                      {item.caption}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
             ))}
-          </div> */}
-
-          <div className="grid items-start grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {schoolContent.gallery.map((item, index) => (
-              <button
-                key={item.title}
-                type="button"
-                onClick={() => setActiveImage(item)}
-                className={`frost-card panel-hover self-start overflow-hidden rounded-[2rem] p-4 text-left ${index === 0 ? 'xl:col-span-2' : ''}`}
-              >
-                <OptimizedImage
-                  src={item.image}
-                  alt={item.title}
-                  wrapperClassName="rounded-[1.5rem]"
-                  className={`w-full rounded-[1.5rem] object-cover ${index === 0 ? 'h-[24rem]' : 'h-64'}`}
-                />
-                <div className="px-2 pb-2 pt-4">
-                  <h3 className="text-xl font-bold uppercase text-primary-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{item.caption}</p>
-                </div>
-              </button>
-            ))}
-          </div>
+          </Grid>
         </Container>
-      </section>
+      </Box>
 
-      {activeImage ? (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-primary-950/78 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-5xl rounded-[2rem] border border-white/10 bg-primary-950/88 p-4 shadow-card">
-            <button
-              type="button"
-              onClick={() => setActiveImage(null)}
-              aria-label="Close image preview"
-              className="focus-ring absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <OptimizedImage
-              src={activeImage.image}
-              alt={activeImage.title}
-              priority
-              wrapperClassName="rounded-[1.5rem]"
-              className="max-h-[78vh] w-full rounded-[1.5rem] object-contain"
-            />
-            <div className="px-2 pb-2 pt-4 text-white">
-              <h3 className="text-2xl font-bold uppercase">{activeImage.title}</h3>
-              <p className="mt-2 text-sm text-white/72">{activeImage.caption}</p>
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <Dialog open={!!activeImage} onClose={() => setActiveImage(null)} maxWidth="lg" fullWidth>
+        <Box sx={{ position: 'relative', p: 2 }}>
+          <IconButton
+            onClick={() => setActiveImage(null)}
+            sx={{ position: 'absolute', right: 10, top: 10, zIndex: 10 }}
+            aria-label="Close gallery image"
+          >
+            <CloseIcon />
+          </IconButton>
+
+          {activeImage ? (
+            <>
+              <OptimizedImage
+                src={activeImage.image}
+                alt={activeImage.title}
+                wrapperSx={{ borderRadius: 4, }}
+                sx={{ maxHeight: '75vh', objectFit: 'contain', borderRadius: 4, }}
+              />
+
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="h5" sx={{ fontWeight: 800 }}>
+                  {activeImage.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 0.75, lineHeight: 1.7 }}>
+                  {activeImage.caption}
+                </Typography>
+              </Box>
+            </>
+          ) : null}
+        </Box>
+      </Dialog>
     </>
   )
 }

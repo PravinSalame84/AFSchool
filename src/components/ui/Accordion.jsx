@@ -1,87 +1,124 @@
-import MuiAccordion from '@mui/material/Accordion'
-import MuiAccordionDetails from '@mui/material/AccordionDetails'
-import MuiAccordionSummary from '@mui/material/AccordionSummary'
-import Typography from '@mui/material/Typography'
-import { alpha } from '@mui/material/styles'
 import { useState } from 'react'
+import MuiAccordion from '@mui/material/Accordion'
+import MuiAccordionSummary from '@mui/material/AccordionSummary'
+import MuiAccordionDetails from '@mui/material/AccordionDetails'
+import Typography from '@mui/material/Typography'
+import { Box, useTheme, alpha } from '@mui/material'
 import { ChevronDown } from 'lucide-react'
 
-export default function Accordion({ items, allowMultiple = false }) {
+export default function Accordion({ items = [], allowMultiple = false }) {
+  const theme = useTheme()
   const [openIndexes, setOpenIndexes] = useState([0])
 
-  const toggle = (i) => {
+  const toggle = (index) => {
     setOpenIndexes((prev) => {
-      const isOpen = prev.includes(i)
+      const isOpen = prev.includes(index)
+
       if (allowMultiple) {
-        return isOpen ? prev.filter((x) => x !== i) : [...prev, i]
+        return isOpen ? prev.filter((i) => i !== index) : [...prev, index]
       }
-      return isOpen ? [] : [i]
+
+      return isOpen ? [] : [index]
     })
   }
 
+  const getBackground = () =>
+    theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(20,25,40,0.95), rgba(10,18,32,0.92))'
+      : 'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,248,255,0.9))'
+
   return (
-    <div className="overflow-hidden rounded-[2rem] shadow-card">
+    <Box
+      sx={{
+        borderRadius: 1,
+        overflow: 'hidden',
+        boxShadow: '0 18px 40px rgba(0,0,0,0.08)',
+      }}
+    >
       {items.map((item, i) => {
         const isOpen = openIndexes.includes(i)
+
         return (
           <MuiAccordion
             key={item.question}
             disableGutters
             expanded={isOpen}
             onChange={() => toggle(i)}
-            square={i !== 0 && i !== items.length - 1}
-            sx={(theme) => ({
-              borderRadius: i === 0 ? '2rem 2rem 0 0' : i === items.length - 1 ? '0 0 2rem 2rem' : 0,
-              overflow: 'hidden',
-              background:
-                theme.palette.mode === 'dark'
-                  ? 'linear-gradient(135deg, rgba(23,19,14,0.94), rgba(29,33,60,0.76))'
-                  : 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(250,244,220,0.82))',
-              border: `1px solid ${
-                theme.palette.mode === 'dark' ? alpha('#ffd707', 0.16) : alpha('#8a6742', 0.12)
-              }`,
+            square={false}
+            sx={{
+              background: getBackground(),
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
               boxShadow: 'none',
-              '&::before': {
-                display: 'none',
+              '&::before': { display: 'none' },
+              '& + &': { borderTop: 'none' },
+              transition: '0.25s ease',
+              '&:hover': {
+                borderColor: alpha(theme.palette.primary.main, 0.25),
               },
-              '& + &': {
-                borderTop: 'none',
-              },
-            })}
+            }}
           >
+            {/* SUMMARY */}
             <MuiAccordionSummary
               expandIcon={
-                <span
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
-                    isOpen
-                      ? 'border-airforce-gold/40 bg-gradient-to-br from-airforce-gold to-airforce-honey text-secondary dark:border-airforce-gold/30 dark:bg-gradient-to-br dark:from-airforce-gold dark:to-airforce-honey dark:text-secondary'
-                      : 'border-airforce-brown/16 bg-white/76 text-airforce-brown dark:border-airforce-gold/16 dark:bg-primary-900/70 dark:text-airforce-honey'
-                  }`}
+                <Box
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: '25%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: isOpen
+                      ? `linear-gradient(135deg, #f0a84b, #f7c56a)`
+                      : alpha(theme.palette.primary.main, 0.08),
+                    color: isOpen ? '#0b1f3a' : theme.palette.primary.main,
+                    transition: '0.25s ease',
+                  }}
                 >
-                  <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-                </span>
+                  <ChevronDown
+                    size={18}
+                    style={{
+                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: '0.25s ease',
+                    }}
+                  />
+                </Box>
               }
               sx={{
-                px: { xs: 2.5, sm: 3.5 },
-                py: 1.25,
+                px: 3,
+                py: 1.5,
                 minHeight: 'unset',
                 '& .MuiAccordionSummary-content': {
-                  my: 1,
+                  margin: 0,
                 },
               }}
             >
-              <Typography className="text-base font-semibold leading-relaxed text-airforce-brown dark:text-airforce-honey sm:text-lg">
+              <Typography
+                sx={{
+                  fontSize: { xs: 15, sm: 16 },
+                  fontWeight: 600,
+                  color: theme.palette.text.primary,
+                }}
+              >
                 {item.question}
               </Typography>
             </MuiAccordionSummary>
-            <MuiAccordionDetails sx={{ px: { xs: 2.5, sm: 3.5 }, pt: 0, pb: 3 }}>
-              <Typography className="text-[15px] leading-relaxed text-airforce-brown/82 dark:text-airforce-honey/84">
+
+            {/* DETAILS */}
+            <MuiAccordionDetails sx={{ px: 3, pb: 3, pt: 0 }}>
+              <Typography
+                sx={{
+                  fontSize: 14.5,
+                  lineHeight: 1.7,
+                  color: alpha(theme.palette.text.primary, 0.75),
+                }}
+              >
                 {item.answer}
               </Typography>
             </MuiAccordionDetails>
           </MuiAccordion>
         )
       })}
-    </div>
+    </Box>
   )
 }

@@ -1,22 +1,48 @@
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, BookOpenCheck, ClipboardPenLine, Dumbbell, Sparkles } from 'lucide-react'
+import {
+  ArrowUpRight,
+  BookOpenCheck,
+  ClipboardPenLine,
+  Dumbbell,
+  Sparkles,
+} from 'lucide-react'
+
+import {
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material'
+
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
+import OptimizedImage from '../components/ui/OptimizedImage'
+
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 
-const icons = [BookOpenCheck, ClipboardPenLine, Dumbbell, Sparkles]
+const icons = [
+  BookOpenCheck,
+  ClipboardPenLine,
+  Dumbbell,
+  Sparkles,
+]
 
 export default function Academics() {
   return (
     <>
       <Seo
         title="Academics"
-        description="Explore curriculum, co-curricular activity, sports and school learning culture at Air Force School, VayuSena Nagar, Nagpur."
+        description="Explore curriculum, co-curricular activity, sports and school learning culture at Air Force School."
         path="/academics"
         image={siteAssets.images.smartClassroom}
       />
+
       <PageHero
         crumb="Academics"
         eyebrow="Learning Experience"
@@ -25,80 +51,256 @@ export default function Academics() {
         image={siteAssets.images.smartClassroom}
       />
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="frost-card rounded-[2.2rem] p-8">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Academic Philosophy</p>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
-                Broad, well-balanced and relevant learning.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.academics.overview}</p>
+      <Box py={{ xs: 7, md: 8 }}>
+        <Container maxWidth="xl">
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                 {schoolContent.statistics.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 26 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    className="frost-card overflow-hidden rounded-[1.8rem] p-3"
+          <Grid container spacing={4}>
+
+            {/* LEFT */}
+
+            <Grid item xs={12} lg={5}>
+              <Card
+                elevation={3}
+                sx={{
+                  borderRadius: 4,
+                  height: '100%',
+                }}
+              >
+                <CardContent sx={{ p: { xs: 2.5, sm: 5 } }}>
+
+                  <Typography
+                    variant="overline"
+                    color="secondary.main"
+                    fontWeight={700}
+                    letterSpacing={2}
                   >
-                    <div className="grid gap-4 sm:grid-cols-[92px_1fr] sm:items-center">
-                      <OptimizedImage
-                        src={stat.image}
-                        alt={stat.label}
-                        wrapperClassName="rounded-[1.2rem]"
-                        className="h-24 w-full rounded-[1.2rem] object-cover"
-                      />
-                      <div className="px-2 py-2">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
-                        <p className="mt-2 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
-                        <p className="mt-2 text-xs leading-relaxed text-primary-600 dark:text-slate-300">{stat.caption}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                    Academic Philosophy
+                  </Typography>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {schoolContent.academics.programmes.map((item, index) => {
-                const Icon = icons[index]
-                return (
-                  <Link
-                    key={item.title}
-                    to={item.to}
-                    className={`frost-card panel-hover rounded-[1.9rem] p-6 ${index === 0 ? 'md:col-span-2' : ''}`}
+                  <Typography
+                    variant="h3"
+                    fontWeight={700}
+                    mt={1}
+                    sx={{ fontSize: { xs: '2rem', sm: '3rem' } }}
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-900 text-white dark:bg-white dark:text-primary-950">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <h3 className="mt-5 text-2xl font-bold uppercase leading-tight text-primary-900 dark:text-white">
-                          {item.title}
-                        </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{item.description}</p>
-                      </div>
-                      <ArrowUpRight className="mt-1 h-5 w-5 text-primary-300" />
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
+                    Broad, well-balanced and relevant learning.
+                  </Typography>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  <Typography
+                    mt={3}
+                    color="text.secondary"
+                    lineHeight={1.8}
+                  >
+                    {schoolContent.academics.overview}
+                  </Typography>
+
+                  <Grid
+                    container
+                    spacing={2}
+                    mt={3}
+                  >
+                    {schoolContent.statistics.map((stat, index) => (
+
+                      <Grid item key={stat.label} xs={12} sm={6}>
+
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{
+                            delay: index * .08,
+                          }}
+                        >
+                          <Card
+                            variant="outlined"
+                            sx={{
+                              borderRadius: 4,
+                              height: '100%',
+                            }}
+                          >
+                            <CardContent>
+
+                              <Grid
+                                container
+                                spacing={2}
+                                alignItems="center"
+                              >
+                                <Grid item xs={12} sm={4}>
+                                  <OptimizedImage
+                                    src={stat.image}
+                                    alt={stat.label}
+                                    wrapperSx={{ borderRadius: 4 }}
+                                    sx={{ height: 96, borderRadius: 4 }}
+                                  />
+                                </Grid>
+
+                                <Grid item xs={12} sm={8}>
+
+                                  <Typography
+                                    variant="caption"
+                                    color="primary"
+                                    fontWeight={700}
+                                  >
+                                    {stat.label}
+                                  </Typography>
+
+                                  <Typography
+                                    variant="h5"
+                                    fontWeight={700}
+                                    mt={1}
+                                  >
+                                    {stat.value}
+                                  </Typography>
+
+                                  <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    mt={1}
+                                  >
+                                    {stat.caption}
+                                  </Typography>
+
+                                </Grid>
+                              </Grid>
+
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+
+                      </Grid>
+
+                    ))}
+                  </Grid>
+
+                </CardContent>
+              </Card>
+            </Grid>
+
+            {/* RIGHT */}
+
+            <Grid item xs={12} lg={7}>
+
+              <Grid container spacing={3}>
+
+                {schoolContent.academics.programmes.map((item, index) => {
+
+                  const Icon = icons[index]
+
+                  return (
+
+                    <Grid item key={item.title} xs={12} md={index === 0 ? 12 : 6}>
+
+                      <Card
+                        component={Link}
+                        to={item.to}
+                        elevation={2}
+                        sx={{
+                          textDecoration: 'none',
+                          borderRadius: 4,
+                          transition: '.3s',
+                          height: '100%',
+                          '&:hover': {
+                            transform: 'translateY(-6px)',
+                            boxShadow: 8,
+                          },
+                        }}
+                      >
+                        <CardContent>
+
+                          <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            spacing={2}
+                            alignItems="flex-start"
+                          >
+                            <Paper
+                              elevation={0}
+                              sx={{
+                                width: 52,
+                                height: 52,
+                                borderRadius: 4,
+                                bgcolor: 'primary.main',
+                                color: '#fff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <Icon size={22} />
+                            </Paper>
+
+                            <ArrowUpRight size={20} />
+                          </Stack>
+
+                          <Typography
+                            variant="h5"
+                            fontWeight={700}
+                            mt={3}
+                            sx={{ fontSize: { xs: '1.15rem', sm: '1.5rem' } }}
+                          >
+                            {item.title}
+                          </Typography>
+
+                          <Typography
+                            mt={2}
+                            color="text.secondary"
+                          >
+                            {item.description}
+                          </Typography>
+
+                        </CardContent>
+                      </Card>
+
+                    </Grid>
+
+                  )
+                })}
+
+              </Grid>
+
+            </Grid>
+
+          </Grid>
+
+          {/* Facilities */}
+
+          <Grid
+            container
+            spacing={3}
+            mt={4}
+          >
+
             {schoolContent.facilities.map((facility) => (
-              <div key={facility} className="frost-card rounded-[1.8rem] p-6">
-                <p className="text-lg font-bold uppercase leading-tight text-primary-900 dark:text-white">{facility}</p>
-              </div>
+
+              <Grid item key={facility} xs={12} md={6} xl={4}>
+
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 4,
+                    height: '100%',
+                  }}
+                >
+                  <CardContent>
+
+                    <Typography
+                      variant="h6"
+                      fontWeight={700}
+                    >
+                      {facility}
+                    </Typography>
+
+                  </CardContent>
+                </Card>
+
+              </Grid>
+
             ))}
-          </div>
+
+          </Grid>
+
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

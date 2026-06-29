@@ -1,15 +1,16 @@
-const tones = {
-  accent: 'text-accent',
-  saffron: 'text-airforce-saffron dark:text-airforce-gold',
-  cyan: 'text-airforce-cyan dark:text-airforce-gold',
-  gold: 'text-airforce-gold',
-  light: 'text-white/60',
-}
+import Typography from '@mui/material/Typography'
 
-export default function Eyebrow({ children, tone = 'accent', className = '', as: Tag = 'p' }) {
+export default function Eyebrow({ children }) {
   return (
-    <Tag className={`text-sm font-bold uppercase tracking-[0.28em] ${tones[tone] ?? tones.accent} ${className}`}>
+    <Typography
+      variant="overline"
+      sx={{
+        letterSpacing: '0.28em',
+        fontWeight: 800,
+        color: 'secondary.main',
+      }}
+    >
       {children}
-    </Tag>
+    </Typography>
   )
 }

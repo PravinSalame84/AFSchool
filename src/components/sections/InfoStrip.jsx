@@ -1,55 +1,122 @@
-import { ClipboardList, Wallet, MapPinned, MailQuestion } from 'lucide-react'
-import Container from '../ui/Container'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import { Box, Container, Grid, Paper, Typography, IconButton, useTheme, alpha } from '@mui/material'
+import { useMemo } from 'react'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
-const items = [
-  { icon: ClipboardList, label: 'Admission Process', to: '/admissions' },
-  { icon: Wallet, label: 'Fee Structure', to: '/admissions#fees' },
-  { icon: MapPinned, label: 'Locations', to: '/locations' },
-  { icon: MailQuestion, label: 'Enquiry Form', action: 'enquiry' },
-]
+import { ClipboardList, Wallet, MapPinned, MailQuestion } from 'lucide-react'
 
 export default function InfoStrip() {
+  const theme = useTheme()
   const { openEnquiry } = useEnquiryModal()
 
+  const items = useMemo(
+    () => [
+      { icon: ClipboardList, label: 'Admission Process', to: '/admissions' },
+      { icon: Wallet, label: 'Fee Structure', to: '/admissions#fees' },
+      { icon: MapPinned, label: 'Locations', to: '/locations' },
+      { icon: MailQuestion, label: 'Enquiry Form', action: true },
+    ],
+    []
+  )
+
   return (
-    <section className="bg-skyback-soft pb-2">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <RevealOnScroll>
-          <div className="grid grid-cols-2 gap-4 rounded-xl2 bg-white p-4 shadow-soft sm:grid-cols-4 sm:p-6">
+    <Box
+      component="section"
+      sx={{
+        bgcolor: alpha(theme.palette.primary.main, 0.03),
+        pb: 1,
+      }}
+    >
+      <Container maxWidth="lg">
+        <Paper
+          elevation={0}
+          sx={{
+            borderRadius: 4,
+            p: { xs: 2, sm: 3 },
+            background: theme.palette.background.paper,
+            boxShadow: theme.shadows[1],
+          }}
+        >
+          <Grid container spacing={2}>
             {items.map(({ icon: Icon, label, to, action }) => {
-              const inner = (
-                <>
-                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-skyback-soft text-primary-700 transition group-hover:bg-accent group-hover:text-white">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="text-sm font-semibold text-primary-800">{label}</span>
-                </>
+              const iconBox = (
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '25%',
+                    bgcolor: alpha(theme.palette.primary.main, 0.08),
+                    color: 'primary.main',
+                    transition: 'all 0.2s ease',
+                    '.MuiBox-root:hover &': {
+                      bgcolor: 'primary.main',
+                      color: '#fff',
+                    },
+                  }}
+                >
+                  <Icon size={18} />
+                </Box>
               )
-              return action ? (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => openEnquiry('General Enquiry')}
-                  className="focus-ring group flex items-center gap-3 rounded-xl p-2 text-left transition hover:bg-skyback-soft"
-                >
-                  {inner}
-                </button>
-              ) : (
-                <Link
-                  key={label}
-                  to={to}
-                  className="focus-ring group flex items-center gap-3 rounded-xl p-2 transition hover:bg-skyback-soft"
-                >
-                  {inner}
-                </Link>
+
+              const content = (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  {iconBox}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 600,
+                      color: 'text.primary',
+                    }}
+                  >
+                    {label}
+                  </Typography>
+                </Box>
+              )
+
+              return (
+                <Grid item xs={6} sm={3} key={label}>
+                  {action ? (
+                    <Box
+                      onClick={() => openEnquiry('General Enquiry')}
+                      sx={{
+                        cursor: 'pointer',
+                        p: 1,
+                        borderRadius: 4,
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          bgcolor: alpha(theme.palette.primary.main, 0.05),
+                        },
+                      }}
+                    >
+                      {content}
+                    </Box>
+                  ) : (
+                    <Box
+                      component={RouterLink}
+                      to={to}
+                      sx={{
+                        textDecoration: 'none',
+                        display: 'block',
+                        p: 1,
+                        borderRadius: 4,
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          bgcolor: alpha(theme.palette.primary.main, 0.05),
+                        },
+                      }}
+                    >
+                      {content}
+                    </Box>
+                  )}
+                </Grid>
               )
             })}
-          </div>
-        </RevealOnScroll>
+          </Grid>
+        </Paper>
       </Container>
-    </section>
+    </Box>
   )
 }

@@ -1,18 +1,94 @@
 import { Link as RouterLink } from 'react-router-dom'
+import { Button, alpha, useTheme } from '@mui/material'
 
-const variants = {
-  footerSoft:
-    'focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-airforce-gold/34 hover:bg-gradient-to-r hover:from-airforce-gold/20 hover:to-airforce-honey/16 hover:text-airforce-gold',
-  footerText:
-    'focus-ring inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm text-white/82 transition hover:bg-gradient-to-r hover:from-airforce-gold/22 hover:to-airforce-honey/16 hover:text-airforce-gold',
-  topbarSolid:
-    'focus-ring rounded-full bg-gradient-to-r from-secondary to-primary-700 px-4 py-1.5 text-[11px] text-white transition hover:from-airforce-gold hover:to-airforce-honey hover:text-secondary dark:bg-white dark:text-primary-950',
-  topbarText:
-    'focus-ring flex items-center gap-1.5 transition hover:text-airforce-gold dark:hover:text-airforce-gold',
-  contactSolid:
-    'focus-ring inline-flex items-center gap-2 rounded-full bg-primary-900 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-gradient-to-r hover:from-airforce-gold hover:to-airforce-honey hover:text-secondary dark:bg-white dark:text-primary-950',
-  contactOutline:
-    'focus-ring inline-flex items-center gap-2 rounded-full border border-primary-900/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-primary-800 transition hover:border-airforce-gold/34 hover:bg-gradient-to-r hover:from-airforce-gold/20 hover:to-airforce-honey/16 hover:text-airforce-brown dark:border-white/10 dark:text-white dark:hover:text-airforce-gold',
+const getVariantStyles = (theme, variant) => {
+  const gold = '#f0a84b'
+  const honey = '#f7c56a'
+  const navy = theme.palette.primary.main
+
+  const base = {
+    borderRadius: 4,
+    textTransform: 'uppercase',
+    fontWeight: 700,
+    letterSpacing: '0.14em',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 1,
+    transition: '0.25s ease',
+  }
+
+  const variants = {
+    footerSoft: {
+      color: alpha('#fff', 0.82),
+      fontSize: 12,
+      px: 2,
+      py: 1,
+      border: `1px solid ${alpha('#fff', 0.14)}`,
+      background: `linear-gradient(90deg, ${alpha('#fff', 0.12)}, ${alpha('#fff', 0.06)})`,
+      '&:hover': {
+        borderColor: alpha(gold, 0.5),
+        background: `linear-gradient(90deg, ${alpha(gold, 0.2)}, ${alpha(honey, 0.15)})`,
+        color: gold,
+      },
+    },
+
+    footerText: {
+      color: alpha('#fff', 0.82),
+      fontSize: 13,
+      px: 1,
+      py: 0.5,
+      '&:hover': {
+        background: `linear-gradient(90deg, ${alpha(gold, 0.22)}, ${alpha(honey, 0.15)})`,
+        color: gold,
+      },
+    },
+
+    topbarSolid: {
+      fontSize: 11,
+      px: 2,
+      py: 0.8,
+      color: '#fff',
+      background: `linear-gradient(90deg, ${theme.palette.secondary.main}, ${navy})`,
+      '&:hover': {
+        background: `linear-gradient(90deg, ${gold}, ${honey})`,
+        color: '#0b1f3a',
+      },
+    },
+
+    topbarText: {
+      fontSize: 12,
+      color: theme.palette.text.primary,
+      '&:hover': { color: gold },
+    },
+
+    contactSolid: {
+      fontSize: 12,
+      px: 2,
+      py: 1,
+      color: '#fff',
+      background: navy,
+      '&:hover': {
+        background: `linear-gradient(90deg, ${gold}, ${honey})`,
+        color: '#0b1f3a',
+      },
+    },
+
+    contactOutline: {
+      fontSize: 12,
+      px: 2,
+      py: 1,
+      color: theme.palette.text.primary,
+      border: `1px solid ${alpha(navy, 0.12)}`,
+      background: 'transparent',
+      '&:hover': {
+        borderColor: alpha(gold, 0.5),
+        background: `linear-gradient(90deg, ${alpha(gold, 0.2)}, ${alpha(honey, 0.15)})`,
+        color: '#0b1f3a',
+      },
+    },
+  }
+
+  return { ...base, ...(variants[variant] || variants.footerSoft) }
 }
 
 export default function ActionPill({
@@ -21,44 +97,53 @@ export default function ActionPill({
   href,
   onClick,
   icon: Icon,
-  className = '',
   variant = 'footerSoft',
+  sx,
   ...rest
 }) {
+  const theme = useTheme()
+
+  const style = getVariantStyles(theme, variant)
+
   const content = (
     <>
-      {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
+      {Icon && <Icon size={14} />}
       {children}
     </>
   )
 
-  const classes = `${variants[variant] ?? variants.footerSoft} ${className}`
+  const commonProps = {
+    sx: { ...style, ...sx },
+    ...rest,
+  }
 
   if (to) {
     return (
-      <RouterLink to={to} className={classes} {...rest}>
+      <Button component={RouterLink} to={to} {...commonProps}>
         {content}
-      </RouterLink>
+      </Button>
     )
   }
 
   if (href) {
-    const external = /^https?:/.test(href)
+    const external = href.startsWith('http')
+
     return (
-      <a
+      <Button
+        component="a"
         href={href}
-        className={classes}
-        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-        {...rest}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        {...commonProps}
       >
         {content}
-      </a>
+      </Button>
     )
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes} {...rest}>
+    <Button onClick={onClick} {...commonProps}>
       {content}
-    </button>
+    </Button>
   )
 }

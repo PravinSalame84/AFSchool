@@ -1,56 +1,159 @@
-import Container from '../ui/Container'
-import SectionHeading from '../ui/SectionHeading'
-import Card from '../ui/Card'
-import BlobIcon from '../ui/BlobIcon'
+import { Box, Container, Typography, Card, CardContent, Stack, Button, useTheme, alpha } from '@mui/material'
+import { Link } from 'react-router-dom'
+
 import Carousel from '../ui/Carousel'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import initiatives from '../../data/initiatives'
 
-const iconForImage = {
-  campus: 'Building2',
-  partnership: 'Handshake',
-  preschool: 'School',
-  toddler: 'Baby',
-  college: 'GraduationCap',
-  training: 'Lightbulb',
-  tours: 'Plane',
+import {
+  Building2,
+  Handshake,
+  School,
+  Baby,
+  GraduationCap,
+  Lightbulb,
+  Plane,
+  Sparkles,
+} from 'lucide-react'
+
+const iconMap = {
+  campus: Building2,
+  partnership: Handshake,
+  preschool: School,
+  toddler: Baby,
+  college: GraduationCap,
+  training: Lightbulb,
+  tours: Plane,
 }
 
-const iconTones = ['primary', 'accent', 'success', 'earth', 'slate', 'dark']
+const toneColors = [
+  '#0d47a1', // navy
+  '#f59e0b', // accent gold
+  '#2e7d32', // green
+  '#6d4c41', // earth
+  '#546e7a', // slate
+  '#1e293b', // dark
+]
 
 export default function Initiatives() {
+  const theme = useTheme()
+
   return (
-    <section className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 6, md: 10 },
+        bgcolor: alpha(theme.palette.primary.main, 0.03),
+      }}
+    >
+      <Container maxWidth="lg">
+        {/* Heading */}
         <RevealOnScroll>
-          <SectionHeading
-            eyebrow="Beyond the Classroom"
-            title="Airforce School Initiatives"
-            subtitle="A family of ventures, each built to support a different stage of the learning journey."
-          />
+          <Box sx={{ mb: 6 }}>
+            <Typography variant="overline" color="primary.main" fontWeight={800}>
+              Beyond the Classroom
+            </Typography>
+
+            <Typography variant="h4" fontWeight={900} sx={{ mt: 1 }}>
+              Airforce School Initiatives
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{
+                mt: 2,
+                maxWidth: 650,
+                color: alpha(theme.palette.text.secondary, 0.85),
+              }}
+            >
+              A family of ventures, each built to support a different stage of the learning journey.
+            </Typography>
+          </Box>
         </RevealOnScroll>
 
-        <div className="mt-10">
-          <Carousel ariaLabel="Airforce School initiatives">
-            {initiatives.map((item, index) => (
-              <div key={item.title} data-carousel-item className="w-[280px] flex-shrink-0 snap-start sm:w-[320px]">
-                <Card className="flex h-full flex-col p-7">
-                  <BlobIcon
-                    icon={iconForImage[item.image] || 'Sparkles'}
-                    tone={iconTones[index % iconTones.length]}
-                    size={72}
-                  />
-                  <h3 className="mt-5 text-base font-bold text-primary-900">{item.title}</h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-primary-500">{item.description}</p>
-                  <a href={item.href} className="focus-ring mt-4 text-sm font-bold text-accent-dark hover:underline">
-                    Read More &rarr;
-                  </a>
+        {/* Carousel */}
+        <Carousel ariaLabel="Airforce School initiatives">
+          {initiatives.map((item, index) => {
+            const Icon = iconMap[item.image] || Sparkles
+            const tone = toneColors[index % toneColors.length]
+
+            return (
+              <Box
+                key={item.title}
+                data-carousel-item
+                sx={{
+                  width: { xs: 'min(84vw, 290px)', sm: 320 },
+                  flexShrink: 0,
+                }}
+              >
+                <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: 4,
+                    boxShadow: 2,
+                    transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: 6,
+                    },
+                  }}
+                >
+                  <CardContent>
+                    <Stack spacing={2.5}>
+                      {/* Icon */}
+                      <Box
+                        sx={{
+                          width: 56,
+                          height: 56,
+                          borderRadius: 4,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          background: alpha(tone, 0.12),
+                          color: tone,
+                        }}
+                      >
+                        <Icon size={24} />
+                      </Box>
+
+                      {/* Title */}
+                      <Typography variant="h6" fontWeight={800}>
+                        {item.title}
+                      </Typography>
+
+                      {/* Description */}
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          flex: 1,
+                          color: alpha(theme.palette.text.secondary, 0.9),
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {item.description}
+                      </Typography>
+
+                      {/* Link */}
+                      <Button
+                        component={Link}
+                        to={item.href}
+                        size="small"
+                        sx={{
+                          alignSelf: 'flex-start',
+                          fontWeight: 700,
+                          textTransform: 'none',
+                        }}
+                      >
+                        Read More →
+                      </Button>
+                    </Stack>
+                  </CardContent>
                 </Card>
-              </div>
-            ))}
-          </Carousel>
-        </div>
+              </Box>
+            )
+          })}
+        </Carousel>
       </Container>
-    </section>
+    </Box>
   )
 }

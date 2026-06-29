@@ -1,41 +1,52 @@
 import IconButton from '@mui/material/IconButton'
-import { alpha } from '@mui/material/styles'
+import { alpha, useTheme } from '@mui/material/styles'
 import { MoonStar, SunMedium } from 'lucide-react'
-import { useTheme } from '../../context/ThemeContext'
+import { useTheme as useAppTheme } from '../../context/ThemeContext'
 
 export default function ThemeToggle({ className = '' }) {
-  const { isDark, toggleTheme } = useTheme()
+  const { isDark, toggleTheme } = useAppTheme()
+  const theme = useTheme()
 
   return (
     <IconButton
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       className={className}
-      sx={(theme) => ({
-        height: 44,
-        width: 44,
-        border: `1px solid ${
-          theme.palette.mode === 'dark' ? alpha('#ffffff', 0.1) : alpha('#ffffff', 0.6)
-        }`,
+      sx={{
+        height: 46,
+        width: 46,
         borderRadius: '999px',
-        color: theme.palette.mode === 'dark' ? '#ffffff' : '#1d213c',
+        color: isDark ? '#EAF2FF' : theme.palette.primary.main,
+
         background:
-          theme.palette.mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(14,20,24,0.9), rgba(29,33,60,0.8))'
-            : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(228,246,251,0.8))',
-        boxShadow: '0 10px 28px rgba(17, 35, 56, 0.1)',
-        backdropFilter: 'blur(16px)',
-        transition: 'transform 0.2s ease, background 0.2s ease',
+          isDark
+            ? `linear-gradient(135deg, ${alpha('#0B1B2B', 0.95)}, ${alpha('#1E3A5F', 0.75)})`
+            : `linear-gradient(135deg, #FFFFFF, ${alpha('#4FA3D1', 0.12)})`,
+
+        border: `1px solid ${
+          isDark ? alpha('#ffffff', 0.08) : alpha(theme.palette.primary.main, 0.15)
+        }`,
+
+        boxShadow: isDark
+          ? '0 10px 30px rgba(0,0,0,0.35)'
+          : '0 10px 25px rgba(30,58,95,0.12)',
+
+        backdropFilter: 'blur(14px)',
+        transition: 'all 0.25s ease',
+
         '&:hover': {
-          transform: 'translateY(-2px)',
-          background:
-            theme.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, rgba(18,28,42,0.95), rgba(41,57,70,0.86))'
-              : 'linear-gradient(135deg, rgba(255,255,255,1), rgba(228,246,251,1))',
+          transform: 'translateY(-2px) scale(1.03)',
+          boxShadow: isDark
+            ? '0 14px 40px rgba(0,0,0,0.45)'
+            : '0 14px 35px rgba(30,58,95,0.18)',
         },
-      })}
+      }}
     >
-      {isDark ? <SunMedium className="h-4.5 w-4.5" /> : <MoonStar className="h-4.5 w-4.5" />}
+      {isDark ? (
+        <SunMedium size={18} />
+      ) : (
+        <MoonStar size={18} />
+      )}
     </IconButton>
   )
 }

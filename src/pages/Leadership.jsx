@@ -1,110 +1,255 @@
-import { Link } from 'react-router-dom'
-import { ArrowUpRight, FileText, ShieldCheck, Users2 } from 'lucide-react'
+import { Link as RouterLink } from 'react-router-dom'
+
+import {
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+  Stack,
+  Button,
+  Chip,
+} from '@mui/material'
+
+import {
+  Shield,
+  ArrowUpward,
+  Groups,
+  Description,
+} from '@mui/icons-material'
+
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 
+/* ---------------- PAGE ---------------- */
 export default function Leadership() {
   return (
     <>
+      {/* SEO */}
       <Seo
         title="Leadership & Governance"
-        description="Explore management committee, school information, staff details, annual report and governance resources for Air Force School, VayuSena Nagar, Nagpur."
+        description="School governance and leadership information."
         path="/leadership"
         image={siteAssets.images.chief}
       />
+
+      {/* HERO */}
       <PageHero
         crumb="Leadership"
         eyebrow="Leadership & Governance"
-        title="Institutional transparency, governance and school leadership access."
-        subtitle="Families can view official governance, staff and institutional resources through the school’s published information channels."
+        title="Institutional transparency and governance access"
+        subtitle="Official leadership and governance resources for stakeholders"
         image={siteAssets.images.chief}
       />
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="frost-card rounded-[2.2rem] p-8">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-900 text-white dark:bg-white dark:text-primary-950">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <p className="mt-5 text-sm font-bold uppercase tracking-[0.28em] text-accent">Governance Overview</p>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
-                School leadership information organised for parents and stakeholders.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.leadership.intro}</p>
-              <div className="mt-8 rounded-[1.8rem] bg-primary-900 p-5 text-white dark:bg-primary-950/90">
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Published Through Local Resources</p>
-                <ul className="mt-4 space-y-2 text-sm text-white/80">
-                  <li>School Management Committee details</li>
-                  <li>School Information and institutional profile</li>
-                  <li>Staff details and annual report links</li>
-                  <li>Transfer certificate resource reference</li>
-                </ul>
-              </div>
-            </div>
+      {/* ---------------- MAIN ---------------- */}
+      <Box sx={{ py: 6 }}>
+        <Container maxWidth="lg">
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {schoolContent.leadership.resources.map((resource, index) => (
-                <Link
-                  key={resource.title}
-                  to={resource.to}
-                  className={`frost-card panel-hover rounded-[1.9rem] p-6 ${index === 0 ? 'md:col-span-2' : ''}`}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary-400">Official Resource</p>
-                      <h3 className="mt-3 text-2xl font-bold uppercase leading-tight text-primary-900 dark:text-white">
-                        {resource.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{resource.description}</p>
-                    </div>
-                    <ArrowUpRight className="mt-1 h-5 w-5 text-primary-300" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <Grid container spacing={4}>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="frost-card rounded-[2rem] p-6">
-              <div className="flex items-center gap-3">
-                <Users2 className="h-5 w-5 text-accent" />
-                <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Administrative Contacts</h3>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">
-                Admin support number published by the school: <span className="font-semibold text-primary-800 dark:text-white">{schoolContent.contact.adminPhone}</span>
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-primary-600 dark:text-slate-300">
-                {schoolContent.contact.adminRoles.map((role) => (
-                  <li key={role} className="rounded-[1rem] border border-primary-900/8 bg-white/75 px-4 py-3 dark:border-white/10 dark:bg-primary-950/70">
-                    {role}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="frost-card rounded-[2rem] p-6">
-              <div className="flex items-center gap-3">
-                <FileText className="h-5 w-5 text-accent" />
-                <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Compliance & Reporting</h3>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">
-                Mandatory public disclosure, annual reporting and institutional documents are now maintained inside this site for easier stakeholder access.
-              </p>
-              <Link
-                to="/mandatory-disclosure"
-                className="focus-ring mt-6 inline-flex items-center gap-2 rounded-full bg-primary-900 px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary-800 dark:bg-white dark:text-primary-950"
+            {/* LEFT PANEL */}
+            <Grid item xs={12} md={5}>
+              <Paper
+                elevation={2}
+                sx={{ p: { xs: 2.5, sm: 4 }, borderRadius: 4, height: '100%' }}
               >
-                Open Mandatory Disclosure
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
+                {/* ICON */}
+                <Box
+                  sx={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 4,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: 'primary.main',
+                    color: 'white',
+                  }}
+                >
+                  <Shield />
+                </Box>
+
+                {/* TAG */}
+                <Typography
+                  variant="overline"
+                  color="primary"
+                  sx={{ mt: 3, display: 'block' }}
+                >
+                  Governance Overview
+                </Typography>
+
+                {/* TITLE */}
+                <Typography variant="h4" fontWeight={800} sx={{ mt: 2, fontSize: { xs: '1.7rem', sm: '2.125rem' } }}>
+                  Leadership information for parents & stakeholders
+                </Typography>
+
+                {/* INTRO */}
+                <Typography variant="body2" sx={{ mt: 3, color: 'text.secondary' }}>
+                  {schoolContent.leadership.intro}
+                </Typography>
+
+                {/* INFO BOX */}
+                <Paper
+                  elevation={0}
+                  sx={{
+                    mt: 4,
+                    p: 3,
+                    borderRadius: 4,
+                    bgcolor: 'primary.main',
+                    color: 'white',
+                  }}
+                >
+                  <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                    Published Resources
+                  </Typography>
+
+                  <Stack spacing={1.5} mt={2}>
+                    <Typography variant="body2">
+                      • School Management Committee details
+                    </Typography>
+                    <Typography variant="body2">
+                      • Institutional profile & information
+                    </Typography>
+                    <Typography variant="body2">
+                      • Staff details & annual reports
+                    </Typography>
+                    <Typography variant="body2">
+                      • Transfer certificate references
+                    </Typography>
+                  </Stack>
+                </Paper>
+              </Paper>
+            </Grid>
+
+            {/* RIGHT PANEL */}
+            <Grid item xs={12} md={7}>
+              <Grid container spacing={3}>
+                {schoolContent.leadership.resources.map((resource, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={index === 0 ? 12 : 6}
+                    key={resource.title}
+                  >
+                    <Paper
+                      component={RouterLink}
+                      to={resource.to}
+                      elevation={2}
+                      sx={{
+                        p: 3,
+                        borderRadius: 4,
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        display: 'block',
+                        transition: '0.3s',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                        },
+                      }}
+                    >
+                      <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        justifyContent="space-between"
+                        spacing={2}
+                        alignItems={{ xs: 'flex-start', sm: 'flex-start' }}
+                      >
+                        <Box>
+                          <Chip
+                            label="Official Resource"
+                            size="small"
+                            sx={{ mb: 1 }}
+                          />
+
+                          <Typography variant="h6" fontWeight={800}>
+                            {resource.title}
+                          </Typography>
+
+                          <Typography
+                            variant="body2"
+                            sx={{ mt: 1, color: 'text.secondary' }}
+                          >
+                            {resource.description}
+                          </Typography>
+                        </Box>
+
+                        <ArrowUpward color="action" />
+                      </Stack>
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {/* ---------------- BOTTOM SECTION ---------------- */}
+          <Grid container spacing={3} sx={{ mt: 5 }}>
+
+            {/* ADMIN CONTACTS */}
+            <Grid item xs={12} md={6}>
+              <Paper sx={{ p: 3, borderRadius: 4 }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ xs: 'flex-start', sm: 'center' }}>
+                  <Groups color="primary" />
+                  <Typography variant="h6" fontWeight={800}>
+                    Administrative Contacts
+                  </Typography>
+                </Stack>
+
+                <Typography variant="body2" sx={{ mt: 2 }}>
+                  Admin Phone:{' '}
+                  <strong>{schoolContent.contact.adminPhone}</strong>
+                </Typography>
+
+                <Stack spacing={1.5} mt={2}>
+                  {schoolContent.contact.adminRoles.map((role) => (
+                    <Paper
+                      key={role}
+                      variant="outlined"
+                      sx={{ p: 2, borderRadius: 3 }}
+                    >
+                      <Typography variant="body2">{role}</Typography>
+                    </Paper>
+                  ))}
+                </Stack>
+              </Paper>
+            </Grid>
+
+            {/* COMPLIANCE */}
+            <Grid item xs={12} md={6}>
+              <Paper sx={{ p: 3, borderRadius: 4, height: '100%' }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ xs: 'flex-start', sm: 'center' }}>
+                  <Description color="primary" />
+                  <Typography variant="h6" fontWeight={800}>
+                    Compliance & Reporting
+                  </Typography>
+                </Stack>
+
+                <Typography variant="body2" sx={{ mt: 2, color: 'text.secondary' }}>
+                  Mandatory disclosures and institutional reports are available
+                  for public access.
+                </Typography>
+
+                <Button
+                  component={RouterLink}
+                  to="/mandatory-disclosure"
+                  variant="contained"
+                  endIcon={<ArrowUpward />}
+                  sx={{
+                    mt: 3,
+                    borderRadius: 4,
+                    fontWeight: 700,
+                    width: { xs: '100%', sm: 'auto' },
+                  }}
+                >
+                  Open Mandatory Disclosure
+                </Button>
+              </Paper>
+            </Grid>
+          </Grid>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

@@ -269,18 +269,18 @@ const schoolContent = {
 
   notices: [
     {
-      title: 'Class VI To XII Summer Holiday Homework 2024-25',
+      title: 'Class VI To XII Summer Holiday Homework 2026-27',
       category: 'Notice',
       date: 'May 2024',
-      to: '/updates/class-6-to-12-summer-holiday-homework-2024-25',
+      to: '/updates/class-6-to-12-summer-holiday-homework-2026-27',
       excerpt: 'Published holiday homework guidance for students in middle and senior classes.',
     },
     {
-      title: 'Book List 2024-25',
+      title: 'Book List 2026-27',
       category: 'Download',
       date: 'March 2024',
-      to: '/updates/book-list-2024-25',
-      excerpt: 'Reference the official book list for the academic session 2024-25.',
+      to: '/updates/book-list-2026-27',
+      excerpt: 'Reference the official book list for the academic session 2026-27.',
     },
     {
       title: 'School Calendar 2024-2025',
@@ -290,17 +290,17 @@ const schoolContent = {
       excerpt: 'Academic session calendar and key dates for the school year.',
     },
     {
-      title: 'Primary Summer Holiday Homework 2024-25',
+      title: 'Primary Summer Holiday Homework 2026-27',
       category: 'Notice',
       date: 'May 2024',
-      to: '/updates/primary-summer-holiday-homework-2024-25',
+      to: '/updates/primary-summer-holiday-homework-2026-27',
       excerpt: 'Primary section holiday homework information and class preparation support.',
     },
     {
-      title: 'Pre-Primary Activities 2023-24',
+      title: 'Pre-Primary Activities 2025-26',
       category: 'Event',
-      date: '2023-24',
-      to: '/updates/pre-primary-activities-2023-24',
+      date: '2025-26',
+      to: '/updates/pre-primary-activities-2025-26',
       excerpt: 'Highlights from pre-primary student participation and school activity.',
     },
     {
@@ -314,9 +314,9 @@ const schoolContent = {
 
   events: [
     {
-      title: 'Pre-Primary Activities 2023-24',
-      date: 'Academic Session 2023-24',
-      to: '/updates/pre-primary-activities-2023-24',
+      title: 'Pre-Primary Activities 2025-26',
+      date: 'Academic Session 2025-26',
+      to: '/updates/pre-primary-activities-2025-26',
     },
     {
       title: 'Mandatory Public Disclosure',
@@ -327,12 +327,12 @@ const schoolContent = {
 
   downloads: [
     {
-      label: 'CCA Calendar 2023-24',
+      label: 'CCA Calendar 2025-26',
       href: siteAssets.downloads.ccaCalendar,
       category: 'Calendar',
     },
     {
-      label: 'Primary Summer Holiday Homework 2024-25',
+      label: 'Primary Summer Holiday Homework 2026-27',
       href: siteAssets.downloads.primaryHomework,
       category: 'Homework',
     },
@@ -347,7 +347,7 @@ const schoolContent = {
       category: 'Book List',
     },
     {
-      label: 'Class VI To XII Summer Holiday Homework 2024-25',
+      label: 'Class VI To XII Summer Holiday Homework 2026-27',
       href: siteAssets.downloads.class6To12Homework,
       category: 'Homework',
     },
@@ -539,6 +539,11 @@ const schoolContent = {
       to: '/new-academic-session-2024-2025',
       description: 'Session-specific guidance and essential files.',
     },
+    {
+      label: 'Careers',
+      to: '/careers',
+      description: 'Teaching and administrative opportunities when published.',
+    },
   ],
 
   quickLinks: [
@@ -579,6 +584,7 @@ const schoolContent = {
     { group: 'Pages', label: 'Notice Board', to: '/notice-board', description: 'Latest notices and updates.' },
     { group: 'Pages', label: 'Downloads', to: '/downloads', description: 'Homework, calendars and published files.' },
     { group: 'Pages', label: 'Gallery', to: '/gallery', description: 'Campus photo highlights.' },
+    { group: 'Pages', label: 'Careers', to: '/careers', description: 'Recruitment and future openings page.' },
     { group: 'Pages', label: 'Contact', to: '/contact', description: 'Campus address, map and enquiry support.' },
     { group: 'Resources', label: 'Mandatory Public Disclosure', to: '/mandatory-disclosure', description: 'Compliance and disclosure-style school information.' },
     { group: 'Resources', label: 'Parent Corner', to: '/parent-corner', description: 'Parent-facing information and resources.' },

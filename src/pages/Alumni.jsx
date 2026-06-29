@@ -1,14 +1,25 @@
 import { Quote } from 'lucide-react'
+import {
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  Button,
+  useTheme,
+  alpha,
+} from '@mui/material'
+
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
-import Button from '../components/ui/Button'
 import testimonials from '../data/testimonials'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 
 export default function Alumni() {
   const { openEnquiry } = useEnquiryModal()
+  const theme = useTheme()
 
   return (
     <>
@@ -16,40 +27,99 @@ export default function Alumni() {
         crumb="Alumni"
         eyebrow="Stay Connected"
         title="The Airforce School Alumni Community"
-        subtitle="Thousands of graduates, one shared foundation. Hear what life after Airforce School looks like."
+        subtitle="Thousands of graduates, one shared foundation."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <Box sx={{ py: 8, bgcolor: 'background.default' }}>
+        <Container>
+          {/* Testimonials Grid */}
+          <Grid container spacing={3}>
             {testimonials.map((t, i) => (
-              <RevealOnScroll key={t.name} delay={i * 90}>
-                <div className="h-full rounded-xl2 bg-white p-7 shadow-soft">
-                  <Quote className="h-7 w-7 text-accent" />
-                  <p className="mt-4 text-[15px] leading-relaxed text-primary-700">"{t.quote}"</p>
-                  <p className="mt-5 text-sm font-bold text-primary-900">{t.name}</p>
-                  <p className="text-xs text-primary-400">{t.batch}</p>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+              <Grid item xs={12} sm={6} key={t.name}>
+                <RevealOnScroll delay={i * 80}>
+                  <Paper
+                    elevation={0}
+                    sx={{
+                      p: 3,
+                      borderRadius: 4,
+                      height: '100%',
+                      border: `1px solid ${alpha('#1d213c', 0.08)}`,
+                      transition: '0.25s ease',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: 6,
+                      },
+                    }}
+                  >
+                    <Stack spacing={2}>
+                      <Quote size={22} color={theme.palette.secondary.main} />
 
+                      <Typography
+                        sx={{
+                          fontSize: 15,
+                          lineHeight: 1.7,
+                          color: 'text.primary',
+                        }}
+                      >
+                        “{t.quote}”
+                      </Typography>
+
+                      <Box>
+                        <Typography fontWeight={800}>{t.name}</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {t.batch}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </RevealOnScroll>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* CTA Section */}
           <RevealOnScroll delay={200}>
-            <div className="mt-14 rounded-xl2 bg-primary-900 p-10 text-center">
+            <Paper
+              elevation={0}
+              sx={{
+                mt: 8,
+                p: { xs: 4, md: 6 },
+                borderRadius: 4,
+                textAlign: 'center',
+                background: 'linear-gradient(135deg,#1d213c,#2a3946)',
+                color: '#fff',
+              }}
+            >
               <SectionHeading
-                title="Are you a Airforce School graduate?"
-                subtitle="Join the alumni network to stay in touch with classmates, mentor current students, and hear about reunions first."
+                title="Are you an Airforce School graduate?"
+                subtitle="Join the alumni network to stay connected, mentor students, and attend reunions."
                 align="center"
                 tone="light"
-                className="mx-auto"
               />
-              <Button variant="primary" className="mt-7" onClick={() => openEnquiry('Alumni Sign-up')}>
+
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: 4,
+                  fontWeight: 700,
+                  background: 'linear-gradient(90deg,#ffd707,#e7ab33)',
+                  color: '#1d213c',
+                  '&:hover': {
+                    transform: 'translateY(-2px)',
+                    filter: 'brightness(1.05)',
+                  },
+                }}
+                onClick={() => openEnquiry('Alumni Sign-up')}
+              >
                 Join the Alumni Network
               </Button>
-            </div>
+            </Paper>
           </RevealOnScroll>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

@@ -64,7 +64,7 @@ export const resourcePages = [
     attachments: [
       { label: 'School Calendar 2024-2025', href: siteAssets.downloads.schoolCalendar },
       { label: 'Book List 2024-2025', href: siteAssets.downloads.bookList },
-      { label: 'CCA Calendar 2023-24', href: siteAssets.downloads.ccaCalendar },
+      { label: 'CCA Calendar 2025-26', href: siteAssets.downloads.ccaCalendar },
     ],
   },
   {
@@ -236,10 +236,10 @@ export const academicPages = [
 
 export const updatePages = [
   {
-    slug: 'class-6-to-12-summer-holiday-homework-2024-25',
-    path: '/updates/class-6-to-12-summer-holiday-homework-2024-25',
+    slug: 'class-6-to-12-summer-holiday-homework-2026-27',
+    path: '/updates/class-6-to-12-summer-holiday-homework-2026-27',
     category: 'Notice',
-    title: 'Class VI to XII summer holiday homework 2024-25.',
+    title: 'Class VI to XII summer holiday homework 2026-27.',
     description:
       'Middle and senior school holiday assignments are organised here for convenient parent and student access.',
     image: siteAssets.images.smartClassroom,
@@ -253,10 +253,10 @@ export const updatePages = [
     attachments: [{ label: 'Download Homework PDF', href: siteAssets.downloads.class6To12Homework }],
   },
   {
-    slug: 'book-list-2024-25',
-    path: '/updates/book-list-2024-25',
+    slug: 'book-list-2026-27',
+    path: '/updates/book-list-2026-27',
     category: 'Download',
-    title: 'Book list for academic session 2024-25.',
+    title: 'Book list for academic session 2026-27.',
     description:
       'The official session book list is available here for parents preparing materials for the academic year.',
     image: siteAssets.images.bestAward,
@@ -287,10 +287,10 @@ export const updatePages = [
     attachments: [{ label: 'Download School Calendar PDF', href: siteAssets.downloads.schoolCalendar }],
   },
   {
-    slug: 'primary-summer-holiday-homework-2024-25',
-    path: '/updates/primary-summer-holiday-homework-2024-25',
+    slug: 'primary-summer-holiday-homework-2026-27',
+    path: '/updates/primary-summer-holiday-homework-2026-27',
     category: 'Notice',
-    title: 'Primary summer holiday homework 2024-25.',
+    title: 'Primary summer holiday homework 2026-27.',
     description:
       'Primary section holiday work is collected here in one place for easy parent follow-up.',
     image: siteAssets.images.campusActivities,
@@ -304,8 +304,8 @@ export const updatePages = [
     attachments: [{ label: 'Download Primary Homework PDF', href: siteAssets.downloads.primaryHomework }],
   },
   {
-    slug: 'pre-primary-activities-2023-24',
-    path: '/updates/pre-primary-activities-2023-24',
+    slug: 'pre-primary-activities-2025-26',
+    path: '/updates/pre-primary-activities-2025-26',
     category: 'Event',
     title: 'Pre-primary activities and participation highlights.',
     description:

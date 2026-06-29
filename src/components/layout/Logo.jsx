@@ -1,39 +1,109 @@
 import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { alpha, useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
 
 export default function Logo({ tone = 'dark', variant = 'default', className = '' }) {
+  const theme = useTheme()
   const isFooter = variant === 'footer'
-  const titleTone = tone === 'light' ? 'text-white' : 'brand-highlight'
-  const subTone = tone === 'light' ? 'text-skyback-light/82' : 'text-primary-500 dark:text-skyback-light/82'
-  const chipTone =
-    tone === 'light'
-      ? 'border-white/14 bg-white/8 text-white/78'
-      : 'brand-chip text-primary-600 dark:text-sky-200/82'
+  const isLight = tone === 'light'
+  const titleColor = isLight
+    ? '#fff'
+    : theme.palette.mode === 'dark'
+      ? '#f7fbff'
+      : theme.palette.primary.main
+  const subtitleColor = isLight
+    ? alpha('#fff', 0.8)
+    : theme.palette.mode === 'dark'
+      ? alpha('#d7eff6', 0.84)
+      : theme.palette.text.secondary
 
   return (
-    <Link
+    <Box
+      component={Link}
       to="/"
-      className={`focus-ring logo-plaque ${tone === 'light' ? 'logo-plaque-light' : ''} flex items-center ${isFooter ? 'gap-3 rounded-[1.7rem] px-4 py-3 sm:gap-4 sm:px-5' : 'gap-3 rounded-[1.5rem] px-2.5 py-2 sm:gap-4 sm:px-4'} ${className}`}
       aria-label="Air Force School home"
+      className={className}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: isFooter ? 1.5 : 1.2,
+        px: isFooter ? { xs: 0.75, sm: 2 } : { xs: 0.4, sm: 1.2 },
+        py: isFooter ? { xs: 1, sm: 1.5 } : { xs: 0.6, sm: 1 },
+        borderRadius: isFooter ? 3 : 2,
+        textDecoration: 'none',
+        transition: 'all 0.2s ease',
+        '&:hover': {
+          transform: 'translateY(-1px)',
+        },
+      }}
     >
-      <div className={`logo-core ${tone === 'light' ? 'logo-core-light' : ''} flex ${isFooter ? 'h-[3.75rem] w-[3.75rem] rounded-[1.3rem] sm:h-16 sm:w-16' : 'h-[3.25rem] w-[3.25rem] sm:h-14 sm:w-14'} flex-shrink-0 items-center justify-center border ${chipTone}`}>
-        <img
+      {/* Logo Container */}
+      <Box
+        sx={{
+          width: isFooter ? { xs: 50, sm: 64 } : { xs: 46, sm: 56 },
+          height: isFooter ? { xs: 50, sm: 64 } : { xs: 46, sm: 56 },
+          borderRadius: 4,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+
+          border: `1px solid ${
+            isLight
+              ? alpha('#fff', 0.18)
+              : alpha(theme.palette.primary.main, 0.18)
+          }`,
+
+          background: isLight
+            ? 'rgba(255,255,255,0.08)'
+            : `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <Box
+          component="img"
           src="/favicon.png"
           alt={`${siteConfig.brandName} logo`}
-          className={`${isFooter ? 'h-[48px] w-[48px] sm:h-[52px] sm:w-[52px]' : 'h-[42px] w-[42px] sm:h-[46px] sm:w-[46px]'} flex-shrink-0 rounded-full object-cover`}
+          sx={{
+            width: isFooter ? { xs: 40, sm: 52 } : { xs: 34, sm: 44 },
+            height: isFooter ? { xs: 40, sm: 52 } : { xs: 34, sm: 44 },
+            borderRadius: '25%',
+            objectFit: 'cover',
+          }}
         />
-      </div>
+      </Box>
 
-      <span className="min-w-0 leading-none">
-        <span className={`block font-display ${isFooter ? 'text-[1.34rem] sm:text-[1.62rem]' : 'text-[1.12rem] sm:text-[1.34rem]'} font-bold uppercase leading-[0.92] ${titleTone}`}>
-          <span className={tone === 'light' ? '' : 'drop-shadow-[0_8px_18px_rgba(24,58,88,0.14)]'}>
-            {siteConfig.brandName}
-          </span>
-        </span>
-        <span className={`mt-1.5 block ${isFooter ? 'text-[9px] sm:text-[10px] tracking-[0.2em]' : 'text-[9px] sm:text-[10px] tracking-[0.16em]'} font-semibold uppercase ${subTone}`}>
+      {/* Text */}
+      <Box sx={{ minWidth: 0, lineHeight: 1 }}>
+        <Typography
+          sx={{
+            fontFamily: '"Rajdhani", "Segoe UI", sans-serif',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            lineHeight: 1,
+            fontSize: isFooter ? { xs: '0.96rem', sm: '1.4rem' } : { xs: '0.92rem', sm: '1.1rem' },
+            color: titleColor,
+            textShadow: 'none',
+          }}
+        >
+          {siteConfig.brandName}
+        </Typography>
+
+        <Typography
+          sx={{
+            mt: 0.5,
+            fontSize: { xs: 8.5, sm: 10 },
+            letterSpacing: { xs: '0.12em', sm: '0.18em' },
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            color: subtitleColor,
+          }}
+        >
           {siteConfig.brandSuffix}
-        </span>
-      </span>
-    </Link>
+        </Typography>
+      </Box>
+    </Box>
   )
 }

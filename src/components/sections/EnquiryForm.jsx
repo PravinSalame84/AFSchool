@@ -1,28 +1,82 @@
-import Container from '../ui/Container'
-import SectionHeading from '../ui/SectionHeading'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import { Box, Container, Grid, Paper, Typography, useTheme } from '@mui/material'
+import { alpha } from '@mui/material/styles'
 import EnquiryFormFields from '../forms/EnquiryFormFields'
 
 export default function EnquiryForm() {
-  return (
-    <section id="enquiry" className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
-          <RevealOnScroll className="lg:col-span-2">
-            <SectionHeading
-              eyebrow="Get in Touch"
-              title="Ask your query — we'll get in touch with you soon"
-              subtitle="Fill in the form and our admissions team will reach out with campus details, fee structure and seat availability for the grade you're enquiring about."
-            />
-          </RevealOnScroll>
+  const theme = useTheme()
 
-          <RevealOnScroll delay={120} className="lg:col-span-3">
-            <div className="rounded-xl2 bg-white p-6 shadow-card sm:p-8">
+  return (
+    <Box
+      id="enquiry"
+      sx={{
+        py: { xs: 6, md: 10 },
+        bgcolor: alpha(theme.palette.primary.main, 0.03),
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={6} alignItems="flex-start">
+          {/* LEFT: Heading */}
+          <Grid item xs={12} md={5}>
+            <Box>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                }}
+              >
+                Get in Touch
+              </Typography>
+
+              <Typography
+                variant="h4"
+                sx={{
+                  mt: 1.5,
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  color: theme.palette.text.primary,
+                }}
+              >
+                Start a confident school enquiry with the right details
+              </Typography>
+
+              <Typography
+                variant="body2"
+                sx={{
+                  mt: 2,
+                  color: alpha(theme.palette.text.secondary, 0.85),
+                  lineHeight: 1.7,
+                }}
+              >
+                Share your interest once and the school team can respond with campus details, admissions guidance,
+                fee support and grade availability in a clear, parent-friendly flow.
+              </Typography>
+            </Box>
+          </Grid>
+
+          {/* RIGHT: Form */}
+          <Grid item xs={12} md={7}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: { xs: 2.5, sm: 4 },
+                borderRadius: 4,
+                background: theme.palette.background.paper,
+                backdropFilter: 'blur(10px)',
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                '&:hover': {
+                  transform: 'translateY(-3px)',
+                  boxShadow: theme.shadows[6],
+                },
+              }}
+            >
               <EnquiryFormFields context="General Enquiry" />
-            </div>
-          </RevealOnScroll>
-        </div>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
-    </section>
+    </Box>
   )
 }

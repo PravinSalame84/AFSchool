@@ -1,12 +1,42 @@
-export default function Card({ children, className = '', as: Tag = 'div', hover = true, ...rest }) {
+import Paper from '@mui/material/Paper'
+import { alpha } from '@mui/material/styles'
+
+export default function Card({
+  children,
+  className = '',
+  component = 'div',
+  hover = true,
+  elevation = 0,
+  ...rest
+}) {
   return (
-    <Tag
-      className={`rounded-xl2 bg-white shadow-soft dark:bg-primary-950/80 ${
-        hover ? 'transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card' : ''
-      } ${className}`}
+    <Paper
+      component={component}
+      elevation={elevation}
+      className={className}
+      sx={(theme) => ({
+        borderRadius: 4,
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? alpha(theme.palette.primary.dark, 0.85)
+            : '#ffffff',
+
+        transition: 'all 0.3s ease',
+
+        ...(hover && {
+          cursor: 'pointer',
+          '&:hover': {
+            transform: 'translateY(-6px)',
+            boxShadow:
+              theme.palette.mode === 'dark'
+                ? '0 18px 40px rgba(0,0,0,0.45)'
+                : '0 18px 40px rgba(15, 35, 56, 0.18)',
+          },
+        }),
+      })}
       {...rest}
     >
       {children}
-    </Tag>
+    </Paper>
   )
 }

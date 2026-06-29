@@ -1,8 +1,23 @@
-import { GraduationCap, Lightbulb, BookOpen, FlaskConical } from 'lucide-react'
-import Container from '../ui/Container'
-import SectionHeading from '../ui/SectionHeading'
-import Button from '../ui/Button'
-import RevealOnScroll from '../ui/RevealOnScroll'
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Stack,
+  alpha,
+} from '@mui/material'
+
+import {
+  GraduationCap,
+  Lightbulb,
+  BookOpen,
+  FlaskConical,
+} from 'lucide-react'
+
+import { useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
 
 const pillars = [
@@ -13,35 +28,139 @@ const pillars = [
 ]
 
 export default function InnovationCentre() {
-  return (
-    <section className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <RevealOnScroll>
-            <SectionHeading
-              eyebrow={`${siteConfig.shortName} Innovation Centre`}
-              title="Where our curriculum is built, tested and refined"
-              subtitle="A team of academicians, technologists and subject experts work year-round so every classroom benefits from the latest in pedagogy and educational research."
-            />
-            <Button to="/why-us#curriculum" variant="dark" className="mt-7">
-              Explore the Innovation Centre
-            </Button>
-          </RevealOnScroll>
+  const theme = useTheme()
 
-          <div className="grid grid-cols-2 gap-5">
-            {pillars.map((p, i) => (
-              <RevealOnScroll key={p.label} delay={i * 90}>
-                <div className="flex flex-col items-center gap-3 rounded-xl2 bg-white p-7 text-center shadow-soft">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-900 text-accent">
-                    <p.icon className="h-6 w-6" />
-                  </span>
-                  <span className="text-sm font-bold text-primary-800">{p.label}</span>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
+  return (
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 8, md: 12 },
+        background: `linear-gradient(135deg,
+          ${alpha('#0B1F3A', 0.98)},
+          ${alpha('#123A63', 0.92)}
+        )`,
+        color: '#fff',
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={6} alignItems="center">
+          
+          {/* LEFT CONTENT */}
+          <Grid item xs={12} md={6}>
+            <Typography
+              variant="overline"
+              sx={{ color: alpha('#FFB74D', 0.9), letterSpacing: 2 }}
+            >
+              {siteConfig.shortName} Innovation Centre
+            </Typography>
+
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: 800,
+                mt: 1.5,
+                lineHeight: 1.1,
+              }}
+            >
+              Where curriculum is built, tested and refined
+            </Typography>
+
+            <Typography
+              sx={{
+                mt: 3,
+                color: alpha('#ffffff', 0.75),
+                lineHeight: 1.7,
+                fontSize: '0.95rem',
+              }}
+            >
+              A team of academicians, technologists and subject experts work
+              year-round so every classroom benefits from modern pedagogy,
+              structured learning systems and continuous improvement.
+            </Typography>
+
+            <Button
+              variant="contained"
+              href="/why-us#curriculum"
+              sx={{
+                mt: 4,
+                px: 4,
+                py: 1.3,
+                fontWeight: 700,
+                borderRadius: 4,
+                background: 'linear-gradient(135deg, #FFB74D, #F57C00)',
+                boxShadow: '0 10px 25px rgba(245, 124, 0, 0.25)',
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #ffa726, #ef6c00)',
+                },
+              }}
+            >
+              Explore Innovation Centre
+            </Button>
+          </Grid>
+
+          {/* RIGHT GRID */}
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              {pillars.map((p, i) => {
+                const Icon = p.icon
+                return (
+                  <Grid item xs={6} key={p.label}>
+                    <Card
+                      sx={{
+                        height: '100%',
+                        textAlign: 'center',
+                        borderRadius: 4,
+                        background: alpha('#ffffff', 0.08),
+                        backdropFilter: 'blur(14px)',
+                        border: `1px solid ${alpha('#ffffff', 0.12)}`,
+                        transition: '0.25s ease',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                          background: alpha('#ffffff', 0.12),
+                        },
+                      }}
+                    >
+                      <CardContent>
+                        <Stack spacing={2} alignItems="center">
+                          
+                          {/* ICON WRAPPER */}
+                          <Box
+                            sx={{
+                              width: 56,
+                              height: 56,
+                              borderRadius: '25%',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              background: alpha('#FFB74D', 0.15),
+                              color: '#FFB74D',
+                            }}
+                          >
+                            <Icon size={22} />
+                          </Box>
+
+                          {/* LABEL */}
+                          <Typography
+                            variant="subtitle2"
+                            sx={{
+                              fontWeight: 700,
+                              color: '#fff',
+                              textTransform: 'uppercase',
+                              letterSpacing: 0.6,
+                            }}
+                          >
+                            {p.label}
+                          </Typography>
+                        </Stack>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              })}
+            </Grid>
+          </Grid>
+        </Grid>
       </Container>
-    </section>
+    </Box>
   )
 }

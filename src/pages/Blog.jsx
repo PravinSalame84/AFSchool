@@ -1,59 +1,151 @@
 import { useMemo, useState } from 'react'
 import { Calendar } from 'lucide-react'
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Grid,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from '@mui/material'
+
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
-import Card from '../components/ui/Card'
-import Badge from '../components/ui/Badge'
 import news from '../data/news'
 
 export default function Blog() {
-  const categories = useMemo(() => ['All', ...new Set(news.map((n) => n.category))], [])
+  const categories = useMemo(
+    () => ['All', ...new Set(news.map((n) => n.category))],
+    [],
+  )
+
   const [active, setActive] = useState('All')
 
-  const filtered = active === 'All' ? news : news.filter((n) => n.category === active)
+  const filtered =
+    active === 'All'
+      ? news
+      : news.filter((item) => item.category === active)
 
   return (
     <>
       <PageHero
         crumb="Blog"
         eyebrow="Newsroom & Insights"
-        title="Airforce School Blog"
+        title="Air Force School Blog"
         subtitle="Stories from our campuses, parenting advice and the latest in education research."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-                  active === cat ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      <Box component="section" py={{ xs: 6, md: 10 }}>
+        <Container maxWidth="xl">
+          <RevealOnScroll>
+            <ToggleButtonGroup
+              value={active}
+              exclusive
+              onChange={(_, value) => value && setActive(value)}
+              sx={{
+                flexWrap: 'wrap',
+                gap: 1,
+                '& .MuiToggleButton-root': {
+                  borderRadius: 4,
+                  px: 2.5,
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  border: '1px solid',
+                  borderColor: 'divider',
+                },
+              }}
+            >
+              {categories.map((category) => (
+                <ToggleButton
+                  key={category}
+                  value={category}
+                >
+                  {category}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           </RevealOnScroll>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((item, i) => (
-              <RevealOnScroll key={item.id} delay={(i % 6) * 70}>
-                <Card className="flex h-full flex-col p-6">
-                  <Badge tone="accent">{item.category}</Badge>
-                  <h3 className="mt-4 text-base font-bold leading-snug text-primary-900">{item.title}</h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-primary-500">{item.excerpt}</p>
-                  <div className="mt-4 flex items-center gap-1.5 text-xs text-primary-400">
-                    <Calendar className="h-3.5 w-3.5" /> {item.date}
-                  </div>
-                </Card>
-              </RevealOnScroll>
+          <Grid container spacing={4} mt={1}>
+            {filtered.map((item, index) => (
+              <Grid item key={item.id} xs={12} sm={6} lg={4}>
+                <RevealOnScroll delay={(index % 6) * 70}>
+                  <Card
+                    elevation={0}
+                    sx={{
+                      height: '100%',
+                      borderRadius: 4,
+                      border: 1,
+                      borderColor: 'divider',
+                      transition: 'all .3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: (theme) => theme.shadows[8],
+                        borderColor: 'primary.main',
+                      },
+                    }}
+                  >
+                    <CardContent
+                      sx={{
+                        p: 3,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                      }}
+                    >
+                      <Chip
+                        label={item.category}
+                        color="primary"
+                        size="small"
+                        sx={{
+                          alignSelf: 'flex-start',
+                          fontWeight: 600,
+                        }}
+                      />
+
+                      <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        mt={2}
+                      >
+                        {item.title}
+                      </Typography>
+
+                      <Typography
+                        color="text.secondary"
+                        sx={{
+                          mt: 2,
+                          flexGrow: 1,
+                          lineHeight: 1.8,
+                        }}
+                      >
+                        {item.excerpt}
+                      </Typography>
+
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        mt={3}
+                        color="text.secondary"
+                      >
+                        <Calendar size={16} />
+                        <Typography variant="body2">
+                          {item.date}
+                        </Typography>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </RevealOnScroll>
+              </Grid>
             ))}
-          </div>
+          </Grid>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

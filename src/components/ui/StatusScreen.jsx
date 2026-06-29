@@ -2,6 +2,13 @@ import { motion } from 'framer-motion'
 import { AlertTriangle, Home, RefreshCcw, Wrench } from 'lucide-react'
 import Container from './Container'
 import Button from './Button'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import Chip from '@mui/material/Chip'
+import Stack from '@mui/material/Stack'
+import Divider from '@mui/material/Divider'
+import { alpha } from '@mui/material/styles'
 
 const iconMap = {
   error: AlertTriangle,
@@ -22,48 +29,130 @@ export default function StatusScreen({
   const Icon = iconMap[icon] ?? AlertTriangle
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-      <div className="contour-lines" />
-      <div className="hero-orb sky left-[8%] top-12 h-52 w-52" />
-      <div className="hero-orb sun right-[12%] top-10 h-60 w-60" />
+    <Box
+      component="section"
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        py: { xs: 8, md: 12 },
+        px: { xs: 2, md: 4 },
+      }}
+    >
+      {/* decorative background elements */}
+      <Box className="contour-lines" />
+      <Box className="hero-orb sky" sx={{ left: '8%', top: 48, height: 208, width: 208 }} />
+      <Box className="hero-orb sun" sx={{ right: '12%', top: 40, height: 240, width: 240 }} />
 
-      <Container className="relative">
+      <Container>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-4xl"
         >
-          <div className="hero-stage p-5 sm:p-8">
-            <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-gradient-to-br from-secondary via-primary-900 to-[#214f79] p-8 text-white shadow-card dark:border-white/10">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent_26%)]" />
-                <div className="relative flex h-full min-h-[260px] flex-col justify-between">
-                  <div>
-                    <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white/84">
-                      {badge}
-                    </span>
-                    <div className="mt-6 inline-flex rounded-[1.7rem] bg-white/10 p-4 backdrop-blur-md">
-                      <Icon className="h-12 w-12" />
-                    </div>
-                  </div>
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 6 },
+              borderRadius: 4,
+              bgcolor: 'background.paper',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: '0.9fr 1.1fr' },
+                gap: 4,
+                alignItems: 'center',
+              }}
+            >
+              {/* LEFT CARD */}
+              <Paper
+                elevation={0}
+                sx={(theme) => ({
+                  p: 4,
+                  borderRadius: 4,
+                  color: '#fff',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: `linear-gradient(135deg, ${
+                    theme.palette.secondary.main
+                  }, ${theme.palette.primary.dark}, #214f79)`,
+                  border: `1px solid ${alpha('#fff', 0.2)}`,
+                })}
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'radial-gradient(circle at top right, rgba(255,255,255,0.25), transparent 35%)',
+                  }}
+                />
 
-                  <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/60">Status</p>
-                    <p className="mt-2 text-5xl font-bold uppercase leading-none">{code}</p>
-                  </div>
-                </div>
-              </div>
+                <Stack spacing={4} sx={{ position: 'relative', minHeight: 260 }}>
+                  <Box>
+                    <Chip
+                      label={badge}
+                      sx={{
+                        bgcolor: alpha('#fff', 0.15),
+                        color: '#fff',
+                        fontWeight: 700,
+                        letterSpacing: 2,
+                      }}
+                    />
 
-              <div className="px-2 sm:px-4">
-                <p className="text-sm font-bold uppercase tracking-[0.26em] text-accent">Status Update</p>
-                <h1 className="mt-4 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
+                    <Box
+                      sx={{
+                        mt: 3,
+                        display: 'inline-flex',
+                        p: 2,
+                        borderRadius: 4,
+                        bgcolor: alpha('#fff', 0.12),
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      <Icon size={42} />
+                    </Box>
+                  </Box>
+
+                  <Box>
+                    <Typography variant="overline" sx={{ color: alpha('#fff', 0.6) }}>
+                      Status
+                    </Typography>
+                    <Typography variant="h3" sx={{ fontWeight: 800 }}>
+                      {code}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Paper>
+
+              {/* RIGHT CONTENT */}
+              <Box>
+                <Typography
+                  variant="overline"
+                  sx={{ color: 'primary.main', letterSpacing: 3 }}
+                >
+                  Status Update
+                </Typography>
+
+                <Typography
+                  variant="h4"
+                  sx={{
+                    mt: 2,
+                    fontWeight: 800,
+                    textTransform: 'uppercase',
+                  }}
+                >
                   {title}
-                </h1>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-primary-600 dark:text-slate-300">{message}</p>
+                </Typography>
 
-                <div className="mt-8 flex flex-wrap gap-4">
-                  {primaryAction ? (
+                <Typography sx={{ mt: 3, color: 'text.secondary', lineHeight: 1.7 }}>
+                  {message}
+                </Typography>
+
+                <Stack direction="row" spacing={2} sx={{ mt: 4, flexWrap: 'wrap' }}>
+                  {primaryAction && (
                     <Button
                       to={primaryAction.to}
                       href={primaryAction.href}
@@ -73,37 +162,56 @@ export default function StatusScreen({
                     >
                       {primaryAction.label}
                     </Button>
-                  ) : null}
+                  )}
 
-                  {secondaryAction ? (
+                  {secondaryAction && (
                     <Button
                       to={secondaryAction.to}
                       href={secondaryAction.href}
                       onClick={secondaryAction.onClick}
                       size="lg"
                       variant={secondaryAction.variant ?? 'outline'}
-                      icon={secondaryAction.icon ?? true}
                     >
                       {secondaryAction.label}
                     </Button>
-                  ) : null}
-                </div>
+                  )}
+                </Stack>
 
-                {note ? (
-                  <div className="mt-8 frost-card rounded-[1.5rem] p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="rounded-full bg-primary-900/8 p-2 text-primary-700 dark:bg-white/10 dark:text-white">
-                        <RefreshCcw className="h-4 w-4" />
-                      </div>
-                      <p className="text-sm leading-relaxed text-primary-700 dark:text-slate-200">{note}</p>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
+                {note && (
+                  <Paper
+                    elevation={0}
+                    sx={{
+                      mt: 5,
+                      p: 2.5,
+                      borderRadius: 4,
+                      bgcolor: 'background.default',
+                      border: '1px solid',
+                      borderColor: 'divider',
+                    }}
+                  >
+                    <Stack direction="row" spacing={2} alignItems="flex-start">
+                      <Box
+                        sx={{
+                          p: 1,
+                          borderRadius: '25%',
+                          bgcolor: 'action.hover',
+                          display: 'flex',
+                        }}
+                      >
+                        <RefreshCcw size={18} />
+                      </Box>
+
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {note}
+                      </Typography>
+                    </Stack>
+                  </Paper>
+                )}
+              </Box>
+            </Box>
+          </Paper>
         </motion.div>
       </Container>
-    </section>
+    </Box>
   )
 }

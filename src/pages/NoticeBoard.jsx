@@ -1,31 +1,39 @@
-import { Link } from 'react-router-dom'
-import { ArrowUpRight, CalendarDays, Newspaper } from 'lucide-react'
+import { Link as RouterLink } from 'react-router-dom'
+import {
+  alpha,
+  Box,
+  Chip,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import useRuntimeContent from '../hooks/useRuntimeContent'
+import OptimizedImage from '../components/ui/OptimizedImage'
 
-const noticeTones = [
-  {
-    shell: 'border-airforce-gold/20 hover:border-airforce-gold/30 dark:border-airforce-gold/18 dark:hover:border-airforce-gold/28',
-    chip: 'bg-gradient-to-r from-airforce-gold to-airforce-honey text-secondary',
-    cta: 'text-airforce-brown dark:text-airforce-gold',
-  },
-  {
-    shell: 'border-airforce-cyan/20 hover:border-airforce-cyan/30 dark:border-airforce-cyan/18 dark:hover:border-airforce-cyan/26',
-    chip: 'bg-gradient-to-r from-airforce-cyan to-skyback-light text-secondary',
-    cta: 'text-primary-700 dark:text-airforce-cyan',
-  },
-  {
-    shell: 'border-airforce-saffron/20 hover:border-airforce-saffron/32 dark:border-airforce-saffron/18 dark:hover:border-airforce-saffron/30',
-    chip: 'bg-gradient-to-r from-airforce-saffron to-accent text-white',
-    cta: 'text-airforce-saffronDeep dark:text-airforce-gold',
-  },
-]
+function panelSx(theme) {
+  return {
+    borderRadius: 4,
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, rgba(14,20,24,0.94), rgba(29,33,60,0.84))'
+        : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(228,246,251,0.76))',
+    boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+  }
+}
 
 export default function NoticeBoard() {
+  const theme = useTheme()
   const { content: runtimeContent, source } = useRuntimeContent()
   const notices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
   const events = runtimeContent.events?.length ? runtimeContent.events : schoolContent.events
@@ -34,121 +42,184 @@ export default function NoticeBoard() {
     <>
       <Seo
         title="Notice Board"
-        description="Stay updated with school notices, calendar updates, publications and official announcements from Air Force School, VayuSena Nagar, Nagpur."
+        description="School notices and announcements"
         path="/notice-board"
         image={siteAssets.images.studentCampusEvent}
       />
+
       <PageHero
         crumb="Notice Board"
         eyebrow="Announcements & Updates"
-        title="Important school notices and official updates in one place."
-        subtitle="Browse current notices, downloads and school publications directly within this website."
+        title="Important school notices in one place"
+        subtitle="Official updates, events and publications"
         image={siteAssets.images.studentCampusEvent}
       />
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="space-y-5">
-              {notices.map((notice, index) => {
-                const tone = noticeTones[index % noticeTones.length]
+      <Box sx={{ py: { xs: 7, md: 9 } }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={7.5}>
+              <Paper sx={{ ...panelSx(theme), p: { xs: 2.5, sm: 3.5 } }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={2} sx={{ mb: 3 }}>
+                  <Box>
+                    <Stack direction="row" spacing={1.25} alignItems="center">
+                      <NewspaperIcon color="primary" />
+                      <Typography variant="h5" sx={{ fontWeight: 800 }}>
+                        Latest Notices
+                      </Typography>
+                    </Stack>
+                    <Typography sx={{ mt: 1, color: 'text.secondary' }}>
+                      Dynamic notices can be updated from the runtime content source without rebuilding the website.
+                    </Typography>
+                  </Box>
 
-                return (
-                <Link
-                  key={notice.title}
-                  to={notice.to}
-                  className={`frost-card panel-hover block rounded-[2rem] bg-white/90 p-6 transition dark:bg-primary-900/84 ${tone.shell}`}
-                >
-                  <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary-400 dark:text-skyback-light/88">
-                    <span className={`rounded-full px-3 py-1 ${tone.chip}`}>
-                      {notice.category}
-                    </span>
-                    <span className="text-primary-500 dark:text-airforce-gold/88">{notice.date}</span>
-                  </div>
-                  <h2 className="mt-4 text-2xl font-bold uppercase leading-tight text-primary-900 dark:text-white">
-                    {notice.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/82">{notice.excerpt}</p>
-                  <span className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold ${tone.cta}`}>
-                    Open Notice <ArrowUpRight className="h-4 w-4" />
-                  </span>
-                </Link>
-                )
-              })}
-            </div>
+                  <Chip
+                    label={source === 'live' ? 'Live Runtime Feed' : 'Local Fallback'}
+                    color={source === 'live' ? 'success' : 'default'}
+                    sx={{ alignSelf: { xs: 'stretch', sm: 'flex-start' }, fontWeight: 700, maxWidth: '100%' }}
+                  />
+                </Stack>
 
-            <div className="space-y-6">
-              <div className="frost-card rounded-[2rem] bg-white/92 p-6 dark:bg-primary-900/88">
-                <div className="flex items-center gap-3">
-                  <CalendarDays className="h-5 w-5 text-airforce-gold" />
-                  <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Event Highlights</h3>
-                  <span className="rounded-full bg-gradient-to-r from-airforce-gold/18 to-airforce-honey/18 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-airforce-brown dark:bg-gradient-to-r dark:from-airforce-gold/18 dark:to-airforce-saffron/12 dark:text-airforce-gold">
-                    {source === 'live' ? 'Live' : 'Local'}
-                  </span>
-                </div>
-                <div className="mt-5 overflow-hidden rounded-[1.6rem] border border-airforce-cyan/18">
-                  <img
+                <Stack spacing={2}>
+                  {notices.map((notice, index) => (
+                    <Paper
+                      key={notice.title}
+                      component={RouterLink}
+                      to={notice.to}
+                      sx={{
+                        p: 2.5,
+                        borderRadius: 4,
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.4) : alpha('#fff', 0.82),
+                        transition: 'transform 0.2s ease, border-color 0.2s ease',
+                        '&:hover': {
+                          transform: 'translateY(-3px)',
+                          borderColor: alpha(theme.palette.secondary.main, 0.24),
+                        },
+                      }}
+                    >
+                      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }}>
+                        <Stack direction="row" spacing={1} flexWrap="wrap" alignItems="center">
+                          <Chip
+                            label={notice.category}
+                            size="small"
+                            color={index % 3 === 0 ? 'warning' : index % 3 === 1 ? 'info' : 'success'}
+                            sx={{ fontWeight: 700 }}
+                          />
+                          <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'text.secondary' }}>
+                            {notice.date}
+                          </Typography>
+                        </Stack>
+                        <ArrowOutwardIcon fontSize="small" color="primary" />
+                      </Stack>
+
+                      <Typography variant="h6" sx={{ mt: 2, fontWeight: 800 }}>
+                        {notice.title}
+                      </Typography>
+
+                      <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.8 }}>
+                        {notice.excerpt}
+                      </Typography>
+                    </Paper>
+                  ))}
+                </Stack>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} lg={4.5}>
+              <Stack spacing={3}>
+                <Paper sx={{ ...panelSx(theme), p: 3 }}>
+                  <Stack direction="row" spacing={1.25} alignItems="center">
+                    <CalendarMonthIcon color="primary" />
+                    <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                      Event Highlights
+                    </Typography>
+                  </Stack>
+
+                  <OptimizedImage
                     src={siteAssets.images.studentConference}
-                    alt="Students during a school event"
-                    className="h-44 w-full object-cover"
+                    alt="School event"
+                    wrapperSx={{ mt: 2, borderRadius: 4 }}
+                    sx={{ height: { xs: 170, sm: 190 }, borderRadius: 4 }}
                   />
-                </div>
-                <div className="mt-5 space-y-4">
-                  {events.map((event, index) => (
-                    <Link
-                      key={event.title}
-                      to={event.to}
-                      className={`block rounded-[1.4rem] border px-4 py-4 transition ${
-                        index % 2 === 0
-                          ? 'border-airforce-cyan/16 bg-white/86 hover:border-airforce-cyan/30 hover:bg-airforce-cyan/5 dark:border-airforce-cyan/18 dark:bg-primary-950/40 dark:hover:border-airforce-cyan/30 dark:hover:bg-primary-950/55'
-                          : 'border-airforce-saffron/16 bg-white/86 hover:border-airforce-saffron/30 hover:bg-airforce-gold/5 dark:border-airforce-saffron/16 dark:bg-primary-950/40 dark:hover:border-airforce-saffron/30 dark:hover:bg-primary-950/55'
-                      }`}
-                    >
-                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-500 dark:text-airforce-gold/86">{event.date}</p>
-                      <p className="mt-2 text-sm font-semibold text-primary-800 dark:text-white">{event.title}</p>
-                    </Link>
-                  ))}
-                </div>
-              </div>
 
-              <div className="frost-card rounded-[2rem] bg-white/92 p-6 dark:bg-primary-900/88">
-                <div className="flex items-center gap-3">
-                  <Newspaper className="h-5 w-5 text-airforce-saffron" />
-                  <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Quick Access</h3>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-3">
-                  <img
-                    src={siteAssets.images.schoolGate}
-                    alt="School entrance"
-                    className="h-28 w-full rounded-[1.2rem] object-cover"
-                  />
-                  <img
-                    src={siteAssets.images.studentLibrary}
-                    alt="Students in library"
-                    className="h-28 w-full rounded-[1.2rem] object-cover"
-                  />
-                </div>
-                <div className="mt-5 space-y-3">
-                  {schoolContent.resources.slice(0, 4).map((resource, index) => (
-                    <Link
-                      key={resource.label}
-                      to={resource.to}
-                      className={`flex items-center justify-between rounded-[1.2rem] border px-4 py-3 text-sm font-semibold transition ${
-                        index % 2 === 0
-                          ? 'border-airforce-gold/16 bg-white/84 text-primary-700 hover:border-airforce-gold/30 hover:bg-airforce-gold/5 dark:border-airforce-gold/16 dark:bg-primary-950/40 dark:text-white dark:hover:border-airforce-gold/28 dark:hover:bg-primary-950/55'
-                          : 'border-airforce-cyan/16 bg-white/84 text-primary-700 hover:border-airforce-cyan/30 hover:bg-airforce-cyan/5 dark:border-airforce-cyan/16 dark:bg-primary-950/40 dark:text-white dark:hover:border-airforce-cyan/28 dark:hover:bg-primary-950/55'
-                      }`}
-                    >
-                      {resource.label}
-                      <ArrowUpRight className="h-4 w-4 text-primary-300 dark:text-airforce-gold" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+                  <Stack spacing={1.5} sx={{ mt: 2 }}>
+                    {events.map((event) => (
+                      <Paper
+                        key={event.title}
+                        component={RouterLink}
+                        to={event.to}
+                        variant="outlined"
+                        sx={{
+                          p: 2,
+                          borderRadius: 4,
+                          textDecoration: 'none',
+                          color: 'inherit',
+                          borderColor: alpha(theme.palette.primary.main, 0.1),
+                          '&:hover': { bgcolor: alpha(theme.palette.secondary.main, 0.08) },
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'text.secondary' }}>
+                          {event.date}
+                        </Typography>
+                        <Typography sx={{ mt: 0.75, fontWeight: 700 }}>
+                          {event.title}
+                        </Typography>
+                      </Paper>
+                    ))}
+                  </Stack>
+                </Paper>
+
+                <Paper sx={{ ...panelSx(theme), p: 3 }}>
+                  <Stack direction="row" spacing={1.25} alignItems="center">
+                    <NewspaperIcon color="primary" />
+                    <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                      Quick Access
+                    </Typography>
+                  </Stack>
+
+                  <Grid container spacing={1.5} sx={{ mt: 1 }}>
+                    {[siteAssets.images.schoolGate, siteAssets.images.studentLibrary].map((src) => (
+                      <Grid item xs={12} sm={6} key={src}>
+                        <OptimizedImage src={src} alt="School resource preview" wrapperSx={{ borderRadius: 4, }} sx={{ height: 100, borderRadius: 4, }} />
+                      </Grid>
+                    ))}
+                  </Grid>
+
+                  <Stack spacing={1.25} sx={{ mt: 2 }}>
+                    {schoolContent.resources.slice(0, 4).map((resource) => (
+                      <Paper
+                        key={resource.label}
+                        component={RouterLink}
+                        to={resource.to}
+                        variant="outlined"
+                        sx={{
+                          p: 1.6,
+                          borderRadius: '1.1rem',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          gap: 2,
+                          textDecoration: 'none',
+                          color: 'inherit',
+                          borderColor: alpha(theme.palette.primary.main, 0.1),
+                          '&:hover': { bgcolor: alpha(theme.palette.secondary.main, 0.08) },
+                        }}
+                      >
+                        <Typography sx={{ fontWeight: 700 }}>
+                          {resource.label}
+                        </Typography>
+                        <ArrowOutwardIcon fontSize="small" />
+                      </Paper>
+                    ))}
+                  </Stack>
+                </Paper>
+              </Stack>
+            </Grid>
+          </Grid>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

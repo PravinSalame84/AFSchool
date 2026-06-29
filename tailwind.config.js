@@ -104,7 +104,7 @@ export default {
         menu: '0 24px 52px -24px rgba(17, 26, 36, 0.26)',
       },
       borderRadius: {
-        xl2: '1.25rem',
+        xl2: 2,
       },
       keyframes: {
         fadeUp: {

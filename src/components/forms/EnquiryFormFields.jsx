@@ -1,4 +1,9 @@
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CheckCircle2, RefreshCw } from 'lucide-react'
 import CheckboxField from '../ui/CheckboxField'
@@ -9,6 +14,39 @@ import { states, citiesForState, schoolsForCity } from '../../data/locations'
 import { isValidEmail, isValidIndianMobile } from '../../utils/formValidation'
 
 const standards = ['LKG', 'UKG', ...Array.from({ length: 9 }, (_, index) => `Class ${index + 1}`)]
+
+function SuccessState({ firstName, phone, context }) {
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, py: 4, textAlign: 'center' }}>
+      <Box
+        sx={(theme) => ({
+          display: 'grid',
+          placeItems: 'center',
+          width: 72,
+          height: 72,
+          borderRadius: '25%',
+          color: 'secondary.main',
+          backgroundColor:
+            theme.palette.mode === 'dark' ? 'rgba(240, 147, 75, 0.14)' : 'rgba(240, 147, 75, 0.12)',
+        })}
+      >
+        <CheckCircle2 size={34} />
+      </Box>
+
+      <Typography component="h4" variant="h6" sx={{ fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+        Thank you, {firstName}.
+      </Typography>
+
+      <Typography sx={{ maxWidth: 360, fontSize: '0.95rem', color: 'text.secondary' }}>
+        Your {context.toLowerCase()} has been received. The school team will contact you on{' '}
+        <Box component="span" sx={{ fontWeight: 700, color: 'text.primary' }}>
+          {phone}
+        </Box>
+        .
+      </Typography>
+    </Box>
+  )
+}
 
 function randomMathChallenge() {
   const a = Math.ceil(Math.random() * 8) + 1
@@ -96,105 +134,126 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center gap-3 py-8 text-center">
-        <CheckCircle2 className="h-14 w-14 text-accent" />
-        <h4 className="text-lg font-bold uppercase text-primary-900 dark:text-white">Thank you, {form.firstName}.</h4>
-        <p className="max-w-sm text-sm text-primary-500 dark:text-slate-300">
-          Your {context.toLowerCase()} has been received. The school team will contact you on{' '}
-          <span className="font-semibold text-primary-700 dark:text-white">{form.phone}</span>.
-        </p>
-      </div>
+      <SuccessState
+        firstName={form.firstName}
+        phone={form.phone}
+        context={context}
+      />
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2" noValidate>
-      <Select id="state" label="State" required options={states} value={form.state} onChange={update('state')} disabled />
-      <Select id="city" label="City" required options={cities} value={form.city} onChange={update('city')} disabled />
-      <Select
-        id="school"
-        label="Campus"
-        required
-        options={schools}
-        value={form.school}
-        onChange={update('school')}
-        className="sm:col-span-2"
-        disabled
-      />
-      <Input
-        id="firstName"
-        label="Child's First Name"
-        required
-        placeholder="e.g. Aarav"
-        value={form.firstName}
-        onChange={update('firstName')}
-        error={errors.firstName}
-      />
-      <Input id="lastName" label="Child's Last Name" placeholder="e.g. Sharma" value={form.lastName} onChange={update('lastName')} />
-      <Select
-        id="standard"
-        label="Class Applying For"
-        required
-        placeholder="Select class"
-        options={standards}
-        value={form.standard}
-        onChange={update('standard')}
-        error={errors.standard}
-      />
-      <Input
-        id="email"
-        type="email"
-        label="Parent's Email"
-        required
-        placeholder="you@email.com"
-        value={form.email}
-        onChange={update('email')}
-        error={errors.email}
-      />
-      <Input
-        id="phone"
-        type="tel"
-        label="Parent's Mobile Number"
-        required
-        placeholder="10-digit number"
-        value={form.phone}
-        onChange={update('phone')}
-        className="sm:col-span-2"
-        error={errors.phone}
-      />
-      <Input
-        id="captcha"
-        label={`Quick check - what is ${challenge.a} + ${challenge.b}?`}
-        required
-        inputMode="numeric"
-        value={form.captcha}
-        onChange={update('captcha')}
-        placeholder="Your answer"
-        className="sm:col-span-2"
-        error={errors.captcha}
-        endAdornment={
-          <IconButton
-            edge="end"
-            onClick={refreshChallenge}
-            aria-label="Get a new question"
-            sx={{ color: 'text.secondary' }}
-          >
-            <RefreshCw className="h-4 w-4" />
-          </IconButton>
-        }
-      />
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={6}>
+        <Select id="state" label="State" required options={states} value={form.state} onChange={update('state')} disabled />
+      </Grid>
 
-      <CheckboxField
-        checked={form.agree}
-        onChange={update('agree')}
-        error={errors.agree}
-        className="sm:col-span-2"
-        label="By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry."
-      />
+      <Grid item xs={12} sm={6}>
+        <Select id="city" label="City" required options={cities} value={form.city} onChange={update('city')} disabled />
+      </Grid>
 
-      <Button type="submit" variant="dark" className="w-full sm:col-span-2">
-        Send {context.includes('Details') ? 'Request' : 'Enquiry'}
-      </Button>
-    </form>
+      <Grid item xs={12}>
+        <Select
+          id="school"
+          label="Campus"
+          required
+          options={schools}
+          value={form.school}
+          onChange={update('school')}
+          disabled
+        />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <Input
+          id="firstName"
+          label="Child's First Name"
+          required
+          placeholder="e.g. Aarav"
+          value={form.firstName}
+          onChange={update('firstName')}
+          error={errors.firstName}
+        />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <Input id="lastName" label="Child's Last Name" placeholder="e.g. Sharma" value={form.lastName} onChange={update('lastName')} />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <Select
+          id="standard"
+          label="Class Applying For"
+          required
+          placeholder="Select class"
+          options={standards}
+          value={form.standard}
+          onChange={update('standard')}
+          error={errors.standard}
+        />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <Input
+          id="email"
+          type="email"
+          label="Parent's Email"
+          required
+          placeholder="you@email.com"
+          value={form.email}
+          onChange={update('email')}
+          error={errors.email}
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <Input
+          id="phone"
+          type="tel"
+          label="Parent's Mobile Number"
+          required
+          placeholder="10-digit number"
+          value={form.phone}
+          onChange={update('phone')}
+          error={errors.phone}
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <TextField
+          label={`What is ${challenge.a} + ${challenge.b}?`}
+          value={form.captcha}
+          onChange={update('captcha')}
+          error={!!errors.captcha}
+          helperText={errors.captcha}
+          fullWidth
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={refreshChallenge} edge="end" aria-label="Refresh verification challenge">
+                  <RefreshCw size={16} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <CheckboxField
+          checked={form.agree}
+          onChange={update('agree')}
+          error={errors.agree}
+          label="By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry."
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <Button type="submit" variant="dark" fullWidth>
+          Send {context.includes('Details') ? 'Request' : 'Enquiry'}
+        </Button>
+      </Grid>
+    </Grid>
   )
 }

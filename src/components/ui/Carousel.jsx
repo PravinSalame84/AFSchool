@@ -1,36 +1,67 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { alpha } from '@mui/material/styles'
+import { Box, IconButton, useTheme } from '@mui/material'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-export default function Carousel({ children, autoPlay = false, interval = 4000, ariaLabel = 'Carousel' }) {
+export default function Carousel({
+  children,
+  autoPlay = false,
+  interval = 4000,
+  ariaLabel = 'Carousel',
+}) {
+  const theme = useTheme()
   const trackRef = useRef(null)
   const frameRef = useRef(0)
+
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const itemCount = Array.isArray(children) ? children.length : 1
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current
     if (!el) return
     setAtStart(el.scrollLeft <= 4)
     setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
+
+    const cards = Array.from(el.querySelectorAll('[data-carousel-item]'))
+    if (!cards.length) return
+
+    const closestIndex = cards.reduce(
+      (best, card, index) => {
+        const distance = Math.abs(card.offsetLeft - el.scrollLeft)
+        return distance < best.distance ? { index, distance } : best
+      },
+      { index: 0, distance: Number.POSITIVE_INFINITY },
+    ).index
+
+    setActiveIndex(closestIndex)
   }, [])
 
   const scrollByCard = useCallback((dir) => {
     const el = trackRef.current
     if (!el) return
+
     const card = el.querySelector('[data-carousel-item]')
     const distance = card ? card.offsetWidth + 24 : el.clientWidth * 0.8
+
     el.scrollBy({ left: dir * distance, behavior: 'smooth' })
   }, [])
 
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
+
     updateEdges()
+
     const onScroll = () => {
       cancelAnimationFrame(frameRef.current)
       frameRef.current = requestAnimationFrame(updateEdges)
     }
+
     el.addEventListener('scroll', onScroll, { passive: true })
+
     return () => {
       cancelAnimationFrame(frameRef.current)
       el.removeEventListener('scroll', onScroll)
@@ -39,50 +70,139 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
 
   useEffect(() => {
     if (!autoPlay) return
+
     const id = setInterval(() => {
       if (document.hidden) return
+
       const el = trackRef.current
       if (!el) return
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+
+      const isEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
+
+      if (isEnd) {
         el.scrollTo({ left: 0, behavior: 'smooth' })
       } else {
         scrollByCard(1)
       }
     }, interval)
+
     return () => clearInterval(id)
   }, [autoPlay, interval, scrollByCard])
 
   return (
-    <div className="relative" role="region" aria-label={ariaLabel}>
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-12 bg-gradient-to-r from-white via-white/72 to-transparent dark:from-primary-950 dark:via-primary-950/74 md:block" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-12 bg-gradient-to-l from-white via-white/72 to-transparent dark:from-primary-950 dark:via-primary-950/74 md:block" />
-      <div
-        ref={trackRef}
-        className="no-scrollbar flex items-start gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
-      >
-        {children}
-      </div>
+    <Box component="section" role="region" aria-label={ariaLabel} sx={{ position: 'relative', minWidth: 0 }}>
+      {/* Left fade */}
+      <Box
+        sx={{
+          pointerEvents: 'none',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 48,
+          zIndex: 10,
+          display: { xs: 'none', md: 'block' },
+          // background:
+          //   'linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0.7), transparent)',
+          // '.dark &': {
+          //   background:
+          //     'linear-gradient(to right, #0b1220, rgba(11,18,32,0.7), transparent)',
+          // },
+        }}
+      />
 
-      <div className="mt-6 flex items-center justify-center gap-3">
-        <button
-          type="button"
-          aria-label="Previous"
-          disabled={atStart}
+      {/* Right fade */}
+      <Box
+        sx={{
+          pointerEvents: 'none',
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: 48,
+          zIndex: 10,
+          display: { xs: 'none', md: 'block' },
+          // background:
+          //   'linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0.7), transparent)',
+          // '.dark &': {
+          //   background:
+          //     'linear-gradient(to left, #0b1220, rgba(11,18,32,0.7), transparent)',
+          // },
+        }}
+      />
+
+      {/* Track */}
+      <Box sx={{ overflow: 'hidden', minWidth: 0 }}>
+        <Box
+          ref={trackRef}
+          sx={{
+            display: 'flex',
+            gap: { xs: 2, sm: 3 },
+            overflowX: 'auto',
+            scrollBehavior: 'smooth',
+            scrollSnapType: 'x mandatory',
+            pb: 1,
+            pr: { xs: 0.5, sm: 1 },
+            minWidth: 0,
+            '&::-webkit-scrollbar': { display: 'none' },
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
+
+      {/* Controls */}
+      <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+        <IconButton
           onClick={() => scrollByCard(-1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-gradient-to-br from-white to-skyback-soft text-primary-900 transition disabled:opacity-30 hover:border-accent/40 hover:bg-gradient-to-br hover:from-secondary hover:to-primary-700 hover:text-white disabled:hover:from-white disabled:hover:to-skyback-soft disabled:hover:text-primary-900 dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-900 dark:to-secondary dark:text-skyback-light dark:hover:border-skyback/30 dark:hover:from-skyback-light dark:hover:to-white dark:hover:text-primary-950"
+          disabled={atStart}
+          aria-label="Previous"
+          sx={{
+            border: '1px solid',
+            borderColor: 'divider',
+            bgcolor: 'background.paper',
+            '&:hover': { bgcolor: 'primary.main', color: 'white' },
+            '&.Mui-disabled': { opacity: 0.3 },
+          }}
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next"
-          disabled={atEnd}
+          <ChevronLeft size={20} />
+        </IconButton>
+
+        {itemCount > 1 ? (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {Array.from({ length: itemCount }).map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: index === activeIndex ? 24 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  transition: 'all 0.2s ease',
+                  bgcolor:
+                    index === activeIndex
+                      ? theme.palette.secondary.main
+                      : alpha(theme.palette.primary.main, 0.18),
+                }}
+              />
+            ))}
+          </Box>
+        ) : null}
+
+        <IconButton
           onClick={() => scrollByCard(1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-gradient-to-br from-white to-skyback-soft text-primary-900 transition disabled:opacity-30 hover:border-accent/40 hover:bg-gradient-to-br hover:from-secondary hover:to-primary-700 hover:text-white disabled:hover:from-white disabled:hover:to-skyback-soft disabled:hover:text-primary-900 dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-900 dark:to-secondary dark:text-skyback-light dark:hover:border-skyback/30 dark:hover:from-skyback-light dark:hover:to-white dark:hover:text-primary-950"
+          disabled={atEnd}
+          aria-label="Next"
+          sx={{
+            border: '1px solid',
+            borderColor: 'divider',
+            bgcolor: 'background.paper',
+            '&:hover': { bgcolor: 'primary.main', color: 'white' },
+            '&.Mui-disabled': { opacity: 0.3 },
+          }}
         >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
-    </div>
+          <ChevronRight size={20} />
+        </IconButton>
+      </Box>
+    </Box>
   )
 }

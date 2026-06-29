@@ -1,4 +1,16 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { alpha } from '@mui/material/styles'
+import {
+  Avatar,
+  Box,
+  Chip,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import {
   ArrowUpRight,
   BookOpenCheck,
@@ -15,9 +27,10 @@ import {
   ShieldCheck,
   Trophy,
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import Hero from '../components/sections/Hero'
 import FAQSection from '../components/sections/FAQSection'
+import Initiatives from '../components/sections/Initiatives'
+import Achievements from '../components/sections/Achievements'
 import Container from '../components/ui/Container'
 import Button from '../components/ui/Button'
 import Carousel from '../components/ui/Carousel'
@@ -30,21 +43,28 @@ import { useEnquiryModal } from '../context/EnquiryModalContext'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 
 const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Trophy]
+
 const activityTones = [
   {
-    card: 'border-airforce-gold/18 bg-gradient-to-br from-white/88 via-airforce-gold/8 to-skyback-soft/68 dark:border-airforce-gold/16 dark:bg-gradient-to-br dark:from-primary-950/88 dark:via-airforce-gold/10 dark:to-secondary',
-    badge: 'bg-gradient-to-r from-airforce-gold to-airforce-honey text-secondary',
-    icon: 'text-airforce-brown dark:text-airforce-gold',
+    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,215,7,0.12), rgba(228,246,251,0.72))',
+    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(255,215,7,0.10), rgba(29,33,60,0.92))',
+    badge: 'linear-gradient(90deg, #ffd707 0%, #e7ab33 100%)',
+    badgeColor: '#1d213c',
+    icon: '#8a6742',
   },
   {
-    card: 'border-airforce-cyan/18 bg-gradient-to-br from-white/88 via-skyback-soft/72 to-airforce-cyan/8 dark:border-airforce-cyan/16 dark:bg-gradient-to-br dark:from-primary-950/88 dark:via-secondary dark:to-airforce-cyan/10',
-    badge: 'bg-gradient-to-r from-airforce-cyan to-skyback-light text-secondary',
-    icon: 'text-primary-700 dark:text-airforce-cyan',
+    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(215,239,246,0.86), rgba(0,212,250,0.08))',
+    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.9), rgba(0,212,250,0.12))',
+    badge: 'linear-gradient(90deg, #00d4fa 0%, #d7eff6 100%)',
+    badgeColor: '#1d213c',
+    icon: '#344656',
   },
   {
-    card: 'border-airforce-saffron/18 bg-gradient-to-br from-white/88 via-airforce-gold/6 to-airforce-saffron/8 dark:border-airforce-saffron/16 dark:bg-gradient-to-br dark:from-primary-950/88 dark:via-secondary dark:to-airforce-saffron/10',
-    badge: 'bg-gradient-to-r from-airforce-saffron to-accent text-white',
-    icon: 'text-airforce-saffronDeep dark:text-airforce-gold',
+    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,215,7,0.08), rgba(255,103,31,0.08))',
+    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.9), rgba(255,103,31,0.12))',
+    badge: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
+    badgeColor: '#ffffff',
+    icon: '#ff671f',
   },
 ]
 
@@ -57,9 +77,62 @@ const rise = {
   }),
 }
 
+function glassCardSx(theme) {
+  return {
+    position: 'relative',
+    overflow: 'hidden',
+    borderRadius: 4,
+    border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.08)}`,
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, rgba(14,20,24,0.94), rgba(29,33,60,0.86))'
+        : 'linear-gradient(135deg, rgba(250,253,255,0.98), rgba(237,249,253,0.95))',
+    boxShadow: '0 20px 48px -30px rgba(17, 26, 36, 0.2)',
+    backdropFilter: 'blur(14px)',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      pointerEvents: 'none',
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04) 35%, transparent 60%)',
+    },
+  }
+}
+
+function mutedTextSx(theme) {
+  return {
+    color: theme.palette.mode === 'dark' ? alpha('#d7eff6', 0.82) : theme.palette.text.secondary,
+  }
+}
+
+// Homepage sections intentionally alternate between sky-blue surfaces
+// so adjacent content blocks stay visually distinct like the original design.
+function sectionShell(theme, tone = 'soft') {
+  const tones = {
+    clear: {
+      light: 'transparent',
+      dark: 'transparent',
+    },
+    soft: {
+      light: 'linear-gradient(180deg, rgba(244,251,254,0.86), rgba(228,246,251,0.96))',
+      dark: 'linear-gradient(180deg, rgba(11,19,32,0.2), rgba(17,28,43,0.48))',
+    },
+    sky: {
+      light: 'linear-gradient(180deg, rgba(215,239,246,0.92), rgba(186,226,238,0.78))',
+      dark: 'linear-gradient(180deg, rgba(17,28,43,0.42), rgba(11,19,32,0.78))',
+    },
+  }
+
+  return {
+    background: theme.palette.mode === 'dark' ? tones[tone].dark : tones[tone].light,
+  }
+}
+
 export default function Home() {
+  const theme = useTheme()
   const { openEnquiry } = useEnquiryModal()
   const { content: runtimeContent, source } = useRuntimeContent()
+
   const liveMarquee = runtimeContent.marquee?.length ? runtimeContent.marquee : schoolContent.marquee
   const liveNotices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
   const liveDownloads = runtimeContent.downloads?.length ? runtimeContent.downloads : schoolContent.downloads
@@ -72,429 +145,685 @@ export default function Home() {
         path="/"
         image={schoolContent.hero.slides[2].image}
       />
+
       <Hero />
 
-      <section className="px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ ...sectionShell(theme, 'clear'), px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="marquee-shell rounded-full border border-primary-900/8 bg-gradient-to-r from-white/86 via-skyback-soft/76 to-white/86 px-3 py-3 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-r dark:from-primary-950/78 dark:via-primary-900/74 dark:to-primary-950/78">
-            <div className="marquee-track">
+          <Box
+            sx={{
+              overflow: 'hidden',
+              borderRadius: 4,
+              border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.08)}`,
+              px: 2,
+              py: 1.5,
+              background:
+                theme.palette.mode === 'dark'
+                  ? 'linear-gradient(90deg, rgba(14,20,24,0.78), rgba(29,33,60,0.74), rgba(14,20,24,0.78))'
+                  : 'linear-gradient(90deg, rgba(255,255,255,0.9), rgba(228,246,251,0.76), rgba(255,255,255,0.9))',
+              boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+              backdropFilter: 'blur(20px)',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                width: 'max-content',
+                gap: 1.5,
+                alignItems: 'center',
+                animation: 'homepage-marquee 28s linear infinite',
+                '@keyframes homepage-marquee': {
+                  '0%': { transform: 'translateX(0)' },
+                  '100%': { transform: 'translateX(-50%)' },
+                },
+              }}
+            >
               {[...liveMarquee, ...liveMarquee].map((item, index) => (
-                <span key={`${item}-${index}`} className="marquee-chip">
-                  {item}
-                </span>
+                <Chip
+                  key={`${item}-${index}`}
+                  label={item}
+                  sx={{
+                    borderRadius: 4,
+                    bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha(theme.palette.common.white, 0.75),
+                    color: theme.palette.mode === 'dark' ? '#fff' : 'text.primary',
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    '& .MuiChip-label': { px: 1.25, py: 0.75 },
+                  }}
+                />
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </Container>
-      </section>
+      </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
+          <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
+            <Box>
               <Eyebrow>Quick Navigation</Eyebrow>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
+              <Typography variant="h2" sx={{ mt: 1.5, maxWidth: 720, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
                 Everything families usually need, faster.
-              </h2>
-            </div>
-            <p className="max-w-xl text-sm leading-relaxed text-primary-600 dark:text-slate-300">
+              </Typography>
+            </Box>
+            <Typography sx={{ maxWidth: 520, ...mutedTextSx(theme), fontSize: '0.95rem', lineHeight: 1.8 }}>
               Structured access to admissions, notices, downloads, gallery, parent resources and official school information.
-            </p>
-          </div>
+            </Typography>
+          </Stack>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <Grid container spacing={2.5}>
             {schoolContent.quickLinks.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}
-              >
-                <Button
-                  to={item.to}
-                  variant="outline"
-                  icon={false}
-                  className="group flex w-full items-start justify-between rounded-[2rem] border-accent/30 bg-gradient-to-br from-accent/12 via-white/95 to-skyback-soft/80 px-6 py-6 text-left hover:border-accent/50 hover:bg-gradient-to-br hover:from-accent/18 hover:via-white hover:to-skyback-soft dark:from-accent/18 dark:via-primary-950/94 dark:to-primary-900/84"
+              <Grid item xs={12} md={6} xl={4} key={item.label}>
+                <motion.div
+                  initial={{ opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-primary-900 text-white shadow-soft dark:bg-white dark:text-primary-950">
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-lg font-bold uppercase">{item.label}</p>
-                    <p className="mt-2 text-sm normal-case tracking-normal text-primary-600 dark:text-slate-300">{item.description}</p>
-                  </div>
-                  <ArrowUpRight className="mt-1 h-5 w-5 flex-shrink-0 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0}
-              variants={rise}
-              className="frost-card rounded-[2.2rem] p-8 sm:p-10"
-            >
-              <Eyebrow>About The School</Eyebrow>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
-                Built on values. Designed for the next generation.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.narrative}</p>
-              <p className="mt-4 text-base leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.extended}</p>
-
-              <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-                {schoolContent.facts.map((fact, index) => (
-                  <motion.div
-                    key={fact.label}
-                    custom={0.08 + index * 0.05}
-                    variants={rise}
-                    className="rounded-[1.6rem] border border-primary-900/8 bg-white/82 p-4 shadow-soft dark:border-white/10 dark:bg-primary-950/70"
+                  <Button
+                    to={item.to}
+                    variant="outline"
+                    icon={false}
+                    sx={{
+                      width: '100%',
+                      justifyContent: 'space-between',
+                      alignItems: { xs: 'stretch', sm: 'flex-start' },
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      borderRadius: 4,
+                      px: 2.5,
+                      py: 2.5,
+                      textAlign: 'left',
+                      borderColor: alpha('#f0934b', 0.3),
+                      background:
+                        theme.palette.mode === 'dark'
+                          ? 'linear-gradient(135deg, rgba(240,147,75,0.18), rgba(14,20,24,0.94), rgba(29,33,60,0.84))'
+                          : 'linear-gradient(135deg, rgba(240,147,75,0.12), rgba(255,255,255,0.96), rgba(228,246,251,0.8))',
+                      '&:hover': {
+                        borderColor: alpha('#f0934b', 0.5),
+                        background:
+                          theme.palette.mode === 'dark'
+                            ? 'linear-gradient(135deg, rgba(240,147,75,0.22), rgba(14,20,24,0.98), rgba(29,33,60,0.88))'
+                            : 'linear-gradient(135deg, rgba(240,147,75,0.18), rgba(255,255,255,1), rgba(228,246,251,0.9))',
+                      },
+                    }}
                   >
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{fact.label}</p>
-                    <p className="mt-2 text-2xl font-bold uppercase text-primary-900 dark:text-white">{fact.value}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0.14}
-              variants={rise}
-              className="grid gap-6"
-            >
-              <div className="frost-card rounded-[2.2rem] p-6">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-primary-900 p-3 text-white dark:bg-white dark:text-primary-950">
-                    <Compass className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Vision</p>
-                    <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Confident Global Citizens</h3>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.vision}</p>
-              </div>
-
-              <div className="frost-card rounded-[2.2rem] p-6">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-accent p-3 text-white">
-                    <Flag className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary-400">Mission</p>
-                    <h3 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Inclusive, Child-Centred Growth</h3>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.mission}</p>
-              </div>
-
-              <div className="relative overflow-hidden rounded-[2.2rem] bg-gradient-to-br from-secondary via-primary-900 to-primary-700 p-6 text-white shadow-card">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(215,166,37,0.28),transparent_28%)]" />
-                <p className="relative text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Parent Access</p>
-                <div className="relative mt-4 flex flex-wrap gap-3">
-                  {schoolContent.resources.slice(0, 3).map((resource) => (
-                    <Link
-                      key={resource.label}
-                      to={resource.to}
-                      className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:border-white/40"
-                    >
-                      {resource.label}
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
+                    <Stack direction="row" spacing={2} alignItems="flex-start" sx={{ flex: 1, minWidth: 0, width: '100%' }}>
+                      <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: '#fff' }}>
+                        <item.icon size={20} />
+                      </Avatar>
+                      <Box sx={{ minWidth: 0 }}>
+                        <Typography sx={{ fontWeight: 800, textTransform: 'uppercase', fontSize: '1.05rem', color: 'text.primary' }}>
+                          {item.label}
+                        </Typography>
+                        <Typography sx={{ mt: 1, textTransform: 'none', letterSpacing: 0, ...mutedTextSx(theme), fontSize: '0.92rem', lineHeight: 1.7 }}>
+                          {item.description}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                    <Box sx={{ alignSelf: { xs: 'flex-end', sm: 'flex-start' }, mt: { xs: 1.5, sm: 0 } }}>
+                      <ArrowUpRight size={20} />
+                    </Box>
+                  </Button>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
-      </section>
+      </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ ...sectionShell(theme, 'sky'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Container>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.15fr 0.85fr' }, gap: 3 }}>
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0} variants={rise}>
+              <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}>
+                <Box sx={{ position: 'relative' }}>
+                  <Eyebrow>About The School</Eyebrow>
+                  <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
+                    Built on values. Designed for the next generation.
+                  </Typography>
+                  <Typography sx={{ mt: 3, fontSize: '1rem', lineHeight: 1.9, ...mutedTextSx(theme) }}>
+                    {schoolContent.about.narrative}
+                  </Typography>
+                  <Typography sx={{ mt: 2, fontSize: '1rem', lineHeight: 1.9, ...mutedTextSx(theme) }}>
+                    {schoolContent.about.extended}
+                  </Typography>
+
+                  <Grid container spacing={2} sx={{ mt: 2 }}>
+                    {schoolContent.facts.map((fact, index) => (
+                      <Grid item xs={6} md={3} key={fact.label}>
+                        <motion.div custom={0.08 + index * 0.05} variants={rise}>
+                          <Paper
+                            sx={{
+                              p: 2,
+                              borderRadius: 4,
+                              border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.35) : alpha('#fff', 0.82),
+                              boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                            }}
+                          >
+                            <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'text.secondary' }}>
+                              {fact.label}
+                            </Typography>
+                            <Typography sx={{ mt: 1, fontSize: { xs: '1.45rem', sm: '1.65rem' }, fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+                              {fact.value}
+                            </Typography>
+                          </Paper>
+                        </motion.div>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              </Paper>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.14} variants={rise}>
+              <Stack spacing={3}>
+                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <Avatar sx={{ bgcolor: 'primary.main', color: '#fff' }}>
+                      <Compass size={20} />
+                    </Avatar>
+                    <Box>
+                      <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.24em', color: 'text.secondary' }}>
+                        Vision
+                      </Typography>
+                      <Typography variant="h5" sx={{ fontWeight: 800 }}>
+                        Confident Global Citizens
+                      </Typography>
+                    </Box>
+                  </Stack>
+                  <Typography sx={{ mt: 2, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                    {schoolContent.about.vision}
+                  </Typography>
+                </Paper>
+
+                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <Avatar sx={{ bgcolor: 'secondary.main', color: '#fff' }}>
+                      <Flag size={20} />
+                    </Avatar>
+                    <Box>
+                      <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.24em', color: 'text.secondary' }}>
+                        Mission
+                      </Typography>
+                      <Typography variant="h5" sx={{ fontWeight: 800 }}>
+                        Inclusive, Child-Centred Growth
+                      </Typography>
+                    </Box>
+                  </Stack>
+                  <Typography sx={{ mt: 2, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                    {schoolContent.about.mission}
+                  </Typography>
+                </Paper>
+
+                <Paper
+                  sx={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    borderRadius: 4,
+                    p: 3,
+                    color: '#fff',
+                    background: 'linear-gradient(135deg, #1d213c 0%, #202c36 55%, #344656 100%)',
+                    boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+                  }}
+                >
+                  <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at top right, rgba(215,166,37,0.28), transparent 28%)' }} />
+                  <Box sx={{ position: 'relative' }}>
+                    <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: alpha('#fff', 0.6) }}>
+                      Parent Access
+                    </Typography>
+                    <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 2 }}>
+                      {schoolContent.resources.slice(0, 3).map((resource) => (
+                        <Box
+                          key={resource.label}
+                          component={Link}
+                          to={resource.to}
+                          sx={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            borderRadius: 4,
+                            border: `1px solid ${alpha('#fff', 0.16)}`,
+                            px: 2,
+                            py: 1,
+                            color: '#fff',
+                            textDecoration: 'none',
+                            fontSize: '0.72rem',
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.16em',
+                            transition: 'border-color 0.2s ease, transform 0.2s ease',
+                            '&:hover': { borderColor: alpha('#fff', 0.4), transform: 'translateY(-1px)' },
+                          }}
+                        >
+                          {resource.label}
+                          <ArrowUpRight size={14} />
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Box>
+                </Paper>
+              </Stack>
+            </motion.div>
+          </Box>
+        </Container>
+      </Box>
+
+      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
-            <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div>
+            <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
+              <Box>
                 <Eyebrow>Infrastructure</Eyebrow>
-                <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white sm:text-5xl">
+                <Typography variant="h2" sx={{ mt: 1.5, maxWidth: 760, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
                   A campus shaped for safety, curiosity and everyday excellence.
-                </h2>
-              </div>
-              <p className="max-w-xl text-sm leading-relaxed text-primary-600 dark:text-slate-300">
-                From smart classrooms to activity rooms and wellness support, the school environment is built to
-                balance focus, movement and creative growth.
-              </p>
-            </div>
+                </Typography>
+              </Box>
+              <Typography sx={{ maxWidth: 520, ...mutedTextSx(theme), fontSize: '0.95rem', lineHeight: 1.8 }}>
+                From smart classrooms to activity rooms and wellness support, the school environment is built to balance focus, movement and creative growth.
+              </Typography>
+            </Stack>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {schoolContent.facilities.map((facility, index) => {
-              const Icon = facilityIcons[index]
-              return (
-                <motion.div
-                  key={facility}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.7, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="frost-card panel-hover rounded-[1.9rem] p-6"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-900 text-white dark:bg-white dark:text-primary-950">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <p className="mt-4 text-lg font-bold uppercase leading-tight text-primary-900 dark:text-white">{facility}</p>
-                </motion.div>
-              )
-            })}
-          </div>
+          <Box sx={{ overflowX: 'auto', pb: 1 }}>
+            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '90%', sm: '48%', lg: 'minmax(220px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' } }}>
+              {schoolContent.facilities.map((facility, index) => {
+                const Icon = facilityIcons[index]
+
+                return (
+                  <motion.div
+                    key={facility}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ duration: 0.7, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Paper
+                      sx={(currentTheme) => ({
+                        ...glassCardSx(currentTheme),
+                        p: 3,
+                        minHeight: '100%',
+                        transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
+                        '&:hover': {
+                          transform: 'translateY(-6px)',
+                          boxShadow: '0 28px 70px -34px rgba(12, 24, 41, 0.42)',
+                          borderColor: alpha('#e7ab33', 0.34),
+                        },
+                      })}
+                    >
+                      <Box sx={{ position: 'relative' }}>
+                        <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: '#fff' }}>
+                          <Icon size={20} />
+                        </Avatar>
+                        <Typography sx={{ mt: 2, fontSize: '1.05rem', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.55, color: 'text.primary' }}>
+                          {facility}
+                        </Typography>
+                      </Box>
+                    </Paper>
+                  </motion.div>
+                )
+              })}
+            </Box>
+          </Box>
         </Container>
-      </section>
+      </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ ...sectionShell(theme, 'sky'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {schoolContent.statistics.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="frost-card overflow-hidden rounded-[1.8rem] p-3"
-              >
-                <div className="grid gap-4 sm:grid-cols-[92px_1fr] sm:items-center">
-                  <OptimizedImage
-                    src={stat.image}
-                    alt={stat.label}
-                    wrapperClassName="rounded-[1.2rem]"
-                    className="h-24 w-full rounded-[1.2rem] object-cover"
-                  />
-                  <div className="px-2 py-2">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
-                    <p className="mt-2 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
-                    <p className="mt-2 text-xs leading-relaxed text-primary-600 dark:text-slate-300">{stat.caption}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <Box sx={{ overflowX: 'auto', pb: 1, mb: 2 }}>
+            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '92%', sm: '58%', lg: 'minmax(260px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' } }}>
+              {schoolContent.statistics.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.5, minHeight: '100%' })}>
+                    <Box sx={{ position: 'relative', display: 'grid', gap: 2, gridTemplateColumns: '92px 1fr', alignItems: 'center' }}>
+                      <OptimizedImage
+                        src={stat.image}
+                        alt={stat.label}
+                        wrapperSx={{ borderRadius: 4 }}
+                        sx={{ height: 96, borderRadius: 4 }}
+                      />
+                      <Box sx={{ px: 1, py: 1 }}>
+                        <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'text.secondary' }}>
+                          {stat.label}
+                        </Typography>
+                        <Typography sx={{ mt: 1, fontSize: { xs: '1.6rem', sm: '1.9rem' }, fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+                          {stat.value}
+                        </Typography>
+                        <Typography sx={{ mt: 1, fontSize: '0.78rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                          {stat.caption}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Paper>
+                </motion.div>
+              ))}
+            </Box>
+          </Box>
 
-          <div className="mb-6">
+          <Box sx={{ mb: 5 }}>
             <Carousel autoPlay interval={3200} ariaLabel="Student life highlights">
               {schoolContent.studentShowcase.map((item, index) => (
-                <motion.article
+                <motion.div
                   key={item.title}
                   data-carousel-item
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative min-h-[250px] w-[290px] flex-shrink-0 overflow-hidden rounded-[1.9rem] border border-white/50 shadow-card sm:w-[340px]"
+                  style={{ minHeight: 250, width: 'min(340px, 88vw)', flexShrink: 0 }}
                 >
-                  <OptimizedImage
-                    src={item.image}
-                    alt={item.title}
-                    wrapperClassName="absolute inset-0"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-primary-900/46 to-info/8" />
-                  <div className="relative flex min-h-[250px] flex-col justify-end p-5 text-white">
-                    <span className="inline-flex w-fit rounded-full border border-white/16 bg-gradient-to-r from-white/14 to-skyback-light/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/92 backdrop-blur-sm">
-                      {item.badge}
-                    </span>
-                    <h3 className="mt-3 text-xl font-bold uppercase">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/80">{item.caption}</p>
-                  </div>
-                </motion.article>
-              ))}
-            </Carousel>
-          </div>
-
-          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[0.96fr_1.04fr]">
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0}
-              variants={rise}
-              className="frost-card rounded-[2.2rem] p-6 sm:p-8"
-            >
-              <Eyebrow tone="saffron">Campus Life</Eyebrow>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
-                Learning that moves beyond the classroom.
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/82">
-                Air Force School encourages strong participation across academic, cultural and physical activity
-                spaces so students build discipline, expression and confidence together.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <span className="rounded-full bg-gradient-to-r from-airforce-gold/18 to-airforce-honey/18 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-airforce-brown dark:text-airforce-gold">
-                  Smart Learning
-                </span>
-                <span className="rounded-full bg-gradient-to-r from-airforce-cyan/14 to-skyback-light px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-800 dark:text-airforce-cyan">
-                  Student Participation
-                </span>
-                <span className="rounded-full bg-gradient-to-r from-airforce-saffron/16 to-airforce-honey/18 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-airforce-brown dark:text-airforce-gold">
-                  Holistic Growth
-                </span>
-              </div>
-
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                {schoolContent.activities.map((activity, index) => {
-                  const tone = activityTones[index % activityTones.length]
-
-                  return (
-                    <Link
-                      key={activity.title}
-                      to={activity.to}
-                      className={`block rounded-[1.6rem] border p-4 shadow-soft transition hover:-translate-y-1 ${tone.card}`}
-                    >
-                      <div className="flex gap-4">
-                        <OptimizedImage
-                          src={activity.image}
-                          alt={activity.title}
-                          wrapperClassName="h-20 w-20 flex-shrink-0 rounded-[1.1rem]"
-                          className="h-20 w-20 rounded-[1.1rem] object-cover"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <div className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.16em] ${tone.badge}`}>
-                            0{index + 1}
-                          </div>
-                          <div className="mt-3 flex items-start justify-between gap-3">
-                            <h3 className="text-base font-bold uppercase leading-tight text-primary-900 dark:text-white">
-                              {activity.title}
-                            </h3>
-                            <ArrowUpRight className={`mt-0.5 h-4 w-4 flex-shrink-0 ${tone.icon}`} />
-                          </div>
-                          <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">
-                            {activity.description}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  )
-                })}
-              </div>
-            </motion.div>
-
-            <div className="grid items-start gap-6">
-              <div className="grid items-start grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-                <article className="frost-card overflow-hidden rounded-[2rem] p-4">
-                  <OptimizedImage
-                    src={siteAssets.images.campusActivities}
-                    alt="School campus life highlights"
-                    wrapperClassName="rounded-[1.5rem]"
-                    className="h-64 w-full rounded-[1.5rem] object-cover sm:h-72"
-                  />
-                  <div className="px-2 pb-2 pt-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-airforce-saffron dark:text-airforce-gold">
-                      Campus Moments
-                    </p>
-                    <h3 className="mt-2 text-xl font-bold uppercase text-primary-900 dark:text-white">Visible energy across the school day.</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">
-                      Assemblies, collaborative spaces and student events help the campus feel active, proud and welcoming.
-                    </p>
-                  </div>
-                </article>
-
-                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
-                  <article className="frost-card overflow-hidden rounded-[1.8rem] p-3">
-                    <OptimizedImage
-                      src={siteAssets.images.studentGroupStudy}
-                      alt="Students studying together"
-                      wrapperClassName="rounded-[1.2rem]"
-                      className="h-40 w-full rounded-[1.2rem] object-cover"
-                    />
-                    <div className="px-2 pb-1 pt-3">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-airforce-cyan">Shared Learning</p>
-                      <p className="mt-2 text-sm font-semibold text-primary-900 dark:text-white">Students collaborate, revise and learn together.</p>
-                    </div>
-                  </article>
-                  <article className="frost-card overflow-hidden rounded-[1.8rem] p-3">
-                    <OptimizedImage
-                      src={siteAssets.images.studentYoga}
-                      alt="Students in yoga activity"
-                      wrapperClassName="rounded-[1.2rem]"
-                      className="h-40 w-full rounded-[1.2rem] object-cover"
-                    />
-                    <div className="px-2 pb-1 pt-3">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-airforce-saffron dark:text-airforce-gold">Wellbeing & Balance</p>
-                      <p className="mt-2 text-sm font-semibold text-primary-900 dark:text-white">Movement and mindfulness remain part of school life.</p>
-                    </div>
-                  </article>
-                </div>
-              </div>
-
-              <div className="frost-card rounded-[2rem] p-4 sm:p-5">
-                <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-airforce-cyan">Gallery Highlights</p>
-                    <h3 className="mt-2 text-2xl font-bold uppercase text-primary-900 dark:text-white">
-                      Real moments from classrooms, campus and student activities.
-                    </h3>
-                  </div>
-                  <Link
-                    to="/gallery"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-airforce-saffron dark:text-skyback-light dark:hover:text-airforce-gold"
-                  >
-                    Open full gallery
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </div>
-
-              <Carousel autoPlay interval={3600} ariaLabel="Campus gallery highlights">
-                {schoolContent.gallery.slice(0, 8).map((item, index) => (
-                  <motion.article
-                    key={item.title}
-                    data-carousel-item
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.72, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                    className="panel-hover self-start w-[290px] flex-shrink-0 overflow-hidden rounded-[1.8rem] border border-primary-900/8 bg-white/90 p-3 shadow-soft dark:border-white/10 dark:bg-primary-900/84 sm:w-[340px]"
-                  >
+                  <Paper sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)' }}>
                     <OptimizedImage
                       src={item.image}
                       alt={item.title}
-                      wrapperClassName="rounded-[1.35rem]"
-                      className="h-52 w-full rounded-[1.35rem] object-cover"
+                      wrapperSx={{ position: 'absolute', inset: 0 }}
+                      sx={{ height: 250, transition: 'transform 700ms ease', '&:hover': { transform: 'scale(1.05)' } }}
                     />
-                    <div className="px-2 pb-2 pt-4">
-                      <h3 className="text-lg font-bold uppercase text-primary-900 dark:text-white">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-primary-700 dark:text-skyback-light/80">{item.caption}</p>
-                    </div>
-                  </motion.article>
-                ))}
-              </Carousel>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
+                    <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(29,33,60,0.08), rgba(32,44,54,0.46), rgba(29,33,60,0.95))' }} />
+                    <Box sx={{ position: 'relative', display: 'flex', minHeight: 250, flexDirection: 'column', justifyContent: 'flex-end', p: 2.5, color: '#fff' }}>
+                      <Chip
+                        label={item.badge}
+                        sx={{
+                          alignSelf: 'flex-start',
+                          borderRadius: 4,
+                          color: '#fff',
+                          bgcolor: 'rgba(255,255,255,0.14)',
+                          border: '1px solid rgba(255,255,255,0.16)',
+                          backdropFilter: 'blur(10px)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.18em',
+                          fontWeight: 800,
+                        }}
+                      />
+                      <Typography variant="h5" sx={{ mt: 2, fontWeight: 800, textTransform: 'uppercase' }}>
+                        {item.title}
+                      </Typography>
+                      <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, color: alpha('#fff', 0.82) }}>
+                        {item.caption}
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </motion.div>
+              ))}
+            </Carousel>
+          </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '0.96fr 1.04fr' }, gap: 3 }}>
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0} variants={rise}>
+              <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}>
+                <Box sx={{ position: 'relative' }}>
+                  <Eyebrow>Campus Life</Eyebrow>
+                  <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
+                    Learning that moves beyond the classroom.
+                  </Typography>
+                  <Typography sx={{ mt: 3, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                    Air Force School encourages strong participation across academic, cultural and physical activity spaces so students build discipline, expression and confidence together.
+                  </Typography>
+
+                  <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 3 }}>
+                    {['Smart Learning', 'Student Participation', 'Holistic Growth'].map((item, index) => (
+                      <Chip
+                        key={item}
+                        label={item}
+                        sx={{
+                          borderRadius: 4,
+                          bgcolor:
+                            index === 0
+                              ? alpha('#ffd707', 0.18)
+                              : index === 1
+                                ? alpha('#00d4fa', 0.12)
+                                : alpha('#ff671f', 0.14),
+                          color: 'text.primary',
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.16em',
+                        }}
+                      />
+                    ))}
+                  </Stack>
+
+                  <Grid container spacing={2} sx={{ mt: 2 }}>
+                    {schoolContent.activities.map((activity, index) => {
+                      const tone = activityTones[index % activityTones.length]
+
+                      return (
+                        <Grid item xs={12} sm={6} key={activity.title}>
+                          <Box
+                            component={Link}
+                            to={activity.to}
+                            sx={{
+                              display: 'block',
+                              borderRadius: 4,
+                              border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                              p: 2,
+                              textDecoration: 'none',
+                              boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                              transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                              background: theme.palette.mode === 'dark' ? tone.surfaceDark : tone.surface,
+                              '&:hover': {
+                                transform: 'translateY(-4px)',
+                                boxShadow: '0 18px 36px rgba(17, 26, 36, 0.12)',
+                              },
+                            }}
+                          >
+                            <Stack direction="row" spacing={2}>
+                              <OptimizedImage
+                                src={activity.image}
+                                alt={activity.title}
+                                wrapperSx={{ flexShrink: 0, width: 80, height: 80, borderRadius: 4 }}
+                                sx={{ width: 80, height: 80, borderRadius: 4 }}
+                              />
+                              <Box sx={{ minWidth: 0, flex: 1 }}>
+                                <Box
+                                  sx={{
+                                    display: 'inline-flex',
+                                    borderRadius: 4,
+                                    px: 1.25,
+                                    py: 0.6,
+                                    fontSize: '0.72rem',
+                                    fontWeight: 800,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.16em',
+                                    color: tone.badgeColor,
+                                    background: tone.badge,
+                                  }}
+                                >
+                                  0{index + 1}
+                                </Box>
+                                <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between" sx={{ mt: 1.5 }}>
+                                  <Typography sx={{ fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.4, color: 'text.primary' }}>
+                                    {activity.title}
+                                  </Typography>
+                                  <ArrowUpRight size={16} color={tone.icon} />
+                                </Stack>
+                                <Typography sx={{ mt: 1, fontSize: '0.88rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                                  {activity.description}
+                                </Typography>
+                              </Box>
+                            </Stack>
+                          </Box>
+                        </Grid>
+                      )
+                    })}
+                  </Grid>
+                </Box>
+              </Paper>
+            </motion.div>
+
+            <Stack spacing={3} sx={{ minWidth: 0 }}>
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1.15fr 0.85fr' }, gap: 2, minWidth: 0 }}>
+                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.5 })}>
+                  <Box sx={{ position: 'relative' }}>
+                    <OptimizedImage
+                      src={siteAssets.images.campusActivities}
+                      alt="School campus life highlights"
+                      wrapperSx={{ borderRadius: 4, }}
+                      sx={{ height: { xs: 260, sm: 288 }, borderRadius: 4, }}
+                    />
+                    <Box sx={{ px: 1, pb: 1, pt: 2 }}>
+                      <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#ff671f' }}>
+                        Campus Moments
+                      </Typography>
+                      <Typography variant="h5" sx={{ mt: 1, fontWeight: 800, textTransform: 'uppercase' }}>
+                        Visible energy across the school day.
+                      </Typography>
+                      <Typography sx={{ mt: 1, fontSize: '0.9rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                        Assemblies, collaborative spaces and student events help the campus feel active, proud and welcoming.
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Paper>
+
+                <Stack spacing={2}>
+                  {[
+                    {
+                      src: siteAssets.images.studentGroupStudy,
+                      alt: 'Students studying together',
+                      eyebrow: 'Shared Learning',
+                      title: 'Students collaborate, revise and learn together.',
+                      color: '#00d4fa',
+                    },
+                    {
+                      src: siteAssets.images.studentYoga,
+                      alt: 'Students in yoga activity',
+                      eyebrow: 'Wellbeing & Balance',
+                      title: 'Movement and mindfulness remain part of school life.',
+                      color: '#ff671f',
+                    },
+                  ].map((item) => (
+                    <Paper key={item.title} sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.25, flex: 1 })}>
+                      <OptimizedImage
+                        src={item.src}
+                        alt={item.alt}
+                        wrapperSx={{ borderRadius: 4 }}
+                        sx={{ height: 160, borderRadius: 4 }}
+                      />
+                      <Box sx={{ px: 1, pb: 0.5, pt: 1.75 }}>
+                        <Typography sx={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: item.color }}>
+                          {item.eyebrow}
+                        </Typography>
+                        <Typography sx={{ mt: 1, fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.6, color: 'text.primary' }}>
+                          {item.title}
+                        </Typography>
+                      </Box>
+                    </Paper>
+                  ))}
+                </Stack>
+              </Box>
+
+              <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 2, sm: 2.5 } })}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'flex-end' }} spacing={2} sx={{ mb: 3 }}>
+                  <Box>
+                    <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#00d4fa' }}>
+                      Gallery Highlights
+                    </Typography>
+                    <Typography variant="h5" sx={{ mt: 1, fontWeight: 800, textTransform: 'uppercase' }}>
+                      Real moments from classrooms, campus and student activities.
+                    </Typography>
+                  </Box>
+                  <Box
+                    component={Link}
+                    to="/gallery"
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      color: 'text.primary',
+                      textDecoration: 'none',
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      '&:hover': { color: '#ff671f' },
+                    }}
+                  >
+                    Open full gallery
+                    <ArrowUpRight size={16} />
+                  </Box>
+                </Stack>
+
+                <Carousel autoPlay interval={3600} ariaLabel="Campus gallery highlights">
+                  {schoolContent.gallery.slice(0, 8).map((item, index) => (
+                    <motion.div
+                      key={item.title}
+                      data-carousel-item
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.25 }}
+                      transition={{ duration: 0.72, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ width: 'min(340px, calc(100vw - 2.5rem))', flexShrink: 0 }}
+                    >
+                      <Paper
+                        sx={{
+                          p: 1.5,
+                          borderRadius: 4,
+                          border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.5) : alpha('#fff', 0.9),
+                          boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                          transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                          '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 18px 36px rgba(17, 26, 36, 0.12)' },
+                        }}
+                      >
+                        <OptimizedImage
+                          src={item.image}
+                          alt={item.title}
+                          wrapperSx={{ borderRadius: 4 }}
+                          sx={{ height: 208, borderRadius: 4 }}
+                        />
+                        <Box sx={{ px: 1, pb: 1, pt: 2 }}>
+                          <Typography sx={{ fontSize: '1rem', fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+                            {item.title}
+                          </Typography>
+                          <Typography sx={{ mt: 1, fontSize: '0.9rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                            {item.caption}
+                          </Typography>
+                        </Box>
+                      </Paper>
+                    </motion.div>
+                  ))}
+                </Carousel>
+              </Paper>
+            </Stack>
+          </Box>
+        </Container>
+      </Box>
+
+      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/92 via-surface-soft to-airforce-gold/8 p-8 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-secondary dark:to-primary-900/94">
-              <div className="mb-6 flex items-center gap-3">
-                <CalendarDays className="h-5 w-5 text-airforce-saffron" />
-                <Eyebrow tone="saffron">Notice Board</Eyebrow>
-                <span className="rounded-full bg-gradient-to-r from-airforce-gold/18 to-airforce-honey/18 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-airforce-brown dark:bg-gradient-to-r dark:from-airforce-gold/18 dark:to-airforce-saffron/12 dark:text-airforce-gold">
-                  {source === 'live' ? 'Live Feed' : 'School Archive'}
-                </span>
-              </div>
-              <div className="space-y-4">
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1.1fr 0.9fr' }, gap: 3 }}>
+            <Paper
+              sx={{
+                ...glassCardSx(theme),
+                p: { xs: 3, sm: 4 },
+                background:
+                  theme.palette.mode === 'dark'
+                    ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(52,70,86,0.94))'
+                    : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(255,215,7,0.08))',
+              }}
+            >
+              <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
+                <CalendarDays size={20} color="#ff671f" />
+                <Eyebrow>Notice Board</Eyebrow>
+                <Chip
+                  label={source === 'live' ? 'Live Feed' : 'School Archive'}
+                  sx={{
+                    borderRadius: 4,
+                    bgcolor: alpha('#ffd707', 0.18),
+                    color: 'text.primary',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.16em',
+                  }}
+                />
+              </Stack>
+
+              <Stack spacing={2}>
                 {liveNotices.slice(0, 4).map((notice, index) => (
                   <motion.div
                     key={notice.title}
@@ -503,88 +832,158 @@ export default function Home() {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <Link
+                    <Box
+                      component={Link}
                       to={notice.to}
-                      className="block rounded-[1.6rem] border border-primary-900/8 bg-white/88 p-5 shadow-soft transition hover:border-airforce-saffron/30 hover:bg-airforce-gold/5 dark:border-white/10 dark:bg-primary-900/84 dark:hover:border-airforce-gold/30 dark:hover:bg-primary-900"
+                      sx={{
+                        display: 'block',
+                        borderRadius: 4,
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha('#fff', 0.88),
+                        p: 2.5,
+                        textDecoration: 'none',
+                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                        transition: 'transform 0.25s ease, border-color 0.25s ease',
+                        '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#ff671f', 0.3) },
+                      }}
                     >
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="rounded-full bg-gradient-to-r from-airforce-saffron to-accent px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-                          {notice.category}
-                        </span>
-                        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-500 dark:text-airforce-gold/88">{notice.date}</span>
-                      </div>
-                      <h3 className="mt-4 text-xl font-bold uppercase text-primary-900 dark:text-white">{notice.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-primary-600 dark:text-skyback-light/82">{notice.excerpt}</p>
-                    </Link>
+                      <Stack direction="row" flexWrap="wrap" gap={1.25} alignItems="center">
+                        <Chip
+                          label={notice.category}
+                          sx={{
+                            borderRadius: 4,
+                            color: '#fff',
+                            background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                          }}
+                        />
+                        <Typography sx={{ fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                          {notice.date}
+                        </Typography>
+                      </Stack>
+                      <Typography variant="h5" sx={{ mt: 2, fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+                        {notice.title}
+                      </Typography>
+                      <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                        {notice.excerpt}
+                      </Typography>
+                    </Box>
                   </motion.div>
                 ))}
-              </div>
-              <div className="mt-6">
+              </Stack>
+
+              <Box sx={{ mt: 3 }}>
                 <Button to="/notice-board" variant="outline">
                   Explore All Notices
                 </Button>
-              </div>
-            </div>
+              </Box>
+            </Paper>
 
-            <div className="frost-card rounded-[2.4rem] bg-gradient-to-br from-white/92 via-surface-soft to-airforce-cyan/8 p-8 dark:bg-gradient-to-br dark:from-primary-950/96 dark:via-secondary dark:to-primary-900/94">
-              <div className="mb-6 flex items-center gap-3">
-                <DownloadCloud className="h-5 w-5 text-airforce-cyan" />
-                <Eyebrow tone="cyan">Downloads</Eyebrow>
-              </div>
-              <div className="space-y-4">
+            <Paper
+              sx={{
+                ...glassCardSx(theme),
+                p: { xs: 3, sm: 4 },
+                background:
+                  theme.palette.mode === 'dark'
+                    ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(0,212,250,0.08))'
+                    : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(0,212,250,0.08))',
+              }}
+            >
+              <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
+                <DownloadCloud size={20} color="#00d4fa" />
+                <Eyebrow>Downloads</Eyebrow>
+              </Stack>
+
+              <Stack spacing={2}>
                 {liveDownloads.map((file, index) => (
-                  <motion.a
+                  <motion.div
                     key={file.label}
-                    href={file.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex items-center justify-between rounded-[1.6rem] border border-primary-900/8 bg-white/88 px-5 py-4 shadow-soft transition hover:border-airforce-cyan/30 hover:bg-airforce-cyan/5 dark:border-white/10 dark:bg-primary-900/84 dark:hover:border-airforce-gold/24 dark:hover:bg-primary-900"
                   >
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-500 dark:text-airforce-gold/88">{file.category}</p>
-                      <p className="mt-1 text-sm font-semibold text-primary-900 dark:text-white">{file.label}</p>
-                    </div>
-                    <ArrowUpRight className="h-4 w-4 text-primary-300 dark:text-airforce-gold" />
-                  </motion.a>
+                    <Box
+                      component="a"
+                      href={file.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 2,
+                        borderRadius: 4,
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha('#fff', 0.88),
+                        px: 2.5,
+                        py: 2,
+                        textDecoration: 'none',
+                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                        transition: 'transform 0.25s ease, border-color 0.25s ease',
+                        '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#00d4fa', 0.3) },
+                      }}
+                    >
+                      <Box>
+                        <Typography sx={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                          {file.category}
+                        </Typography>
+                        <Typography sx={{ mt: 0.75, fontSize: '0.95rem', fontWeight: 700, color: 'text.primary' }}>
+                          {file.label}
+                        </Typography>
+                      </Box>
+                      <ArrowUpRight size={16} color={theme.palette.mode === 'dark' ? '#ffd707' : theme.palette.primary.light} />
+                    </Box>
+                  </motion.div>
                 ))}
-              </div>
-              <div className="mt-6">
+              </Stack>
+
+              <Box sx={{ mt: 3 }}>
                 <Button to="/downloads" variant="outline">
                   Open Download Centre
                 </Button>
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Paper>
+          </Box>
         </Container>
-      </section>
+      </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-secondary via-primary-900 to-primary-700 p-8 text-white shadow-card sm:p-10">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(215,166,37,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(93,138,168,0.14),transparent_20%)]" />
-            <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.9fr]">
+          <Paper
+            sx={{
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: 4,
+              p: { xs: 3, sm: 4, md: 5 },
+              color: '#fff',
+              background: 'linear-gradient(135deg, #1d213c 0%, #202c36 55%, #344656 100%)',
+              boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+            }}
+          >
+            <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at top right, rgba(215,166,37,0.35), transparent 28%), radial-gradient(circle at left, rgba(93,138,168,0.14), transparent 20%)' }} />
+            <Box sx={{ position: 'relative', display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 0.9fr' }, gap: 4 }}>
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
                 <Eyebrow>Admissions</Eyebrow>
-                <h2 className="mt-3 text-4xl font-bold uppercase leading-[0.92] text-white sm:text-5xl">
+                <Typography variant="h2" sx={{ mt: 1.5, color: '#fff', fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
                   Start your school enquiry with clarity and confidence.
-                </h2>
-                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/72">{schoolContent.admissions.intro}</p>
-
-                <div className="mt-8 flex flex-wrap gap-4">
+                </Typography>
+                <Typography sx={{ mt: 3, maxWidth: 680, fontSize: '0.95rem', lineHeight: 1.8, color: alpha('#fff', 0.74) }}>
+                  {schoolContent.admissions.intro}
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                   <Button size="lg" variant="light" onClick={() => openEnquiry('Admissions Enquiry')}>
                     Enquire For Admission
                   </Button>
                   <Button size="lg" variant="ghost" to={schoolContent.resources[0].to}>
                     View Public Disclosure
                   </Button>
-                </div>
+                </Stack>
               </motion.div>
 
-              <div className="grid gap-4">
+              <Stack spacing={2}>
                 {schoolContent.admissions.steps.map((step, index) => (
                   <motion.div
                     key={step}
@@ -592,88 +991,191 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.65, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                    className="rounded-[1.7rem] border border-white/10 bg-white/8 p-5 backdrop-blur-md"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="rounded-full bg-white/12 px-3 py-1 text-sm font-bold uppercase tracking-[0.16em] text-white">
-                        0{index + 1}
-                      </div>
-                      <p className="text-sm leading-relaxed text-white/80">{step}</p>
-                    </div>
+                    <Paper
+                      sx={{
+                        borderRadius: 4,
+                        border: `1px solid ${alpha('#fff', 0.1)}`,
+                        bgcolor: alpha('#fff', 0.08),
+                        p: 2.5,
+                        backdropFilter: 'blur(12px)',
+                      }}
+                    >
+                      <Stack direction="row" spacing={2} alignItems="flex-start">
+                        <Box
+                          sx={{
+                            borderRadius: 4,
+                            bgcolor: alpha('#fff', 0.12),
+                            px: 1.5,
+                            py: 0.6,
+                            fontSize: '0.8rem',
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.16em',
+                            color: '#fff',
+                          }}
+                        >
+                          0{index + 1}
+                        </Box>
+                        <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: alpha('#fff', 0.82) }}>
+                          {step}
+                        </Typography>
+                      </Stack>
+                    </Paper>
                   </motion.div>
                 ))}
-              </div>
-            </div>
-          </div>
+              </Stack>
+            </Box>
+          </Paper>
         </Container>
-      </section>
+      </Box>
 
-      <section className="section-pad px-4 sm:px-6 lg:px-8">
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-            <div className="frost-card rounded-[2.3rem] bg-gradient-to-br from-white/80 to-skyback-soft/58 p-8 dark:bg-gradient-to-br dark:from-primary-950/76 dark:to-primary-900/66">
-              <div className="flex items-center gap-3">
-                <FileText className="h-5 w-5 text-accent" />
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '0.9fr 1.1fr' }, gap: 3 }}>
+            <Paper
+              sx={{
+                ...glassCardSx(theme),
+                p: { xs: 3, sm: 4 },
+                background:
+                  theme.palette.mode === 'dark'
+                    ? 'linear-gradient(135deg, rgba(14,20,24,0.76), rgba(29,33,60,0.66))'
+                    : 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(228,246,251,0.58))',
+              }}
+            >
+              <Stack direction="row" spacing={1.5} alignItems="center">
+                <FileText size={20} color="#f0934b" />
                 <Eyebrow>Leadership Preview</Eyebrow>
-              </div>
-              <h2 className="mt-4 text-4xl font-bold uppercase leading-[0.92] text-primary-900 dark:text-white">
+              </Stack>
+              <Typography variant="h2" sx={{ mt: 2, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.2rem', sm: '3rem' } }}>
                 Transparent school governance and parent access.
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.leadership.intro}</p>
-              <div className="mt-6 space-y-3">
-                  {schoolContent.leadership.resources.slice(0, 3).map((resource) => (
-                  <Link
+              </Typography>
+              <Typography sx={{ mt: 3, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                {schoolContent.leadership.intro}
+              </Typography>
+
+              <Stack spacing={1.5} sx={{ mt: 3 }}>
+                {schoolContent.leadership.resources.slice(0, 3).map((resource) => (
+                  <Box
                     key={resource.title}
+                    component={Link}
                     to={resource.to}
-                    className="flex items-center justify-between rounded-[1.4rem] border border-primary-900/8 bg-white/78 px-5 py-4 shadow-soft transition hover:border-primary-200 dark:border-white/10 dark:bg-primary-950/70"
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 2,
+                      borderRadius: 4,
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.4) : alpha('#fff', 0.78),
+                      px: 2.5,
+                      py: 2,
+                      textDecoration: 'none',
+                      boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                      '&:hover': { borderColor: alpha(theme.palette.primary.light, 0.28) },
+                    }}
                   >
-                    <span className="text-sm font-semibold text-primary-900 dark:text-white">{resource.title}</span>
-                    <ArrowUpRight className="h-4 w-4 text-primary-300" />
-                  </Link>
+                    <Typography sx={{ fontSize: '0.92rem', fontWeight: 700, color: 'text.primary' }}>
+                      {resource.title}
+                    </Typography>
+                    <ArrowUpRight size={16} color={theme.palette.primary.light} />
+                  </Box>
                 ))}
-              </div>
-              <div className="mt-6">
+              </Stack>
+
+              <Box sx={{ mt: 3 }}>
                 <Button to="/leadership" variant="outline">
                   Explore Leadership
                 </Button>
-              </div>
-            </div>
+              </Box>
+            </Paper>
 
-            <div className="overflow-hidden rounded-[2.3rem] border border-white/70 bg-gradient-to-br from-white/84 to-skyback-soft/68 p-4 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-primary-950/84 dark:to-primary-900/70">
-              <div className="mb-4 flex flex-col gap-3 px-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary-400">Campus Contact</p>
-                  <h2 className="text-2xl font-bold uppercase text-primary-900 dark:text-white">Air Force School VayuSena Nagar</h2>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <a
+            <Paper
+              sx={{
+                overflow: 'hidden',
+                borderRadius: 4,
+                border: `1px solid ${alpha('#fff', theme.palette.mode === 'dark' ? 0.1 : 0.7)}`,
+                p: 1.5,
+                boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+                backdropFilter: 'blur(20px)',
+                background:
+                  theme.palette.mode === 'dark'
+                    ? 'linear-gradient(135deg, rgba(14,20,24,0.84), rgba(29,33,60,0.7))'
+                    : 'linear-gradient(135deg, rgba(255,255,255,0.84), rgba(228,246,251,0.68))',
+              }}
+            >
+              <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }} spacing={2} sx={{ px: 1.5, py: 1.5 }}>
+                <Box>
+                  <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'text.secondary' }}>
+                    Campus Contact
+                  </Typography>
+                  <Typography variant="h5" sx={{ mt: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
+                    Air Force School VayuSena Nagar
+                  </Typography>
+                </Box>
+                <Stack direction="row" flexWrap="wrap" gap={1}>
+                  <Box
+                    component="a"
                     href={`tel:${schoolContent.contact.phone}`}
-                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-primary-900 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white dark:bg-white dark:text-primary-950"
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      borderRadius: 4,
+                      bgcolor: 'primary.main',
+                      px: 2,
+                      py: 1,
+                      color: '#fff',
+                      textDecoration: 'none',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.14em',
+                    }}
                   >
-                    <Phone className="h-3.5 w-3.5" />
+                    <Phone size={14} />
                     Call
-                  </a>
-                  <a
+                  </Box>
+                  <Box
+                    component="a"
                     href={schoolContent.contact.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-primary-900/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-primary-800 dark:border-white/10 dark:text-white"
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      borderRadius: 4,
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+                      px: 2,
+                      py: 1,
+                      color: 'text.primary',
+                      textDecoration: 'none',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.14em',
+                    }}
                   >
-                    <MapPin className="h-3.5 w-3.5" />
+                    <MapPin size={14} />
                     Open Map
-                  </a>
-                </div>
-              </div>
-              <iframe
+                  </Box>
+                </Stack>
+              </Stack>
+              <Box
+                component="iframe"
                 title="Air Force School VayuSena Nagar map"
                 src={schoolContent.contact.mapEmbed}
-                className="h-[420px] w-full rounded-[1.8rem] border-0"
                 loading="lazy"
+                sx={{ width: '100%', height: 420, border: 0, borderRadius: 4 }}
               />
-            </div>
-          </div>
+            </Paper>
+          </Box>
         </Container>
-      </section>
+      </Box>
+
+      <Initiatives />
+      <Achievements />
 
       <FAQSection />
     </>

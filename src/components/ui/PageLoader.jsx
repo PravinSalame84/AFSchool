@@ -8,8 +8,8 @@ export default function PageLoader() {
     <Box sx={{ minHeight: '50vh', px: { xs: 2, sm: 3, lg: 4 }, py: 12 }}>
       <Container>
         <Stack spacing={3}>
-          <Skeleton variant="rounded" width={160} height={20} sx={{ borderRadius: 999 }} />
-          <Skeleton variant="rounded" width="100%" height={80} sx={{ maxWidth: '48rem', borderRadius: '2rem' }} />
+          <Skeleton variant="rounded" width={160} height={20} sx={{ borderRadius: 4 }} />
+          <Skeleton variant="rounded" width="100%" height={80} sx={{ maxWidth: '48rem', borderRadius: 4 }} />
           <Box
             sx={{
               display: 'grid',
@@ -18,7 +18,7 @@ export default function PageLoader() {
             }}
           >
             {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton key={index} variant="rounded" height={256} sx={{ borderRadius: '2rem' }} />
+              <Skeleton key={index} variant="rounded" height={256} sx={{ borderRadius: 4 }} />
             ))}
           </Box>
         </Stack>

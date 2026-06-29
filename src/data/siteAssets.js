@@ -31,11 +31,11 @@ const siteAssets = {
     studentYoga: '/media/students/student-yoga.jpeg',
   },
   downloads: {
-    ccaCalendar: '/downloads/school/cca-calendar-2023-24.pdf',
-    primaryHomework: '/downloads/school/primary-summer-holiday-homework-2024-25.pdf',
+    ccaCalendar: '/downloads/school/cca-calendar-2025-26.pdf',
+    primaryHomework: '/downloads/school/primary-summer-holiday-homework-2026-27.pdf',
     schoolCalendar: '/downloads/school/school-calendar-2024-2025.pdf',
     bookList: '/downloads/school/book-list-2024-2025.pdf',
-    class6To12Homework: '/downloads/school/class-6-12-summer-holiday-homework-2024-25.pdf',
+    class6To12Homework: '/downloads/school/class-6-12-summer-holiday-homework-2026-27.pdf',
   },
 }
 

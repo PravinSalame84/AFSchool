@@ -6,37 +6,91 @@ import RevealOnScroll from '../ui/RevealOnScroll'
 import stats from '../../data/stats'
 import siteConfig from '../../data/siteConfig'
 
-export default function AboutSnapshot() {
-  return (
-    <section id="about-snapshot" className="bg-primary-900 section-pad">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-          <RevealOnScroll>
-            <SectionHeading
-              eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
-              title="More than grades — we build well-rounded human beings"
-              tone="light"
-            />
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-skyback-light/80">
-              Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
-              of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
-              is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
-              society.
-            </p>
-            <Button to="/about" variant="light" className="mt-7">
-              Read Our Story
-            </Button>
-          </RevealOnScroll>
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import { alpha, useTheme } from '@mui/material/styles'
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-y-12">
-            {stats.map((stat, i) => (
-              <RevealOnScroll key={stat.label} delay={i * 90}>
-                <StatCounter {...stat} tone="light" />
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
+export default function AboutSnapshot() {
+  const theme = useTheme()
+
+  return (
+    <Box
+      component="section"
+      id="about-snapshot"
+      sx={{
+        py: { xs: 8, md: 12 },
+        background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+        color: '#fff',
+      }}
+    >
+      <Container>
+        <Grid container spacing={6} alignItems="flex-start">
+
+          {/* LEFT CONTENT */}
+          <Grid item xs={12} md={6}>
+            <RevealOnScroll>
+              <SectionHeading
+                eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
+                title="More than grades — we build well-rounded human beings"
+                tone="light"
+              />
+
+              <Typography
+                sx={{
+                  mt: 3,
+                  maxWidth: 520,
+                  fontSize: 15,
+                  lineHeight: 1.7,
+                  color: alpha('#fff', 0.8),
+                }}
+              >
+                Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
+                of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
+                is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
+                society.
+              </Typography>
+
+              <Box sx={{ mt: 4 }}>
+                <Button to="/about" variant="light">
+                  Read Our Story
+                </Button>
+              </Box>
+            </RevealOnScroll>
+          </Grid>
+
+          {/* RIGHT STATS GRID */}
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={3}>
+              {stats.map((stat, i) => (
+                <Grid item xs={6} key={stat.label}>
+                  <RevealOnScroll delay={i * 80}>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        p: 3,
+                        borderRadius: 4,
+                        bgcolor: alpha('#fff', 0.06),
+                        border: `1px solid ${alpha('#fff', 0.12)}`,
+                        backdropFilter: 'blur(10px)',
+                        transition: 'transform 0.2s ease',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                          bgcolor: alpha('#fff', 0.09),
+                        },
+                      }}
+                    >
+                      <StatCounter {...stat} tone="light" />
+                    </Paper>
+                  </RevealOnScroll>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+
+        </Grid>
       </Container>
-    </section>
+    </Box>
   )
 }

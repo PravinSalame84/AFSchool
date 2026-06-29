@@ -1,15 +1,14 @@
 import { memo, useEffect, useState } from 'react'
+import { Box, Skeleton } from '@mui/material'
 
-/**
- * Shared image wrapper with a lightweight loading state so pages can reuse
- * consistent image behaviour without repeating skeleton and fade logic.
- */
 function OptimizedImage({
   src,
   alt,
   className = '',
   wrapperClassName = '',
   priority = false,
+  sx,
+  wrapperSx,
   ...rest
 }) {
   const [loaded, setLoaded] = useState(false)
@@ -19,19 +18,46 @@ function OptimizedImage({
   }, [src])
 
   return (
-    <div className={`relative overflow-hidden ${wrapperClassName}`}>
-      {!loaded && <div className="absolute inset-0 animate-pulse bg-slate-200/70 dark:bg-slate-800/70" aria-hidden="true" />}
-      <img
+    <Box
+      className={wrapperClassName}
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        ...(Array.isArray(wrapperSx) ? Object.assign({}, ...wrapperSx) : wrapperSx),
+      }}
+    >
+      {!loaded && (
+        <Skeleton
+          variant="rectangular"
+          animation="pulse"
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            bgcolor: 'action.hover',
+          }}
+        />
+      )}
+
+      <Box
+        component="img"
         src={src}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         fetchPriority={priority ? 'high' : 'auto'}
         onLoad={() => setLoaded(true)}
-        className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+        className={className}
+        sx={{
+          width: '100%',
+          height: '100%',
+          opacity: loaded ? 1 : 0,
+          transition: 'opacity 500ms ease',
+          objectFit: 'cover',
+          ...(Array.isArray(sx) ? Object.assign({}, ...sx) : sx),
+        }}
         {...rest}
       />
-    </div>
+    </Box>
   )
 }
 
