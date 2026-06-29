@@ -74,7 +74,7 @@ export default function Hero() {
             <motion.div initial="hidden" animate="show" custom={0.08} variants={fadeUp}>
               <h1 className="mt-7 max-w-4xl text-[3rem] font-bold uppercase leading-[0.88] text-primary-900 dark:text-white sm:text-[4.6rem]">
                 Premium Schooling
-                <span className="block bg-gradient-to-r from-[#2d5f8d] via-[#5d8aa8] to-[#7aaec9] bg-clip-text text-transparent dark:from-sky-200 dark:via-sky-300 dark:to-cyan-200">
+                <span className="block bg-gradient-to-r from-primary-600 via-airforce-blue to-skyback bg-clip-text text-transparent dark:from-skyback-light dark:via-skyback dark:to-info">
                   With Air Force Character
                 </span>
               </h1>
@@ -174,7 +174,7 @@ export default function Hero() {
                         className="h-[155px] w-full rounded-[1.4rem] object-cover object-center"
                       />
                     </div>
-                    <div className="mt-3 rounded-[1.35rem] bg-gradient-to-r from-secondary to-primary-700 px-4 py-3 text-white dark:from-white dark:to-slate-100 dark:text-primary-950">
+                    <div className="mt-3 rounded-[1.35rem] bg-gradient-to-r from-secondary via-primary-800 to-primary-600 px-4 py-3 text-white dark:from-white dark:to-skyback-light dark:text-primary-950">
                       <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/60 dark:text-primary-700">
                         School Motto
                       </p>

@@ -90,14 +90,18 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}
               >
                 <Button
                   to={item.to}
                   variant="outline"
                   icon={false}
-                  className="group flex w-full items-start justify-between rounded-[2rem] px-6 py-6 text-left"
+                  className="group flex w-full items-start justify-between rounded-[2rem] border-accent/30 bg-gradient-to-br from-accent/12 via-white/95 to-skyback-soft/80 px-6 py-6 text-left hover:border-accent/50 hover:bg-gradient-to-br hover:from-accent/18 hover:via-white hover:to-skyback-soft dark:from-accent/18 dark:via-primary-950/94 dark:to-primary-900/84"
                 >
-                  <div>
+                  <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-primary-900 text-white shadow-soft dark:bg-white dark:text-primary-950">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
                     <p className="text-lg font-bold uppercase">{item.label}</p>
                     <p className="mt-2 text-sm normal-case tracking-normal text-primary-600 dark:text-slate-300">{item.description}</p>
                   </div>
@@ -176,8 +180,8 @@ export default function Home() {
                 <p className="mt-4 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{schoolContent.about.mission}</p>
               </div>
 
-              <div className="relative overflow-hidden rounded-[2.2rem] bg-primary-900 p-6 text-white shadow-card">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.3),transparent_28%)]" />
+              <div className="relative overflow-hidden rounded-[2.2rem] bg-gradient-to-br from-secondary via-primary-900 to-primary-700 p-6 text-white shadow-card">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(215,166,37,0.28),transparent_28%)]" />
                 <p className="relative text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">Parent Access</p>
                 <div className="relative mt-4 flex flex-wrap gap-3">
                   {schoolContent.resources.slice(0, 3).map((resource) => (
@@ -247,11 +251,50 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="frost-card rounded-[1.8rem] p-5"
+                className="frost-card overflow-hidden rounded-[1.8rem] p-3"
               >
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
-                <p className="mt-3 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
+                <div className="grid gap-4 sm:grid-cols-[92px_1fr] sm:items-center">
+                  <OptimizedImage
+                    src={stat.image}
+                    alt={stat.label}
+                    wrapperClassName="rounded-[1.2rem]"
+                    className="h-24 w-full rounded-[1.2rem] object-cover"
+                  />
+                  <div className="px-2 py-2">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-400">{stat.label}</p>
+                    <p className="mt-2 text-3xl font-bold uppercase text-primary-900 dark:text-white">{stat.value}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-primary-600 dark:text-slate-300">{stat.caption}</p>
+                  </div>
+                </div>
               </motion.div>
+            ))}
+          </div>
+
+          <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {schoolContent.studentShowcase.map((item, index) => (
+              <motion.article
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden rounded-[1.9rem] border border-white/50 shadow-card"
+              >
+                <OptimizedImage
+                  src={item.image}
+                  alt={item.title}
+                  wrapperClassName="absolute inset-0"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-950/90 via-primary-900/42 to-transparent" />
+                <div className="relative flex min-h-[240px] flex-col justify-end p-5 text-white">
+                  <span className="inline-flex w-fit rounded-full bg-white/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+                    {item.badge}
+                  </span>
+                  <h3 className="mt-3 text-xl font-bold uppercase">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/78">{item.caption}</p>
+                </div>
+              </motion.article>
             ))}
           </div>
 
@@ -280,14 +323,21 @@ export default function Home() {
                     to={activity.to}
                     className="block rounded-[1.6rem] border border-primary-900/8 bg-white/80 p-4 shadow-soft transition hover:border-primary-200 dark:border-white/10 dark:bg-primary-950/70"
                   >
-                    <div className="flex items-start gap-3">
-                      <div className="mt-1 rounded-full bg-primary-900 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
-                        0{index + 1}
-                      </div>
-                      <div>
+                    <div className="flex items-start gap-4">
+                      <OptimizedImage
+                        src={activity.image}
+                        alt={activity.title}
+                        wrapperClassName="h-20 w-20 flex-shrink-0 rounded-[1.1rem]"
+                        className="h-20 w-20 rounded-[1.1rem] object-cover"
+                      />
+                      <div className="flex-1">
+                        <div className="mt-1 inline-flex rounded-full bg-primary-900 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+                          0{index + 1}
+                        </div>
                         <h3 className="text-lg font-bold uppercase text-primary-900 dark:text-white">{activity.title}</h3>
                         <p className="mt-1 text-sm leading-relaxed text-primary-600 dark:text-slate-300">{activity.description}</p>
                       </div>
+                      <ArrowUpRight className="mt-2 h-4 w-4 flex-shrink-0 text-primary-300" />
                     </div>
                   </Link>
                 ))}
@@ -295,7 +345,7 @@ export default function Home() {
             </motion.div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              {schoolContent.gallery.slice(0, 4).map((item, index) => (
+              {schoolContent.gallery.slice(0, 6).map((item, index) => (
                 <motion.article
                   key={item.title}
                   initial={{ opacity: 0, y: 28 }}
@@ -397,8 +447,8 @@ export default function Home() {
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-secondary via-primary-900 to-[#214f79] p-8 text-white shadow-card sm:p-10">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgrgba(176,141,76,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(107,124,70,0.12),transparent_20%)]" />
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-secondary via-primary-900 to-primary-700 p-8 text-white shadow-card sm:p-10">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(215,166,37,0.35),transparent_28%),radial-gradient(circle_at_left,rgba(93,138,168,0.14),transparent_20%)]" />
             <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.9fr]">
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
                 <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Admissions</p>

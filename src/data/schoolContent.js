@@ -1,4 +1,5 @@
 import siteAssets from './siteAssets'
+import { School, Users, BookOpen, Bell, Download, Images } from 'lucide-react'
 
 const schoolContent = {
   meta: {
@@ -56,10 +57,30 @@ const schoolContent = {
   ],
 
   statistics: [
-    { label: 'Years of Legacy', value: '58+' },
-    { label: 'Students', value: '530+' },
-    { label: 'Learning Stages', value: 'LKG - IX' },
-    { label: 'Core Focus', value: 'Holistic Growth' },
+    {
+      image: siteAssets.images.bestAward,
+      label: 'Years of Legacy',
+      value: '58+',
+      caption: 'A long-standing culture of discipline and student growth.',
+    },
+    {
+      image: siteAssets.images.campusActivities,
+      label: 'Students',
+      value: '530+',
+      caption: 'A vibrant student body learning, participating and growing together.',
+    },
+    {
+      image: siteAssets.images.smartClassroom,
+      label: 'Learning Stages',
+      value: 'LKG - IX',
+      caption: 'Structured progression supported by modern classroom practices.',
+    },
+    {
+      image: siteAssets.images.campusLearning,
+      label: 'Core Focus',
+      value: 'Holistic Growth',
+      caption: 'Academics, values, confidence and wellbeing at the centre.',
+    },
   ],
 
   quickStats: [
@@ -68,21 +89,21 @@ const schoolContent = {
       value: 'Smart Classrooms',
       description: 'Digital boards, child-friendly furniture and structured learning support.',
       image: siteAssets.images.smartClassroom,
-      accent: 'from-[#1f3f63] to-[#5d8aa8]',
+      accent: 'from-[#ff7b3d] to-[#ffb16a]',
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
       image: siteAssets.images.campusActivities,
-      accent: 'from-[#224870] to-[#2d6fa1]',
+      accent: 'from-[#5b44ff] to-[#9a64ff]',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
       description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
       image: siteAssets.images.campusLearning,
-      accent: 'from-[#2d7589] to-[#69a9bd]',
+      accent: 'from-[#1fd3d2] to-[#76f6d4]',
     },
   ],
 
@@ -197,21 +218,52 @@ const schoolContent = {
       title: 'Curricular Activities',
       description: 'Structured classroom learning that builds concepts, confidence and academic habits.',
       to: '/academics/curricular-activities',
+      image: siteAssets.images.smartClassroom,
     },
     {
       title: 'Co-Curricular Activities',
       description: 'Assemblies, celebrations, clubs and creativity-led opportunities that broaden perspective.',
       to: '/academics/co-curricular-activities',
+      image: siteAssets.images.campusActivities,
     },
     {
       title: 'Sports Activities',
       description: 'Physical training, games and team spirit that support endurance, coordination and resilience.',
       to: '/academics/sports-activities',
+      image: siteAssets.images.unityRun,
     },
     {
       title: 'Educational Trips & Competitions',
       description: 'Inter-school exposure and learning beyond the classroom strengthen communication and confidence.',
       to: '/academics/other-school-activities',
+      image: siteAssets.images.bestAward,
+    },
+  ],
+
+  studentShowcase: [
+    {
+      title: 'Student Energy',
+      badge: 'Campus Life',
+      image: siteAssets.images.campusActivities,
+      caption: 'Everyday student participation across events, school gatherings and guided activities.',
+    },
+    {
+      title: 'Learning Focus',
+      badge: 'Academics',
+      image: siteAssets.images.smartClassroom,
+      caption: 'Classroom experiences designed to feel structured, modern and encouraging.',
+    },
+    {
+      title: 'Recognition & Pride',
+      badge: 'Achievement',
+      image: siteAssets.images.bestAward,
+      caption: 'Student milestones and achievement moments that reinforce effort and confidence.',
+    },
+    {
+      title: 'Confident Growth',
+      badge: 'School Spirit',
+      image: siteAssets.images.unityRun,
+      caption: 'A culture of teamwork, discipline and visible school pride across student life.',
     },
   ],
 
@@ -375,12 +427,12 @@ const schoolContent = {
   ],
 
   quickLinks: [
-    { label: 'About School', to: '/about', description: 'History, vision, mission and institutional overview.' },
-    { label: 'Leadership & Governance', to: '/leadership', description: 'Committee, staff and governance resources.' },
-    { label: 'Academics', to: '/academics', description: 'Curricular, co-curricular and sports learning paths.' },
-    { label: 'Notice Board', to: '/notice-board', description: 'Latest notices, updates and school publications.' },
-    { label: 'Downloads', to: '/downloads', description: 'Homework, calendars and official downloadable resources.' },
-    { label: 'Gallery', to: '/gallery', description: 'Campus photos and school highlights.' },
+    { icon: School, label: 'About School', to: '/about', description: 'History, vision, mission and institutional overview.' },
+    { icon: Users, label: 'Leadership & Governance', to: '/leadership', description: 'Committee, staff and governance resources.' },
+    { icon: BookOpen, label: 'Academics', to: '/academics', description: 'Curricular, co-curricular and sports learning paths.' },
+    { icon: Bell, label: 'Notice Board', to: '/notice-board', description: 'Latest notices, updates and school publications.' },
+    { icon: Download, label: 'Downloads', to: '/downloads', description: 'Homework, calendars and official downloadable resources.' },
+    { icon: Images, label: 'Gallery', to: '/gallery', description: 'Campus photos and school highlights.' },
   ],
 
   marquee: [

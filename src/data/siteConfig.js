@@ -33,7 +33,7 @@ const siteConfig = {
   },
 
   cta: {
-    enquire: 'Schedule an Enquiry',
+    enquire: 'Enquire',
     brochure: 'Request School Details',
     admissions: 'Start Admission Enquiry',
   },

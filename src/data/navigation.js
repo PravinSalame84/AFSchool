@@ -1,7 +1,7 @@
 const navigation = [
   { label: 'Home', to: '/' },
   {
-    label: 'About School',
+    label: 'About',
     to: '/about',
     children: [
       { label: 'About Us', to: '/about' },

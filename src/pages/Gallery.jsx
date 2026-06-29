@@ -27,14 +27,35 @@ export default function Gallery() {
 
       <section className="section-pad px-4 sm:px-6 lg:px-8">
         <Container>
-          <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-900 text-white dark:bg-white dark:text-primary-950">
+          <div className="mb-8 flex items-start gap-3 sm:items-center">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary via-primary-800 to-primary-600 text-white dark:from-skyback-light dark:via-white dark:to-accent dark:text-primary-950">
               <Camera className="h-5 w-5" />
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Interactive Gallery</p>
-              <h2 className="text-3xl font-bold uppercase text-primary-900 dark:text-white">Campus, events and achievement moments.</h2>
+              <h2 className="text-2xl font-bold uppercase text-primary-900 dark:text-white sm:text-3xl">Campus, events and achievement moments.</h2>
             </div>
+          </div>
+
+          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {schoolContent.studentShowcase.slice(0, 3).map((item) => (
+              <article key={item.title} className="relative overflow-hidden rounded-[1.8rem] border border-white/50 shadow-card">
+                <OptimizedImage
+                  src={item.image}
+                  alt={item.title}
+                  wrapperClassName="absolute inset-0"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-primary-900/60 to-accent/10" />
+                <div className="relative flex min-h-[220px] flex-col justify-end p-5 text-white">
+                  <span className="inline-flex w-fit rounded-full border border-white/16 bg-white/16 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/95 backdrop-blur-sm">
+                    {item.badge}
+                  </span>
+                  <h3 className="mt-3 text-lg font-bold uppercase">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/86">{item.caption}</p>
+                </div>
+              </article>
+            ))}
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">

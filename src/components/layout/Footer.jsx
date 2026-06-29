@@ -63,14 +63,14 @@ const connectLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-secondary via-primary-900 to-[#183d5d] text-white">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-secondary via-primary-900 to-primary-700 text-white">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-      <div className="pointer-events-none absolute -top-20 right-0 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-skyback/10 blur-3xl" />
+      <div className="pointer-events-none absolute -top-20 right-0 h-64 w-64 rounded-full bg-accent/24 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-info/14 blur-3xl" />
       <Container className="relative px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.8fr_0.9fr_1fr]">
           <div>
-            <Logo tone="light" />
+            <Logo tone="light" variant="footer" className="inline-flex" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/74">
               A premium digital presence for Air Force School VayuSena Nagar, designed around parent access,
               student achievement and a disciplined Air Force inspired identity.
@@ -117,7 +117,7 @@ export default function Footer() {
                   <Link
                     key={label}
                     to={href}
-                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/28 hover:from-white/18 hover:to-white/10"
+                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-accent/50 hover:from-accent/28 hover:to-info/16 hover:text-white"
                   >
                     <Icon className="h-3.5 w-3.5" />
                     {label}
@@ -128,7 +128,7 @@ export default function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-white/28 hover:from-white/18 hover:to-white/10"
+                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/14 bg-gradient-to-r from-white/12 to-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/82 transition hover:border-accent/50 hover:from-accent/28 hover:to-info/16 hover:text-white"
                   >
                     <Icon className="h-3.5 w-3.5" />
                     {label}
@@ -143,7 +143,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent">
+                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm text-white/82 transition hover:bg-white/10 hover:text-white">
                     <ChevronRight className="h-4 w-4" /> {link.label}
                   </Link>
                 </li>
@@ -156,7 +156,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {schoolContent.resources.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 text-sm transition hover:text-accent">
+                  <Link to={link.to} className="focus-ring inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm text-white/82 transition hover:bg-white/10 hover:text-white">
                     <ChevronRight className="h-4 w-4" /> {link.label}
                   </Link>
                 </li>
@@ -213,7 +213,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 rounded-[2rem] border border-white/10 bg-gradient-to-r from-white/8 to-white/4 p-4 backdrop-blur-md lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mt-10 grid grid-cols-1 gap-4 rounded-[2rem] border border-white/10 bg-gradient-to-r from-white/10 via-white/6 to-info/10 p-4 backdrop-blur-md lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">School Snapshot</p>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/72">
@@ -223,7 +223,7 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {schoolContent.statistics.map((stat) => (
-              <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-white/8 px-4 py-3">
+              <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-gradient-to-br from-white/12 to-white/6 px-4 py-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/55">{stat.label}</p>
                 <p className="mt-2 text-lg font-bold uppercase text-white">{stat.value}</p>
               </div>
