@@ -1,14 +1,12 @@
 const achievements = [
-  { year: '2026', title: 'Transformational K–12 School Network Award', org: 'National Education Excellence Awards' },
-  { year: '2026', title: 'Pioneering Education Excellence Award', org: 'EdTech Leadership Council' },
-  { year: '2025', title: "India's Prestigious Learning Institute", org: 'National Edge Media' },
-  { year: '2025', title: 'Most Trusted Education Brand', org: 'Big Impact Awards' },
-  { year: '2024', title: 'Most Respected Education Brand in India', org: 'Education World' },
-  { year: '2024', title: 'Best Education Brand', org: 'Economic Insights Group' },
-  { year: '2023', title: "Most Trusted Brand of the Nation", org: 'The Brand Story' },
-  { year: '2023', title: 'Leading Pre-school Chain (National)', org: 'ArdorComm Media' },
-  { year: '2022', title: "India's Most Respected Education Brand", org: 'Education World' },
-  { year: '2021', title: 'Most Distinguished School Network of the Year', org: 'Education Excellence Awards' },
+  { year: '1968', title: 'Legacy Of Service In Education', org: 'Established to serve families with disciplined, value-led schooling.' },
+  { year: 'CBSE', title: 'Affiliated Academic Pathway', org: 'Structured learning aligned with CBSE affiliation no. 1130860.' },
+  { year: '530+', title: 'Active Student Community', org: 'A vibrant campus supporting learners from LKG to Class IX.' },
+  { year: 'Campus', title: 'Modern Learning Infrastructure', org: 'Smart classrooms, library, labs, activity rooms and supervised play spaces.' },
+  { year: 'Values', title: 'Holistic Student Development', org: 'Academics, sports, arts and wellbeing are built into everyday school life.' },
+  { year: 'Care', title: 'Safe And Supportive Environment', org: 'Child-friendly facilities, counselling support and guided routines across campus.' },
+  { year: 'Faculty', title: 'Continuous Teacher Development', org: 'Orientation programmes and workshops strengthen classroom delivery.' },
+  { year: 'Parents', title: 'Transparent School Access', org: 'Notices, downloads and parent-facing resources are organised for easy access.' },
 ]
 
 export default achievements

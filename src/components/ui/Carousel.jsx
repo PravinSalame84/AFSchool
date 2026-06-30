@@ -139,12 +139,26 @@ export default function Carousel({
             display: 'flex',
             gap: { xs: 2, sm: 3 },
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-x',
             scrollBehavior: 'smooth',
             scrollSnapType: 'x mandatory',
+            scrollPaddingInline: { xs: 4, sm: 8 },
             pb: 1,
             pr: { xs: 0.5, sm: 1 },
             minWidth: 0,
-            '&::-webkit-scrollbar': { display: 'none' },
+            scrollbarWidth: 'thin',
+            scrollbarColor: `${alpha(theme.palette.primary.main, 0.3)} transparent`,
+            '&::-webkit-scrollbar': {
+              height: 7,
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: alpha(theme.palette.primary.main, 0.26),
+              borderRadius: 999,
+            },
+            '& > *': {
+              scrollSnapAlign: 'start',
+            },
           }}
         >
           {children}

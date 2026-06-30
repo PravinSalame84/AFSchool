@@ -29,7 +29,7 @@ export default function AnnouncementBar({ compact = false }) {
   return (
     <Box
       sx={{
-        maxHeight: compact ? 0 : 120,
+        maxHeight: compact ? 0 : { xs: 260, md: 140 },
         opacity: compact ? 0 : 1,
         transform: compact ? 'translateY(-14px)' : 'translateY(0)',
         pointerEvents: compact ? 'none' : 'auto',
@@ -41,7 +41,7 @@ export default function AnnouncementBar({ compact = false }) {
         overflow: 'hidden',
       }}
     >
-      <Container maxWidth="lg" sx={{ py: 1.5 }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 1.25, md: 1.5 } }}>
 
         <Stack
           direction={{ xs: 'column', lg: 'row' }}
@@ -53,6 +53,7 @@ export default function AnnouncementBar({ compact = false }) {
           <Box
             sx={{
               flex: 1,
+              minWidth: 0,
               overflow: 'hidden',
               whiteSpace: { xs: 'normal', md: 'nowrap' },
               position: 'relative',
@@ -65,6 +66,7 @@ export default function AnnouncementBar({ compact = false }) {
                 gap: 2,
                 flexWrap: { xs: 'wrap', md: 'nowrap' },
                 animation: { xs: 'none', md: 'marquee 18s linear infinite' },
+                width: { xs: '100%', md: 'max-content' },
                 '@keyframes marquee': {
                   '0%': { transform: 'translateX(0%)' },
                   '100%': { transform: 'translateX(-50%)' },
@@ -99,7 +101,10 @@ export default function AnnouncementBar({ compact = false }) {
             spacing={1}
             flexWrap="wrap"
             justifyContent="center"
-            sx={{ width: '100%' }}
+            sx={{
+              width: { xs: '100%', lg: 'auto' },
+              flexShrink: 0,
+            }}
           >
             {announcementBar.actions.map((action) => (
               <Button

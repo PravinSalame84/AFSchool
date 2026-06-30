@@ -62,8 +62,8 @@ export const resourcePages = [
     ],
     highlights: ['Academic calendar', 'Book list', 'Homework circulars', 'Policy and disclosure-ready references'],
     attachments: [
-      { label: 'School Calendar 2024-2025', href: siteAssets.downloads.schoolCalendar },
-      { label: 'Book List 2024-2025', href: siteAssets.downloads.bookList },
+      { label: 'School Calendar 2026-2027', href: siteAssets.downloads.schoolCalendar },
+      { label: 'Book List 2026-2027', href: siteAssets.downloads.bookList },
       { label: 'CCA Calendar 2025-26', href: siteAssets.downloads.ccaCalendar },
     ],
   },
@@ -141,8 +141,8 @@ export const resourcePages = [
     highlights: ['Academic consistency', 'Co-curricular participation', 'Infrastructure growth', 'Teacher development'],
   },
   {
-    slug: 'new-academic-session-2024-2025',
-    path: '/new-academic-session-2024-2025',
+    slug: 'new-academic-session-2026-2027',
+    path: '/new-academic-session-2026-2027',
     category: 'Academic Session',
     title: 'New session guidance, essentials and start-of-year readiness.',
     description:
@@ -157,8 +157,8 @@ export const resourcePages = [
     ],
     highlights: ['Calendar access', 'Book list reference', 'Homework files', 'Watch notice board for updates'],
     attachments: [
-      { label: 'School Calendar 2024-2025', href: siteAssets.downloads.schoolCalendar },
-      { label: 'Book List 2024-2025', href: siteAssets.downloads.bookList },
+      { label: 'School Calendar 2026-2027', href: siteAssets.downloads.schoolCalendar },
+      { label: 'Book List 2026-2027', href: siteAssets.downloads.bookList },
     ],
   },
 ]
@@ -270,10 +270,10 @@ export const updatePages = [
     attachments: [{ label: 'Download Book List PDF', href: siteAssets.downloads.bookList }],
   },
   {
-    slug: 'school-calendar-2024-2025',
-    path: '/updates/school-calendar-2024-2025',
+    slug: 'school-calendar-2026-2027',
+    path: '/updates/school-calendar-2026-2027',
     category: 'Calendar',
-    title: 'School calendar for academic session 2024-2025.',
+    title: 'School calendar for academic session 2026-2027.',
     description:
       'Important term planning, event dates and session-level rhythm can be tracked through the current school calendar.',
     image: siteAssets.images.unityDay,

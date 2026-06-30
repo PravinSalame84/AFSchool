@@ -47,9 +47,9 @@ export default function Hero() {
       component="section"
       sx={{
         position: 'relative',
-        overflow: 'hidden',
-        pt: { xs: 6, md: 7 },
-        pb: { xs: 7, md: 9 },
+        overflow: 'clip',
+        pt: { xs: 4, md: 5 },
+        pb: { xs: 6, md: 8 },
       }}
     >
       <Box
@@ -236,7 +236,7 @@ export default function Hero() {
                 backdropFilter: 'blur(18px)',
               }}
             >
-              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, minHeight: { xs: 360, sm: 460, lg: 560 } }}>
+              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, minHeight: { xs: 300, sm: 400, lg: 520 } }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeSlide.id}
@@ -251,7 +251,7 @@ export default function Hero() {
                       alt={activeSlide.title}
                       priority
                       wrapperSx={{ height: '100%' }}
-                      sx={{ height: { xs: 360, sm: 460, lg: 560 } }}
+                      sx={{ height: { xs: 300, sm: 400, lg: 520 } }}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -270,8 +270,8 @@ export default function Hero() {
                   spacing={1}
                   sx={{
                     position: 'absolute',
-                    top: 16,
-                    right: 16,
+                    top: { xs: 12, sm: 16 },
+                    right: { xs: 12, sm: 16 },
                   }}
                 >
                   <IconButton
@@ -304,7 +304,7 @@ export default function Hero() {
                   </IconButton>
                 </Stack>
 
-                <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, p: { xs: 2.5, sm: 3 } }}>
+                <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, p: { xs: 2, sm: 3 } }}>
                   <Box
                     sx={{
                       mb: 2,
@@ -337,7 +337,7 @@ export default function Hero() {
                         sx={{ height: 38 }}
                       />
                     </Box>
-                    <Typography sx={{ fontSize: '0.76rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'normal' }}>
+                    <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'normal' }}>
                       Learning with discipline, warmth and confidence.
                     </Typography>
                   </Box>
@@ -353,10 +353,10 @@ export default function Hero() {
                       textTransform: 'uppercase',
                     }}
                   />
-                  <Typography sx={{ mt: 2, color: '#fff', fontWeight: 800, lineHeight: 1, fontSize: { xs: '1.8rem', sm: '2.5rem' } }}>
+                  <Typography sx={{ mt: 1.5, maxWidth: 440, color: '#fff', fontWeight: 800, lineHeight: 1.02, fontSize: { xs: '1.5rem', sm: '2.2rem', lg: '2.5rem' } }}>
                     {activeSlide.title}
                   </Typography>
-                  <Typography sx={{ mt: 1.5, maxWidth: 520, color: alpha('#fff', 0.8), fontSize: '0.95rem', lineHeight: 1.8 }}>
+                  <Typography sx={{ mt: 1.25, maxWidth: 500, color: alpha('#fff', 0.8), fontSize: { xs: '0.88rem', sm: '0.95rem' }, lineHeight: 1.7 }}>
                     {schoolContent.hero.motto}
                   </Typography>
 
@@ -382,7 +382,7 @@ export default function Hero() {
 
             <Paper
               sx={{
-                mt: { xs: 2, md: -6 },
+                mt: { xs: 2, md: 2.5 },
                 ml: { md: 'auto' },
                 width: { xs: '100%', sm: 340 },
                 maxWidth: '100%',

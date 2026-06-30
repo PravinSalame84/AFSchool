@@ -67,12 +67,14 @@
 
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 html,
 body{
     background:
       linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-alt) 100%);
+    max-width: 100%;
 }
 
 .dark html,

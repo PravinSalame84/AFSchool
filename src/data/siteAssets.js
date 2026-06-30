@@ -33,8 +33,8 @@ const siteAssets = {
   downloads: {
     ccaCalendar: '/downloads/school/cca-calendar-2025-26.pdf',
     primaryHomework: '/downloads/school/primary-summer-holiday-homework-2026-27.pdf',
-    schoolCalendar: '/downloads/school/school-calendar-2024-2025.pdf',
-    bookList: '/downloads/school/book-list-2024-2025.pdf',
+    schoolCalendar: '/downloads/school/school-calendar-2026-2027.pdf',
+    bookList: '/downloads/school/book-list-2026-2027.pdf',
     class6To12Homework: '/downloads/school/class-6-12-summer-holiday-homework-2026-27.pdf',
   },
 }

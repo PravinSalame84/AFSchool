@@ -128,6 +128,24 @@ function sectionShell(theme, tone = 'soft') {
   }
 }
 
+function horizontalScrollerSx(theme) {
+  return {
+    overflowX: 'auto',
+    pb: 1.5,
+    WebkitOverflowScrolling: 'touch',
+    touchAction: 'pan-x',
+    scrollbarWidth: 'thin',
+    scrollbarColor: `${alpha(theme.palette.primary.main, 0.3)} transparent`,
+    '&::-webkit-scrollbar': {
+      height: 7,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: alpha(theme.palette.primary.main, 0.24),
+      borderRadius: 999,
+    },
+  }
+}
+
 export default function Home() {
   const theme = useTheme()
   const { openEnquiry } = useEnquiryModal()
@@ -427,8 +445,8 @@ export default function Home() {
             </Stack>
           </motion.div>
 
-          <Box sx={{ overflowX: 'auto', pb: 1 }}>
-            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '90%', sm: '48%', lg: 'minmax(220px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' } }}>
+          <Box sx={horizontalScrollerSx(theme)}>
+            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '90%', sm: '48%', lg: 'minmax(220px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' }, alignItems: 'stretch' }}>
               {schoolContent.facilities.map((facility, index) => {
                 const Icon = facilityIcons[index]
 
@@ -472,8 +490,8 @@ export default function Home() {
 
       <Box component="section" sx={{ ...sectionShell(theme, 'sky'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <Box sx={{ overflowX: 'auto', pb: 1, mb: 2 }}>
-            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '92%', sm: '58%', lg: 'minmax(260px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' } }}>
+          <Box sx={{ ...horizontalScrollerSx(theme), mb: 2 }}>
+            <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '92%', sm: '58%', lg: 'minmax(260px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' }, alignItems: 'stretch' }}>
               {schoolContent.statistics.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -1113,62 +1131,62 @@ export default function Home() {
                     Air Force School VayuSena Nagar
                   </Typography>
                 </Box>
-                <Stack direction="row" flexWrap="wrap" gap={1}>
-                  <Box
-                    component="a"
-                    href={`tel:${schoolContent.contact.phone}`}
-                    sx={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      borderRadius: 4,
-                      bgcolor: 'primary.main',
-                      px: 2,
-                      py: 1,
-                      color: '#fff',
-                      textDecoration: 'none',
-                      fontSize: '0.72rem',
-                      fontWeight: 800,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                    }}
-                  >
-                    <Phone size={14} />
-                    Call
-                  </Box>
-                  <Box
-                    component="a"
-                    href={schoolContent.contact.mapLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      borderRadius: 4,
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
-                      px: 2,
-                      py: 1,
-                      color: 'text.primary',
-                      textDecoration: 'none',
-                      fontSize: '0.72rem',
-                      fontWeight: 800,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                    }}
-                  >
-                    <MapPin size={14} />
-                    Open Map
-                  </Box>
-                </Stack>
               </Stack>
               <Box
                 component="iframe"
                 title="Air Force School VayuSena Nagar map"
                 src={schoolContent.contact.mapEmbed}
                 loading="lazy"
-                sx={{ width: '100%', height: 420, border: 0, borderRadius: 4 }}
+                sx={{ width: '100%', height: 420, border: 0, borderRadius: 4, marginBottom: 4 }}
               />
+              <Stack direction="row" flexWrap="wrap" gap={1}>
+                <Box
+                  component="a"
+                  href={`tel:${schoolContent.contact.phone}`}
+                  sx={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    borderRadius: 4,
+                    bgcolor: 'primary.main',
+                    px: 2,
+                    py: 1,
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.14em',
+                  }}
+                >
+                  <Phone size={14} />
+                  Call
+                </Box>
+                <Box
+                  component="a"
+                  href={schoolContent.contact.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    borderRadius: 4,
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+                    px: 2,
+                    py: 1,
+                    color: 'text.primary',
+                    textDecoration: 'none',
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.14em',
+                  }}
+                >
+                  <MapPin size={14} />
+                  Open Map
+                </Box>
+              </Stack>
             </Paper>
           </Box>
         </Container>

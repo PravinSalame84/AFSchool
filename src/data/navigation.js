@@ -29,7 +29,7 @@ const navigation = [
       { label: 'Notice Board', to: '/notice-board' },
       { label: 'Downloads', to: '/downloads' },
       { label: 'Gallery', to: '/gallery' },
-      { label: 'New Academic Session', to: '/new-academic-session-2024-2025' },
+      { label: 'New Academic Session', to: '/new-academic-session-2026-2027' },
     ],
   },
   {

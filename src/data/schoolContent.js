@@ -10,9 +10,9 @@ const schoolContent = {
 
   hero: {
     eyebrow: 'Air Force School, Nagpur',
-    title: 'Modern learning with discipline, confidence and an Indian Air Force spirit.',
+    title: 'A calm, confident school experience shaped by discipline, care and Air Force values.',
     subtitle:
-      'Established in 1968, Air Force School VayuSena Nagar blends strong academics, caring mentorship and vibrant student life for the wards of Air Force personnel and the wider community.',
+      'Established in 1968, Air Force School VayuSena Nagar brings together strong academics, caring mentorship, safe routines and vibrant student participation for families who value both structure and warmth.',
     motto: 'Teaching is Learning',
     badges: ['Established 1968', 'CBSE Affiliation 1130860', 'Student-Centred Campus'],
     slides: [
@@ -41,7 +41,7 @@ const schoolContent = {
   },
 
   announcementBar: {
-    message: 'Admissions, downloads, academic session notices and school information are now organised directly inside this website.',
+    message: 'Admissions, notices, parent resources and official school information are now organised in a clearer, easier-to-use website experience.',
     actions: [
       { label: 'Mandatory Disclosure', to: '/mandatory-disclosure' },
       { label: 'Parent Corner', to: '/parent-corner' },
@@ -109,9 +109,9 @@ const schoolContent = {
 
   about: {
     narrative:
-      'Air Force School is registered with the Indian Air Force Educational and Cultural Society, New Delhi. The school was established to provide quality education with a broad, well-balanced and relevant curriculum. Students benefit from Smartboards, child-safe classrooms, fire-safety equipment and a campus designed to support both strong academics and joyful exploration.',
+      'Air Force School is registered with the Indian Air Force Educational and Cultural Society, New Delhi. The school was established to provide quality education through a broad, balanced and relevant curriculum. Students benefit from smart classrooms, child-safe spaces, fire-safety readiness and a campus designed to support both strong academics and joyful exploration.',
     extended:
-      'The campus includes an outdoor stage, play area, synthetic court, laboratory, library, dedicated music and art-craft rooms, sports facilities and counselling support. Regular co-curricular activities, educational trips and inter-school competitions are organised for holistic development, while staff orientation programmes and workshops strengthen teaching excellence.',
+      'The campus includes an outdoor stage, play area, synthetic court, laboratory, library, dedicated music and art-craft rooms, sports facilities and counselling support. Regular co-curricular activities, educational trips and inter-school participation help children grow with confidence, while staff orientation programmes and workshops strengthen teaching excellence.',
     vision:
       'To inculcate love, respect, tolerance and cooperation, while empowering students to acquire, comprehend, apply and value knowledge and skills that help them become confident, self-sustaining individuals who can serve the global community.',
     mission:
@@ -283,10 +283,10 @@ const schoolContent = {
       excerpt: 'Reference the official book list for the academic session 2026-27.',
     },
     {
-      title: 'School Calendar 2024-2025',
+      title: 'School Calendar 2026-2027',
       category: 'Calendar',
       date: 'March 2024',
-      to: '/updates/school-calendar-2024-2025',
+      to: '/updates/school-calendar-2026-2027',
       excerpt: 'Academic session calendar and key dates for the school year.',
     },
     {
@@ -337,12 +337,12 @@ const schoolContent = {
       category: 'Homework',
     },
     {
-      label: 'School Calendar 2024-2025',
+      label: 'School Calendar 2026-2027',
       href: siteAssets.downloads.schoolCalendar,
       category: 'Calendar',
     },
     {
-      label: 'Book List 2024-2025',
+      label: 'Book List 2026-2027',
       href: siteAssets.downloads.bookList,
       category: 'Book List',
     },
@@ -535,8 +535,8 @@ const schoolContent = {
       description: 'Published school profile and institutional overview.',
     },
     {
-      label: 'New Academic Session 2024-2025',
-      to: '/new-academic-session-2024-2025',
+      label: 'New Academic Session 2026-2027',
+      to: '/new-academic-session-2026-2027',
       description: 'Session-specific guidance and essential files.',
     },
     {
@@ -590,8 +590,8 @@ const schoolContent = {
     { group: 'Resources', label: 'Parent Corner', to: '/parent-corner', description: 'Parent-facing information and resources.' },
     { group: 'Resources', label: 'Fee Support', to: '/fee-support', description: 'School fee support information.' },
     { group: 'Resources', label: 'School Staff Details', to: '/staff-details', description: 'Administrative and staff overview.' },
-    { group: 'Downloads', label: 'School Calendar 2024-2025', to: siteAssets.downloads.schoolCalendar, external: true, description: 'Published school calendar PDF.' },
-    { group: 'Downloads', label: 'Book List 2024-2025', to: siteAssets.downloads.bookList, external: true, description: 'Published book list PDF.' },
+    { group: 'Downloads', label: 'School Calendar 2026-2027', to: siteAssets.downloads.schoolCalendar, external: true, description: 'Published school calendar PDF.' },
+    { group: 'Downloads', label: 'Book List 2026-2027', to: siteAssets.downloads.bookList, external: true, description: 'Published book list PDF.' },
   ],
 }
 

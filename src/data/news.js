@@ -17,10 +17,10 @@ const news = [
   },
   {
     id: 'school-calendar-2026-27',
-    title: 'School Calendar 2024-2025',
+    title: 'School Calendar 2026-2027',
     category: 'Calendar',
     date: 'March 2024',
-    href: '/updates/school-calendar-2024-2025',
+    href: '/updates/school-calendar-2026-2027',
     excerpt: 'Track key academic dates and session planning with the local calendar page.',
   },
   {

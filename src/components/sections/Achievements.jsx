@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { Box, Container, Typography, Card, CardContent, Button, Stack, Avatar, useTheme } from '@mui/material'
+import { Box, Container, Typography, Card, CardContent, Button, Stack, Avatar, Chip, useTheme } from '@mui/material'
 import { alpha } from '@mui/material/styles'
-import { Award } from 'lucide-react'
+import { Award, ArrowUpRight } from 'lucide-react'
 import Carousel from '../ui/Carousel'
 import achievements from '../../data/achievements'
 import { Link } from 'react-router-dom'
@@ -13,7 +13,10 @@ export default function Achievements() {
     () => ({
       section: {
         py: { xs: 6, md: 10 },
-        bgcolor: 'background.default',
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, rgba(11,19,32,0.2), rgba(17,28,43,0.48))'
+            : 'linear-gradient(180deg, rgba(244,251,254,0.86), rgba(228,246,251,0.96))',
       },
       headingWrap: {
         textAlign: 'center',
@@ -26,15 +29,21 @@ export default function Achievements() {
         mt: 1.5,
       },
       card: {
-        width: 'min(84vw, 300px)',
+        width: 'min(84vw, 320px)',
         flexShrink: 0,
         borderRadius: 4,
-        bgcolor: 'background.paper',
-        boxShadow: theme.shadows[2],
-        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+        border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.16 : 0.08)}`,
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.84))'
+            : 'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(228,246,251,0.82))',
+        boxShadow: '0 20px 48px -30px rgba(17, 26, 36, 0.2)',
+        backdropFilter: 'blur(16px)',
+        transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
         '&:hover': {
           transform: 'translateY(-4px)',
-          boxShadow: theme.shadows[6],
+          boxShadow: '0 28px 60px -34px rgba(17, 26, 36, 0.28)',
+          borderColor: alpha(theme.palette.secondary.main, 0.3),
         },
       },
       iconWrap: {
@@ -48,21 +57,22 @@ export default function Achievements() {
         color: '#d97706',
       },
       year: {
-        fontSize: 12,
+        fontSize: 11,
         fontWeight: 700,
-        letterSpacing: 1,
-        color: theme.palette.warning.dark,
+        letterSpacing: 1.2,
+        color: theme.palette.warning.main,
       },
       title: {
-        mt: 1,
+        mt: 1.25,
         fontWeight: 800,
-        fontSize: 15,
+        fontSize: 18,
         lineHeight: 1.3,
         color: theme.palette.text.primary,
       },
       org: {
         mt: 1,
-        fontSize: 12,
+        fontSize: 13,
+        lineHeight: 1.7,
         color: theme.palette.text.secondary,
       },
     }),
@@ -74,15 +84,15 @@ export default function Achievements() {
       <Container>
         <Box sx={styles.headingWrap}>
           <Typography variant="overline" color="warning.main" fontWeight={700}>
-            Recognition
+            School Highlights
           </Typography>
 
           <Typography variant="h4" fontWeight={900} sx={{ mt: 1 }}>
-            Our Achievements
+            The milestones that shape the Air Force School experience.
           </Typography>
 
           <Typography variant="body2" sx={styles.subtitle}>
-            We're honoured to be recognised for our commitment to quality, year after year.
+            This section now reflects real school strengths and institutional milestones, so families see what matters most at a glance.
           </Typography>
         </Box>
 
@@ -90,12 +100,26 @@ export default function Achievements() {
           {achievements.map((item) => (
             <Card key={item.title} sx={styles.card} data-carousel-item>
               <CardContent>
-                <Stack spacing={2}>
-                  <Box sx={styles.iconWrap}>
-                    <Award size={20} />
-                  </Box>
+                <Stack spacing={2.25}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1.5}>
+                    <Box sx={styles.iconWrap}>
+                      <Award size={20} />
+                    </Box>
+                    <Chip
+                      label={item.year}
+                      size="small"
+                      sx={{
+                        borderRadius: 4,
+                        bgcolor: alpha(theme.palette.secondary.main, 0.12),
+                        color: 'text.primary',
+                        fontWeight: 800,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}
+                    />
+                  </Stack>
 
-                  <Typography sx={styles.year}>{item.year}</Typography>
+                  <Typography sx={styles.year}>Why it matters</Typography>
 
                   <Typography sx={styles.title}>{item.title}</Typography>
 
@@ -117,9 +141,12 @@ export default function Achievements() {
               px: { xs: 2.5, sm: 4 },
               width: { xs: '100%', sm: 'auto' },
               fontWeight: 700,
+              color: '#d97706',
+              gap: 1,
             }}
           >
-            View All Achievements
+            Explore School Overview
+            <ArrowUpRight size={16} />
           </Button>
         </Box>
       </Container>

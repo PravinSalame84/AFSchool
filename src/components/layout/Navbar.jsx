@@ -96,9 +96,9 @@ function DesktopItem({ item }) {
             backdropFilter: 'blur(18px)',
           }}
         >
-          <Typography sx={{ px: 1.25, pt: 0.5, pb: 1, fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+          {/* <Typography sx={{ px: 1.25, pt: 0.5, pb: 1, fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
             {item.label}
-          </Typography>
+          </Typography> */}
           <Box sx={{ display: 'grid', gap: 0.5 }}>
             {item.children.map((child) => {
               const childActive = location.pathname === child.to
@@ -118,7 +118,7 @@ function DesktopItem({ item }) {
                     gap: 2,
                     borderRadius: 4,
                     px: 1.25,
-                    py: 1.15,
+                    py: 2,
                     color: 'text.primary',
                     textDecoration: 'none',
                     bgcolor: childActive ? alpha(theme.palette.secondary.main, 0.12) : 'transparent',
@@ -129,9 +129,9 @@ function DesktopItem({ item }) {
                     <Typography sx={{ fontWeight: 700, fontSize: '0.94rem' }}>
                       {child.label}
                     </Typography>
-                    <Typography sx={{ mt: 0.25, fontSize: '0.76rem', color: 'text.secondary' }}>
-                      {item.label} resource
-                    </Typography>
+                    {/* <Typography sx={{ mt: 0.25, fontSize: '0.76rem', color: 'text.secondary' }}> */}
+                      {/* {item.label} */}
+                    {/* </Typography> */}
                   </Box>
                   {child.external ? <LaunchIcon fontSize="small" /> : <ExpandMoreIcon sx={{ transform: 'rotate(-90deg)', fontSize: 18, color: 'text.secondary' }} />}
                 </Box>
@@ -224,6 +224,7 @@ export default function Navbar({ compact = false }) {
           borderBottom: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
           bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.9) : alpha('#fff', 0.9),
           backdropFilter: 'blur(18px)',
+          overflow: 'visible',
           boxShadow: compact ? '0 14px 36px rgba(17, 26, 36, 0.12)' : 'none',
           transition: 'box-shadow 260ms ease, background-color 260ms ease',
         }}
@@ -231,11 +232,11 @@ export default function Navbar({ compact = false }) {
         <Toolbar sx={{ minHeight: { xs: 78, lg: 86 }, justifyContent: 'space-between', gap: 2 }}>
           <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0, flex: { xs: 1, xl: '0 0 auto' } }}>
             <Logo />
-            <Box sx={{ display: { xs: 'none', md: 'block', xl: 'none' }, minWidth: 0, maxWidth: 230 }}>
+            {/* <Box sx={{ display: { xs: 'none', md: 'block', xl: 'none' }, minWidth: 0, maxWidth: 230 }}>
               <Typography noWrap sx={{ fontSize: '0.78rem', fontWeight: 700, color: 'text.secondary' }}>
                 {headerNote}
               </Typography>
-            </Box>
+            </Box> */}
           </Stack>
 
           <Box sx={{ display: { xs: 'none', xl: 'flex' }, gap: 0.5, alignItems: 'center', flex: 1, justifyContent: 'center' }}>
