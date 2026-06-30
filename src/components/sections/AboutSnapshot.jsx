@@ -7,10 +7,10 @@ import stats from '../../data/stats'
 import siteConfig from '../../data/siteConfig'
 
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
+import Grid from '../ui/Grid'
 import { brandColors } from '../../theme/colorTokens'
 
 export default function AboutSnapshot() {

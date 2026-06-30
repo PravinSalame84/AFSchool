@@ -1,14 +1,14 @@
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Card,
   CardContent,
   Button,
-  Stack,
   alpha,
 } from '@mui/material'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 
 import studentJourney from '../../data/studentJourney'
 import { brandColors, gradientTokens, studentJourneyColors } from '../../theme/colorTokens'
@@ -19,10 +19,13 @@ export default function StudentJourney() {
   return (
     <Box
       component="section"
-      sx={{
+      sx={(theme) => ({
         py: { xs: 8, md: 12 },
-        backgroundColor: '#F5FAFF',
-      }}
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(180deg, ${alpha(theme.palette.background.default, 0.92)} 0%, ${alpha(theme.palette.background.paper, 0.98)} 100%)`
+            : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      })}
     >
       <Container maxWidth="lg">
 
@@ -30,7 +33,7 @@ export default function StudentJourney() {
         <Typography
           align="center"
           variant="overline"
-          sx={{ color: brandColors.saffron, fontWeight: 800, letterSpacing: 2 }}
+          sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: 2 }}
         >
           A Glimpse Into Campus Life
         </Typography>
@@ -43,7 +46,7 @@ export default function StudentJourney() {
             mt: 1,
             maxWidth: 800,
             mx: 'auto',
-            color: brandColors.navyAlt,
+            color: 'text.primary',
             lineHeight: 1.2,
             fontSize: { xs: '1.8rem', sm: '2.125rem' },
           }}
@@ -61,8 +64,8 @@ export default function StudentJourney() {
                   height: '100%',
                   borderRadius: 4,
                   p: 1,
-                  background: brandColors.white,
-                  border: `1px solid ${alpha(brandColors.navyAlt, 0.08)}`,
+                  background: 'background.paper',
+                  border: (theme) => `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.08)}`,
                   transition: '0.25s ease',
                   '&:hover': {
                     transform: 'translateY(-6px)',
@@ -96,7 +99,7 @@ export default function StudentJourney() {
                     variant="h6"
                     sx={{
                       fontWeight: 800,
-                      color: brandColors.navyAlt,
+                      color: 'text.primary',
                     }}
                   >
                     {item.title}
@@ -107,7 +110,7 @@ export default function StudentJourney() {
                     variant="body2"
                     sx={{
                       mt: 1.5,
-                      color: alpha(brandColors.navyAlt, 0.7),
+                      color: 'text.secondary',
                       lineHeight: 1.7,
                     }}
                   >

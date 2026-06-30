@@ -1,4 +1,13 @@
-import { Box, Container, Grid, Paper, Typography, IconButton, useTheme, alpha } from '@mui/material'
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  IconButton,
+  useTheme,
+  alpha,
+} from '@mui/material'
+import Grid from '../ui/Grid'
 import { useMemo } from 'react'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { Link as RouterLink } from 'react-router-dom'

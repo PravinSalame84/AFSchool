@@ -1,8 +1,9 @@
-import { Link as RouterLink } from 'react-router-dom'
+import {
+  Link as RouterLink } from 'react-router-dom'
+import Stack from '../ui/Stack'
 import {
   Box,
   Container,
-  Stack,
   Typography,
   Link,
   alpha,
@@ -27,13 +28,16 @@ export default function QuickLinksStrip() {
   return (
     <Box
       component="section"
-      sx={{
+      sx={(theme) => ({
         py: 3,
         borderTop: '1px solid',
         borderBottom: '1px solid',
-        borderColor: alpha(brandColors.navyAlt, 0.1),
-        background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
-      }}
+        borderColor: alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.1),
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(180deg, ${alpha(theme.palette.background.default, 0.9)} 0%, ${alpha(theme.palette.background.paper, 0.96)} 100%)`
+            : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      })}
     >
       <Container maxWidth="lg">
 
@@ -52,11 +56,11 @@ export default function QuickLinksStrip() {
               gap: 1,
               fontSize: '0.875rem',
               fontWeight: 700,
-              color: brandColors.navyAlt,
+              color: 'text.primary',
               textDecoration: 'none',
               transition: '0.25s ease',
               '&:hover': {
-                color: brandColors.saffron,
+                color: 'secondary.main',
                 transform: 'translateY(-2px)',
               },
             }

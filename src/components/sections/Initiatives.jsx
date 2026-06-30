@@ -1,4 +1,14 @@
-import { Box, Container, Typography, Card, CardContent, Stack, Button, useTheme, alpha } from '@mui/material'
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  useTheme,
+  alpha,
+} from '@mui/material'
+import Stack from '../ui/Stack'
 import { Link } from 'react-router-dom'
 
 import Carousel from '../ui/Carousel'

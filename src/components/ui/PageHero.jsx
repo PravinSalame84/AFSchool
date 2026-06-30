@@ -2,11 +2,11 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { ChevronRight } from 'lucide-react'
 import Container from './Container'
 import OptimizedImage from './OptimizedImage'
+import Stack from './Stack'
 import { brandColors } from '../../theme/colorTokens'
 
 function PageHero({ eyebrow, title, subtitle, crumb, image }) {

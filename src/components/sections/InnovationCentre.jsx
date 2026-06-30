@@ -1,14 +1,14 @@
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Button,
   Card,
   CardContent,
-  Stack,
   alpha,
 } from '@mui/material'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 
 import {
   GraduationCap,

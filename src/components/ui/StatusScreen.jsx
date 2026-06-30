@@ -6,9 +6,9 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material/styles'
+import Stack from './Stack'
 import { brandColors } from '../../theme/colorTokens'
 
 const iconMap = {

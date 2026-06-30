@@ -1,4 +1,11 @@
-import { Box, Container, Paper, Stack, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import Stack from '../ui/Stack'
 import { alpha } from '@mui/material/styles'
 import Accordion from '../ui/Accordion'
 import faqs from '../../data/faqs'
@@ -84,7 +91,7 @@ export default function FAQSection() {
           <Typography
             variant="overline"
             sx={{
-              color: theme.palette.primary.main,
+              color: 'secondary.main',
               fontWeight: 800,
               letterSpacing: 2,
             }}
@@ -92,7 +99,7 @@ export default function FAQSection() {
             Have Questions?
           </Typography>
 
-          <Typography variant="h4" sx={{ mt: 1.5, fontWeight: 900 }}>
+          <Typography variant="h4" sx={{ mt: 1.5, fontWeight: 900, color: 'text.primary' }}>
             Frequently Asked Questions
           </Typography>
 

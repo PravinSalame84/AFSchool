@@ -1,5 +1,16 @@
-import { useMemo } from 'react'
-import { Box, Container, Typography, Card, CardContent, Button, Stack, Avatar, Chip, useTheme } from '@mui/material'
+import {
+  useMemo } from 'react'
+import Stack from '../ui/Stack'
+import { Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  Avatar,
+  Chip,
+  useTheme,
+} from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { Award, ArrowUpRight } from 'lucide-react'
 import Carousel from '../ui/Carousel'

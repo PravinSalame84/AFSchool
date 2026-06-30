@@ -5,7 +5,6 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import { Box, useTheme, alpha } from '@mui/material'
 import { ChevronDown } from 'lucide-react'
-import { brandColors } from '../../theme/colorTokens'
 
 export default function Accordion({ items = [], allowMultiple = false }) {
   const theme = useTheme()
@@ -70,9 +69,11 @@ export default function Accordion({ items = [], allowMultiple = false }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     background: isOpen
-                      ? `linear-gradient(135deg, #f0a84b, #f7c56a)`
+                      ? `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`
                       : alpha(theme.palette.primary.main, 0.08),
-                    color: isOpen ? brandColors.navyAlt : theme.palette.primary.main,
+                    color: isOpen
+                      ? (theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main)
+                      : theme.palette.primary.main,
                     transition: '0.25s ease',
                   }}
                 >
@@ -111,7 +112,7 @@ export default function Accordion({ items = [], allowMultiple = false }) {
                 sx={{
                   fontSize: 14.5,
                   lineHeight: 1.7,
-                  color: alpha(theme.palette.text.primary, 0.75),
+                  color: theme.palette.text.secondary,
                 }}
               >
                 {item.answer}

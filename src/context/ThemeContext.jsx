@@ -47,8 +47,11 @@ export function ThemeProvider({ children }) {
   )
 }
 
-export function useTheme() {
+export function useAppTheme() {
   const context = useContext(ThemeContext)
-  if (!context) throw new Error('useTheme must be used within ThemeProvider')
+  if (!context) throw new Error('useAppTheme must be used within ThemeProvider')
   return context
 }
+
+// Backward-compatible alias while components are migrated off the ambiguous name.
+export const useTheme = useAppTheme

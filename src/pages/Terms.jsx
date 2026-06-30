@@ -5,9 +5,9 @@ import {
   Divider,
   Link,
   Paper,
-  Stack,
   Typography,
 } from '@mui/material'
+import Stack from '../components/ui/Stack'
 
 import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'

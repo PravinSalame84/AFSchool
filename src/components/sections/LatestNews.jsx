@@ -1,15 +1,16 @@
-import { Link as RouterLink } from 'react-router-dom'
+import {
+  Link as RouterLink } from 'react-router-dom'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 import { Calendar } from 'lucide-react'
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Card,
   CardContent,
   Chip,
   Button,
-  Stack,
   alpha,
 } from '@mui/material'
 import { brandColors } from '../../theme/colorTokens'
@@ -22,10 +23,13 @@ export default function LatestNews() {
   return (
     <Box
       component="section"
-      sx={{
+      sx={(theme) => ({
         py: { xs: 8, md: 12 },
-        background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
-      }}
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(180deg, ${alpha(theme.palette.background.default, 0.92)} 0%, ${alpha(theme.palette.background.paper, 0.98)} 100%)`
+            : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
+      })}
     >
       <Container maxWidth="lg">
         
@@ -39,13 +43,13 @@ export default function LatestNews() {
           <Box>
             <Typography
               variant="overline"
-              sx={{ color: brandColors.saffron, fontWeight: 700, letterSpacing: 2 }}
+              sx={{ color: 'secondary.main', fontWeight: 700, letterSpacing: 2 }}
             >
               Newsroom
             </Typography>
             <Typography
               variant="h4"
-              sx={{ fontWeight: 800, color: brandColors.navyAlt, mt: 0.5 }}
+              sx={{ fontWeight: 800, color: 'text.primary', mt: 0.5 }}
             >
               Latest News
             </Typography>
@@ -58,11 +62,11 @@ export default function LatestNews() {
             sx={{
               borderRadius: 4,
               fontWeight: 700,
-              borderColor: alpha(brandColors.navyAlt, 0.3),
-              color: brandColors.navyAlt,
+              borderColor: (theme) => alpha(theme.palette.primary.main, 0.3),
+              color: 'text.primary',
               '&:hover': {
-                borderColor: brandColors.navyAlt,
-                backgroundColor: alpha(brandColors.navyAlt, 0.04),
+                borderColor: 'primary.main',
+                backgroundColor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.14 : 0.04),
               },
             }}
           >
@@ -83,9 +87,9 @@ export default function LatestNews() {
                   borderRadius: 4,
                   p: 2,
                   textDecoration: 'none',
-                  background: alpha(brandColors.white, 0.9),
+                  background: (theme) => alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.88 : 0.9),
                   backdropFilter: 'blur(12px)',
-                  border: `1px solid ${alpha(brandColors.navyAlt, 0.08)}`,
+                  border: (theme) => `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.08)}`,
                   transition: '0.25s ease',
                   '&:hover': {
                     transform: 'translateY(-6px)',
@@ -102,8 +106,8 @@ export default function LatestNews() {
                     sx={{
                       width: 'fit-content',
                       fontWeight: 700,
-                      backgroundColor: alpha(brandColors.saffron, 0.12),
-                      color: brandColors.saffron,
+                      backgroundColor: (theme) => alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.2 : 0.12),
+                      color: 'secondary.main',
                     }}
                   />
 
@@ -113,7 +117,7 @@ export default function LatestNews() {
                     sx={{
                       fontWeight: 800,
                       mt: 2,
-                      color: brandColors.navyAlt,
+                      color: 'text.primary',
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
@@ -128,7 +132,7 @@ export default function LatestNews() {
                     variant="body2"
                     sx={{
                       mt: 1.5,
-                      color: alpha(brandColors.navyAlt, 0.7),
+                      color: 'text.secondary',
                       flexGrow: 1,
                       display: '-webkit-box',
                       WebkitLineClamp: 3,
@@ -141,8 +145,10 @@ export default function LatestNews() {
 
                   {/* DATE */}
                   <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2 }}>
-                    <Calendar size={14} color="#64748B" />
-                    <Typography variant="caption" sx={{ color: '#64748B' }}>
+                    <Box sx={{ display: 'inline-flex', color: 'text.secondary' }}>
+                      <Calendar size={14} />
+                    </Box>
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                       {item.date}
                     </Typography>
                   </Stack>

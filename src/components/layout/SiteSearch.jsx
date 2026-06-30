@@ -1,4 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useState } from 'react'
+import Stack from '../ui/Stack'
 import { Link } from 'react-router-dom'
 import {
   alpha,
@@ -11,7 +15,6 @@ import {
   List,
   ListItemButton,
   Paper,
-  Stack,
   TextField,
   Typography,
   useTheme,
@@ -143,12 +146,14 @@ export default function SiteSearch({ compact = false }) {
               placeholder="Search admissions, notices, downloads, careers..."
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search size={18} />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search size={18} />
+                    </InputAdornment>
+                  ),
+                },
               }}
               sx={{
                 '& .MuiOutlinedInput-root': {

@@ -1,10 +1,11 @@
-import { Quote } from 'lucide-react'
+import {
+  Quote } from 'lucide-react'
+import Grid from '../components/ui/Grid'
+import Stack from '../components/ui/Stack'
 import {
   Box,
   Container,
-  Grid,
   Paper,
-  Stack,
   Typography,
   Button,
   useTheme,

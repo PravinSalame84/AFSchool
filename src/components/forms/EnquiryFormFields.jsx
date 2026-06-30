@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
@@ -21,6 +19,8 @@ import CheckboxField from '../ui/CheckboxField'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
 import Button from '../ui/Button'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 import {
   isValidEmail,
   isValidIndianMobile,
@@ -420,14 +420,16 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             helperText={touched.captcha && errors.captcha ? errors.captcha : 'Quick verification to prevent spam'}
             fullWidth
             size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={refreshChallenge} edge="end" aria-label="Refresh verification challenge">
-                    <RefreshCw size={16} />
-                  </IconButton>
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={refreshChallenge} edge="end" aria-label="Refresh verification challenge">
+                      <RefreshCw size={16} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              },
             }}
             sx={{
               '& .MuiOutlinedInput-root': {

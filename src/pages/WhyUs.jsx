@@ -1,11 +1,12 @@
-import { motion } from 'framer-motion'
+import {
+  motion } from 'framer-motion'
+import Grid from '../components/ui/Grid'
+import Stack from '../components/ui/Stack'
 import {
   Box,
   Card,
   CardContent,
   Container,
-  Grid,
-  Stack,
   Typography,
 } from '@mui/material'
 import {

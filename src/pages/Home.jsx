@@ -1,13 +1,14 @@
-import { motion } from 'framer-motion'
+import {
+  motion } from 'framer-motion'
+import Grid from '../components/ui/Grid'
+import Stack from '../components/ui/Stack'
 import { Link } from 'react-router-dom'
 import { alpha } from '@mui/material/styles'
 import {
   Avatar,
   Box,
   Chip,
-  Grid,
   Paper,
-  Stack,
   Typography,
   useTheme,
 } from '@mui/material'

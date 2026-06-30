@@ -18,20 +18,20 @@ const toneMap = {
     borderColor: alpha(theme.palette.primary.dark, 0.3),
     background: `linear-gradient(90deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
   }),
-  gold: () => ({
-    color: '#8a6742',
-    borderColor: alpha('#ffd707', 0.35),
-    background: `linear-gradient(90deg, rgba(255,215,7,0.18), rgba(231,171,51,0.25))`,
+  gold: (theme) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.accent.main : brandColors.earth,
+    borderColor: alpha(theme.palette.accent.main, theme.palette.mode === 'dark' ? 0.4 : 0.35),
+    background: `linear-gradient(90deg, ${alpha(theme.palette.accent.main, theme.palette.mode === 'dark' ? 0.24 : 0.18)}, ${alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.18 : 0.25)})`,
   }),
-  saffron: () => ({
-    color: '#7a4b2a',
-    borderColor: alpha('#f0934b', 0.3),
-    background: `linear-gradient(90deg, rgba(240,147,75,0.18), rgba(255,200,120,0.22))`,
+  saffron: (theme) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.secondary.light : brandColors.earth,
+    borderColor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.38 : 0.3),
+    background: `linear-gradient(90deg, ${alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.22 : 0.18)}, ${alpha(theme.palette.secondary.light, theme.palette.mode === 'dark' ? 0.14 : 0.22)})`,
   }),
-  cyan: () => ({
-    color: '#0d5c7a',
-    borderColor: alpha('#4dd0e1', 0.25),
-    background: `linear-gradient(90deg, rgba(77,208,225,0.18), rgba(224,247,250,0.35))`,
+  cyan: (theme) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.sky.main : brandColors.navyBlue,
+    borderColor: alpha(theme.palette.info.main, theme.palette.mode === 'dark' ? 0.35 : 0.25),
+    background: `linear-gradient(90deg, ${alpha(theme.palette.info.main, theme.palette.mode === 'dark' ? 0.18 : 0.14)}, ${alpha(theme.palette.sky.main, theme.palette.mode === 'dark' ? 0.18 : 0.35)})`,
   }),
 }
 

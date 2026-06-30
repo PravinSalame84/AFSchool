@@ -1,17 +1,20 @@
-import { useMemo, useState } from 'react'
+import {
+  useMemo,
+  useState } from 'react'
+import Grid from '../components/ui/Grid'
+import Stack from '../components/ui/Stack'
 import { useSearchParams } from 'react-router-dom'
 
 import {
   Box,
   Container,
-  Grid,
   Card,
   Typography,
-  Stack,
   TextField,
   InputAdornment,
   Chip,
   Button,
+  alpha,
 } from '@mui/material'
 
 import MapPinIcon from '@mui/icons-material/LocationOn'
@@ -68,7 +71,15 @@ export default function Locations() {
         subtitle="Multiple campuses across states — find yours easily"
       />
 
-      <Box sx={{ py: 6, bgcolor: '#f5f7fb' }}>
+      <Box
+        sx={(theme) => ({
+          py: 6,
+          background:
+            theme.palette.mode === 'dark'
+              ? `linear-gradient(180deg, ${alpha(theme.palette.background.default, 0.92)} 0%, ${alpha(theme.palette.background.paper, 0.98)} 100%)`
+              : 'linear-gradient(180deg, #f5f7fb 0%, #eef6ff 100%)',
+        })}
+      >
         <Container maxWidth="lg">
 
           {/* ---------------- FILTER BAR ---------------- */}
@@ -87,15 +98,20 @@ export default function Locations() {
                 placeholder="Search campus, city or state"
                 size="small"
                 sx={{ width: { xs: '100%', sm: 350 } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="small" />
-                    </InputAdornment>
-                  ),
-                  sx: {
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon fontSize="small" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                sx={{
+                  width: { xs: '100%', sm: 350 },
+                  '& .MuiOutlinedInput-root': {
                     borderRadius: 4,
-                    bgcolor: 'white',
+                    bgcolor: 'background.paper',
                   },
                 }}
               />
@@ -157,7 +173,7 @@ export default function Locations() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        bgcolor: '#e3f2fd',
+                        bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.12),
                         color: 'primary.main',
                       }}
                     >
@@ -220,7 +236,7 @@ export default function Locations() {
           </Grid>
 
           {/* ---------------- CTA ---------------- */}
-          <Box display="flex" justifyContent="center" mt={6}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
             <Button
               variant="contained"
               size="large"

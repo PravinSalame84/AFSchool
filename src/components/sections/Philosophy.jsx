@@ -1,13 +1,13 @@
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Card,
   CardContent,
-  Stack,
   alpha,
 } from '@mui/material'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 
 import { ShieldCheck, HeartHandshake } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'

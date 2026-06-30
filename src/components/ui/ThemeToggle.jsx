@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton'
 import { alpha, useTheme } from '@mui/material/styles'
 import { MoonStar, SunMedium } from 'lucide-react'
-import { useTheme as useAppTheme } from '../../context/ThemeContext'
+import { useAppTheme } from '../../context/ThemeContext'
 
 export default function ThemeToggle({ className = '' }) {
   const { isDark, toggleTheme } = useAppTheme()

@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Paper, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import Grid from '../ui/Grid'
 import { alpha } from '@mui/material/styles'
 import { motion } from 'framer-motion'
 import { BadgeCheck, MessageSquareHeart, Sparkles } from 'lucide-react'

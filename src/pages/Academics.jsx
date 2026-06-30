@@ -1,4 +1,7 @@
-import { motion } from 'framer-motion'
+import {
+  motion } from 'framer-motion'
+import Grid from '../components/ui/Grid'
+import Stack from '../components/ui/Stack'
 import { Link } from 'react-router-dom'
 import {
   ArrowUpRight,
@@ -6,16 +9,14 @@ import {
   ClipboardPenLine,
   Dumbbell,
   Sparkles,
-} from 'lucide-react'
+  } from 'lucide-react'
 
 import {
   Box,
   Card,
   CardContent,
   Container,
-  Grid,
   Paper,
-  Stack,
   Typography,
 } from '@mui/material'
 

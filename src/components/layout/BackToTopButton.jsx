@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Fab, Zoom } from '@mui/material'
+import { alpha, Fab, Zoom } from '@mui/material'
 import { ArrowUp } from 'lucide-react'
 import { brandColors } from '../../theme/colorTokens'
 
@@ -32,9 +32,8 @@ export default function BackToTopButton() {
           bottom: { xs: 146, sm: 150 },
           right: 24,
           zIndex: 1400,
-
           bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(17,28,43,0.9)' : alpha(brandColors.white, 0.92),
-          color: 'primary.main',
+          color: 'text.primary',
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255,255,255,0.6)',
 

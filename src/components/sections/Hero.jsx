@@ -1,15 +1,19 @@
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useState } from 'react'
+import Grid from '../ui/Grid'
+import Stack from '../ui/Stack'
 import { Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion,
+  AnimatePresence } from 'framer-motion'
 import { alpha } from '@mui/material/styles'
 import {
   Box,
   Chip,
   Container,
-  Grid,
   IconButton,
   Paper,
-  Stack,
   Typography,
   useTheme,
 } from '@mui/material'
@@ -128,6 +132,97 @@ export default function Hero() {
                   Request School Details
                 </Button>
               </Stack>
+
+              <Box
+                sx={{
+                  mt: 3,
+                  p: { xs: 2, sm: 2.25 },
+                  borderRadius: 4,
+                  border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.16 : 0.08)}`,
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.78)}, ${alpha(theme.palette.primary.dark, 0.28)})`
+                      : `linear-gradient(135deg, ${alpha('#fafdff', 0.96)}, ${alpha(theme.palette.sky.main, 0.6)})`,
+                  boxShadow: '0 18px 40px rgba(17, 26, 36, 0.08)',
+                  backdropFilter: 'blur(14px)',
+                }}
+              >
+                <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems={{ xs: 'flex-start', sm: 'center' }}
+                >
+                  <Box>
+                    <Typography
+                      sx={{
+                        fontSize: '0.68rem',
+                        fontWeight: 800,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        color: 'secondary.main',
+                      }}
+                    >
+                      Featured Moments
+                    </Typography>
+                    <Typography sx={{ mt: 0.8, fontSize: { xs: '1rem', sm: '1.08rem' }, fontWeight: 800, color: 'text.primary' }}>
+                      {activeSlide.title}
+                    </Typography>
+                    <Typography sx={{ mt: 0.7, maxWidth: 560, fontSize: '0.94rem', lineHeight: 1.7, color: 'text.secondary' }}>
+                      {activeSlide.description}
+                    </Typography>
+                  </Box>
+
+                  <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
+                    {slides.map((slide, index) => {
+                      const isActive = index === activeIndex
+
+                      return (
+                        <Box
+                          key={slide.id}
+                          component="button"
+                          type="button"
+                          onClick={() => setActiveIndex(index)}
+                          aria-label={`Show hero slide ${index + 1}: ${slide.label}`}
+                          sx={{
+                            minWidth: { xs: 68, sm: 78 },
+                            px: 1.25,
+                            py: 1,
+                            borderRadius: 4,
+                            border: '1px solid',
+                            borderColor: isActive
+                              ? 'secondary.main'
+                              : alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.24 : 0.12),
+                            background: isActive
+                              ? `linear-gradient(135deg, ${alpha(theme.palette.secondary.main, 0.92)}, ${alpha(theme.palette.secondary.light, 0.9)})`
+                              : theme.palette.mode === 'dark'
+                                ? alpha(theme.palette.background.default, 0.36)
+                                : alpha(brandColors.white, 0.72),
+                            color: isActive
+                              ? theme.palette.primary.dark
+                              : theme.palette.text.primary,
+                            boxShadow: isActive ? '0 14px 28px rgba(240, 147, 75, 0.24)' : 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            transition: 'all 0.25s ease',
+                            '&:hover': {
+                              transform: 'translateY(-2px)',
+                              borderColor: isActive ? 'secondary.main' : 'primary.main',
+                            },
+                          }}
+                        >
+                          <Typography sx={{ fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.16em', textTransform: 'uppercase', lineHeight: 1 }}>
+                            {String(index + 1).padStart(2, '0')}
+                          </Typography>
+                          <Typography sx={{ mt: 0.6, fontSize: '0.72rem', fontWeight: 700, lineHeight: 1.15 }}>
+                            {slide.label}
+                          </Typography>
+                        </Box>
+                      )
+                    })}
+                  </Stack>
+                </Stack>
+              </Box>
 
               <Grid container spacing={2} sx={{ mt: 3 }}>
                 <Grid item xs={12} sm={6}>
@@ -314,13 +409,16 @@ export default function Hero() {
                       <Box
                         key={slide.id}
                         onClick={() => setActiveIndex(index)}
+                        aria-label={`Show hero slide ${index + 1}: ${slide.label}`}
                         sx={{
-                          width: index === activeIndex ? 34 : 10,
-                          height: 10,
+                          width: index === activeIndex ? 42 : 12,
+                          height: 12,
                           borderRadius: 4,
                           cursor: 'pointer',
                           transition: 'all 0.25s ease',
-                          bgcolor: index === activeIndex ? 'secondary.main' : alpha(brandColors.white, 0.4),
+                          bgcolor: index === activeIndex ? 'secondary.main' : alpha(brandColors.white, 0.34),
+                          border: index === activeIndex ? `1px solid ${alpha(brandColors.white, 0.36)}` : `1px solid ${alpha(brandColors.white, 0.18)}`,
+                          boxShadow: index === activeIndex ? '0 10px 22px rgba(240, 147, 75, 0.28)' : 'none',
                         }}
                       />
                     ))}
