@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 import { ChevronRight } from 'lucide-react'
 import Container from './Container'
 import OptimizedImage from './OptimizedImage'
+import { brandColors } from '../../theme/colorTokens'
 
 function PageHero({ eyebrow, title, subtitle, crumb, image }) {
   return (
@@ -81,7 +82,7 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
               sx={{
                 mt: 2,
                 maxWidth: '48rem',
-                color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : theme.palette.primary.main),
+                color: (theme) => (theme.palette.mode === 'dark' ? brandColors.white : theme.palette.primary.main),
                 fontWeight: 800,
                 lineHeight: 0.95,
                 fontSize: { xs: '2.1rem', sm: '3.25rem' },

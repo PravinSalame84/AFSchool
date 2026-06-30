@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 
 import { states } from '../../data/locations'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function LocationsStrip() {
   return (
@@ -35,7 +36,7 @@ export default function LocationsStrip() {
               variant="subtitle2"
               sx={{
                 fontWeight: 800,
-                color: '#0B1F3A',
+                color: brandColors.navyAlt,
                 letterSpacing: 0.5,
               }}
             >
@@ -55,13 +56,13 @@ export default function LocationsStrip() {
                 sx={{
                   fontWeight: 600,
                   borderRadius: 4,
-                  backgroundColor: '#ffffff',
-                  color: '#0B1F3A',
-                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  backgroundColor: brandColors.white,
+                  color: brandColors.navyAlt,
+                  border: `1px solid ${alpha(brandColors.navyAlt, 0.08)}`,
                   transition: '0.25s ease',
                   '&:hover': {
-                    backgroundColor: '#0B1F3A',
-                    color: '#ffffff',
+                    backgroundColor: brandColors.navyAlt,
+                    color: brandColors.white,
                     transform: 'translateY(-2px)',
                     boxShadow: '0 10px 20px rgba(11, 31, 58, 0.15)',
                   },

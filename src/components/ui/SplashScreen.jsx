@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { AnimatePresence, motion } from 'framer-motion'
 import siteConfig from '../../data/siteConfig'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function SplashScreen({ visible }) {
   return (
@@ -80,7 +81,7 @@ export default function SplashScreen({ visible }) {
                     <Typography sx={{ mt: 3.5, color: 'rgba(215,239,246,0.88)', fontSize: { xs: '0.64rem', sm: '0.7rem' }, fontWeight: 800, textTransform: 'uppercase', letterSpacing: { xs: '0.18em', sm: '0.28em' } }}>
                       Welcome To
                     </Typography>
-                    <Typography component="h1" sx={{ mt: 1.5, color: '#fff', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, fontSize: { xs: '1.8rem', sm: '3rem' } }}>
+                    <Typography component="h1" sx={{ mt: 1.5, color: brandColors.white, fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, fontSize: { xs: '1.8rem', sm: '3rem' } }}>
                       {siteConfig.brandName}
                     </Typography>
                     <Typography sx={{ mt: 1.5, color: 'rgba(215,239,246,0.74)', fontSize: { xs: '0.72rem', sm: '0.85rem' }, fontWeight: 700, textTransform: 'uppercase', letterSpacing: { xs: '0.1em', sm: '0.22em' }, lineHeight: 1.5 }}>

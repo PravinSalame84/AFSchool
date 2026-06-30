@@ -1,12 +1,13 @@
 import { alpha } from '@mui/material/styles'
+import { brandColors } from '../../theme/colorTokens'
 
 export const sharedTextFieldSx = (theme) => {
   const { palette } = theme
   const isDark = palette.mode === 'dark'
 
   const border = isDark
-    ? alpha('#c8d4de', 0.16)
-    : alpha('#111a24', 0.1)
+    ? alpha(brandColors.skyMist, 0.16)
+    : alpha(brandColors.inkSoft, 0.1)
 
   const focusRing = alpha(palette.secondary.main, 0.14)
 
@@ -14,8 +15,8 @@ export const sharedTextFieldSx = (theme) => {
     '& .MuiInputLabel-root': {
       fontWeight: 600,
       color: isDark
-        ? alpha('#f7fbff', 0.84)
-        : alpha('#111a24', 0.72),
+        ? alpha(brandColors.skyBright, 0.84)
+        : alpha(brandColors.inkSoft, 0.72),
     },
 
     '& .MuiInputLabel-root.Mui-focused': {
@@ -35,7 +36,7 @@ export const sharedTextFieldSx = (theme) => {
       borderRadius: 4, // MUI spacing unit (~18px)
       backgroundColor: isDark
         ? alpha(palette.background.paper, 0.72)
-        : alpha('#fff', 0.94),
+        : alpha(brandColors.white, 0.94),
 
       backdropFilter: 'blur(14px)',
       transition: theme.transitions.create([
@@ -68,8 +69,8 @@ export const sharedTextFieldSx = (theme) => {
 
       '&.Mui-disabled': {
         backgroundColor: isDark
-          ? alpha('#fff', 0.06)
-          : alpha('#111a24', 0.035),
+          ? alpha(brandColors.white, 0.06)
+          : alpha(brandColors.inkSoft, 0.035),
       },
     },
 
@@ -96,13 +97,13 @@ export const dropdownPaperSx = (theme) => {
     borderRadius: 4,
 
     border: `1px solid ${
-      isDark ? alpha('#c8d4de', 0.12) : alpha('#111a24', 0.08)
+      isDark ? alpha(brandColors.skyMist, 0.12) : alpha(brandColors.inkSoft, 0.08)
     }`,
 
     backgroundImage: 'none',
     backgroundColor: isDark
       ? alpha(palette.background.paper, 0.98)
-      : alpha('#fff', 0.98),
+      : alpha(brandColors.white, 0.98),
 
     boxShadow: theme.shadows[10],
 

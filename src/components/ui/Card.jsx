@@ -1,6 +1,6 @@
 import Paper from '@mui/material/Paper'
 import { alpha } from '@mui/material/styles'
-
+import { brandColors } from '../../theme/colorTokens'
 export default function Card({
   children,
   className = '',
@@ -19,7 +19,7 @@ export default function Card({
         backgroundColor:
           theme.palette.mode === 'dark'
             ? alpha(theme.palette.primary.dark, 0.85)
-            : '#ffffff',
+            : brandColors.white,
 
         transition: 'all 0.3s ease',
 

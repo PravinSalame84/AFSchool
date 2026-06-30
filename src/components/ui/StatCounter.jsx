@@ -1,6 +1,8 @@
 import Typography from '@mui/material/Typography'
 import useOnScreen from '../../hooks/useOnScreen'
 import useCountUp from '../../hooks/useCountUp'
+import { alpha } from '@mui/material'
+import { brandColors } from '../../theme/colorTokens'
 
 function formatValue(value, format) {
   if (format === 'compact') {
@@ -29,7 +31,7 @@ export default function StatCounter({
         sx={(theme) => ({
           fontWeight: 800,
           fontSize: { xs: '2.25rem', sm: '3rem' },
-          color: tone === 'light' ? '#fff' : theme.palette.text.primary,
+          color: tone === 'light' ? brandColors.white : theme.palette.text.primary,
           fontFamily: theme.typography.fontFamily,
         })}
       >
@@ -54,7 +56,7 @@ export default function StatCounter({
           letterSpacing: '0.08em',
           color:
             tone === 'light'
-              ? 'rgba(255,255,255,0.85)'
+              ? alpha(brandColors.white, 0.85)
               : theme.palette.text.secondary,
         })}
       >

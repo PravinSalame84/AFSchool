@@ -20,6 +20,7 @@ import schoolContent from '../../data/schoolContent'
 import siteConfig from '../../data/siteConfig'
 import siteAssets from '../../data/siteAssets'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function Hero() {
   const theme = useTheme()
@@ -45,17 +46,23 @@ export default function Hero() {
   return (
     <Box
       component="section"
+      className="hero-shell"
       sx={{
-        position: 'relative',
-        overflow: 'clip',
-        pt: { xs: 4, md: 5 },
-        pb: { xs: 6, md: 8 },
+        '--hero-card-border': alpha(theme.palette.primary.main, 0.1),
+        '--hero-card-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
+        '--hero-card-bg-soft': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fafdff', 0.82),
+        '--hero-card-shadow-soft': '0 12px 28px rgba(17, 26, 36, 0.08)',
+        '--hero-frame-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.5) : alpha('#fafdff', 0.86),
+        '--hero-frame-shadow': '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+        '--hero-aside-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.92) : alpha('#fafdff', 0.96),
+        '--hero-aside-shadow': '0 20px 40px rgba(17, 26, 36, 0.12)',
+        '--hero-pill-bg': alpha('#fafdff', 0.9),
+        '--hero-pill-shadow': '0 14px 32px rgba(17, 26, 36, 0.14)',
       }}
     >
       <Box
+        className="hero-ambient"
         sx={{
-          position: 'absolute',
-          inset: 0,
           background:
             theme.palette.mode === 'dark'
               ? 'linear-gradient(180deg, rgba(8,14,22,0.98), rgba(17,28,43,0.9) 48%, rgba(11,19,32,0.95))'
@@ -63,75 +70,57 @@ export default function Hero() {
         }}
       />
       <Box
+        className="hero-ambient-overlay"
         sx={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
           background:
             'radial-gradient(circle at top right, rgba(240,147,75,0.18), transparent 24%), radial-gradient(circle at left, rgba(93,138,168,0.18), transparent 30%)',
         }}
       />
       <Box className="contour-lines" sx={{ opacity: theme.palette.mode === 'dark' ? 0.22 : 0.14 }} />
 
-      <Container maxWidth="xl" sx={{ position: 'relative', px: { xs: 2, sm: 3, md: 4 } }}>
+      <Container maxWidth="xl" className="hero-inner">
         <Grid container spacing={{ xs: 4, lg: 5 }} alignItems="center">
           <Grid item xs={12} lg={6}>
-            <Box sx={{ maxWidth: 720 }}>
+            <Box className="hero-copy">
               <Typography
                 variant="overline"
-                sx={{
-                  color: 'secondary.main',
-                  fontWeight: 800,
-                  letterSpacing: '0.28em',
-                }}
+                className="hero-eyebrow"
+                sx={{ color: 'secondary.main' }}
               >
                 {schoolContent.hero.eyebrow}
               </Typography>
 
               <Typography
                 component="h1"
-                sx={{
-                  mt: 1.5,
-                  color: 'text.primary',
-                  fontWeight: 800,
-                  lineHeight: 0.92,
-                  fontSize: { xs: '2.5rem', sm: '3.3rem', lg: '4.25rem' },
-                }}
+                className="hero-title"
+                sx={{ color: 'text.primary' }}
               >
                 {schoolContent.hero.title}
               </Typography>
 
               <Typography
-                sx={{
-                  mt: 2.5,
-                  maxWidth: 640,
-                  color: 'text.secondary',
-                  fontSize: { xs: '1rem', sm: '1.05rem' },
-                  lineHeight: 1.85,
-                }}
+                className="hero-subtitle"
+                sx={{ color: 'text.secondary' }}
               >
                 {schoolContent.hero.subtitle}
               </Typography>
 
-              <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 3 }}>
+              <Stack className="hero-badges" direction="row" flexWrap="wrap">
                 {schoolContent.hero.badges.map((badge) => (
                   <Chip
                     key={badge}
                     label={badge}
+                    className="hero-badge"
                     sx={{
-                      borderRadius: 4,
                       color: 'text.primary',
-                      bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha('#fff', 0.8),
+                      bgcolor: theme.palette.mode === 'dark' ? alpha(brandColors.white, 0.08) : alpha(brandColors.white, 0.8),
                       border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
                     }}
                   />
                 ))}
               </Stack>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
+              <Stack className="cta-stack-responsive" direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                 <Button size="lg" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                   Start General Enquiry
                 </Button>
@@ -145,16 +134,11 @@ export default function Hero() {
                   <Box
                     component={Link}
                     to="/contact"
+                    className="surface-card-soft hero-contact-card"
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.25,
-                      p: 2,
-                      borderRadius: 4,
-                      textDecoration: 'none',
                       color: 'text.primary',
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
+                      '--surface-border-soft': alpha(theme.palette.primary.main, 0.1),
+                      '--surface-bg-soft': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
                     }}
                   >
                     <MapPin size={18} color={theme.palette.secondary.main} />
@@ -173,16 +157,11 @@ export default function Hero() {
                   <Box
                     component="a"
                     href={`tel:${siteConfig.contact.phone}`}
+                    className="surface-card-soft hero-contact-card"
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.25,
-                      p: 2,
-                      borderRadius: 4,
-                      textDecoration: 'none',
                       color: 'text.primary',
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
+                      '--surface-border-soft': alpha(theme.palette.primary.main, 0.1),
+                      '--surface-bg-soft': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fafdff', 0.92),
                     }}
                   >
                     <Phone size={18} color={theme.palette.secondary.main} />
@@ -202,12 +181,11 @@ export default function Hero() {
                 {stats.map((fact) => (
                   <Grid item xs={6} sm={3} key={fact.label}>
                     <Box
+                      className="surface-card-soft hero-stat-card"
                       sx={{
-                        p: 2,
-                        borderRadius: '1.4rem',
-                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fafdff', 0.82),
-                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                        '--surface-border-soft': alpha(theme.palette.primary.main, 0.08),
+                        '--surface-bg-soft': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fafdff', 0.82),
+                        '--surface-shadow-soft': '0 12px 28px rgba(17, 26, 36, 0.08)',
                         backdropFilter: 'blur(16px)',
                       }}
                     >
@@ -226,17 +204,15 @@ export default function Hero() {
 
           <Grid item xs={12} lg={6}>
             <Box
+              className="surface-card hero-stage-frame"
               sx={{
-                position: 'relative',
-                borderRadius: 4,
-                p: { xs: 1.5, md: 2 },
-                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.5) : alpha('#fafdff', 0.86),
-                boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
-                backdropFilter: 'blur(18px)',
+                '--surface-border': alpha(theme.palette.primary.main, 0.1),
+                '--surface-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.5) : alpha('#fafdff', 0.86),
+                '--surface-shadow': '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
+                '--surface-blur': '18px',
               }}
             >
-              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, minHeight: { xs: 300, sm: 400, lg: 520 } }}>
+              <Box className="hero-stage-media">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeSlide.id}
@@ -257,32 +233,21 @@ export default function Hero() {
                 </AnimatePresence>
 
                 <Box
+                  className="hero-stage-overlay"
                   sx={{
-                    position: 'absolute',
-                    inset: 0,
                     background:
                       'linear-gradient(180deg, rgba(17,26,36,0.08), rgba(17,26,36,0.24) 38%, rgba(17,26,36,0.88))',
                   }}
                 />
 
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{
-                    position: 'absolute',
-                    top: { xs: 12, sm: 16 },
-                    right: { xs: 12, sm: 16 },
-                  }}
-                >
+                <Stack className="hero-nav-controls" direction="row" spacing={1}>
                   <IconButton
                     onClick={() => navigateSlide(-1)}
                     aria-label="Previous slide"
+                    className="hero-nav-button"
                     sx={{
-                      width: 42,
-                      height: 42,
                       bgcolor: 'rgba(255,255,255,0.14)',
-                      color: '#fff',
-                      backdropFilter: 'blur(12px)',
+                      color: brandColors.white,
                       '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
                     }}
                   >
@@ -291,12 +256,10 @@ export default function Hero() {
                   <IconButton
                     onClick={() => navigateSlide(1)}
                     aria-label="Next slide"
+                    className="hero-nav-button"
                     sx={{
-                      width: 42,
-                      height: 42,
                       bgcolor: 'rgba(255,255,255,0.14)',
-                      color: '#fff',
-                      backdropFilter: 'blur(12px)',
+                      color: brandColors.white,
                       '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
                     }}
                   >
@@ -304,30 +267,19 @@ export default function Hero() {
                   </IconButton>
                 </Stack>
 
-                <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, p: { xs: 2, sm: 3 } }}>
+                <Box className="hero-stage-copy">
                   <Box
+                    className="hero-stage-pill"
                     sx={{
-                      mb: 2,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 1.25,
-                      borderRadius: 4,
                       bgcolor: alpha('#fafdff', 0.9),
-                      px: 1.2,
-                      py: 0.8,
                       color: theme.palette.primary.main,
                       boxShadow: '0 14px 32px rgba(17, 26, 36, 0.14)',
-                      maxWidth: '100%',
                     }}
                   >
                     <Box
+                      className="hero-stage-avatar"
                       sx={{
-                        width: 38,
-                        height: 38,
-                        overflow: 'hidden',
-                        borderRadius: '25%',
-                        border: `2px solid ${alpha('#fff', 0.9)}`,
-                        flexShrink: 0,
+                        border: `2px solid ${alpha(brandColors.white, 0.9)}`,
                       }}
                     >
                       <OptimizedImage
@@ -343,24 +295,21 @@ export default function Hero() {
                   </Box>
                   <Chip
                     label={activeSlide.label}
+                    className="hero-slide-label"
                     sx={{
-                      borderRadius: 4,
-                      color: '#fff',
+                      color: brandColors.white,
                       bgcolor: 'rgba(255,255,255,0.14)',
                       border: '1px solid rgba(255,255,255,0.16)',
-                      letterSpacing: '0.16em',
-                      fontWeight: 800,
-                      textTransform: 'uppercase',
                     }}
                   />
-                  <Typography sx={{ mt: 1.5, maxWidth: 440, color: '#fff', fontWeight: 800, lineHeight: 1.02, fontSize: { xs: '1.5rem', sm: '2.2rem', lg: '2.5rem' } }}>
+                  <Typography className="hero-slide-title" sx={{ color: brandColors.white }}>
                     {activeSlide.title}
                   </Typography>
-                  <Typography sx={{ mt: 1.25, maxWidth: 500, color: alpha('#fff', 0.8), fontSize: { xs: '0.88rem', sm: '0.95rem' }, lineHeight: 1.7 }}>
+                  <Typography className="hero-slide-motto" sx={{ color: alpha(brandColors.white, 0.8) }}>
                     {schoolContent.hero.motto}
                   </Typography>
 
-                  <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+                  <Stack className="hero-slide-dots" direction="row" spacing={1}>
                     {slides.map((slide, index) => (
                       <Box
                         key={slide.id}
@@ -371,7 +320,7 @@ export default function Hero() {
                           borderRadius: 4,
                           cursor: 'pointer',
                           transition: 'all 0.25s ease',
-                          bgcolor: index === activeIndex ? 'secondary.main' : alpha('#fff', 0.4),
+                          bgcolor: index === activeIndex ? 'secondary.main' : alpha(brandColors.white, 0.4),
                         }}
                       />
                     ))}
@@ -381,23 +330,19 @@ export default function Hero() {
             </Box>
 
             <Paper
+              className="surface-card hero-stage-aside"
               sx={{
-                mt: { xs: 2, md: 2.5 },
-                ml: { md: 'auto' },
-                width: { xs: '100%', sm: 340 },
-                maxWidth: '100%',
-                p: 1.25,
-                borderRadius: 4,
-                border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.92) : alpha('#fafdff', 0.96),
-                boxShadow: '0 20px 40px rgba(17, 26, 36, 0.12)',
+                '--surface-border': alpha(theme.palette.primary.main, 0.08),
+                '--surface-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.92) : alpha('#fafdff', 0.96),
+                '--surface-shadow': '0 20px 40px rgba(17, 26, 36, 0.12)',
               }}
             >
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'flex-start', sm: 'center' }}>
+              <Stack className="hero-stage-aside-stack" direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'flex-start', sm: 'center' }}>
                 <OptimizedImage
                   src={siteAssets.images.studentClassPhoto}
                   alt="Students at Air Force School"
-                  wrapperSx={{ width: { xs: '100%', sm: 86 }, flexShrink: 0, borderRadius: 4 }}
+                  wrapperSx={{ width: { xs: '100%', sm: 86 } }}
+                  className="hero-stage-aside-media"
                   sx={{ width: { xs: '100%', sm: 86 }, height: { xs: 160, sm: 86 }, borderRadius: 4 }}
                 />
                 <Box>

@@ -11,6 +11,7 @@ import {
 
 import { ShieldCheck, HeartHandshake } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
+import { brandColors } from '../../theme/colorTokens'
 
 const pillars = [
   {
@@ -33,8 +34,8 @@ export default function Philosophy() {
       component="section"
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: '#0B1F3A', // Air Force deep navy
-        color: '#fff',
+        backgroundColor: brandColors.navyAlt, // Air Force deep navy
+        color: brandColors.white,
         position: 'relative',
       }}
     >
@@ -52,7 +53,7 @@ export default function Philosophy() {
           }}
         >
           Because we believe your child is{' '}
-          <Box component="span" sx={{ color: '#F57C00' }}>
+          <Box component="span" sx={{ color: brandColors.saffron }}>
             our responsibility
           </Box>{' '}
           — we groom, we nurture.
@@ -68,13 +69,13 @@ export default function Philosophy() {
                   sx={{
                     height: '100%',
                     borderRadius: 4,
-                    background: alpha('#ffffff', 0.06),
-                    border: `1px solid ${alpha('#ffffff', 0.12)}`,
+                    background: alpha(brandColors.white, 0.06),
+                    border: `1px solid ${alpha(brandColors.white, 0.12)}`,
                     backdropFilter: 'blur(12px)',
                     transition: '0.25s ease',
                     '&:hover': {
                       transform: 'translateY(-4px)',
-                      background: alpha('#ffffff', 0.1),
+                      background: alpha(brandColors.white, 0.1),
                     },
                   }}
                 >
@@ -90,8 +91,8 @@ export default function Philosophy() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          background: alpha('#F57C00', 0.15),
-                          color: '#F57C00',
+                          background: alpha(brandColors.saffron, 0.15),
+                          color: brandColors.saffron,
                         }}
                       >
                         <Icon size={22} />
@@ -102,7 +103,7 @@ export default function Philosophy() {
                         variant="h6"
                         sx={{
                           fontWeight: 800,
-                          color: '#fff',
+                          color: brandColors.white,
                           lineHeight: 1.3,
                         }}
                       >
@@ -113,7 +114,7 @@ export default function Philosophy() {
                       <Typography
                         variant="body2"
                         sx={{
-                          color: alpha('#ffffff', 0.75),
+                          color: alpha(brandColors.white, 0.75),
                           lineHeight: 1.7,
                         }}
                       >
@@ -134,7 +135,7 @@ export default function Philosophy() {
           sx={{
             mt: 6,
             fontSize: '0.85rem',
-            color: alpha('#ffffff', 0.6),
+            color: alpha(brandColors.white, 0.6),
             letterSpacing: 1,
           }}
         >

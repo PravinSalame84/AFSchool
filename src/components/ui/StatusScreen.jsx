@@ -9,6 +9,7 @@ import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material/styles'
+import { brandColors } from '../../theme/colorTokens'
 
 const iconMap = {
   error: AlertTriangle,
@@ -72,13 +73,13 @@ export default function StatusScreen({
                 sx={(theme) => ({
                   p: 4,
                   borderRadius: 4,
-                  color: '#fff',
+                  color: brandColors.white,
                   position: 'relative',
                   overflow: 'hidden',
                   background: `linear-gradient(135deg, ${
                     theme.palette.secondary.main
                   }, ${theme.palette.primary.dark}, #214f79)`,
-                  border: `1px solid ${alpha('#fff', 0.2)}`,
+                  border: `1px solid ${alpha(brandColors.white, 0.2)}`,
                 })}
               >
                 <Box
@@ -95,8 +96,8 @@ export default function StatusScreen({
                     <Chip
                       label={badge}
                       sx={{
-                        bgcolor: alpha('#fff', 0.15),
-                        color: '#fff',
+                        bgcolor: alpha(brandColors.white, 0.15),
+                        color: brandColors.white,
                         fontWeight: 700,
                         letterSpacing: 2,
                       }}
@@ -108,7 +109,7 @@ export default function StatusScreen({
                         display: 'inline-flex',
                         p: 2,
                         borderRadius: 4,
-                        bgcolor: alpha('#fff', 0.12),
+                        bgcolor: alpha(brandColors.white, 0.12),
                         backdropFilter: 'blur(10px)',
                       }}
                     >
@@ -117,7 +118,7 @@ export default function StatusScreen({
                   </Box>
 
                   <Box>
-                    <Typography variant="overline" sx={{ color: alpha('#fff', 0.6) }}>
+                    <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.6) }}>
                       Status
                     </Typography>
                     <Typography variant="h3" sx={{ fontWeight: 800 }}>

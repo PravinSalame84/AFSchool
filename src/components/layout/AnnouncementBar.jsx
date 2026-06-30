@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { useMemo } from 'react'
 import { Box, Container, Stack, Button } from '@mui/material'
+import { alpha } from '@mui/material/styles'
 
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import useRuntimeContent from '../../hooks/useRuntimeContent'
+import { brandColors, gradientTokens } from '../../theme/colorTokens'
 
 export default function AnnouncementBar({ compact = false }) {
   const { content } = useRuntimeContent()
@@ -28,6 +30,7 @@ export default function AnnouncementBar({ compact = false }) {
 
   return (
     <Box
+      className="announcement-shell"
       sx={{
         maxHeight: compact ? 0 : { xs: 260, md: 140 },
         opacity: compact ? 0 : 1,
@@ -35,59 +38,29 @@ export default function AnnouncementBar({ compact = false }) {
         pointerEvents: compact ? 'none' : 'auto',
         transition: 'max-height 320ms ease, opacity 240ms ease, transform 320ms ease',
         borderBottom: '1px solid',
-        borderColor: 'rgba(255,255,255,0.2)',
-        background: 'linear-gradient(90deg, #1e3a8a, #0f172a, #334155)',
-        color: '#fff',
+        borderColor: alpha(brandColors.white, 0.2),
+        background: gradientTokens.announcementBar,
+        color: brandColors.white,
         overflow: 'hidden',
       }}
     >
       <Container maxWidth="xl" sx={{ py: { xs: 1.25, md: 1.5 } }}>
 
-        <Stack
-          direction={{ xs: 'column', lg: 'row' }}
-          alignItems="center"
-          spacing={2}
-        >
+        <Stack className="announcement-content" direction={{ xs: 'column', lg: 'row' }} alignItems="center" spacing={2}>
 
           {/* ---------------- MARQUEE ---------------- */}
-          <Box
-            sx={{
-              flex: 1,
-              minWidth: 0,
-              overflow: 'hidden',
-              whiteSpace: { xs: 'normal', md: 'nowrap' },
-              position: 'relative',
-              width: '100%',
-            }}
-          >
+          <Box className="announcement-marquee">
             <Box
+              className="announcement-marquee-track"
               sx={{
-                display: 'inline-flex',
-                gap: 2,
                 flexWrap: { xs: 'wrap', md: 'nowrap' },
-                animation: { xs: 'none', md: 'marquee 18s linear infinite' },
-                width: { xs: '100%', md: 'max-content' },
-                '@keyframes marquee': {
-                  '0%': { transform: 'translateX(0%)' },
-                  '100%': { transform: 'translateX(-50%)' },
-                },
               }}
             >
               {chips.map((item, index) => (
                 <Box
+                  className="announcement-chip"
                   key={`${item}-${index}`}
-                  sx={{
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: 4,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: 1.2,
-                    whiteSpace: { xs: 'normal', md: 'nowrap' },
-                    background: 'rgba(255,255,255,0.12)',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                  }}
+                  sx={{ whiteSpace: { xs: 'normal', md: 'nowrap' } }}
                 >
                   {item}
                 </Box>
@@ -97,6 +70,7 @@ export default function AnnouncementBar({ compact = false }) {
 
           {/* ---------------- ACTION BUTTONS ---------------- */}
           <Stack
+            className="announcement-actions"
             direction="row"
             spacing={1}
             flexWrap="wrap"
@@ -115,8 +89,8 @@ export default function AnnouncementBar({ compact = false }) {
                 variant="outlined"
                 size="small"
                 sx={{
-                  color: 'white',
-                  borderColor: 'rgba(255,255,255,0.25)',
+                  color: brandColors.white,
+                  borderColor: alpha(brandColors.white, 0.25),
                   fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: 1,
@@ -124,8 +98,8 @@ export default function AnnouncementBar({ compact = false }) {
                   px: 2,
                   width: { xs: '100%', sm: 'auto' },
                   '&:hover': {
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245,158,11,0.15)',
+                    borderColor: brandColors.goldDeep,
+                    backgroundColor: alpha(brandColors.goldDeep, 0.15),
                   },
                 }}
               >

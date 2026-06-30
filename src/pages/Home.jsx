@@ -41,32 +41,11 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 import useRuntimeContent from '../hooks/useRuntimeContent'
+import { activityToneTokens, brandColors } from '../theme/colorTokens'
 
 const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Trophy]
 
-const activityTones = [
-  {
-    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,215,7,0.12), rgba(228,246,251,0.72))',
-    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(255,215,7,0.10), rgba(29,33,60,0.92))',
-    badge: 'linear-gradient(90deg, #ffd707 0%, #e7ab33 100%)',
-    badgeColor: '#1d213c',
-    icon: '#8a6742',
-  },
-  {
-    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(215,239,246,0.86), rgba(0,212,250,0.08))',
-    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.9), rgba(0,212,250,0.12))',
-    badge: 'linear-gradient(90deg, #00d4fa 0%, #d7eff6 100%)',
-    badgeColor: '#1d213c',
-    icon: '#344656',
-  },
-  {
-    surface: 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,215,7,0.08), rgba(255,103,31,0.08))',
-    surfaceDark: 'linear-gradient(135deg, rgba(14,20,24,0.92), rgba(29,33,60,0.9), rgba(255,103,31,0.12))',
-    badge: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
-    badgeColor: '#ffffff',
-    icon: '#ff671f',
-  },
-]
+const activityTones = activityToneTokens
 
 const rise = {
   hidden: { opacity: 0, y: 28 },
@@ -202,8 +181,8 @@ export default function Home() {
                   label={item}
                   sx={{
                     borderRadius: 4,
-                    bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha(theme.palette.common.white, 0.75),
-                    color: theme.palette.mode === 'dark' ? '#fff' : 'text.primary',
+                    bgcolor: theme.palette.mode === 'dark' ? alpha(brandColors.white, 0.08) : alpha(theme.palette.common.white, 0.75),
+                    color: theme.palette.mode === 'dark' ? brandColors.white : 'text.primary',
                     border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
                     fontWeight: 700,
                     letterSpacing: '0.08em',
@@ -268,7 +247,7 @@ export default function Home() {
                     }}
                   >
                     <Stack direction="row" spacing={2} alignItems="flex-start" sx={{ flex: 1, minWidth: 0, width: '100%' }}>
-                      <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: '#fff' }}>
+                      <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: brandColors.white }}>
                         <item.icon size={20} />
                       </Avatar>
                       <Box sx={{ minWidth: 0 }}>
@@ -317,7 +296,7 @@ export default function Home() {
                               p: 2,
                               borderRadius: 4,
                               border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.35) : alpha('#fff', 0.82),
+                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.35) : alpha(brandColors.white, 0.82),
                               boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
                             }}
                           >
@@ -340,7 +319,7 @@ export default function Home() {
               <Stack spacing={3}>
                 <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
                   <Stack direction="row" spacing={2} alignItems="center">
-                    <Avatar sx={{ bgcolor: 'primary.main', color: '#fff' }}>
+                    <Avatar sx={{ bgcolor: 'primary.main', color: brandColors.white }}>
                       <Compass size={20} />
                     </Avatar>
                     <Box>
@@ -359,7 +338,7 @@ export default function Home() {
 
                 <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
                   <Stack direction="row" spacing={2} alignItems="center">
-                    <Avatar sx={{ bgcolor: 'secondary.main', color: '#fff' }}>
+                    <Avatar sx={{ bgcolor: 'secondary.main', color: brandColors.white }}>
                       <Flag size={20} />
                     </Avatar>
                     <Box>
@@ -382,14 +361,14 @@ export default function Home() {
                     overflow: 'hidden',
                     borderRadius: 4,
                     p: 3,
-                    color: '#fff',
+                    color: brandColors.white,
                     background: 'linear-gradient(135deg, #1d213c 0%, #202c36 55%, #344656 100%)',
                     boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
                   }}
                 >
                   <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at top right, rgba(215,166,37,0.28), transparent 28%)' }} />
                   <Box sx={{ position: 'relative' }}>
-                    <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: alpha('#fff', 0.6) }}>
+                    <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: alpha(brandColors.white, 0.6) }}>
                       Parent Access
                     </Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 2 }}>
@@ -403,17 +382,17 @@ export default function Home() {
                             alignItems: 'center',
                             gap: 1,
                             borderRadius: 4,
-                            border: `1px solid ${alpha('#fff', 0.16)}`,
+                            border: `1px solid ${alpha(brandColors.white, 0.16)}`,
                             px: 2,
                             py: 1,
-                            color: '#fff',
+                            color: brandColors.white,
                             textDecoration: 'none',
                             fontSize: '0.72rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
                             letterSpacing: '0.16em',
                             transition: 'border-color 0.2s ease, transform 0.2s ease',
-                            '&:hover': { borderColor: alpha('#fff', 0.4), transform: 'translateY(-1px)' },
+                            '&:hover': { borderColor: alpha(brandColors.white, 0.4), transform: 'translateY(-1px)' },
                           }}
                         >
                           {resource.label}
@@ -472,7 +451,7 @@ export default function Home() {
                       })}
                     >
                       <Box sx={{ position: 'relative' }}>
-                        <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: '#fff' }}>
+                        <Avatar sx={{ width: 48, height: 48, borderRadius: 4, bgcolor: 'primary.main', color: brandColors.white }}>
                           <Icon size={20} />
                         </Avatar>
                         <Typography sx={{ mt: 2, fontSize: '1.05rem', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.55, color: 'text.primary' }}>
@@ -546,13 +525,13 @@ export default function Home() {
                       sx={{ height: 250, transition: 'transform 700ms ease', '&:hover': { transform: 'scale(1.05)' } }}
                     />
                     <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(29,33,60,0.08), rgba(32,44,54,0.46), rgba(29,33,60,0.95))' }} />
-                    <Box sx={{ position: 'relative', display: 'flex', minHeight: 250, flexDirection: 'column', justifyContent: 'flex-end', p: 2.5, color: '#fff' }}>
+                    <Box sx={{ position: 'relative', display: 'flex', minHeight: 250, flexDirection: 'column', justifyContent: 'flex-end', p: 2.5, color: brandColors.white }}>
                       <Chip
                         label={item.badge}
                         sx={{
                           alignSelf: 'flex-start',
                           borderRadius: 4,
-                          color: '#fff',
+                          color: brandColors.white,
                           bgcolor: 'rgba(255,255,255,0.14)',
                           border: '1px solid rgba(255,255,255,0.16)',
                           backdropFilter: 'blur(10px)',
@@ -564,7 +543,7 @@ export default function Home() {
                       <Typography variant="h5" sx={{ mt: 2, fontWeight: 800, textTransform: 'uppercase' }}>
                         {item.title}
                       </Typography>
-                      <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, color: alpha('#fff', 0.82) }}>
+                      <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, color: alpha(brandColors.white, 0.82) }}>
                         {item.caption}
                       </Typography>
                     </Box>
@@ -782,7 +761,7 @@ export default function Home() {
                           p: 1.5,
                           borderRadius: 4,
                           border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.5) : alpha('#fff', 0.9),
+                          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.5) : alpha(brandColors.white, 0.9),
                           boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
                           transition: 'transform 0.25s ease, box-shadow 0.25s ease',
                           '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 18px 36px rgba(17, 26, 36, 0.12)' },
@@ -857,7 +836,7 @@ export default function Home() {
                         display: 'block',
                         borderRadius: 4,
                         border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha('#fff', 0.88),
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
                         p: 2.5,
                         textDecoration: 'none',
                         boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
@@ -870,7 +849,7 @@ export default function Home() {
                           label={notice.category}
                           sx={{
                             borderRadius: 4,
-                            color: '#fff',
+                            color: brandColors.white,
                             background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
                             fontWeight: 800,
                             textTransform: 'uppercase',
@@ -935,7 +914,7 @@ export default function Home() {
                         gap: 2,
                         borderRadius: 4,
                         border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha('#fff', 0.88),
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
                         px: 2.5,
                         py: 2,
                         textDecoration: 'none',
@@ -976,7 +955,7 @@ export default function Home() {
               overflow: 'hidden',
               borderRadius: 4,
               p: { xs: 3, sm: 4, md: 5 },
-              color: '#fff',
+              color: brandColors.white,
               background: 'linear-gradient(135deg, #1d213c 0%, #202c36 55%, #344656 100%)',
               boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
             }}
@@ -985,10 +964,10 @@ export default function Home() {
             <Box sx={{ position: 'relative', display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 0.9fr' }, gap: 4 }}>
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
                 <Eyebrow>Admissions</Eyebrow>
-                <Typography variant="h2" sx={{ mt: 1.5, color: '#fff', fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
+                <Typography variant="h2" sx={{ mt: 1.5, color: brandColors.white, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
                   Start your school enquiry with clarity and confidence.
                 </Typography>
-                <Typography sx={{ mt: 3, maxWidth: 680, fontSize: '0.95rem', lineHeight: 1.8, color: alpha('#fff', 0.74) }}>
+                <Typography sx={{ mt: 3, maxWidth: 680, fontSize: '0.95rem', lineHeight: 1.8, color: alpha(brandColors.white, 0.74) }}>
                   {schoolContent.admissions.intro}
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
@@ -1013,8 +992,8 @@ export default function Home() {
                     <Paper
                       sx={{
                         borderRadius: 4,
-                        border: `1px solid ${alpha('#fff', 0.1)}`,
-                        bgcolor: alpha('#fff', 0.08),
+                        border: `1px solid ${alpha(brandColors.white, 0.1)}`,
+                        bgcolor: alpha(brandColors.white, 0.08),
                         p: 2.5,
                         backdropFilter: 'blur(12px)',
                       }}
@@ -1023,19 +1002,19 @@ export default function Home() {
                         <Box
                           sx={{
                             borderRadius: 4,
-                            bgcolor: alpha('#fff', 0.12),
+                            bgcolor: alpha(brandColors.white, 0.12),
                             px: 1.5,
                             py: 0.6,
                             fontSize: '0.8rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
                             letterSpacing: '0.16em',
-                            color: '#fff',
+                            color: brandColors.white,
                           }}
                         >
                           0{index + 1}
                         </Box>
-                        <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: alpha('#fff', 0.82) }}>
+                        <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: alpha(brandColors.white, 0.82) }}>
                           {step}
                         </Typography>
                       </Stack>
@@ -1085,7 +1064,7 @@ export default function Home() {
                       gap: 2,
                       borderRadius: 4,
                       border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.4) : alpha('#fff', 0.78),
+                      bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.4) : alpha(brandColors.white, 0.78),
                       px: 2.5,
                       py: 2,
                       textDecoration: 'none',
@@ -1112,7 +1091,7 @@ export default function Home() {
               sx={{
                 overflow: 'hidden',
                 borderRadius: 4,
-                border: `1px solid ${alpha('#fff', theme.palette.mode === 'dark' ? 0.1 : 0.7)}`,
+                border: `1px solid ${alpha(brandColors.white, theme.palette.mode === 'dark' ? 0.1 : 0.7)}`,
                 p: 1.5,
                 boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
                 backdropFilter: 'blur(20px)',
@@ -1151,7 +1130,7 @@ export default function Home() {
                     bgcolor: 'primary.main',
                     px: 2,
                     py: 1,
-                    color: '#fff',
+                    color: brandColors.white,
                     textDecoration: 'none',
                     fontSize: '0.72rem',
                     fontWeight: 800,

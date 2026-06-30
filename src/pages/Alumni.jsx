@@ -16,6 +16,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import testimonials from '../data/testimonials'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import { brandColors } from '../theme/colorTokens'
 
 export default function Alumni() {
   const { openEnquiry } = useEnquiryModal()
@@ -87,7 +88,7 @@ export default function Alumni() {
                 borderRadius: 4,
                 textAlign: 'center',
                 background: 'linear-gradient(135deg,#1d213c,#2a3946)',
-                color: '#fff',
+                color: brandColors.white,
               }}
             >
               <SectionHeading

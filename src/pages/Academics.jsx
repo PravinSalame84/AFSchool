@@ -25,6 +25,7 @@ import OptimizedImage from '../components/ui/OptimizedImage'
 
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import { brandColors } from '../theme/colorTokens'
 
 const icons = [
   BookOpenCheck,
@@ -220,7 +221,7 @@ export default function Academics() {
                                 height: 52,
                                 borderRadius: 4,
                                 bgcolor: 'primary.main',
-                                color: '#fff',
+                                color: brandColors.white,
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Fab, Zoom } from '@mui/material'
 import { ArrowUp } from 'lucide-react'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function BackToTopButton() {
   const [visible, setVisible] = useState(false)
@@ -32,13 +33,13 @@ export default function BackToTopButton() {
           right: 24,
           zIndex: 1400,
 
-          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(17,28,43,0.9)' : 'rgba(255,255,255,0.92)',
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(17,28,43,0.9)' : alpha(brandColors.white, 0.92),
           color: 'primary.main',
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255,255,255,0.6)',
 
           '&:hover': {
-            bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(17,28,43,1)' : '#fff',
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(17,28,43,1)' : brandColors.white,
             transform: 'translateY(-4px)',
           },
         }}

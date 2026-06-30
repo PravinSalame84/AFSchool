@@ -1,44 +1,6 @@
 import { Box } from '@mui/material'
 import iconMap from './iconMap'
-
-const tones = {
-  primary: {
-    blobFrom: '#D7EFF6',
-    blobTo: '#A8C5D7',
-    iconColor: '#F0934B',
-    ringColor: '#161E25',
-  },
-  accent: {
-    blobFrom: '#FCE4D0',
-    blobTo: '#F6C090',
-    iconColor: '#D97A2E',
-    ringColor: '#161E25',
-  },
-  success: {
-    blobFrom: '#D9EEDC',
-    blobTo: '#A9D1B2',
-    iconColor: '#046A38',
-    ringColor: '#F0934B',
-  },
-  earth: {
-    blobFrom: '#EFE2D4',
-    blobTo: '#D5BA9A',
-    iconColor: '#8A6742',
-    ringColor: '#526F86',
-  },
-  slate: {
-    blobFrom: '#E7EEF3',
-    blobTo: '#C0D0DC',
-    iconColor: '#526F86',
-    ringColor: '#F0934B',
-  },
-  dark: {
-    blobFrom: '#D7DEE6',
-    blobTo: '#AFBCC8',
-    iconColor: '#2A3946',
-    ringColor: '#046A38',
-  },
-}
+import { blobToneTokens } from '../../theme/colorTokens'
 
 const blobPaths = [
   'M82.7,-23.7C94.7,9.6,90.4,52.1,67.3,73.9C44.2,95.7,2.4,96.8,-31.9,82.6C-66.2,68.4,-93.5,38.9,-94.7,7.7C-95.9,-23.5,-71,-56.5,-38.5,-67.6C-6.1,-78.6,33.8,-67.7,82.7,-23.7Z',
@@ -53,7 +15,7 @@ export default function BlobIcon({
   blobIndex = 0,
 }) {
   const Icon = iconMap[icon] || iconMap.Sparkles
-  const palette = tones[tone] || tones.primary
+  const palette = blobToneTokens[tone] || blobToneTokens.primary
   const path = blobPaths[blobIndex % blobPaths.length]
 
   const gradId = `blobGrad-${tone}-${blobIndex}`

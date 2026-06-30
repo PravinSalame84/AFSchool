@@ -19,6 +19,7 @@ import Seo from '../components/ui/Seo'
 import Carousel from '../components/ui/Carousel'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
+import { brandColors } from '../theme/colorTokens'
 
 function galleryCardSx(theme) {
   return {
@@ -65,7 +66,7 @@ export default function Gallery() {
                 display: 'grid',
                 placeItems: 'center',
                 background: 'linear-gradient(135deg, #1e3a8a, #0f172a)',
-                color: '#fff',
+                color: brandColors.white,
               }}
             >
               <PhotoCamera />
@@ -104,7 +105,7 @@ export default function Gallery() {
 
                     <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,26,36,0.06), rgba(17,26,36,0.82))' }} />
 
-                    <Box sx={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', p: 2.25, color: '#fff' }}>
+                    <Box sx={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', p: 2.25, color: brandColors.white }}>
                       <Chip
                         label="Featured"
                         size="small"
@@ -112,14 +113,14 @@ export default function Gallery() {
                           alignSelf: 'flex-start',
                           mb: 1.25,
                           bgcolor: 'rgba(255,255,255,0.16)',
-                          color: '#fff',
+                          color: brandColors.white,
                           border: '1px solid rgba(255,255,255,0.18)',
                         }}
                       />
                       <Typography sx={{ fontWeight: 800, fontSize: '1.1rem' }}>
                         {item.title}
                       </Typography>
-                      <Typography variant="caption" sx={{ mt: 0.5, color: alpha('#fff', 0.82), lineHeight: 1.7 }}>
+                      <Typography variant="caption" sx={{ mt: 0.5, color: alpha(brandColors.white, 0.82), lineHeight: 1.7 }}>
                         {item.caption}
                       </Typography>
                     </Box>

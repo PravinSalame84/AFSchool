@@ -3,18 +3,19 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function Logo({ tone = 'dark', variant = 'default', className = '' }) {
   const theme = useTheme()
   const isFooter = variant === 'footer'
   const isLight = tone === 'light'
   const titleColor = isLight
-    ? '#fff'
+    ? brandColors.white
     : theme.palette.mode === 'dark'
       ? '#f7fbff'
       : theme.palette.primary.main
   const subtitleColor = isLight
-    ? alpha('#fff', 0.8)
+    ? alpha(brandColors.white, 0.8)
     : theme.palette.mode === 'dark'
       ? alpha('#d7eff6', 0.84)
       : theme.palette.text.secondary
@@ -51,7 +52,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
 
           border: `1px solid ${
             isLight
-              ? alpha('#fff', 0.18)
+              ? alpha(brandColors.white, 0.18)
               : alpha(theme.palette.primary.main, 0.18)
           }`,
 

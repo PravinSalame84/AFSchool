@@ -1,9 +1,10 @@
 import { Link as RouterLink } from 'react-router-dom'
 import { Button, alpha, useTheme } from '@mui/material'
+import { brandColors } from '../../theme/colorTokens'
 
 const getVariantStyles = (theme, variant) => {
-  const gold = '#f0a84b'
-  const honey = '#f7c56a'
+  const gold = brandColors.amber
+  const honey = brandColors.amberSoft
   const navy = theme.palette.primary.main
 
   const base = {
@@ -19,12 +20,12 @@ const getVariantStyles = (theme, variant) => {
 
   const variants = {
     footerSoft: {
-      color: alpha('#fff', 0.82),
+      color: alpha(brandColors.white, 0.82),
       fontSize: 12,
       px: 2,
       py: 1,
-      border: `1px solid ${alpha('#fff', 0.14)}`,
-      background: `linear-gradient(90deg, ${alpha('#fff', 0.12)}, ${alpha('#fff', 0.06)})`,
+      border: `1px solid ${alpha(brandColors.white, 0.14)}`,
+      background: `linear-gradient(90deg, ${alpha(brandColors.white, 0.12)}, ${alpha(brandColors.white, 0.06)})`,
       '&:hover': {
         borderColor: alpha(gold, 0.5),
         background: `linear-gradient(90deg, ${alpha(gold, 0.2)}, ${alpha(honey, 0.15)})`,
@@ -33,7 +34,7 @@ const getVariantStyles = (theme, variant) => {
     },
 
     footerText: {
-      color: alpha('#fff', 0.82),
+      color: alpha(brandColors.white, 0.82),
       fontSize: 13,
       px: 1,
       py: 0.5,
@@ -47,11 +48,11 @@ const getVariantStyles = (theme, variant) => {
       fontSize: 11,
       px: 2,
       py: 0.8,
-      color: '#fff',
+      color: brandColors.white,
       background: `linear-gradient(90deg, ${theme.palette.secondary.main}, ${navy})`,
       '&:hover': {
         background: `linear-gradient(90deg, ${gold}, ${honey})`,
-        color: '#0b1f3a',
+        color: brandColors.navyAlt,
       },
     },
 
@@ -65,11 +66,11 @@ const getVariantStyles = (theme, variant) => {
       fontSize: 12,
       px: 2,
       py: 1,
-      color: '#fff',
+      color: brandColors.white,
       background: navy,
       '&:hover': {
         background: `linear-gradient(90deg, ${gold}, ${honey})`,
-        color: '#0b1f3a',
+        color: brandColors.navyAlt,
       },
     },
 
@@ -83,7 +84,7 @@ const getVariantStyles = (theme, variant) => {
       '&:hover': {
         borderColor: alpha(gold, 0.5),
         background: `linear-gradient(90deg, ${alpha(gold, 0.2)}, ${alpha(honey, 0.15)})`,
-        color: '#0b1f3a',
+        color: brandColors.navyAlt,
       },
     },
   }

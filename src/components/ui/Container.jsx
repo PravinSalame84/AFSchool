@@ -14,7 +14,7 @@ export default function Container({
     <MuiContainer
       maxWidth={maxWidth}
       disableGutters={disableGutters}
-      className={className}
+      className={`app-shell-container ${className}`.trim()}
       sx={(theme) => ({
         position: 'relative',
 
@@ -35,7 +35,7 @@ export default function Container({
         }),
 
         ...(variant === 'default' && {
-          px: { xs: 2, sm: 3, md: 4 },
+          px: 0,
         }),
 
         transition: 'all 0.2s ease',

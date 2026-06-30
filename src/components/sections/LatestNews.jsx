@@ -12,6 +12,7 @@ import {
   Stack,
   alpha,
 } from '@mui/material'
+import { brandColors } from '../../theme/colorTokens'
 
 import news from '../../data/news'
 
@@ -38,13 +39,13 @@ export default function LatestNews() {
           <Box>
             <Typography
               variant="overline"
-              sx={{ color: '#F57C00', fontWeight: 700, letterSpacing: 2 }}
+              sx={{ color: brandColors.saffron, fontWeight: 700, letterSpacing: 2 }}
             >
               Newsroom
             </Typography>
             <Typography
               variant="h4"
-              sx={{ fontWeight: 800, color: '#0B1F3A', mt: 0.5 }}
+              sx={{ fontWeight: 800, color: brandColors.navyAlt, mt: 0.5 }}
             >
               Latest News
             </Typography>
@@ -57,11 +58,11 @@ export default function LatestNews() {
             sx={{
               borderRadius: 4,
               fontWeight: 700,
-              borderColor: alpha('#0B1F3A', 0.3),
-              color: '#0B1F3A',
+              borderColor: alpha(brandColors.navyAlt, 0.3),
+              color: brandColors.navyAlt,
               '&:hover': {
-                borderColor: '#0B1F3A',
-                backgroundColor: alpha('#0B1F3A', 0.04),
+                borderColor: brandColors.navyAlt,
+                backgroundColor: alpha(brandColors.navyAlt, 0.04),
               },
             }}
           >
@@ -82,9 +83,9 @@ export default function LatestNews() {
                   borderRadius: 4,
                   p: 2,
                   textDecoration: 'none',
-                  background: alpha('#ffffff', 0.9),
+                  background: alpha(brandColors.white, 0.9),
                   backdropFilter: 'blur(12px)',
-                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  border: `1px solid ${alpha(brandColors.navyAlt, 0.08)}`,
                   transition: '0.25s ease',
                   '&:hover': {
                     transform: 'translateY(-6px)',
@@ -101,8 +102,8 @@ export default function LatestNews() {
                     sx={{
                       width: 'fit-content',
                       fontWeight: 700,
-                      backgroundColor: alpha('#F57C00', 0.12),
-                      color: '#F57C00',
+                      backgroundColor: alpha(brandColors.saffron, 0.12),
+                      color: brandColors.saffron,
                     }}
                   />
 
@@ -112,7 +113,7 @@ export default function LatestNews() {
                     sx={{
                       fontWeight: 800,
                       mt: 2,
-                      color: '#0B1F3A',
+                      color: brandColors.navyAlt,
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
@@ -127,7 +128,7 @@ export default function LatestNews() {
                     variant="body2"
                     sx={{
                       mt: 1.5,
-                      color: alpha('#0B1F3A', 0.7),
+                      color: alpha(brandColors.navyAlt, 0.7),
                       flexGrow: 1,
                       display: '-webkit-box',
                       WebkitLineClamp: 3,

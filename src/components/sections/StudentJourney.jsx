@@ -11,8 +11,9 @@ import {
 } from '@mui/material'
 
 import studentJourney from '../../data/studentJourney'
+import { brandColors, gradientTokens, studentJourneyColors } from '../../theme/colorTokens'
 
-const colors = ['#F57C00', '#2E7D32', '#1565C0', '#455A64', '#0B1F3A', '#8E24AA']
+const colors = studentJourneyColors
 
 export default function StudentJourney() {
   return (
@@ -29,7 +30,7 @@ export default function StudentJourney() {
         <Typography
           align="center"
           variant="overline"
-          sx={{ color: '#F57C00', fontWeight: 800, letterSpacing: 2 }}
+          sx={{ color: brandColors.saffron, fontWeight: 800, letterSpacing: 2 }}
         >
           A Glimpse Into Campus Life
         </Typography>
@@ -42,7 +43,7 @@ export default function StudentJourney() {
             mt: 1,
             maxWidth: 800,
             mx: 'auto',
-            color: '#0B1F3A',
+            color: brandColors.navyAlt,
             lineHeight: 1.2,
             fontSize: { xs: '1.8rem', sm: '2.125rem' },
           }}
@@ -60,8 +61,8 @@ export default function StudentJourney() {
                   height: '100%',
                   borderRadius: 4,
                   p: 1,
-                  background: '#ffffff',
-                  border: `1px solid ${alpha('#0B1F3A', 0.08)}`,
+                  background: brandColors.white,
+                  border: `1px solid ${alpha(brandColors.navyAlt, 0.08)}`,
                   transition: '0.25s ease',
                   '&:hover': {
                     transform: 'translateY(-6px)',
@@ -95,7 +96,7 @@ export default function StudentJourney() {
                     variant="h6"
                     sx={{
                       fontWeight: 800,
-                      color: '#0B1F3A',
+                      color: brandColors.navyAlt,
                     }}
                   >
                     {item.title}
@@ -106,7 +107,7 @@ export default function StudentJourney() {
                     variant="body2"
                     sx={{
                       mt: 1.5,
-                      color: alpha('#0B1F3A', 0.7),
+                      color: alpha(brandColors.navyAlt, 0.7),
                       lineHeight: 1.7,
                     }}
                   >
@@ -131,9 +132,9 @@ export default function StudentJourney() {
               fontWeight: 700,
               borderRadius: 4,
               width: { xs: '100%', sm: 'auto' },
-              background: 'linear-gradient(135deg, #0B1F3A, #123A63)',
+              background: gradientTokens.navyButton,
               '&:hover': {
-                background: 'linear-gradient(135deg, #123A63, #0B1F3A)',
+                background: gradientTokens.navyButtonHover,
               },
             }}
           >

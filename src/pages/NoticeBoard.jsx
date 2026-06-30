@@ -19,6 +19,7 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 import OptimizedImage from '../components/ui/OptimizedImage'
+import { brandColors } from '../theme/colorTokens'
 
 function panelSx(theme) {
   return {
@@ -92,7 +93,7 @@ export default function NoticeBoard() {
                         textDecoration: 'none',
                         color: 'inherit',
                         border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.4) : alpha('#fff', 0.82),
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.4) : alpha(brandColors.white, 0.82),
                         transition: 'transform 0.2s ease, border-color 0.2s ease',
                         '&:hover': {
                           transform: 'translateY(-3px)',

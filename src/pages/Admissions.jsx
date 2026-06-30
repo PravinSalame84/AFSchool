@@ -18,6 +18,7 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import admissionSteps, { feeStructureNote } from '../data/admissionSteps'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import { brandColors } from '../theme/colorTokens'
 
 const stepIcons = [PhoneCall, School, FileCheck2, ClipboardList]
 
@@ -34,7 +35,7 @@ function panelSx(theme, tone = 'light') {
   if (tone === 'dark') {
     return {
       borderRadius: 4,
-      color: '#fff',
+      color: brandColors.white,
       background: 'linear-gradient(135deg, #1d213c 0%, #24364a 55%, #344656 100%)',
       boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
     }
@@ -103,7 +104,7 @@ export default function Admissions() {
                     >
                       <Paper sx={{ ...panelSx(theme), p: 2.75 }}>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.25} alignItems="flex-start">
-                          <Avatar sx={{ width: 54, height: 54, borderRadius: 4, bgcolor: 'primary.main', color: '#fff' }}>
+                          <Avatar sx={{ width: 54, height: 54, borderRadius: 4, bgcolor: 'primary.main', color: brandColors.white }}>
                             <Icon size={22} />
                           </Avatar>
                           <Box>
@@ -145,7 +146,7 @@ export default function Admissions() {
                             py: 1.5,
                             borderRadius: 4,
                             border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.46) : alpha('#fff', 0.82),
+                            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.46) : alpha(brandColors.white, 0.82),
                           }}
                         >
                           <Typography sx={{ color: 'text.primary', fontWeight: 600 }}>
@@ -168,20 +169,20 @@ export default function Admissions() {
 
                 <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.18} variants={reveal}>
                   <Paper sx={{ ...panelSx(theme, 'dark'), p: 3.5 }}>
-                    <Typography variant="overline" sx={{ color: alpha('#fff', 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
+                    <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
                       Admission Support
                     </Typography>
                     <Typography variant="h5" sx={{ mt: 1.25, fontWeight: 800 }}>
                       Need help choosing the right next step?
                     </Typography>
-                    <Typography sx={{ mt: 1.5, color: alpha('#fff', 0.8), lineHeight: 1.8 }}>
+                    <Typography sx={{ mt: 1.5, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
                       Call the school office or request a guided admission response for process, class availability and required records.
                     </Typography>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                       <Button variant="contained" color="secondary" onClick={() => openEnquiry('Admissions Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                         Enquire For Admission
                       </Button>
-                      <Button variant="outlined" sx={{ color: '#fff', borderColor: alpha('#fff', 0.22), width: { xs: '100%', sm: 'auto' } }} href={`tel:${schoolContent.contact.phone}`}>
+                      <Button variant="outlined" sx={{ color: brandColors.white, borderColor: alpha(brandColors.white, 0.22), width: { xs: '100%', sm: 'auto' } }} href={`tel:${schoolContent.contact.phone}`}>
                         Call Office
                       </Button>
                     </Stack>

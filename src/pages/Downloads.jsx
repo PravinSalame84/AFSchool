@@ -17,12 +17,9 @@ import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import useRuntimeContent from '../hooks/useRuntimeContent'
+import { brandColors, downloadToneTokens } from '../theme/colorTokens'
 
-const tones = [
-  { main: '#ffd707', soft: '#e7ab33' },
-  { main: '#00bcd4', soft: '#81d4fa' },
-  { main: '#ff9800', soft: '#ffb74d' },
-]
+const tones = downloadToneTokens
 
 function cardSx(theme) {
   return {
@@ -91,8 +88,8 @@ export default function Downloads() {
                           borderRadius: 4,
                           display: 'grid',
                           placeItems: 'center',
-                          background: `linear-gradient(135deg, ${tone.main}, ${tone.soft})`,
-                          color: '#1d213c',
+                          background: tone.gradient,
+                          color: brandColors.navy,
                         }}
                       >
                         <DownloadCloud size={18} />

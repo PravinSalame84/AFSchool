@@ -19,6 +19,7 @@ import {
 
 import { useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
+import { brandColors } from '../../theme/colorTokens'
 
 const pillars = [
   { icon: GraduationCap, label: 'Teacher Training' },
@@ -36,10 +37,10 @@ export default function InnovationCentre() {
       sx={{
         py: { xs: 8, md: 12 },
         background: `linear-gradient(135deg,
-          ${alpha('#0B1F3A', 0.98)},
+          ${alpha(brandColors.navyAlt, 0.98)},
           ${alpha('#123A63', 0.92)}
         )`,
-        color: '#fff',
+        color: brandColors.white,
       }}
     >
       <Container maxWidth="lg">
@@ -49,7 +50,7 @@ export default function InnovationCentre() {
           <Grid item xs={12} md={6}>
             <Typography
               variant="overline"
-              sx={{ color: alpha('#FFB74D', 0.9), letterSpacing: 2 }}
+              sx={{ color: alpha(brandColors.orangeSoft, 0.9), letterSpacing: 2 }}
             >
               {siteConfig.shortName} Innovation Centre
             </Typography>
@@ -132,8 +133,8 @@ export default function InnovationCentre() {
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              background: alpha('#FFB74D', 0.15),
-                              color: '#FFB74D',
+                              background: alpha(brandColors.orangeSoft, 0.15),
+                              color: brandColors.orangeSoft,
                             }}
                           >
                             <Icon size={22} />
@@ -144,7 +145,7 @@ export default function InnovationCentre() {
                             variant="subtitle2"
                             sx={{
                               fontWeight: 700,
-                              color: '#fff',
+                              color: brandColors.white,
                               textTransform: 'uppercase',
                               letterSpacing: 0.6,
                             }}

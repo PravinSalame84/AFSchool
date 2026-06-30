@@ -21,6 +21,8 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import { isValidEmail } from '../utils/formValidation'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import { brandColors } from '../theme/colorTokens'
+brandColors
 
 const infoCards = [
   { icon: LocationOn, title: 'Campus Address', value: schoolContent.contact.address },
@@ -33,7 +35,7 @@ function cardSx(theme, tone = 'light') {
   if (tone === 'dark') {
     return {
       borderRadius: 4,
-      color: '#fff',
+      color: brandColors.white,
       background: 'linear-gradient(135deg, #1d213c 0%, #24364a 55%, #344656 100%)',
       boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
     }
@@ -181,20 +183,20 @@ export default function Contact() {
                 </Paper>
 
                 <Paper sx={{ ...cardSx(theme, 'dark'), p: 3.25 }}>
-                  <Typography variant="overline" sx={{ color: alpha('#fff', 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
+                  <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
                     Quick Support
                   </Typography>
                   <Typography variant="h5" sx={{ mt: 1.25, fontWeight: 800 }}>
                     Need faster help for admissions or school details?
                   </Typography>
-                  <Typography sx={{ mt: 1.5, color: alpha('#fff', 0.8), lineHeight: 1.8 }}>
+                  <Typography sx={{ mt: 1.5, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
                     Use the enquiry flow for admission-related questions or request school details directly from the school office.
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                     <Button variant="contained" color="secondary" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                       Start General Enquiry
                     </Button>
-                    <Button variant="outlined" sx={{ color: '#fff', borderColor: alpha('#fff', 0.24), width: { xs: '100%', sm: 'auto' } }} onClick={() => openEnquiry('School Details Request')}>
+                    <Button variant="outlined" sx={{ color: brandColors.white, borderColor: alpha(brandColors.white, 0.24), width: { xs: '100%', sm: 'auto' } }} onClick={() => openEnquiry('School Details Request')}>
                       Request School Details
                     </Button>
                   </Stack>

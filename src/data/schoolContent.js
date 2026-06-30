@@ -1,5 +1,6 @@
 import siteAssets from './siteAssets'
 import { School, Users, BookOpen, Bell, Download, Images } from 'lucide-react'
+import { gradientTokens } from '../theme/colorTokens'
 
 const schoolContent = {
   meta: {
@@ -89,21 +90,21 @@ const schoolContent = {
       value: 'Smart Classrooms',
       description: 'Digital boards, child-friendly furniture and structured learning support.',
       image: siteAssets.images.smartClassroom,
-      accent: 'from-[#ff7b3d] to-[#ffb16a]',
+      accent: gradientTokens.downloadOrange,
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
       image: siteAssets.images.studentActivities,
-      accent: 'from-[#1d213c] via-[#5d8aa8] to-[#00d4fa]',
+      accent: 'linear-gradient(135deg, #1d213c, #5d8aa8, #00d4fa)',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
       description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
       image: siteAssets.images.campusLearning,
-      accent: 'from-[#1fd3d2] to-[#76f6d4]',
+      accent: 'linear-gradient(135deg, #1fd3d2, #76f6d4)',
     },
   ],
 

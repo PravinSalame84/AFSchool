@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
 import { alpha, useTheme } from '@mui/material/styles'
+import { brandColors } from '../../theme/colorTokens'
 
 const toneMap = {
   accent: (theme) => ({
@@ -13,7 +14,7 @@ const toneMap = {
     background: `linear-gradient(90deg, ${alpha(theme.palette.sky.main, 0.8)}, ${alpha(theme.palette.sky.main, 0.4)})`,
   }),
   dark: (theme) => ({
-    color: '#fff',
+    color: brandColors.white,
     borderColor: alpha(theme.palette.primary.dark, 0.3),
     background: `linear-gradient(90deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
   }),

@@ -1,43 +1,50 @@
 import { alpha, createTheme } from '@mui/material/styles'
+import { brandColors } from './colorTokens'
 
 export function createAppTheme(mode = 'light') {
   const isDark = mode === 'dark'
-  const surfaceBorder = isDark ? alpha('#d7eff6', 0.1) : alpha('#1d213c', 0.08)
-  const lightPageBase = '#bae2ee'
-  const lightPageAlt = '#d7eff6'
+  const surfaceBorder = isDark ? alpha(brandColors.sky, 0.1) : alpha(brandColors.navy, 0.08)
+  const lightPageBase = brandColors.skyBase
+  const lightPageAlt = brandColors.sky
 
   return createTheme({
     palette: {
       mode,
       primary: {
-        main: '#1d213c',
-        light: '#344656',
-        dark: '#111426',
+        main: brandColors.navy,
+        light: brandColors.slate,
+        dark: brandColors.navyDeep,
       },
       secondary: {
-        main: '#f0934b',
-        light: '#fbc998',
-        dark: '#d97a2e',
+        main: brandColors.amber,
+        light: brandColors.amberSoft,
+        dark: brandColors.amberDeep,
+      },
+      accent: {
+        main: brandColors.gold,
+      },
+      sky: {
+        main: brandColors.sky,
       },
       background: {
-        default: isDark ? '#0b1320' : lightPageBase,
-        paper: isDark ? '#111c2b' : '#fafdff',
+        default: isDark ? brandColors.navyPage : lightPageBase,
+        paper: isDark ? brandColors.navyPaper : brandColors.skyPale,
       },
       text: {
-        primary: isDark ? '#f7fbff' : '#161e25',
-        secondary: isDark ? '#bed1e2' : '#526f86',
+        primary: isDark ? brandColors.skyBright : brandColors.ink,
+        secondary: isDark ? brandColors.skyText : brandColors.slateSoft,
       },
       success: {
-        main: '#046a38',
+        main: brandColors.success,
       },
       error: {
-        main: '#dc2626',
+        main: brandColors.red,
       },
       warning: {
-        main: '#ff671f',
+        main: brandColors.orange,
       },
       info: {
-        main: '#5d8aa8',
+        main: brandColors.slateInfo,
       },
     },
     shape: {
@@ -75,14 +82,14 @@ export function createAppTheme(mode = 'light') {
             colorScheme: mode,
           },
           body: {
-            backgroundColor: isDark ? '#0b1320' : lightPageBase,
-            color: isDark ? '#f7fbff' : '#161e25',
+            backgroundColor: isDark ? brandColors.navyPage : lightPageBase,
+            color: isDark ? brandColors.skyBright : brandColors.ink,
             backgroundImage: isDark
-              ? 'linear-gradient(180deg, #0b1320 0%, #111c2b 100%)'
+              ? `linear-gradient(180deg, ${brandColors.navyPage} 0%, ${brandColors.navyPaper} 100%)`
               : `linear-gradient(180deg, ${lightPageBase} 0%, ${lightPageAlt} 100%)`,
           },
           '::selection': {
-            backgroundColor: alpha('#f0934b', 0.3),
+            backgroundColor: alpha(brandColors.amber, 0.3),
           },
         },
       },

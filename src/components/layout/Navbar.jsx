@@ -28,6 +28,7 @@ import Logo from './Logo'
 import ThemeToggle from '../ui/ThemeToggle'
 import SiteSearch from './SiteSearch'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { brandColors } from '../../theme/colorTokens'
 
 const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
   px: 1.6,
@@ -91,7 +92,7 @@ function DesktopItem({ item }) {
             p: 1.25,
             borderRadius: 4,
             border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.96) : alpha('#fff', 0.98),
+            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.96) : alpha(brandColors.white, 0.98),
             boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
             backdropFilter: 'blur(18px)',
           }}
@@ -222,14 +223,14 @@ export default function Navbar({ compact = false }) {
         color="inherit"
         sx={{
           borderBottom: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.9) : alpha('#fff', 0.9),
+          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.9) : alpha(brandColors.white, 0.9),
           backdropFilter: 'blur(18px)',
           overflow: 'visible',
           boxShadow: compact ? '0 14px 36px rgba(17, 26, 36, 0.12)' : 'none',
           transition: 'box-shadow 260ms ease, background-color 260ms ease',
         }}
       >
-        <Toolbar sx={{ minHeight: { xs: 78, lg: 86 }, justifyContent: 'space-between', gap: 2 }}>
+        <Toolbar className="navbar-toolbar" sx={{ minHeight: { xs: 78, lg: 86 } }}>
           <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0, flex: { xs: 1, xl: '0 0 auto' } }}>
             <Logo />
             {/* <Box sx={{ display: { xs: 'none', md: 'block', xl: 'none' }, minWidth: 0, maxWidth: 230 }}>
@@ -259,7 +260,7 @@ export default function Navbar({ compact = false }) {
               width: 44,
               height: 44,
               border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fff', 0.9),
+              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha(brandColors.white, 0.9),
             }}
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"

@@ -15,7 +15,7 @@ export default function Modal({ open, onClose, title, children }) {
       onClose={onClose}
       aria-labelledby={titleId}
       fullWidth
-      maxWidth="sm"
+      maxWidth="md"
       slotProps={{
         backdrop: {
           sx: {
@@ -27,6 +27,7 @@ export default function Modal({ open, onClose, title, children }) {
           sx: (theme) => ({
             borderRadius: 4,
             overflow: 'hidden',
+            width: 'min(100%, 760px)',
             color: 'text.primary',
             backgroundImage: 'none',
             background:

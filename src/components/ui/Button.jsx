@@ -2,6 +2,7 @@ import MuiButton from '@mui/material/Button'
 import { alpha } from '@mui/material/styles'
 import { ArrowRight } from 'lucide-react'
 import { Link as RouterLink } from 'react-router-dom'
+import { brandColors, gradientTokens } from '../../theme/colorTokens'
 
 /**
  * Size scale aligned with MUI system (cleaner than px overrides)
@@ -27,15 +28,11 @@ const sizeMap = {
 const getVariant = (theme, variant) => {
   const isDark = theme.palette.mode === 'dark'
 
-  const gold = '#ffd707'
-  const brown = '#8a6742'
-  const navy = '#1d213c'
-
   const gradients = {
-    primary: `linear-gradient(90deg, ${gold}, #e7ab33)`,
+    primary: gradientTokens.goldBadge,
     dark: isDark
       ? `linear-gradient(90deg, rgba(255,215,7,0.98), rgba(231,171,51,0.94))`
-      : `linear-gradient(90deg, ${navy}, #2a3946)`,
+      : `linear-gradient(90deg, ${brandColors.navy}, ${brandColors.slateDeep})`,
     outline: isDark
       ? `linear-gradient(135deg, rgba(16,24,36,0.94), rgba(35,49,67,0.82))`
       : `linear-gradient(135deg, rgba(255,255,255,0.96), rgba(250,244,220,0.86))`,
@@ -47,29 +44,29 @@ const getVariant = (theme, variant) => {
 
   const styles = {
     primary: {
-      color: navy,
+      color: brandColors.navy,
       background: gradients.primary,
       boxShadow: '0 10px 22px rgba(15, 35, 56, 0.16)',
     },
     dark: {
-      color: isDark ? navy : '#fff',
+      color: isDark ? brandColors.navy : brandColors.white,
       background: gradients.dark,
     },
     outline: {
-      color: isDark ? gold : brown,
+      color: isDark ? brandColors.gold : brandColors.earth,
       background: gradients.outline,
-      border: `1px solid ${alpha(isDark ? gold : brown, 0.25)}`,
+      border: `1px solid ${alpha(isDark ? brandColors.gold : brandColors.earth, 0.25)}`,
     },
     ghost: {
-      color: '#fff',
+      color: brandColors.white,
       background: gradients.ghost,
       backdropFilter: 'blur(16px)',
-      border: `1px solid ${alpha('#fff', 0.18)}`,
+      border: `1px solid ${alpha(brandColors.white, 0.18)}`,
     },
     light: {
-      color: brown,
+      color: brandColors.earth,
       background: gradients.light,
-      border: `1px solid ${alpha('#fff', 0.6)}`,
+      border: `1px solid ${alpha(brandColors.white, 0.6)}`,
     },
   }
 

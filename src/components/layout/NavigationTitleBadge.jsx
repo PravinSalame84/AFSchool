@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Box, Typography } from '@mui/material'
 import { alpha, useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function NavigationTitleBadge({ className = '' }) {
   const theme = useTheme()
@@ -23,7 +24,7 @@ export default function NavigationTitleBadge({ className = '' }) {
         position: 'relative',
         overflow: 'hidden',
         background: `linear-gradient(135deg,
-          ${alpha('#0b1f3a', 0.06)},
+          ${alpha(brandColors.navyAlt, 0.06)},
           ${alpha('#133a6b', 0.04)}
         )`,
         border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
@@ -31,7 +32,7 @@ export default function NavigationTitleBadge({ className = '' }) {
         '&:hover': {
           transform: 'translateY(-1px)',
           borderColor: theme.palette.primary.main,
-          boxShadow: `0 12px 30px ${alpha('#000', 0.12)}`,
+          boxShadow: `0 12px 30px ${alpha(brandColors.black, 0.12)}`,
         },
         ...className,
       }}

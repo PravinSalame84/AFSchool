@@ -19,6 +19,7 @@ import FAQSection from '../components/sections/FAQSection'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import siteConfig from '../data/siteConfig'
+import { brandColors } from '../theme/colorTokens'
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -51,7 +52,7 @@ function panelSx(theme, tone = 'light') {
   if (tone === 'dark') {
     return {
       borderRadius: 4,
-      color: '#fff',
+      color: brandColors.white,
       background: 'linear-gradient(135deg, #1d213c 0%, #24364a 55%, #344656 100%)',
       boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)',
     }
@@ -120,7 +121,7 @@ export default function About() {
                               p: 2,
                               borderRadius: '1.4rem',
                               border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha('#fff', 0.82),
+                              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.58) : alpha(brandColors.white, 0.82),
                             }}
                           >
                             <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
@@ -169,7 +170,7 @@ export default function About() {
                     >
                       <Paper sx={{ ...panelSx(theme), p: 3 }}>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ xs: 'flex-start', sm: 'center' }}>
-                          <Avatar sx={{ bgcolor: item.color, color: '#fff', width: 48, height: 48 }}>
+                          <Avatar sx={{ bgcolor: item.color, color: brandColors.white, width: 48, height: 48 }}>
                             <Icon size={20} />
                           </Avatar>
                           <Box>
@@ -198,11 +199,11 @@ export default function About() {
                       Indian Air Force Educational and Cultural Society, New Delhi
                     </Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mt: 3 }}>
-                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha('#fff', 0.12) }}>
+                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha(brandColors.white, 0.12) }}>
                         <Sparkles size={14} />
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Teaching is Learning</Typography>
                       </Stack>
-                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha('#fff', 0.12) }}>
+                      <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha(brandColors.white, 0.12) }}>
                         <ShieldCheck size={14} />
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Legacy Since 1968</Typography>
                       </Stack>

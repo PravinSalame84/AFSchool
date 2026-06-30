@@ -1,7 +1,9 @@
+import { alpha } from '@mui/material/styles'
 import { Box, Fab, Chip, Tooltip } from '@mui/material'
 import { Send, MessageCircle } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function FloatingButtons() {
   const { openEnquiry } = useEnquiryModal()
@@ -33,7 +35,7 @@ export default function FloatingButtons() {
               fontWeight: 700,
               letterSpacing: 1.2,
               textTransform: 'uppercase',
-              bgcolor: 'rgba(255,255,255,0.85)',
+              bgcolor: alpha(brandColors.white, 0.85),
               color: 'primary.main',
               backdropFilter: 'blur(10px)',
             }}
@@ -44,7 +46,7 @@ export default function FloatingButtons() {
               onClick={() => openEnquiry('General Enquiry')}
               sx={{
                 bgcolor: 'secondary.main',
-                color: '#fff',
+                color: brandColors.white,
                 '&:hover': {
                   bgcolor: 'secondary.dark',
                   transform: 'scale(1.05)',
@@ -69,7 +71,7 @@ export default function FloatingButtons() {
               fontWeight: 700,
               letterSpacing: 1.2,
               textTransform: 'uppercase',
-              bgcolor: 'rgba(255,255,255,0.85)',
+              bgcolor: alpha(brandColors.white, 0.85),
               color: 'primary.main',
               backdropFilter: 'blur(10px)',
             }}
@@ -82,10 +84,10 @@ export default function FloatingButtons() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                bgcolor: '#25D366',
-                color: '#fff',
+                bgcolor: brandColors.whatsapp,
+                color: brandColors.white,
                 '&:hover': {
-                  bgcolor: '#1ebe5d',
+                  bgcolor: brandColors.whatsappDeep,
                   transform: 'scale(1.05)',
                 },
               }}

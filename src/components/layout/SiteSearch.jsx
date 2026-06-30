@@ -18,6 +18,7 @@ import {
 } from '@mui/material'
 import { ExternalLink, Search, X } from 'lucide-react'
 import schoolContent from '../../data/schoolContent'
+import { brandColors } from '../../theme/colorTokens'
 
 function scoreItem(item, query) {
   const q = query.toLowerCase()
@@ -82,7 +83,7 @@ export default function SiteSearch({ compact = false }) {
           borderRadius: 4,
           cursor: 'pointer',
           border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
-          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha('#fff', 0.92),
+          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha(brandColors.white, 0.92),
           color: 'text.primary',
           backdropFilter: 'blur(12px)',
           transition: 'all 0.2s ease',
@@ -152,7 +153,7 @@ export default function SiteSearch({ compact = false }) {
               sx={{
                 '& .MuiOutlinedInput-root': {
                   borderRadius: 4,
-                  bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.06) : alpha('#fff', 0.86),
+                  bgcolor: theme.palette.mode === 'dark' ? alpha(brandColors.white, 0.06) : alpha(brandColors.white, 0.86),
                 },
               }}
             />
@@ -190,7 +191,7 @@ export default function SiteSearch({ compact = false }) {
               maxHeight: '60vh',
               overflowY: 'auto',
               border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-              bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.04) : alpha('#fff', 0.72),
+              bgcolor: theme.palette.mode === 'dark' ? alpha(brandColors.white, 0.04) : alpha(brandColors.white, 0.72),
             }}
           >
             {results.length ? (

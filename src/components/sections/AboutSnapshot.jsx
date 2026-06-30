@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function AboutSnapshot() {
   const theme = useTheme()
@@ -22,7 +23,7 @@ export default function AboutSnapshot() {
       sx={{
         py: { xs: 8, md: 12 },
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-        color: '#fff',
+        color: brandColors.white,
       }}
     >
       <Container>
@@ -43,7 +44,7 @@ export default function AboutSnapshot() {
                   maxWidth: 520,
                   fontSize: 15,
                   lineHeight: 1.7,
-                  color: alpha('#fff', 0.8),
+                  color: alpha(brandColors.white, 0.8),
                 }}
               >
                 Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
@@ -71,13 +72,13 @@ export default function AboutSnapshot() {
                       sx={{
                         p: 3,
                         borderRadius: 4,
-                        bgcolor: alpha('#fff', 0.06),
-                        border: `1px solid ${alpha('#fff', 0.12)}`,
+                        bgcolor: alpha(brandColors.white, 0.06),
+                        border: `1px solid ${alpha(brandColors.white, 0.12)}`,
                         backdropFilter: 'blur(10px)',
                         transition: 'transform 0.2s ease',
                         '&:hover': {
                           transform: 'translateY(-4px)',
-                          bgcolor: alpha('#fff', 0.09),
+                          bgcolor: alpha(brandColors.white, 0.09),
                         },
                       }}
                     >

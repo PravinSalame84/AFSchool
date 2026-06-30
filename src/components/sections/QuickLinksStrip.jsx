@@ -14,6 +14,7 @@ import {
   MapPin,
   ExternalLink,
 } from 'lucide-react'
+import { brandColors } from '../../theme/colorTokens'
 
 const links = [
   { icon: Star, label: 'About Us', to: '/about' },
@@ -30,7 +31,7 @@ export default function QuickLinksStrip() {
         py: 3,
         borderTop: '1px solid',
         borderBottom: '1px solid',
-        borderColor: alpha('#0B1F3A', 0.1),
+        borderColor: alpha(brandColors.navyAlt, 0.1),
         background: 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
       }}
     >
@@ -51,11 +52,11 @@ export default function QuickLinksStrip() {
               gap: 1,
               fontSize: '0.875rem',
               fontWeight: 700,
-              color: '#0B1F3A',
+              color: brandColors.navyAlt,
               textDecoration: 'none',
               transition: '0.25s ease',
               '&:hover': {
-                color: '#F57C00',
+                color: brandColors.saffron,
                 transform: 'translateY(-2px)',
               },
             }

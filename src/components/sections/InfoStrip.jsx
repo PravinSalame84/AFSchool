@@ -4,6 +4,7 @@ import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { Link as RouterLink } from 'react-router-dom'
 
 import { ClipboardList, Wallet, MapPinned, MailQuestion } from 'lucide-react'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function InfoStrip() {
   const theme = useTheme()
@@ -53,7 +54,7 @@ export default function InfoStrip() {
                     transition: 'all 0.2s ease',
                     '.MuiBox-root:hover &': {
                       bgcolor: 'primary.main',
-                      color: '#fff',
+                      color: brandColors.white,
                     },
                   }}
                 >

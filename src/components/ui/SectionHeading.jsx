@@ -1,6 +1,7 @@
 import { alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { brandColors, gradientTokens } from '../../theme/colorTokens'
 
 export default function SectionHeading({
   eyebrow,
@@ -31,7 +32,7 @@ export default function SectionHeading({
             display: 'inline-flex',
             alignItems: 'center',
             gap: 1,
-            color: isLight ? '#ffd707' : '#8a6742',
+            color: isLight ? brandColors.gold : brandColors.earth,
             fontSize: '0.75rem',
             fontWeight: 800,
             textTransform: 'uppercase',
@@ -45,7 +46,7 @@ export default function SectionHeading({
               width: 6,
               height: 6,
               borderRadius: '25%',
-              background: 'linear-gradient(180deg, #ffd707 0%, #e7ab33 100%)',
+              background: gradientTokens.goldBadgeVertical,
             }}
           />
           {eyebrow}
@@ -56,7 +57,7 @@ export default function SectionHeading({
         component="h2"
         sx={{
           mt: 1.5,
-          color: isLight ? '#ffd707' : 'text.primary',
+          color: isLight ? brandColors.gold : 'text.primary',
           fontWeight: 800,
           lineHeight: 1.05,
           fontSize: { xs: '2rem', sm: '2.5rem' },
@@ -69,7 +70,7 @@ export default function SectionHeading({
         <Typography
           sx={(theme) => ({
             mt: 2,
-            color: isLight ? alpha('#d7eff6', 0.9) : theme.palette.text.secondary,
+            color: isLight ? alpha(brandColors.sky, 0.9) : theme.palette.text.secondary,
             fontSize: { xs: '1rem', sm: '1.05rem' },
             lineHeight: 1.75,
           })}

@@ -14,6 +14,7 @@ import { Mail, MapPinned, Phone, ShieldCheck } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { brandColors } from '../../theme/colorTokens'
 
 export default function TopBar({ compact = false }) {
   const { openEnquiry } = useEnquiryModal()
@@ -70,7 +71,7 @@ export default function TopBar({ compact = false }) {
               size="small"
               sx={{
                 borderColor: alpha(theme.palette.primary.main, 0.12),
-                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.36) : alpha('#fff', 0.72),
+                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.36) : alpha(brandColors.white, 0.72),
               }}
             />
           </Stack>
