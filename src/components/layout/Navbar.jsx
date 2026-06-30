@@ -39,17 +39,21 @@ const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
   px: 1.6,
   py: 1.1,
   minWidth: 0,
-  color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+  color: isActive
+    ? (theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.dark)
+    : theme.palette.text.primary,
   fontWeight: 800,
   fontSize: '0.92rem',
   letterSpacing: '0.02em',
   textTransform: 'none',
   borderRadius: 4,
-  backgroundColor: isActive ? alpha(theme.palette.secondary.main, 0.14) : 'transparent',
-  border: `1px solid ${isActive ? alpha(theme.palette.secondary.main, 0.24) : 'transparent'}`,
+  backgroundColor: isActive
+    ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.2 : 0.14)
+    : 'transparent',
+  border: `1px solid ${isActive ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.34 : 0.24) : 'transparent'}`,
   '&:hover': {
-    backgroundColor: alpha(theme.palette.secondary.main, 0.1),
-    borderColor: alpha(theme.palette.secondary.main, 0.18),
+    backgroundColor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.16 : 0.1),
+    borderColor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.28 : 0.18),
   },
   ...(hasChildren && {
     pr: 1.2,
@@ -125,21 +129,25 @@ function DesktopItem({ item }) {
                     borderRadius: 4,
                     px: 1.25,
                     py: 2,
-                    color: 'text.primary',
+                    color: childActive
+                      ? (theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.dark)
+                      : 'text.primary',
                     textDecoration: 'none',
-                    bgcolor: childActive ? alpha(theme.palette.secondary.main, 0.12) : 'transparent',
-                    '&:hover': { bgcolor: alpha(theme.palette.secondary.main, 0.08) },
+                    bgcolor: childActive
+                      ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.16 : 0.12)
+                      : 'transparent',
+                    '&:hover': { bgcolor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.12 : 0.08) },
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontWeight: 700, fontSize: '0.94rem' }}>
+                    <Typography sx={{ fontWeight: childActive ? 800 : 700, fontSize: '0.94rem' }}>
                       {child.label}
                     </Typography>
                     {/* <Typography sx={{ mt: 0.25, fontSize: '0.76rem', color: 'text.secondary' }}> */}
                       {/* {item.label} */}
                     {/* </Typography> */}
                   </Box>
-                  {child.external ? <LaunchIcon fontSize="small" /> : <ExpandMoreIcon sx={{ transform: 'rotate(-90deg)', fontSize: 18, color: 'text.secondary' }} />}
+                  {child.external ? <LaunchIcon fontSize="small" /> : <ExpandMoreIcon sx={{ transform: 'rotate(-90deg)', fontSize: 18, color: childActive ? 'secondary.main' : 'text.secondary' }} />}
                 </Box>
               )
             })}
@@ -152,7 +160,9 @@ function DesktopItem({ item }) {
 
 function MobileItem({ item, onClose }) {
   const theme = useTheme()
+  const location = useLocation()
   const [open, setOpen] = useState(false)
+  const isActive = item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)
 
   if (!item.children) {
     return (
@@ -160,7 +170,17 @@ function MobileItem({ item, onClose }) {
         component={Link}
         to={item.to}
         onClick={onClose}
-        sx={{ borderRadius: 4, mb: 0.5 }}
+        sx={{
+          borderRadius: 4,
+          mb: 0.5,
+          color: isActive
+            ? (theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.dark)
+            : 'text.primary',
+          bgcolor: isActive
+            ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.2 : 0.12)
+            : 'transparent',
+          border: `1px solid ${isActive ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.34 : 0.18) : 'transparent'}`,
+        }}
       >
         <ListItemText primaryTypographyProps={{ fontWeight: 700 }} primary={item.label} />
       </ListItemButton>
@@ -174,7 +194,13 @@ function MobileItem({ item, onClose }) {
         sx={{
           borderRadius: 4,
           mb: 0.5,
-          bgcolor: open ? alpha(theme.palette.secondary.main, 0.08) : 'transparent',
+          color: isActive
+            ? (theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.dark)
+            : 'text.primary',
+          bgcolor: open || isActive
+            ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.16 : 0.08)
+            : 'transparent',
+          border: `1px solid ${isActive ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.3 : 0.16) : 'transparent'}`,
         }}
       >
         <ListItemText primaryTypographyProps={{ fontWeight: 700 }} primary={item.label} />
@@ -183,24 +209,37 @@ function MobileItem({ item, onClose }) {
 
       <Collapse in={open}>
         <List disablePadding sx={{ pl: 1.5, pb: 0.5 }}>
-          {item.children.map((child) => (
-            <ListItemButton
-              key={child.label}
-              component={child.external ? 'a' : Link}
-              to={!child.external ? child.to : undefined}
-              href={child.external ? child.to : undefined}
-              target={child.external ? '_blank' : undefined}
-              rel={child.external ? 'noopener noreferrer' : undefined}
-              onClick={onClose}
-              sx={{ borderRadius: '0.9rem', mb: 0.5 }}
-            >
-              <ListItemText
-                primary={child.label}
-                primaryTypographyProps={{ fontSize: '0.92rem', fontWeight: 600 }}
-              />
-              {child.external ? <LaunchIcon fontSize="small" /> : null}
-            </ListItemButton>
-          ))}
+          {item.children.map((child) => {
+            const childActive = location.pathname === child.to
+
+            return (
+              <ListItemButton
+                key={child.label}
+                component={child.external ? 'a' : Link}
+                to={!child.external ? child.to : undefined}
+                href={child.external ? child.to : undefined}
+                target={child.external ? '_blank' : undefined}
+                rel={child.external ? 'noopener noreferrer' : undefined}
+                onClick={onClose}
+                sx={{
+                  borderRadius: '0.9rem',
+                  mb: 0.5,
+                  color: childActive
+                    ? (theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.dark)
+                    : 'text.primary',
+                  bgcolor: childActive
+                    ? alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.18 : 0.1)
+                    : 'transparent',
+                }}
+              >
+                <ListItemText
+                  primary={child.label}
+                  primaryTypographyProps={{ fontSize: '0.92rem', fontWeight: childActive ? 700 : 600 }}
+                />
+                {child.external ? <LaunchIcon fontSize="small" /> : null}
+              </ListItemButton>
+            )
+          })}
         </List>
       </Collapse>
     </>
@@ -276,7 +315,16 @@ export default function Navbar({ compact = false }) {
       </AppBar>
 
       <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}>
-        <Box sx={{ width: { xs: 'min(100vw, 320px)', sm: 360 }, maxWidth: '100vw', p: { xs: 1.5, sm: 2.25 } }}>
+        <Box
+          sx={{
+            width: { xs: 'min(100vw, 320px)', sm: 360 },
+            maxWidth: '100vw',
+            minHeight: '100%',
+            p: { xs: 1.5, sm: 2.25 },
+            bgcolor: 'background.paper',
+            color: 'text.primary',
+          }}
+        >
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
             <Logo />
             <IconButton onClick={() => setMobileOpen(false)} aria-label="Close menu">

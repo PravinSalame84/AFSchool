@@ -13,7 +13,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
     ? brandColors.white
     : theme.palette.mode === 'dark'
       ? '#f7fbff'
-      : theme.palette.primary.main
+      : theme.palette.primary.dark
   const subtitleColor = isLight
     ? alpha(brandColors.white, 0.8)
     : theme.palette.mode === 'dark'

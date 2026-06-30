@@ -23,15 +23,14 @@ export default function NavigationTitleBadge({ className = '' }) {
         textDecoration: 'none',
         position: 'relative',
         overflow: 'hidden',
-        background: `linear-gradient(135deg,
-          ${alpha(brandColors.navyAlt, 0.06)},
-          ${alpha('#133a6b', 0.04)}
-        )`,
+        background: theme.palette.mode === 'dark'
+          ? `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.88)}, ${alpha(theme.palette.primary.dark, 0.34)})`
+          : `linear-gradient(135deg, ${alpha(brandColors.skySoft, 0.9)}, ${alpha(brandColors.white, 0.94)})`,
         border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
         transition: '0.25s ease',
         '&:hover': {
           transform: 'translateY(-1px)',
-          borderColor: theme.palette.primary.main,
+          borderColor: theme.palette.secondary.main,
           boxShadow: `0 12px 30px ${alpha(brandColors.black, 0.12)}`,
         },
         ...className,
@@ -80,12 +79,12 @@ export default function NavigationTitleBadge({ className = '' }) {
           sx={{
             fontWeight: 900,
             textTransform: 'uppercase',
-            lineHeight: 0.9,
-            fontSize: '1.02rem',
-            letterSpacing: '0.02em',
-            color: theme.palette.primary.dark,
-          }}
-        >
+          lineHeight: 0.9,
+          fontSize: '1.02rem',
+          letterSpacing: '0.02em',
+          color: theme.palette.mode === 'dark' ? brandColors.white : theme.palette.primary.dark,
+        }}
+      >
           AIR FORCE
         </Typography>
 
@@ -93,12 +92,12 @@ export default function NavigationTitleBadge({ className = '' }) {
           sx={{
             fontWeight: 900,
             textTransform: 'uppercase',
-            lineHeight: 0.9,
-            fontSize: '1.02rem',
-            letterSpacing: '0.02em',
-            color: theme.palette.primary.main,
-          }}
-        >
+          lineHeight: 0.9,
+          fontSize: '1.02rem',
+          letterSpacing: '0.02em',
+          color: theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.main,
+        }}
+      >
           SCHOOL
         </Typography>
 
