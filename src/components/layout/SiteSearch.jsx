@@ -22,6 +22,7 @@ import {
 import { ExternalLink, Search, X } from 'lucide-react'
 import schoolContent from '../../data/schoolContent'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 function scoreItem(item, query) {
   const q = query.toLowerCase()
@@ -37,11 +38,13 @@ function scoreItem(item, query) {
 
 export default function SiteSearch({ compact = false }) {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const localizedSchoolContent = localize(schoolContent)
 
   const results = useMemo(() => {
-    const items = schoolContent.directory
+    const items = localizedSchoolContent.directory
 
     if (!query.trim()) return items.slice(0, 8)
 
@@ -50,7 +53,7 @@ export default function SiteSearch({ compact = false }) {
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, 12)
-  }, [query])
+  }, [localizedSchoolContent.directory, query])
 
   useEffect(() => {
     const handler = (event) => {
@@ -100,7 +103,7 @@ export default function SiteSearch({ compact = false }) {
           <Search size={16} />
           {!compact ? (
             <Typography sx={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
-              Search
+              {t('Search')}
             </Typography>
           ) : null}
         </Stack>
@@ -143,7 +146,7 @@ export default function SiteSearch({ compact = false }) {
             <TextField
               fullWidth
               autoFocus
-              placeholder="Search admissions, notices, downloads, careers..."
+              placeholder={t('Search admissions, notices, downloads, careers...')}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               slotProps={{
@@ -163,14 +166,14 @@ export default function SiteSearch({ compact = false }) {
               }}
             />
 
-            <IconButton onClick={() => setOpen(false)} aria-label="Close search">
+            <IconButton onClick={() => setOpen(false)} aria-label={t('Close search')}>
               <X size={18} />
             </IconButton>
           </Stack>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={1.5} sx={{ mb: 2 }}>
             <Typography sx={{ fontSize: '0.85rem', color: 'text.secondary' }}>
-              {query.trim() ? `${results.length} matching results` : 'Popular pages and quick-access resources'}
+              {query.trim() ? `${results.length} ${t('matching results')}` : t('Popular pages and quick-access resources')}
             </Typography>
             <Stack direction="row" spacing={1} flexWrap="wrap">
               {['Admissions', 'Downloads', 'Notice Board', 'Careers'].map((item) => (
@@ -244,9 +247,9 @@ export default function SiteSearch({ compact = false }) {
               </List>
             ) : (
               <Box sx={{ px: 3, py: 5, textAlign: 'center' }}>
-                <Typography sx={{ fontWeight: 700 }}>No matching pages found</Typography>
+                <Typography sx={{ fontWeight: 700 }}>{t('No matching pages found')}</Typography>
                 <Typography sx={{ mt: 1, color: 'text.secondary', fontSize: '0.9rem' }}>
-                  Try terms like admissions, leadership, calendar or careers.
+                  {t('Try terms like admissions, leadership, calendar or careers.')}
                 </Typography>
               </Box>
             )}

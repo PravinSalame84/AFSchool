@@ -24,11 +24,11 @@ The site will then fetch live content at runtime and still fall back to local co
 
 ## Files Already Prepared
 
-- [src/data/siteConfig.js](/Users/aniketsatarkar/Downloads/brightland-edu/src/data/siteConfig.js)
-- [src/context/RuntimeContentContext.jsx](/Users/aniketsatarkar/Downloads/brightland-edu/src/context/RuntimeContentContext.jsx)
-- [src/hooks/useRuntimeContent.js](/Users/aniketsatarkar/Downloads/brightland-edu/src/hooks/useRuntimeContent.js)
-- [src/data/runtimeContentFallback.js](/Users/aniketsatarkar/Downloads/brightland-edu/src/data/runtimeContentFallback.js)
-- [google-apps-script/runtime-content.gs](/Users/aniketsatarkar/Downloads/brightland-edu/google-apps-script/runtime-content.gs)
+- [src/data/siteConfig.js](/src/data/siteConfig.js)
+- [src/context/RuntimeContentContext.jsx](/src/context/RuntimeContentContext.jsx)
+- [src/hooks/useRuntimeContent.js](/src/hooks/useRuntimeContent.js)
+- [src/data/runtimeContentFallback.js](/src/data/runtimeContentFallback.js)
+- [google-apps-script/runtime-content.gs](/google-apps-script/runtime-content.gs)
 
 ## Step 1: Create The Google Sheet
 
@@ -147,7 +147,7 @@ Open `Extensions -> Apps Script` from the Google Sheet.
 
 Replace the default script with the contents of:
 
-- [google-apps-script/runtime-content.gs](/Users/aniketsatarkar/Downloads/brightland-edu/google-apps-script/runtime-content.gs)
+- [google-apps-script/runtime-content.gs](/google-apps-script/runtime-content.gs)
 
 That script reads the sheet tabs and returns JSON for the website.
 
@@ -163,7 +163,7 @@ In Apps Script:
 
 ## Step 5: Connect The Website
 
-Update [src/data/siteConfig.js](/Users/aniketsatarkar/Downloads/brightland-edu/src/data/siteConfig.js):
+Update [src/data/siteConfig.js](/src/data/siteConfig.js):
 
 ```js
 runtimeContent: {
@@ -277,7 +277,7 @@ If the runtime endpoint is:
 
 the site automatically falls back to:
 
-- [src/data/runtimeContentFallback.js](/Users/aniketsatarkar/Downloads/brightland-edu/src/data/runtimeContentFallback.js)
+- [src/data/runtimeContentFallback.js](/src/data/runtimeContentFallback.js)
 
 So the website still loads instead of breaking.
 

@@ -3,15 +3,19 @@ import Typography from '@mui/material/Typography'
 import { AnimatePresence, motion } from 'framer-motion'
 import siteConfig from '../../data/siteConfig'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function SplashScreen({ visible }) {
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
+
   return (
     <AnimatePresence>
       {visible ? (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeOut' } }}
-          aria-label="Loading Air Force School"
+          aria-label={t('Loading Air Force School')}
         >
           <Box
             sx={{
@@ -67,7 +71,7 @@ export default function SplashScreen({ visible }) {
                       <Box
                         component="img"
                         src="/favicon.png"
-                        alt={`${siteConfig.brandName} logo`}
+                        alt={`${localizedSiteConfig.brandName} logo`}
                         sx={{ position: 'relative', width: { xs: 62, sm: 78 }, height: { xs: 62, sm: 78 }, borderRadius: '25%', objectFit: 'cover' }}
                       />
                     </Box>
@@ -79,13 +83,13 @@ export default function SplashScreen({ visible }) {
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Typography sx={{ mt: 3.5, color: 'rgba(215,239,246,0.88)', fontSize: { xs: '0.64rem', sm: '0.7rem' }, fontWeight: 800, textTransform: 'uppercase', letterSpacing: { xs: '0.18em', sm: '0.28em' } }}>
-                      Welcome To
+                      {t('Welcome To')}
                     </Typography>
                     <Typography component="h1" sx={{ mt: 1.5, color: brandColors.white, fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, fontSize: { xs: '1.8rem', sm: '3rem' } }}>
-                      {siteConfig.brandName}
+                      {localizedSiteConfig.brandName}
                     </Typography>
                     <Typography sx={{ mt: 1.5, color: 'rgba(215,239,246,0.74)', fontSize: { xs: '0.72rem', sm: '0.85rem' }, fontWeight: 700, textTransform: 'uppercase', letterSpacing: { xs: '0.1em', sm: '0.22em' }, lineHeight: 1.5 }}>
-                      {siteConfig.brandSuffix}
+                      {localizedSiteConfig.brandSuffix}
                     </Typography>
                   </motion.div>
 

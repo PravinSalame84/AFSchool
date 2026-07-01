@@ -25,6 +25,7 @@ import {
   Plane,
   Sparkles,
 } from 'lucide-react'
+import { useLocale } from '../../context/LocaleContext'
 
 const iconMap = {
   campus: Building2,
@@ -47,6 +48,8 @@ const toneColors = [
 
 export default function Initiatives() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedInitiatives = localize(initiatives)
 
   return (
     <Box
@@ -61,11 +64,11 @@ export default function Initiatives() {
         <RevealOnScroll>
           <Box sx={{ mb: 6 }}>
             <Typography variant="overline" color="primary.main" fontWeight={800}>
-              Beyond the Classroom
+              {t('Beyond the Classroom')}
             </Typography>
 
             <Typography variant="h4" fontWeight={900} sx={{ mt: 1 }}>
-              Airforce School Initiatives
+              {t('Airforce School Initiatives')}
             </Typography>
 
             <Typography
@@ -76,14 +79,14 @@ export default function Initiatives() {
                 color: alpha(theme.palette.text.secondary, 0.85),
               }}
             >
-              A family of ventures, each built to support a different stage of the learning journey.
+              {t('A family of ventures, each built to support a different stage of the learning journey.')}
             </Typography>
           </Box>
         </RevealOnScroll>
 
         {/* Carousel */}
-        <Carousel ariaLabel="Airforce School initiatives">
-          {initiatives.map((item, index) => {
+        <Carousel ariaLabel={t('Airforce School initiatives')}>
+          {localizedInitiatives.map((item, index) => {
             const Icon = iconMap[item.image] || Sparkles
             const tone = toneColors[index % toneColors.length]
 
@@ -154,7 +157,7 @@ export default function Initiatives() {
                           textTransform: 'none',
                         }}
                       >
-                        Read More →
+                        {t('Read More')} →
                       </Button>
                     </Stack>
                   </CardContent>

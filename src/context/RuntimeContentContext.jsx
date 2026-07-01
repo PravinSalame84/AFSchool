@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import runtimeContentFallback from '../data/runtimeContentFallback'
 import siteConfig from '../data/siteConfig'
+import { useLocale } from './LocaleContext'
 
 const RuntimeContentContext = createContext(null)
 
@@ -43,12 +44,13 @@ function normalizeDownload(download) {
 
 function normalizeSiteStatus(siteStatus) {
   const mode = siteStatus?.mode === 'maintenance' ? 'maintenance' : 'active'
+  const { localize, t } = useLocale()
   return {
     mode,
     title: String(siteStatus?.title ?? 'We will be back shortly'),
     message: String(
       siteStatus?.message ??
-        'Some pages may be temporarily unavailable while the school website is being refreshed.',
+        t('Some pages may be temporarily unavailable while the school website is being refreshed.'),
     ),
     updatedAt: String(siteStatus?.updatedAt ?? ''),
   }

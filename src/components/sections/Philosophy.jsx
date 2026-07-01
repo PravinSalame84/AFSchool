@@ -12,6 +12,7 @@ import Stack from '../ui/Stack'
 import { ShieldCheck, HeartHandshake } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const pillars = [
   {
@@ -29,6 +30,10 @@ const pillars = [
 ]
 
 export default function Philosophy() {
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedPillars = localize(pillars)
+
   return (
     <Box
       component="section"
@@ -52,16 +57,16 @@ export default function Philosophy() {
             mx: 'auto',
           }}
         >
-          Because we believe your child is{' '}
+          {t('Because we believe your child is')}{' '}
           <Box component="span" sx={{ color: brandColors.saffron }}>
-            our responsibility
+            {t('our responsibility')}
           </Box>{' '}
-          — we groom, we nurture.
+          {t('- we groom, we nurture.')}
         </Typography>
 
         {/* CARDS */}
         <Grid container spacing={3} sx={{ mt: 6, maxWidth: 800, mx: 'auto' }}>
-          {pillars.map((p, i) => {
+          {localizedPillars.map((p, i) => {
             const Icon = p.icon
             return (
               <Grid item xs={12} sm={6} key={p.title}>
@@ -139,7 +144,7 @@ export default function Philosophy() {
             letterSpacing: 1,
           }}
         >
-          — {siteConfig.brandName} {siteConfig.brandSuffix}
+          - {localizedSiteConfig.brandName} {localizedSiteConfig.brandSuffix}
         </Typography>
 
       </Container>

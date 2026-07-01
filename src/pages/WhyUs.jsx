@@ -22,6 +22,7 @@ import Seo from '../components/ui/Seo'
 import StudentJourney from '../components/sections/StudentJourney'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import { useLocale } from '../context/LocaleContext'
 
 const icons = [
   BookOpenCheck,
@@ -34,6 +35,9 @@ const icons = [
 const MotionCard = motion.create(Card)
 
 export default function WhyUs() {
+  const { localize } = useLocale()
+  const localizedSchoolContent = localize(schoolContent)
+
   return (
     <>
       <Seo
@@ -66,7 +70,7 @@ export default function WhyUs() {
           </Stack>
 
           <Grid container spacing={4}>
-            {schoolContent.pillars.map((pillar, index) => {
+            {localizedSchoolContent.pillars.map((pillar, index) => {
               const Icon = icons[index] ?? Trophy
 
               return (

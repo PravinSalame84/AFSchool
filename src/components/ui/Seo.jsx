@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import schoolContent from '../../data/schoolContent'
+import { useLocale } from '../../context/LocaleContext'
 
 function setMeta(name, content, attribute = 'name') {
   if (!content) return
@@ -13,9 +14,13 @@ function setMeta(name, content, attribute = 'name') {
 }
 
 export default function Seo({ title, description, path = '/', image }) {
+  const { localize, t } = useLocale()
+  const localizedContent = localize(schoolContent)
+
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${schoolContent.meta.title}` : schoolContent.meta.title
-    const resolvedDescription = description || schoolContent.meta.description
+    const pageTitle = title ? t(title) : ''
+    const fullTitle = pageTitle ? `${pageTitle} | ${localizedContent.meta.title}` : localizedContent.meta.title
+    const resolvedDescription = description ? t(description) : localizedContent.meta.description
     const canonicalUrl = `${window.location.origin}${path}`
 
     document.title = fullTitle
@@ -40,7 +45,7 @@ export default function Seo({ title, description, path = '/', image }) {
       document.head.appendChild(canonical)
     }
     canonical.setAttribute('href', canonicalUrl)
-  }, [description, image, path, title])
+  }, [description, image, localizedContent.meta.description, localizedContent.meta.title, path, t, title])
 
   return null
 }

@@ -16,9 +16,11 @@ import {
 import { brandColors } from '../../theme/colorTokens'
 
 import news from '../../data/news'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function LatestNews() {
-  const featured = news.slice(0, 3)
+  const { localize, t } = useLocale()
+  const featured = localize(news).slice(0, 3)
 
   return (
     <Box
@@ -45,13 +47,13 @@ export default function LatestNews() {
               variant="overline"
               sx={{ color: 'secondary.main', fontWeight: 700, letterSpacing: 2 }}
             >
-              Newsroom
+              {t('Newsroom')}
             </Typography>
             <Typography
               variant="h4"
               sx={{ fontWeight: 800, color: 'text.primary', mt: 0.5 }}
             >
-              Latest News
+              {t('Latest News')}
             </Typography>
           </Box>
 
@@ -70,7 +72,7 @@ export default function LatestNews() {
               },
             }}
           >
-            View All News
+            {t('View All News')}
           </Button>
         </Stack>
 

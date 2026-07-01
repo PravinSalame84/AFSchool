@@ -14,11 +14,14 @@ import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function TopBar({ compact = false }) {
   const { openEnquiry } = useEnquiryModal()
+  const { localize, t } = useLocale()
   const theme = useTheme()
   const isDesktopHeader = useMediaQuery(theme.breakpoints.up('lg'))
+  const localizedSchoolContent = localize(schoolContent)
 
   if (!isDesktopHeader) return null
 
@@ -120,7 +123,7 @@ export default function TopBar({ compact = false }) {
 
             <Chip
               icon={<ShieldCheck size={14} />}
-              label={schoolContent.contact.affiliation}
+              label={localizedSchoolContent.contact.affiliation}
               variant="outlined"
               size="small"
               sx={{
@@ -147,11 +150,11 @@ export default function TopBar({ compact = false }) {
             <Chip
               component="a"
               clickable
-              href={schoolContent.contact.mapLink}
+              href={localizedSchoolContent.contact.mapLink}
               target="_blank"
               rel="noopener noreferrer"
               icon={<MapPinned size={14} />}
-              label="Visit Campus"
+              label={t('Visit Campus')}
               variant="outlined"
               size="small"
               sx={{
@@ -177,7 +180,7 @@ export default function TopBar({ compact = false }) {
               onClick={() => openEnquiry('School Details Request')}
               sx={{ fontWeight: 800, whiteSpace: 'nowrap' }}
             >
-              Request School Details
+              {t('Request School Details')}
             </Button>
           </Stack>
         </Toolbar>

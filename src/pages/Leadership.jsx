@@ -23,9 +23,13 @@ import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
+import { useLocale } from '../context/LocaleContext'
 
 /* ---------------- PAGE ---------------- */
 export default function Leadership() {
+  const { localize } = useLocale()
+  const localizedSchoolContent = localize(schoolContent)
+
   return (
     <>
       {/* SEO */}
@@ -89,7 +93,7 @@ export default function Leadership() {
 
                 {/* INTRO */}
                 <Typography variant="body2" sx={{ mt: 3, color: 'text.secondary' }}>
-                  {schoolContent.leadership.intro}
+                  {localizedSchoolContent.leadership.intro}
                 </Typography>
 
                 {/* INFO BOX */}
@@ -128,7 +132,7 @@ export default function Leadership() {
             {/* RIGHT PANEL */}
             <Grid item xs={12} md={7}>
               <Grid container spacing={3}>
-                {schoolContent.leadership.resources.map((resource, index) => (
+                {localizedSchoolContent.leadership.resources.map((resource, index) => (
                   <Grid
                     item
                     xs={12}
@@ -200,11 +204,11 @@ export default function Leadership() {
 
                 <Typography variant="body2" sx={{ mt: 2 }}>
                   Admin Phone:{' '}
-                  <strong>{schoolContent.contact.adminPhone}</strong>
+                  <strong>{localizedSchoolContent.contact.adminPhone}</strong>
                 </Typography>
 
                 <Stack spacing={1.5} mt={2}>
-                  {schoolContent.contact.adminRoles.map((role) => (
+                  {localizedSchoolContent.contact.adminRoles.map((role) => (
                     <Paper
                       key={role}
                       variant="outlined"

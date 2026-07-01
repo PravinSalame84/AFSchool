@@ -43,6 +43,7 @@ import siteAssets from '../data/siteAssets'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 import { activityToneTokens, brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Trophy]
 
@@ -128,20 +129,22 @@ function horizontalScrollerSx(theme) {
 
 export default function Home() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { openEnquiry } = useEnquiryModal()
   const { content: runtimeContent, source } = useRuntimeContent()
+  const localizedSchoolContent = localize(schoolContent)
 
-  const liveMarquee = runtimeContent.marquee?.length ? runtimeContent.marquee : schoolContent.marquee
-  const liveNotices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
-  const liveDownloads = runtimeContent.downloads?.length ? runtimeContent.downloads : schoolContent.downloads
+  const liveMarquee = runtimeContent.marquee?.length ? localize(runtimeContent.marquee) : localizedSchoolContent.marquee
+  const liveNotices = runtimeContent.notices?.length ? localize(runtimeContent.notices) : localizedSchoolContent.notices
+  const liveDownloads = runtimeContent.downloads?.length ? localize(runtimeContent.downloads) : localizedSchoolContent.downloads
 
   return (
     <>
       <Seo
-        title={schoolContent.meta.title}
-        description={schoolContent.meta.description}
+        title={localizedSchoolContent.meta.title}
+        description={localizedSchoolContent.meta.description}
         path="/"
-        image={schoolContent.hero.slides[2].image}
+        image={localizedSchoolContent.hero.slides[2].image}
       />
 
       <Hero />
@@ -201,18 +204,18 @@ export default function Home() {
         <Container>
           <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
             <Box>
-              <Eyebrow>Quick Navigation</Eyebrow>
+              <Eyebrow>{t('Quick Navigation')}</Eyebrow>
               <Typography variant="h2" sx={{ mt: 1.5, maxWidth: 720, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
-                Everything families usually need, faster.
+                {t('Everything families usually need, faster.')}
               </Typography>
             </Box>
             <Typography sx={{ maxWidth: 520, ...mutedTextSx(theme), fontSize: '0.95rem', lineHeight: 1.8 }}>
-              Structured access to admissions, notices, downloads, gallery, parent resources and official school information.
+              {t('Structured access to admissions, notices, downloads, gallery, parent resources and official school information.')}
             </Typography>
           </Stack>
 
           <Grid container spacing={2.5}>
-            {schoolContent.quickLinks.map((item, index) => (
+            {localizedSchoolContent.quickLinks.map((item, index) => (
               <Grid item xs={12} md={6} xl={4} key={item.label}>
                 <motion.div
                   initial={{ opacity: 0, y: 26 }}
@@ -277,19 +280,19 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0} variants={rise}>
               <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}>
                 <Box sx={{ position: 'relative' }}>
-                  <Eyebrow>About The School</Eyebrow>
+                  <Eyebrow>{t('About The School')}</Eyebrow>
                   <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
-                    Built on values. Designed for the next generation.
+                    {t('Built on values. Designed for the next generation.')}
                   </Typography>
                   <Typography sx={{ mt: 3, fontSize: '1rem', lineHeight: 1.9, ...mutedTextSx(theme) }}>
-                    {schoolContent.about.narrative}
+                    {localizedSchoolContent.about.narrative}
                   </Typography>
                   <Typography sx={{ mt: 2, fontSize: '1rem', lineHeight: 1.9, ...mutedTextSx(theme) }}>
-                    {schoolContent.about.extended}
+                    {localizedSchoolContent.about.extended}
                   </Typography>
 
                   <Grid container spacing={2} sx={{ mt: 2 }}>
-                    {schoolContent.facts.map((fact, index) => (
+                    {localizedSchoolContent.facts.map((fact, index) => (
                       <Grid item xs={6} md={3} key={fact.label}>
                         <motion.div custom={0.08 + index * 0.05} variants={rise}>
                           <Paper
@@ -325,15 +328,15 @@ export default function Home() {
                     </Avatar>
                     <Box>
                       <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.24em', color: 'text.secondary' }}>
-                        Vision
+                        {t('Vision')}
                       </Typography>
                       <Typography variant="h5" sx={{ fontWeight: 800 }}>
-                        Confident Global Citizens
+                        {t('Confident Global Citizens')}
                       </Typography>
                     </Box>
                   </Stack>
                   <Typography sx={{ mt: 2, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
-                    {schoolContent.about.vision}
+                    {localizedSchoolContent.about.vision}
                   </Typography>
                 </Paper>
 
@@ -344,15 +347,15 @@ export default function Home() {
                     </Avatar>
                     <Box>
                       <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.24em', color: 'text.secondary' }}>
-                        Mission
+                        {t('Mission')}
                       </Typography>
                       <Typography variant="h5" sx={{ fontWeight: 800 }}>
-                        Inclusive, Child-Centred Growth
+                        {t('Inclusive, Child-Centred Growth')}
                       </Typography>
                     </Box>
                   </Stack>
                   <Typography sx={{ mt: 2, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
-                    {schoolContent.about.mission}
+                    {localizedSchoolContent.about.mission}
                   </Typography>
                 </Paper>
 
@@ -370,10 +373,10 @@ export default function Home() {
                   <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at top right, rgba(215,166,37,0.28), transparent 28%)' }} />
                   <Box sx={{ position: 'relative' }}>
                     <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: alpha(brandColors.white, 0.6) }}>
-                      Parent Access
+                      {t('Parent Access')}
                     </Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 2 }}>
-                      {schoolContent.resources.slice(0, 3).map((resource) => (
+                      {localizedSchoolContent.resources.slice(0, 3).map((resource) => (
                         <Box
                           key={resource.label}
                           component={Link}
@@ -414,20 +417,20 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
             <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
               <Box>
-                <Eyebrow>Infrastructure</Eyebrow>
+                <Eyebrow>{t('Infrastructure')}</Eyebrow>
                 <Typography variant="h2" sx={{ mt: 1.5, maxWidth: 760, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
-                  A campus shaped for safety, curiosity and everyday excellence.
+                  {t('A campus shaped for safety, curiosity and everyday excellence.')}
                 </Typography>
               </Box>
               <Typography sx={{ maxWidth: 520, ...mutedTextSx(theme), fontSize: '0.95rem', lineHeight: 1.8 }}>
-                From smart classrooms to activity rooms and wellness support, the school environment is built to balance focus, movement and creative growth.
+                {t('From smart classrooms to activity rooms and wellness support, the school environment is built to balance focus, movement and creative growth.')}
               </Typography>
             </Stack>
           </motion.div>
 
           <Box sx={horizontalScrollerSx(theme)}>
             <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '90%', sm: '48%', lg: 'minmax(220px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' }, alignItems: 'stretch' }}>
-              {schoolContent.facilities.map((facility, index) => {
+              {localizedSchoolContent.facilities.map((facility, index) => {
                 const Icon = facilityIcons[index]
 
                 return (
@@ -472,7 +475,7 @@ export default function Home() {
         <Container>
           <Box sx={{ ...horizontalScrollerSx(theme), mb: 2 }}>
             <Box sx={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: { xs: '92%', sm: '58%', lg: 'minmax(260px, 1fr)' }, gap: 2.5, minWidth: { lg: '100%' }, alignItems: 'stretch' }}>
-              {schoolContent.statistics.map((stat, index) => (
+              {localizedSchoolContent.statistics.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 26 }}
@@ -508,7 +511,7 @@ export default function Home() {
 
           <Box sx={{ mb: 5 }}>
             <Carousel autoPlay interval={3200} ariaLabel="Student life highlights">
-              {schoolContent.studentShowcase.map((item, index) => (
+              {localizedSchoolContent.studentShowcase.map((item, index) => (
                 <motion.div
                   key={item.title}
                   data-carousel-item
@@ -558,12 +561,12 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0} variants={rise}>
               <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}>
                 <Box sx={{ position: 'relative' }}>
-                  <Eyebrow>Campus Life</Eyebrow>
+                  <Eyebrow>{t('Campus Life')}</Eyebrow>
                   <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
-                    Learning that moves beyond the classroom.
+                    {t('Learning that moves beyond the classroom.')}
                   </Typography>
                   <Typography sx={{ mt: 3, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
-                    Air Force School encourages strong participation across academic, cultural and physical activity spaces so students build discipline, expression and confidence together.
+                    {t('Air Force School encourages strong participation across academic, cultural and physical activity spaces so students build discipline, expression and confidence together.')}
                   </Typography>
 
                   <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 3 }}>
@@ -589,7 +592,7 @@ export default function Home() {
                   </Stack>
 
                   <Grid container spacing={2} sx={{ mt: 2 }}>
-                    {schoolContent.activities.map((activity, index) => {
+                    {localizedSchoolContent.activities.map((activity, index) => {
                       const tone = activityTones[index % activityTones.length]
 
                       return (
@@ -668,13 +671,13 @@ export default function Home() {
                     />
                     <Box sx={{ px: 1, pb: 1, pt: 2 }}>
                       <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#ff671f' }}>
-                        Campus Moments
+                        {t('Campus Moments')}
                       </Typography>
                       <Typography variant="h5" sx={{ mt: 1, fontWeight: 800, textTransform: 'uppercase' }}>
-                        Visible energy across the school day.
+                        {t('Visible energy across the school day.')}
                       </Typography>
                       <Typography sx={{ mt: 1, fontSize: '0.9rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
-                        Assemblies, collaborative spaces and student events help the campus feel active, proud and welcoming.
+                        {t('Assemblies, collaborative spaces and student events help the campus feel active, proud and welcoming.')}
                       </Typography>
                     </Box>
                   </Box>
@@ -721,10 +724,10 @@ export default function Home() {
                 <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'flex-end' }} spacing={2} sx={{ mb: 3 }}>
                   <Box>
                     <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#00d4fa' }}>
-                      Gallery Highlights
+                      {t('Gallery Highlights')}
                     </Typography>
                     <Typography variant="h5" sx={{ mt: 1, fontWeight: 800, textTransform: 'uppercase' }}>
-                      Real moments from classrooms, campus and student activities.
+                      {t('Real moments from classrooms, campus and student activities.')}
                     </Typography>
                   </Box>
                   <Box
@@ -741,13 +744,13 @@ export default function Home() {
                       '&:hover': { color: '#ff671f' },
                     }}
                   >
-                    Open full gallery
+                    {t('Open full gallery')}
                     <ArrowUpRight size={16} />
                   </Box>
                 </Stack>
 
-                <Carousel autoPlay interval={3600} ariaLabel="Campus gallery highlights">
-                  {schoolContent.gallery.slice(0, 8).map((item, index) => (
+                <Carousel autoPlay interval={3600} ariaLabel={t('Campus gallery highlights')}>
+                  {localizedSchoolContent.gallery.slice(0, 8).map((item, index) => (
                     <motion.div
                       key={item.title}
                       data-carousel-item
@@ -807,9 +810,9 @@ export default function Home() {
             >
               <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
                 <CalendarDays size={20} color="#ff671f" />
-                <Eyebrow>Notice Board</Eyebrow>
+                <Eyebrow>{t('Notice Board')}</Eyebrow>
                 <Chip
-                  label={source === 'live' ? 'Live Feed' : 'School Archive'}
+                  label={source === 'live' ? t('Live Feed') : t('School Archive')}
                   sx={{
                     borderRadius: 4,
                     bgcolor: alpha('#ffd707', 0.18),
@@ -874,7 +877,7 @@ export default function Home() {
 
               <Box sx={{ mt: 3 }}>
                 <Button to="/notice-board" variant="outline">
-                  Explore All Notices
+                  {t('Explore All Notices')}
                 </Button>
               </Box>
             </Paper>
@@ -891,7 +894,7 @@ export default function Home() {
             >
               <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
                 <DownloadCloud size={20} color="#00d4fa" />
-                <Eyebrow>Downloads</Eyebrow>
+                <Eyebrow>{t('Downloads')}</Eyebrow>
               </Stack>
 
               <Stack spacing={2}>
@@ -940,7 +943,7 @@ export default function Home() {
 
               <Box sx={{ mt: 3 }}>
                 <Button to="/downloads" variant="outline">
-                  Open Download Centre
+                  {t('Open Download Centre')}
                 </Button>
               </Box>
             </Paper>
@@ -964,25 +967,25 @@ export default function Home() {
             <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at top right, rgba(215,166,37,0.35), transparent 28%), radial-gradient(circle at left, rgba(93,138,168,0.14), transparent 20%)' }} />
             <Box sx={{ position: 'relative', display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 0.9fr' }, gap: 4 }}>
               <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={rise}>
-                <Eyebrow>Admissions</Eyebrow>
+                <Eyebrow>{t('Admissions')}</Eyebrow>
                 <Typography variant="h2" sx={{ mt: 1.5, color: brandColors.white, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.3rem', sm: '3rem' } }}>
-                  Start your school enquiry with clarity and confidence.
+                  {t('Start your school enquiry with clarity and confidence.')}
                 </Typography>
                 <Typography sx={{ mt: 3, maxWidth: 680, fontSize: '0.95rem', lineHeight: 1.8, color: alpha(brandColors.white, 0.74) }}>
-                  {schoolContent.admissions.intro}
+                  {localizedSchoolContent.admissions.intro}
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                   <Button size="lg" variant="light" onClick={() => openEnquiry('Admissions Enquiry')}>
-                    Enquire For Admission
+                    {t('Enquire For Admission')}
                   </Button>
-                  <Button size="lg" variant="ghost" to={schoolContent.resources[0].to}>
-                    View Public Disclosure
+                  <Button size="lg" variant="ghost" to={localizedSchoolContent.resources[0].to}>
+                    {t('View Public Disclosure')}
                   </Button>
                 </Stack>
               </motion.div>
 
               <Stack spacing={2}>
-                {schoolContent.admissions.steps.map((step, index) => (
+                {localizedSchoolContent.admissions.steps.map((step, index) => (
                   <motion.div
                     key={step}
                     initial={{ opacity: 0, x: 24 }}
@@ -1043,17 +1046,17 @@ export default function Home() {
             >
               <Stack direction="row" spacing={1.5} alignItems="center">
                 <FileText size={20} color="#f0934b" />
-                <Eyebrow>Leadership Preview</Eyebrow>
+                <Eyebrow>{t('Leadership Preview')}</Eyebrow>
               </Stack>
               <Typography variant="h2" sx={{ mt: 2, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.2rem', sm: '3rem' } }}>
-                Transparent school governance and parent access.
+                {t('Transparent school governance and parent access.')}
               </Typography>
               <Typography sx={{ mt: 3, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
-                {schoolContent.leadership.intro}
+                {t(localizedSchoolContent.leadership.intro)}
               </Typography>
 
               <Stack spacing={1.5} sx={{ mt: 3 }}>
-                {schoolContent.leadership.resources.slice(0, 3).map((resource) => (
+                {localizedSchoolContent.leadership.resources.slice(0, 3).map((resource) => (
                   <Box
                     key={resource.title}
                     component={Link}
@@ -1083,7 +1086,7 @@ export default function Home() {
 
               <Box sx={{ mt: 3 }}>
                 <Button to="/leadership" variant="outline">
-                  Explore Leadership
+                  {t('Explore Leadership')}
                 </Button>
               </Box>
             </Paper>
@@ -1105,24 +1108,24 @@ export default function Home() {
               <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }} spacing={2} sx={{ px: 1.5, py: 1.5 }}>
                 <Box>
                   <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'text.secondary' }}>
-                    Campus Contact
+                    {t('Campus Contact')}
                   </Typography>
                   <Typography variant="h5" sx={{ mt: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
-                    Air Force School VayuSena Nagar
+                    {t('Air Force School VayuSena Nagar')}
                   </Typography>
                 </Box>
               </Stack>
               <Box
                 component="iframe"
-                title="Air Force School VayuSena Nagar map"
-                src={schoolContent.contact.mapEmbed}
+                title={t('Air Force School VayuSena Nagar map')}
+                src={localizedSchoolContent.contact.mapEmbed}
                 loading="lazy"
                 sx={{ width: '100%', height: 420, border: 0, borderRadius: 4, marginBottom: 4 }}
               />
               <Stack direction="row" flexWrap="wrap" gap={1}>
                 <Box
                   component="a"
-                  href={`tel:${schoolContent.contact.phone}`}
+                  href={`tel:${localizedSchoolContent.contact.phone}`}
                   sx={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1140,11 +1143,11 @@ export default function Home() {
                   }}
                 >
                   <Phone size={14} />
-                  Call
+                  {t('Call')}
                 </Box>
                 <Box
                   component="a"
-                  href={schoolContent.contact.mapLink}
+                  href={localizedSchoolContent.contact.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -1164,7 +1167,7 @@ export default function Home() {
                   }}
                 >
                   <MapPin size={14} />
-                  Open Map
+                  {t('Open Map')}
                 </Box>
               </Stack>
             </Paper>

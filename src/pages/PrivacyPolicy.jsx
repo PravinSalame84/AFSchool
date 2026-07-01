@@ -12,13 +12,17 @@ import Stack from '../components/ui/Stack'
 import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'
 import siteConfig from '../data/siteConfig'
+import { useLocale } from '../context/LocaleContext'
 
 export default function PrivacyPolicy() {
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
+
   return (
     <>
       <Seo
         title="Privacy Policy"
-        description={`Privacy policy information for ${siteConfig.brandName}, ${siteConfig.brandSuffix}.`}
+        description={`Privacy policy information for ${localizedSiteConfig.brandName}, ${localizedSiteConfig.brandSuffix}.`}
         path="/privacy-policy"
       />
 
@@ -57,8 +61,8 @@ export default function PrivacyPolicy() {
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  This Privacy Policy explains how {siteConfig.brandName}{' '}
-                  {siteConfig.brandSuffix} collects, uses, stores and protects
+                  This Privacy Policy explains how {localizedSiteConfig.brandName}{' '}
+                  {localizedSiteConfig.brandSuffix} collects, uses, stores and protects
                   information submitted through this website.
                 </Typography>
               </Box>
@@ -115,11 +119,11 @@ export default function PrivacyPolicy() {
                   If you have any questions regarding this Privacy Policy,
                   please contact us at{' '}
                   <Link
-                    href={`mailto:${siteConfig.contact.email}`}
+                    href={`mailto:${localizedSiteConfig.contact.email}`}
                     underline="hover"
                     fontWeight={600}
                   >
-                    {siteConfig.contact.email}
+                    {localizedSiteConfig.contact.email}
                   </Link>
                   .
                 </Typography>

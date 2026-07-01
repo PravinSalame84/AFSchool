@@ -16,9 +16,12 @@ import { Award, ArrowUpRight } from 'lucide-react'
 import Carousel from '../ui/Carousel'
 import achievements from '../../data/achievements'
 import { Link } from 'react-router-dom'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function Achievements() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedAchievements = localize(achievements)
 
   const styles = useMemo(
     () => ({
@@ -95,20 +98,20 @@ export default function Achievements() {
       <Container>
         <Box sx={styles.headingWrap}>
           <Typography variant="overline" color="warning.main" fontWeight={700}>
-            School Highlights
+            {t('School Highlights')}
           </Typography>
 
           <Typography variant="h4" fontWeight={900} sx={{ mt: 1 }}>
-            The milestones that shape the Air Force School experience.
+            {t('The milestones that shape the Air Force School experience.')}
           </Typography>
 
           <Typography variant="body2" sx={styles.subtitle}>
-            This section now reflects real school strengths and institutional milestones, so families see what matters most at a glance.
+            {t('This section now reflects real school strengths and institutional milestones, so families see what matters most at a glance.')}
           </Typography>
         </Box>
 
-        <Carousel ariaLabel="Awards and achievements">
-          {achievements.map((item) => (
+        <Carousel ariaLabel={t('Awards and achievements')}>
+          {localizedAchievements.map((item) => (
             <Card key={item.title} sx={styles.card} data-carousel-item>
               <CardContent>
                 <Stack spacing={2.25}>
@@ -130,7 +133,7 @@ export default function Achievements() {
                     />
                   </Stack>
 
-                  <Typography sx={styles.year}>Why it matters</Typography>
+                  <Typography sx={styles.year}>{t('Why it matters')}</Typography>
 
                   <Typography sx={styles.title}>{item.title}</Typography>
 
@@ -156,7 +159,7 @@ export default function Achievements() {
               gap: 1,
             }}
           >
-            Explore School Overview
+            {t('Explore School Overview')}
             <ArrowUpRight size={16} />
           </Button>
         </Box>

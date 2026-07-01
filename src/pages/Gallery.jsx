@@ -21,6 +21,7 @@ import Carousel from '../components/ui/Carousel'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 function galleryCardSx(theme) {
   return {
@@ -37,7 +38,9 @@ function galleryCardSx(theme) {
 
 export default function Gallery() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const [activeImage, setActiveImage] = useState(null)
+  const localizedSchoolContent = localize(schoolContent)
 
   return (
     <>
@@ -45,15 +48,15 @@ export default function Gallery() {
         title="Gallery"
         description="School activities and campus life gallery."
         path="/gallery"
-        image={schoolContent.gallery[0].image}
+        image={localizedSchoolContent.gallery[0].image}
       />
 
       <PageHero
         crumb="Gallery"
         eyebrow="School Highlights"
         title="Campus life, events and achievements"
-        subtitle={`Browse ${schoolContent.gallery.length} curated images from school archives`}
-        image={schoolContent.gallery[0].image}
+        subtitle={`Browse ${localizedSchoolContent.gallery.length} curated images from school archives`}
+        image={localizedSchoolContent.gallery[0].image}
       />
 
       <Box sx={{ py: { xs: 7, md: 9 } }}>
@@ -86,8 +89,8 @@ export default function Gallery() {
           </Stack>
 
           <Box sx={{ mb: 6 }}>
-            <Carousel autoPlay interval={3200} ariaLabel="Featured gallery highlights">
-              {schoolContent.gallery.slice(0, 8).map((item) => (
+            <Carousel autoPlay interval={3200} ariaLabel={t('Featured gallery highlights')}>
+              {localizedSchoolContent.gallery.slice(0, 8).map((item) => (
                 <Box key={item.title} data-carousel-item sx={{ width: { xs: 'min(88vw, 320px)', sm: 'min(360px, 84vw)' }, flexShrink: 0 }}>
                   <Paper
                     onClick={() => setActiveImage(item)}
@@ -108,7 +111,7 @@ export default function Gallery() {
 
                     <Box sx={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', p: 2.25, color: brandColors.white }}>
                       <Chip
-                        label="Featured"
+                        label={t('Featured')}
                         size="small"
                         sx={{
                           alignSelf: 'flex-start',
@@ -136,7 +139,7 @@ export default function Gallery() {
               Auto-Scrolling Archive Strip
             </Typography>
             <Carousel autoPlay interval={2600} ariaLabel="Full gallery archive strip">
-              {schoolContent.gallery.map((item) => (
+              {localizedSchoolContent.gallery.map((item) => (
                 <Box key={`strip-${item.title}`} data-carousel-item sx={{ width: { xs: 'min(82vw, 260px)', sm: 'min(280px, 72vw)' }, flexShrink: 0 }}>
                   <Paper
                     onClick={() => setActiveImage(item)}
@@ -162,7 +165,7 @@ export default function Gallery() {
           </Box>
 
           <Grid container spacing={2.5}>
-            {schoolContent.gallery.map((item, index) => (
+            {localizedSchoolContent.gallery.map((item, index) => (
               <Grid item xs={12} sm={6} xl={index % 5 === 0 ? 6 : 3} key={item.title}>
                 <Paper
                   onClick={() => setActiveImage(item)}
@@ -203,7 +206,7 @@ export default function Gallery() {
           <IconButton
             onClick={() => setActiveImage(null)}
             sx={{ position: 'absolute', right: 10, top: 10, zIndex: 10 }}
-            aria-label="Close gallery image"
+            aria-label={t('Close gallery image')}
           >
             <CloseIcon />
           </IconButton>

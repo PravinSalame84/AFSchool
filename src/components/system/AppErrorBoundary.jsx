@@ -23,16 +23,16 @@ export default class AppErrorBoundary extends React.Component {
         <StatusScreen
           badge="Application Error"
           code="500"
-          title="The page hit an unexpected issue."
-          message="The website is safe, but this view could not be loaded right now. Please refresh once or return to the homepage."
+          title={t("The page hit an unexpected issue.")}
+          message={t("The website is safe, but this view could not be loaded right now. Please refresh once or return to the homepage.")}
           icon="error"
-          primaryAction={{ label: 'Go To Homepage', to: '/', variant: 'dark' }}
+          primaryAction={{ label: t('Go To Homepage'), to: '/', variant: 'dark' }}
           secondaryAction={{
-            label: 'Refresh Page',
+            label: t('Refresh Page'),
             onClick: () => window.location.reload(),
             variant: 'outline',
           }}
-          note="If the issue continues, keep using the homepage or contact the school office while we restore the page."
+          note={t("If the issue continues, keep using the homepage or contact the school office while we restore the page.")}
         />
       )
     }

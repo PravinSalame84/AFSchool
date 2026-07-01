@@ -24,9 +24,11 @@ import PageHero from '../components/ui/PageHero'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import locations, { states } from '../data/locations'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import { useLocale } from '../context/LocaleContext'
 
 /* ---------------- PAGE ---------------- */
 export default function Locations() {
+  const { t } = useLocale()
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const { openEnquiry } = useEnquiryModal()
@@ -95,7 +97,7 @@ export default function Locations() {
               <TextField
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search campus, city or state"
+                placeholder={t('Search campus, city or state')}
                 size="small"
                 sx={{ width: { xs: '100%', sm: 350 } }}
                 slotProps={{
@@ -123,7 +125,7 @@ export default function Locations() {
                 flexWrap="wrap"
               >
                 <Chip
-                  label="All States"
+                  label={t('All States')}
                   clickable
                   color={
                     activeState === 'All' ? 'primary' : 'default'
@@ -214,7 +216,7 @@ export default function Locations() {
                         },
                       }}
                     >
-                      Enquire about this campus →
+                      {t('Enquire about this campus')} →
                     </Typography>
                   </Card>
                 </RevealOnScroll>

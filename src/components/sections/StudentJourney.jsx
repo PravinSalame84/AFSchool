@@ -12,10 +12,14 @@ import Stack from '../ui/Stack'
 
 import studentJourney from '../../data/studentJourney'
 import { brandColors, gradientTokens, studentJourneyColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const colors = studentJourneyColors
 
 export default function StudentJourney() {
+  const { localize, t } = useLocale()
+  const localizedStudentJourney = localize(studentJourney)
+
   return (
     <Box
       component="section"
@@ -35,7 +39,7 @@ export default function StudentJourney() {
           variant="overline"
           sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: 2 }}
         >
-          A Glimpse Into Campus Life
+          {t('A Glimpse Into Campus Life')}
         </Typography>
 
         <Typography
@@ -51,12 +55,12 @@ export default function StudentJourney() {
             fontSize: { xs: '1.8rem', sm: '2.125rem' },
           }}
         >
-          An Air Force School education adapts to become whatever your child needs
+          {t('An Air Force School education adapts to become whatever your child needs')}
         </Typography>
 
         {/* GRID */}
         <Grid container spacing={3} sx={{ mt: 6 }}>
-          {studentJourney.map((item, i) => (
+          {localizedStudentJourney.map((item, i) => (
             <Grid item xs={12} sm={6} md={4} key={item.title}>
               
               <Card
@@ -141,7 +145,7 @@ export default function StudentJourney() {
               },
             }}
           >
-            Enter the Student Journey
+            {t('Enter the Student Journey')}
           </Button>
         </Stack>
 

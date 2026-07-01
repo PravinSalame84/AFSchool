@@ -12,13 +12,17 @@ import Stack from '../components/ui/Stack'
 import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'
 import siteConfig from '../data/siteConfig'
+import { useLocale } from '../context/LocaleContext'
 
 export default function Terms() {
+  const { localize } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
+
   return (
     <>
       <Seo
         title="Terms & Conditions"
-        description={`Terms and website usage information for ${siteConfig.brandName}, ${siteConfig.brandSuffix}.`}
+        description={`Terms and website usage information for ${localizedSiteConfig.brandName}, ${localizedSiteConfig.brandSuffix}.`}
         path="/terms"
       />
 
@@ -57,8 +61,8 @@ export default function Terms() {
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  By accessing or using the {siteConfig.brandName}{' '}
-                  {siteConfig.brandSuffix} website, you agree to comply with
+                  By accessing or using the {localizedSiteConfig.brandName}{' '}
+                  {localizedSiteConfig.brandSuffix} website, you agree to comply with
                   these Terms & Conditions. If you do not agree, please refrain
                   from using this website.
                 </Typography>
@@ -135,11 +139,11 @@ export default function Terms() {
                   If you have any questions regarding these Terms & Conditions,
                   please contact us at{' '}
                   <Link
-                    href={`mailto:${siteConfig.contact.email}`}
+                    href={`mailto:${localizedSiteConfig.contact.email}`}
                     underline="hover"
                     fontWeight={600}
                   >
-                    {siteConfig.contact.email}
+                    {localizedSiteConfig.contact.email}
                   </Link>
                   .
                 </Typography>

@@ -23,6 +23,7 @@ import siteAssets from '../data/siteAssets'
 import { isValidEmail } from '../utils/formValidation'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 brandColors
 
 const infoCards = [
@@ -55,7 +56,16 @@ function cardSx(theme, tone = 'light') {
 
 export default function Contact() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { openEnquiry } = useEnquiryModal()
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedSchoolContent = localize(schoolContent)
+  const localizedInfoCards = [
+    { icon: LocationOn, title: t('Campus Address'), value: localizedSchoolContent.contact.address },
+    { icon: Phone, title: t('Call Us'), value: localizedSchoolContent.contact.phone, href: `tel:${localizedSiteConfig.contact.phone}` },
+    { icon: Email, title: t('Email Us'), value: localizedSchoolContent.contact.email, href: `mailto:${localizedSiteConfig.contact.email}` },
+    { icon: AccessTime, title: t('Office Hours'), value: t('Mon - Sat, 9:00 AM - 5:30 PM') },
+  ]
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -79,9 +89,9 @@ export default function Contact() {
     event.preventDefault()
     const next = {}
 
-    if (!form.name.trim()) next.name = 'Name is required'
-    if (!isValidEmail(form.email)) next.email = 'Valid email required'
-    if (!form.message.trim()) next.message = 'Message is required'
+    if (!form.name.trim()) next.name = t('Name is required')
+    if (!isValidEmail(form.email)) next.email = t('Valid email required')
+    if (!form.message.trim()) next.message = t('Message is required')
 
     setErrors(next)
     if (Object.keys(next).length === 0) setSent(true)
@@ -107,7 +117,7 @@ export default function Contact() {
       <Box sx={{ py: { xs: 7, md: 10 }, background: theme.palette.mode === 'dark' ? 'transparent' : 'linear-gradient(180deg, rgba(215,239,246,0.65), rgba(244,251,254,0.94))' }}>
         <Container maxWidth="xl">
           <Grid container spacing={2.5}>
-            {infoCards.map((card) => (
+            {localizedInfoCards.map((card) => (
               <Grid item xs={12} sm={6} xl={3} key={card.title}>
                 <Paper sx={{ ...cardSx(theme), p: 3, height: '100%' }}>
                   <Avatar sx={{ bgcolor: 'primary.main', width: 46, height: 46 }}>
@@ -156,17 +166,17 @@ export default function Contact() {
                   ) : (
                     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                       <Stack spacing={2}>
-                        <TextField label="Full Name" value={form.name} onChange={update('name')} error={!!errors.name} helperText={errors.name} fullWidth />
+                        <TextField label={t('Full Name')} value={form.name} onChange={update('name')} error={!!errors.name} helperText={errors.name} fullWidth />
                         <Grid container spacing={2}>
                           <Grid item xs={12} sm={6}>
-                            <TextField label="Email" value={form.email} onChange={update('email')} error={!!errors.email} helperText={errors.email} fullWidth />
+                            <TextField label={t('Email')} value={form.email} onChange={update('email')} error={!!errors.email} helperText={errors.email} fullWidth />
                           </Grid>
                           <Grid item xs={12} sm={6}>
-                            <TextField label="Phone (optional)" value={form.phone} onChange={update('phone')} fullWidth />
+                            <TextField label={t('Phone (optional)')} value={form.phone} onChange={update('phone')} fullWidth />
                           </Grid>
                         </Grid>
                         <TextField
-                          label="Message"
+                          label={t('Message')}
                           value={form.message}
                           onChange={update('message')}
                           error={!!errors.message}
@@ -176,7 +186,7 @@ export default function Contact() {
                           fullWidth
                         />
                         <Button type="submit" variant="contained" size="large" fullWidth>
-                          Send Message
+                          {t('Send Message')}
                         </Button>
                       </Stack>
                     </Box>
@@ -191,14 +201,14 @@ export default function Contact() {
                     Need faster help for admissions or school details?
                   </Typography>
                   <Typography sx={{ mt: 1.5, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
-                    Use the enquiry flow for admission-related questions or request school details directly from the school office.
+                    {t('Use the enquiry flow for admission-related questions or request school details directly from the school office.')}
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                     <Button variant="contained" color="secondary" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                      Start General Enquiry
+                      {t('Start General Enquiry')}
                     </Button>
                     <Button variant="outlined" sx={{ color: brandColors.white, borderColor: alpha(brandColors.white, 0.24), width: { xs: '100%', sm: 'auto' } }} onClick={() => openEnquiry('School Details Request')}>
-                      Request School Details
+                      {t('Request School Details')}
                     </Button>
                   </Stack>
                 </Paper>
@@ -216,24 +226,24 @@ export default function Contact() {
                       Air Force School VayuSena Nagar
                     </Typography>
                     <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.8 }}>
-                      {siteConfig.contact.address}
+                      {localizedSiteConfig.contact.address}
                     </Typography>
                   </Box>
 
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} flexWrap="wrap">
-                    <Button component="a" href={schoolContent.contact.mapLink} target="_blank" rel="noopener noreferrer" variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                      Open Map
+                    <Button component="a" href={localizedSchoolContent.contact.mapLink} target="_blank" rel="noopener noreferrer" variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                      {t('Open Map')}
                     </Button>
-                    <Button component="a" href={`tel:${schoolContent.contact.phone}`} variant="contained" sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                      Call Office
+                    <Button component="a" href={`tel:${localizedSchoolContent.contact.phone}`} variant="contained" sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                      {t('Call Office')}
                     </Button>
                   </Stack>
                 </Stack>
 
                 <Box
                   component="iframe"
-                  title="Campus Map"
-                  src={schoolContent.contact.mapEmbed}
+                  title={t('Campus Map')}
+                  src={localizedSchoolContent.contact.mapEmbed}
                   loading="lazy"
                   sx={{
                     width: '100%',

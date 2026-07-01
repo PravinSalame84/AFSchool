@@ -33,6 +33,7 @@ import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import { brandColors, socialColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const socialLinks = [
   { label: 'Facebook', href: siteConfig.social.facebook, icon: Facebook, color: socialColors.facebook },
@@ -51,8 +52,11 @@ const connectLinks = [
 ]
 
 export default function Footer() {
+  const { localize, t } = useLocale()
   const theme = useTheme()
   const isDark = theme.palette.mode === 'dark'
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedSchoolContent = localize(schoolContent)
 
   return (
     <Box
@@ -95,11 +99,11 @@ export default function Footer() {
             <Grid item xs={12} lg={7}>
               <Logo tone="light" variant="footer" />
               <Typography sx={{ mt: 2, maxWidth: 720, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
-                A focused digital experience for families, parents and school stakeholders with fast access to notices, downloads, academics, admissions and school support.
+                {t('A focused digital experience for families, parents and school stakeholders with fast access to notices, downloads, academics, admissions and school support.')}
               </Typography>
 
               <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mt: 2.5 }}>
-                {schoolContent.hero.badges.map((badge) => (
+                {localizedSchoolContent.hero.badges.map((badge) => (
                   <Paper
                     key={badge}
                     sx={{
@@ -164,7 +168,7 @@ export default function Footer() {
                       },
                     }}
                   >
-                    {label}
+                    {t(label)}
                   </Button>
                 ))}
               </Stack>
@@ -175,45 +179,45 @@ export default function Footer() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Typography variant="subtitle2" sx={{ fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Contact
+              {t('Contact')}
             </Typography>
             <Stack spacing={2} sx={{ mt: 2.5 }}>
               <Stack direction="row" spacing={1.25} alignItems="flex-start">
                 <MapPin size={18} />
                 <Typography variant="body2" sx={{ color: alpha(brandColors.white, 0.82), lineHeight: 1.8 }}>
-                  {siteConfig.contact.address}
+                  {localizedSiteConfig.contact.address}
                 </Typography>
               </Stack>
               <Stack direction="row" spacing={1.25} alignItems="center">
                 <Phone size={18} />
-                <MuiLink href={`tel:${siteConfig.contact.phone}`} color="inherit" underline="hover">
-                  {siteConfig.contact.phone}
+                <MuiLink href={`tel:${localizedSiteConfig.contact.phone}`} color="inherit" underline="hover">
+                  {localizedSiteConfig.contact.phone}
                 </MuiLink>
               </Stack>
               <Stack direction="row" spacing={1.25} alignItems="center">
                 <Mail size={18} />
-                <MuiLink href={`mailto:${siteConfig.contact.email}`} color="inherit" underline="hover">
-                  {siteConfig.contact.email}
+                <MuiLink href={`mailto:${localizedSiteConfig.contact.email}`} color="inherit" underline="hover">
+                  {localizedSiteConfig.contact.email}
                 </MuiLink>
               </Stack>
               <Button
-                href={schoolContent.contact.mapLink}
+                href={localizedSchoolContent.contact.mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="contained"
                 sx={{ alignSelf: 'flex-start', width: { xs: '100%', sm: 'auto' } }}
               >
-                Open Campus Map
+                {t('Open Campus Map')}
               </Button>
             </Stack>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle2" sx={{ fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Quick Links
+              {t('Quick Links')}
             </Typography>
             <Stack spacing={1} sx={{ mt: 2 }}>
-              {schoolContent.quickLinks.map((link) => (
+              {localizedSchoolContent.quickLinks.map((link) => (
                 <Button
                   key={link.label}
                   component={Link}
@@ -234,10 +238,10 @@ export default function Footer() {
 
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle2" sx={{ fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Resources
+              {t('Resources')}
             </Typography>
             <Stack spacing={1} sx={{ mt: 2 }}>
-              {schoolContent.resources.map((link) => (
+              {localizedSchoolContent.resources.map((link) => (
                 <Button
                   key={link.label}
                   component={Link}

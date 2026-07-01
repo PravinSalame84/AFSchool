@@ -16,6 +16,7 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const links = [
   { icon: Star, label: 'About Us', to: '/about' },
@@ -25,6 +26,9 @@ const links = [
 ]
 
 export default function QuickLinksStrip() {
+  const { localize } = useLocale()
+  const localizedLinks = localize(links)
+
   return (
     <Box
       component="section"
@@ -49,7 +53,7 @@ export default function QuickLinksStrip() {
           spacing={3}
           useFlexGap
         >
-          {links.map(({ icon: Icon, label, to, external }) => {
+          {localizedLinks.map(({ icon: Icon, label, to, external }) => {
             const commonStyles = {
               display: 'flex',
               alignItems: 'center',

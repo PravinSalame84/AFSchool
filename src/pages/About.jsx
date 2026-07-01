@@ -21,6 +21,7 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import siteConfig from '../data/siteConfig'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -72,6 +73,10 @@ function panelSx(theme, tone = 'light') {
 
 export default function About() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedSchoolContent = localize(schoolContent)
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedOutreachPrograms = localize(outreachPrograms)
 
   return (
     <>
@@ -85,7 +90,7 @@ export default function About() {
       <PageHero
         crumb="About Us"
         eyebrow="Our Story"
-        title={`About ${siteConfig.brandName} ${siteConfig.brandSuffix}`}
+        title={`About ${localizedSiteConfig.brandName} ${localizedSiteConfig.brandSuffix}`}
         subtitle="Established to provide quality education with discipline, care and inclusive development for the wards of Air Force personnel and the wider school community."
         image={siteAssets.images.chief}
       />
@@ -98,22 +103,23 @@ export default function About() {
                 <Paper sx={{ ...panelSx(theme), p: { xs: 3, sm: 4 } }}>
                   <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: '0.2em' }}>
                     Who We Are
+                    
                   </Typography>
                   <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.96, fontSize: { xs: '2.2rem', sm: '3rem' } }}>
                     A values-led school built on structure, warmth and steady growth.
                   </Typography>
                   <Typography sx={{ mt: 3, color: 'text.secondary', lineHeight: 1.9 }}>
-                    Established in {siteConfig.yearFounded}, Air Force School VayuSena Nagar functions under the Indian Air Force Educational and Cultural Society, New Delhi, and serves students from LKG to IX.
+                    {t('Established in')} {localizedSiteConfig.yearFounded}, {localizedSchoolContent.hero.eyebrow} {t('functions under the Indian Air Force Educational and Cultural Society, New Delhi, and serves students from LKG to IX.')}
                   </Typography>
                   <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.9 }}>
-                    {schoolContent.about.narrative}
+                    {localizedSchoolContent.about.narrative}
                   </Typography>
                   <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.9 }}>
-                    {schoolContent.about.extended}
+                    {localizedSchoolContent.about.extended}
                   </Typography>
 
                   <Grid container spacing={2} sx={{ mt: 2 }}>
-                    {schoolContent.facts.map((fact, index) => (
+                    {localizedSchoolContent.facts.map((fact, index) => (
                       <Grid item xs={6} md={3} key={fact.label}>
                         <motion.div custom={0.08 + index * 0.05} initial="hidden" whileInView="show" viewport={{ once: true }} variants={reveal}>
                           <Paper
@@ -146,14 +152,14 @@ export default function About() {
                   {
                     label: 'Vision',
                     title: 'Confident and self-sustaining individuals',
-                    body: schoolContent.about.vision,
+                    body: localizedSchoolContent.about.vision,
                     icon: Compass,
                     color: 'primary.main',
                   },
                   {
                     label: 'Mission',
                     title: 'Inclusive education for every child',
-                    body: schoolContent.about.mission,
+                    body: localizedSchoolContent.about.mission,
                     icon: Flag,
                     color: 'secondary.main',
                   },
@@ -194,19 +200,19 @@ export default function About() {
                 <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.24} variants={reveal}>
                   <Paper sx={{ ...panelSx(theme, 'dark'), p: 3.5 }}>
                     <Typography variant="caption" sx={{ opacity: 0.72, textTransform: 'uppercase', letterSpacing: '0.18em' }}>
-                      Registered With
+                      {t('Registered With')}
                     </Typography>
                     <Typography variant="h6" sx={{ mt: 2, fontWeight: 800, lineHeight: 1.4 }}>
-                      Indian Air Force Educational and Cultural Society, New Delhi
+                      {t('Indian Air Force Educational and Cultural Society, New Delhi')}
                     </Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mt: 3 }}>
                       <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha(brandColors.white, 0.12) }}>
                         <Sparkles size={14} />
-                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Teaching is Learning</Typography>
+                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>{t('Teaching is Learning')}</Typography>
                       </Stack>
                       <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 0.9, borderRadius: 4, bgcolor: alpha(brandColors.white, 0.12) }}>
                         <ShieldCheck size={14} />
-                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>Legacy Since 1968</Typography>
+                        <Typography sx={{ fontSize: '0.76rem', fontWeight: 700 }}>{t('Legacy Since 1968')}</Typography>
                       </Stack>
                     </Stack>
                   </Paper>
@@ -226,10 +232,10 @@ export default function About() {
                 "Education is not about filling a vessel, it is about lighting a fire. Every decision we make starts with the question: will this help a child think, grow and stand confidently on their own?"
               </Typography>
               <Typography sx={{ mt: 3, fontWeight: 800, color: 'primary.main' }}>
-                School Leadership Message
+                {t('School Leadership Message')}
               </Typography>
               <Typography sx={{ mt: 0.6, fontSize: '0.84rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'text.secondary' }}>
-                {siteConfig.brandName} {siteConfig.brandSuffix}
+                {localizedSiteConfig.brandName} {localizedSiteConfig.brandSuffix}
               </Typography>
             </Paper>
           </motion.div>
@@ -261,7 +267,7 @@ export default function About() {
           </motion.div>
 
           <Grid container spacing={2.5} sx={{ mt: 3 }}>
-            {outreachPrograms.map((item, index) => {
+                {localizedOutreachPrograms.map((item, index) => {
               const Icon = item.icon
 
               return (

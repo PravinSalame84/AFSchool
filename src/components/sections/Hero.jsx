@@ -25,11 +25,15 @@ import siteConfig from '../../data/siteConfig'
 import siteAssets from '../../data/siteAssets'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function Hero() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { openEnquiry } = useEnquiryModal()
-  const slides = schoolContent.hero.slides
+  const localizedSchoolContent = localize(schoolContent)
+  const localizedSiteConfig = localize(siteConfig)
+  const slides = localizedSchoolContent.hero.slides
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function Hero() {
   }, [slides.length])
 
   const activeSlide = slides[activeIndex]
-  const stats = useMemo(() => schoolContent.facts.slice(0, 4), [])
+  const stats = useMemo(() => localizedSchoolContent.facts.slice(0, 4), [localizedSchoolContent.facts])
 
   const navigateSlide = (direction) => {
     setActiveIndex((current) => (current + direction + slides.length) % slides.length)
@@ -91,7 +95,7 @@ export default function Hero() {
                 className="hero-eyebrow"
                 sx={{ color: 'secondary.main' }}
               >
-                {schoolContent.hero.eyebrow}
+                {localizedSchoolContent.hero.eyebrow}
               </Typography>
 
               <Typography
@@ -99,18 +103,18 @@ export default function Hero() {
                 className="hero-title"
                 sx={{ color: 'text.primary' }}
               >
-                {schoolContent.hero.title}
+                {localizedSchoolContent.hero.title}
               </Typography>
 
               <Typography
                 className="hero-subtitle"
                 sx={{ color: 'text.secondary' }}
               >
-                {schoolContent.hero.subtitle}
+                {localizedSchoolContent.hero.subtitle}
               </Typography>
 
               <Stack className="hero-badges" direction="row" flexWrap="wrap">
-                {schoolContent.hero.badges.map((badge) => (
+                {localizedSchoolContent.hero.badges.map((badge) => (
                   <Chip
                     key={badge}
                     label={badge}
@@ -126,10 +130,10 @@ export default function Hero() {
 
               <Stack className="cta-stack-responsive" direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                 <Button size="lg" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                  Start General Enquiry
+                  {t('Start General Enquiry')}
                 </Button>
                 <Button size="lg" variant="outline" onClick={() => openEnquiry('School Details Request')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                  Request School Details
+                  {t('Request School Details')}
                 </Button>
               </Stack>
 
@@ -163,7 +167,7 @@ export default function Hero() {
                         color: 'secondary.main',
                       }}
                     >
-                      Featured Moments
+                      {t('Featured Moments')}
                     </Typography>
                     <Typography sx={{ mt: 0.8, fontSize: { xs: '1rem', sm: '1.08rem' }, fontWeight: 800, color: 'text.primary' }}>
                       {activeSlide.title}
@@ -183,7 +187,7 @@ export default function Hero() {
                           component="button"
                           type="button"
                           onClick={() => setActiveIndex(index)}
-                          aria-label={`Show hero slide ${index + 1}: ${slide.label}`}
+                          aria-label={`${t('Featured Moments')} ${index + 1}: ${slide.label}`}
                           sx={{
                             minWidth: { xs: 68, sm: 78 },
                             px: 1.25,
@@ -239,10 +243,10 @@ export default function Hero() {
                     <MapPin size={18} color={theme.palette.secondary.main} />
                     <Box>
                       <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em' }}>
-                        Campus Location
+                        {t('Campus Location')}
                       </Typography>
                       <Typography sx={{ mt: 0.4, fontSize: '0.92rem', color: 'text.secondary' }}>
-                        {siteConfig.brandSuffix}
+                        {localizedSiteConfig.brandSuffix}
                       </Typography>
                     </Box>
                   </Box>
@@ -251,7 +255,7 @@ export default function Hero() {
                 <Grid item xs={12} sm={6}>
                   <Box
                     component="a"
-                    href={`tel:${siteConfig.contact.phone}`}
+                    href={`tel:${localizedSiteConfig.contact.phone}`}
                     className="surface-card-soft hero-contact-card"
                     sx={{
                       color: 'text.primary',
@@ -262,10 +266,10 @@ export default function Hero() {
                     <Phone size={18} color={theme.palette.secondary.main} />
                     <Box>
                       <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em' }}>
-                        School Office
+                        {t('Call Office')}
                       </Typography>
                       <Typography sx={{ mt: 0.4, fontSize: '0.92rem', color: 'text.secondary' }}>
-                        {siteConfig.contact.phone}
+                        {localizedSiteConfig.contact.phone}
                       </Typography>
                     </Box>
                   </Box>

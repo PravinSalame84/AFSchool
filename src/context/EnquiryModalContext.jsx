@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import Modal from '../components/ui/Modal'
 import EnquiryFormFields from '../components/forms/EnquiryFormFields'
+import { useLocale } from './LocaleContext'
 
 const EnquiryModalContext = createContext(null)
 
 export function EnquiryModalProvider({ children }) {
+  const { t } = useLocale()
   const [open, setOpen] = useState(false)
   const [reason, setReason] = useState('General Enquiry')
 
@@ -18,7 +20,7 @@ export function EnquiryModalProvider({ children }) {
   return (
     <EnquiryModalContext.Provider value={{ openEnquiry, closeEnquiry }}>
       {children}
-      <Modal open={open} onClose={closeEnquiry} title={reason}>
+      <Modal open={open} onClose={closeEnquiry} title={t(reason)}>
         <EnquiryFormFields context={reason} onSuccess={closeEnquiry} />
       </Modal>
     </EnquiryModalContext.Provider>

@@ -2,8 +2,11 @@ import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'
 import StatusScreen from '../components/ui/StatusScreen'
 import siteAssets from '../data/siteAssets'
+import { useLocale } from '../context/LocaleContext'
 
 export default function Careers() {
+  useLocale()
+
   return (
     <>
       <Seo

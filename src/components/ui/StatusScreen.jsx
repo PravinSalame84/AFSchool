@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material/styles'
 import Stack from './Stack'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const iconMap = {
   error: AlertTriangle,
@@ -27,6 +28,7 @@ export default function StatusScreen({
   secondaryAction,
   note,
 }) {
+  const { t } = useLocale()
   const Icon = iconMap[icon] ?? AlertTriangle
 
   return (
@@ -119,10 +121,10 @@ export default function StatusScreen({
 
                   <Box>
                     <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.6) }}>
-                      Status
+                      {t('Status')}
                     </Typography>
                     <Typography variant="h3" sx={{ fontWeight: 800 }}>
-                      {code}
+                      {t(code)}
                     </Typography>
                   </Box>
                 </Stack>
@@ -134,7 +136,7 @@ export default function StatusScreen({
                   variant="overline"
                   sx={{ color: 'primary.main', letterSpacing: 3 }}
                 >
-                  Status Update
+                  {t('Status Update')}
                 </Typography>
 
                 <Typography
@@ -145,11 +147,11 @@ export default function StatusScreen({
                     textTransform: 'uppercase',
                   }}
                 >
-                  {title}
+                  {t(title)}
                 </Typography>
 
                 <Typography sx={{ mt: 3, color: 'text.secondary', lineHeight: 1.7 }}>
-                  {message}
+                  {t(message)}
                 </Typography>
 
                 <Stack direction="row" spacing={2} sx={{ mt: 4, flexWrap: 'wrap' }}>
@@ -161,7 +163,7 @@ export default function StatusScreen({
                       size="lg"
                       variant={primaryAction.variant ?? 'dark'}
                     >
-                      {primaryAction.label}
+                      {t(primaryAction.label)}
                     </Button>
                   )}
 
@@ -173,7 +175,7 @@ export default function StatusScreen({
                       size="lg"
                       variant={secondaryAction.variant ?? 'outline'}
                     >
-                      {secondaryAction.label}
+                      {t(secondaryAction.label)}
                     </Button>
                   )}
                 </Stack>
@@ -203,7 +205,7 @@ export default function StatusScreen({
                       </Box>
 
                       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        {note}
+                        {t(note)}
                       </Typography>
                     </Stack>
                   </Paper>

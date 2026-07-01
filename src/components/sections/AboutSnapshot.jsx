@@ -12,9 +12,13 @@ import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import Grid from '../ui/Grid'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function AboutSnapshot() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedStats = localize(stats)
+  const localizedSiteConfig = localize(siteConfig)
 
   return (
     <Box
@@ -33,8 +37,8 @@ export default function AboutSnapshot() {
           <Grid item xs={12} md={6}>
             <RevealOnScroll>
               <SectionHeading
-                eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
-                title="More than grades — we build well-rounded human beings"
+                eyebrow={`${localizedSiteConfig.brandName} ${localizedSiteConfig.brandSuffix}`}
+                title={t('More than grades - we build well-rounded human beings')}
                 tone="light"
               />
 
@@ -47,15 +51,12 @@ export default function AboutSnapshot() {
                   color: alpha(brandColors.white, 0.8),
                 }}
               >
-                Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
-                of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
-                is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
-                society.
+                {t('Since')} {localizedSiteConfig.yearFounded}, {localizedSiteConfig.brandName} {localizedSiteConfig.brandSuffix} {t("has grown into one of the country's most trusted school networks. Our aim has never been just to impart knowledge - it is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to society.")}
               </Typography>
 
               <Box sx={{ mt: 4 }}>
                 <Button to="/about" variant="light">
-                  Read Our Story
+                  {t('Read Our Story')}
                 </Button>
               </Box>
             </RevealOnScroll>
@@ -64,7 +65,7 @@ export default function AboutSnapshot() {
           {/* RIGHT STATS GRID */}
           <Grid item xs={12} md={6}>
             <Grid container spacing={3}>
-              {stats.map((stat, i) => (
+              {localizedStats.map((stat, i) => (
                 <Grid item xs={6} key={stat.label}>
                   <RevealOnScroll delay={i * 80}>
                     <Paper

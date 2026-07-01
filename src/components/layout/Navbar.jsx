@@ -32,10 +32,12 @@ import navigation from '../../data/navigation'
 import siteConfig from '../../data/siteConfig'
 import Logo from './Logo'
 import ThemeToggle from '../ui/ThemeToggle'
+import LanguageSwitcher from '../ui/LanguageSwitcher'
 import SiteSearch from './SiteSearch'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
 import { getVisitorMetrics, initializeVisitorSession, METRICS_EVENT } from '../../utils/visitorFeedback'
+import { useLocale } from '../../context/LocaleContext'
 
 const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
   px: 1.6,
@@ -250,6 +252,9 @@ function MobileItem({ item, onClose }) {
 
 export default function Navbar({ compact = false }) {
   const theme = useTheme()
+  const { localize, t, locale } = useLocale()
+  const localizedNavigation = localize(navigation)
+  const localizedSiteConfig = localize(siteConfig)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [visitorMetrics, setVisitorMetrics] = useState({ visitorCount: 0, ratingCount: 0, averageRating: 0, reviews: [] })
   const { openEnquiry } = useEnquiryModal()
@@ -271,15 +276,15 @@ export default function Navbar({ compact = false }) {
   }, [])
 
   const headerNote = useMemo(
-    () => `${siteConfig.brandName} • ${siteConfig.brandSuffix}`,
-    [],
+    () => `${localizedSiteConfig.brandName} • ${localizedSiteConfig.brandSuffix}`,
+    [localizedSiteConfig.brandName, localizedSiteConfig.brandSuffix],
   )
 
-  const visitorCountLabel = `${visitorMetrics.visitorCount.toLocaleString('en-IN')} visitors`
+  const visitorCountLabel = `${visitorMetrics.visitorCount.toLocaleString(locale === 'mr' ? 'mr-IN' : locale === 'hi' ? 'hi-IN' : 'en-IN')} ${t('visitors')}`
   const ratingLabel =
     visitorMetrics.ratingCount > 0
-      ? `${visitorMetrics.averageRating.toFixed(1)}/5 from ${visitorMetrics.ratingCount} ratings`
-      : '0 ratings • Submit review'
+      ? `${visitorMetrics.averageRating.toFixed(1)}/5 ${t('from')} ${visitorMetrics.ratingCount} ${t('ratings')}`
+      : `0 ${t('ratings')} • ${t('Submit review')}`
 
   return (
     <>
@@ -307,7 +312,7 @@ export default function Navbar({ compact = false }) {
           </Stack>
 
           <Box sx={{ display: { xs: 'none', xl: 'flex' }, gap: 0.5, alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-            {navigation.map((item) => (
+            {localizedNavigation.map((item) => (
               <DesktopItem key={item.label} item={item} />
             ))}
           </Box>
@@ -331,9 +336,12 @@ export default function Navbar({ compact = false }) {
               sx={{ fontWeight: 700 }}
             />
             <SiteSearch />
+            <Box sx={{ width: 220 }}>
+              <LanguageSwitcher compact align="flex-end" />
+            </Box>
             <ThemeToggle />
             <Button variant="contained" onClick={() => openEnquiry('General Enquiry')}>
-              {siteConfig.cta.enquire}
+              {localizedSiteConfig.cta.enquire}
             </Button>
           </Stack>
 
@@ -346,7 +354,7 @@ export default function Navbar({ compact = false }) {
               bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.72) : alpha(brandColors.white, 0.9),
             }}
             onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
+            aria-label={t('Open menu')}
           >
             <MenuIcon />
           </IconButton>
@@ -366,7 +374,7 @@ export default function Navbar({ compact = false }) {
         >
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
             <Logo />
-            <IconButton onClick={() => setMobileOpen(false)} aria-label="Close menu">
+            <IconButton onClick={() => setMobileOpen(false)} aria-label={t('Close menu')}>
               <CloseIcon />
             </IconButton>
           </Stack>
@@ -379,6 +387,10 @@ export default function Navbar({ compact = false }) {
             <SiteSearch compact />
             <ThemeToggle />
           </Stack>
+
+          <Box sx={{ mb: 2 }}>
+            <LanguageSwitcher />
+          </Box>
 
           <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
             <Chip label={visitorCountLabel} size="small" variant="outlined" sx={{ fontWeight: 700 }} />
@@ -394,7 +406,7 @@ export default function Navbar({ compact = false }) {
           <Divider sx={{ mb: 1.5 }} />
 
           <List sx={{ py: 0 }}>
-            {navigation.map((item) => (
+            {localizedNavigation.map((item) => (
               <MobileItem key={item.label} item={item} onClose={() => setMobileOpen(false)} />
             ))}
           </List>
@@ -408,7 +420,7 @@ export default function Navbar({ compact = false }) {
               openEnquiry('General Enquiry')
             }}
           >
-            {siteConfig.cta.enquire}
+            {localizedSiteConfig.cta.enquire}
           </Button>
         </Box>
       </Drawer>

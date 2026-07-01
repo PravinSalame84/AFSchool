@@ -27,6 +27,7 @@ import OptimizedImage from '../components/ui/OptimizedImage'
 import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 const icons = [
   BookOpenCheck,
@@ -36,6 +37,9 @@ const icons = [
 ]
 
 export default function Academics() {
+  const { localize, t } = useLocale()
+  const localizedSchoolContent = localize(schoolContent)
+
   return (
     <>
       <Seo
@@ -93,7 +97,7 @@ export default function Academics() {
                     color="text.secondary"
                     lineHeight={1.8}
                   >
-                    {schoolContent.academics.overview}
+                    {localizedSchoolContent.academics.overview}
                   </Typography>
 
                   <Grid
@@ -101,7 +105,7 @@ export default function Academics() {
                     spacing={2}
                     mt={3}
                   >
-                    {schoolContent.statistics.map((stat, index) => (
+                    {localizedSchoolContent.statistics.map((stat, index) => (
 
                       <Grid item key={stat.label} xs={12} sm={6}>
 
@@ -184,7 +188,7 @@ export default function Academics() {
 
               <Grid container spacing={3}>
 
-                {schoolContent.academics.programmes.map((item, index) => {
+                {localizedSchoolContent.academics.programmes.map((item, index) => {
 
                   const Icon = icons[index]
 
@@ -272,7 +276,7 @@ export default function Academics() {
             mt={4}
           >
 
-            {schoolContent.facilities.map((facility) => (
+            {localizedSchoolContent.facilities.map((facility) => (
 
               <Grid item key={facility} xs={12} md={6} xl={4}>
 

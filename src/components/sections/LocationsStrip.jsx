@@ -12,8 +12,10 @@ import {
 
 import { states } from '../../data/locations'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function LocationsStrip() {
+  const { t } = useLocale()
   return (
     <Box
       component="section"
@@ -46,7 +48,7 @@ export default function LocationsStrip() {
                 letterSpacing: 0.5,
               }}
             >
-              Campuses in:
+              {t('Campuses in:')}
             </Typography>
           </Stack>
 

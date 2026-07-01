@@ -20,6 +20,7 @@ import siteAssets from '../data/siteAssets'
 import admissionSteps, { feeStructureNote } from '../data/admissionSteps'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 const stepIcons = [PhoneCall, School, FileCheck2, ClipboardList]
 
@@ -55,7 +56,11 @@ function panelSx(theme, tone = 'light') {
 
 export default function Admissions() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { openEnquiry } = useEnquiryModal()
+  const localizedSchoolContent = localize(schoolContent)
+  const localizedAdmissionSteps = localize(admissionSteps)
+  const localizedFeeStructureNote = t(feeStructureNote)
 
   return (
     <>
@@ -84,14 +89,14 @@ export default function Admissions() {
               Start with the school office and move ahead with clarity.
             </Typography>
             <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.85 }}>
-              {schoolContent.admissions.intro}
+              {localizedSchoolContent.admissions.intro}
             </Typography>
           </Box>
 
           <Grid container spacing={3.5}>
             <Grid item xs={12} lg={7}>
               <Stack spacing={2.5}>
-                {admissionSteps.map((step, index) => {
+                {localizedAdmissionSteps.map((step, index) => {
                   const Icon = stepIcons[index] ?? ClipboardList
 
                   return (
@@ -110,7 +115,7 @@ export default function Admissions() {
                           </Avatar>
                           <Box>
                             <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'secondary.main' }}>
-                              Step 0{step.step}
+                              {t('Step')} 0{step.step}
                             </Typography>
                             <Typography variant="h6" sx={{ mt: 0.8, fontWeight: 800 }}>
                               {step.title}
@@ -139,7 +144,7 @@ export default function Admissions() {
                     </Typography>
 
                     <Stack spacing={1.5}>
-                      {schoolContent.admissions.documents.map((doc) => (
+                      {localizedSchoolContent.admissions.documents.map((doc) => (
                         <Box
                           key={doc}
                           sx={{
@@ -159,10 +164,10 @@ export default function Admissions() {
 
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                       <Button variant="contained" size="large" fullWidth onClick={() => openEnquiry('Admissions Enquiry')}>
-                        Start Enquiry
+                        {t('Start Enquiry')}
                       </Button>
-                      <Button variant="outlined" size="large" fullWidth href={schoolContent.resources[0].to}>
-                        View Documents
+                      <Button variant="outlined" size="large" fullWidth href={localizedSchoolContent.resources[0].to}>
+                        {t('View Documents')}
                       </Button>
                     </Stack>
                   </Paper>
@@ -181,10 +186,10 @@ export default function Admissions() {
                     </Typography>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                       <Button variant="contained" color="secondary" onClick={() => openEnquiry('Admissions Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                        Enquire For Admission
+                        {t('Enquire For Admission')}
                       </Button>
-                      <Button variant="outlined" sx={{ color: brandColors.white, borderColor: alpha(brandColors.white, 0.22), width: { xs: '100%', sm: 'auto' } }} href={`tel:${schoolContent.contact.phone}`}>
-                        Call Office
+                      <Button variant="outlined" sx={{ color: brandColors.white, borderColor: alpha(brandColors.white, 0.22), width: { xs: '100%', sm: 'auto' } }} href={`tel:${localizedSchoolContent.contact.phone}`}>
+                        {t('Call Office')}
                       </Button>
                     </Stack>
                   </Paper>
@@ -202,7 +207,7 @@ export default function Admissions() {
               {
                 icon: Wallet,
                 title: 'Fee Structure',
-                description: feeStructureNote,
+                description: localizedFeeStructureNote,
               },
               {
                 icon: ArrowRightLeft,

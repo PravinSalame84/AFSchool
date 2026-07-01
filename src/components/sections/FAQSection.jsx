@@ -9,10 +9,13 @@ import Stack from '../ui/Stack'
 import { alpha } from '@mui/material/styles'
 import Accordion from '../ui/Accordion'
 import faqs from '../../data/faqs'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function FAQSection() {
   const theme = useTheme()
   const isDark = theme.palette.mode === 'dark'
+  const { localize, t } = useLocale()
+  const localizedFaqs = localize(faqs)
 
   return (
     <Box
@@ -84,7 +87,7 @@ export default function FAQSection() {
                   bgcolor: alpha(theme.palette.secondary.main, 0.12),
                 }}
               >
-                {item}
+                {t(item)}
               </Typography>
             ))}
           </Stack>
@@ -96,11 +99,11 @@ export default function FAQSection() {
               letterSpacing: 2,
             }}
           >
-            Have Questions?
+            {t('Have Questions?')}
           </Typography>
 
           <Typography variant="h4" sx={{ mt: 1.5, fontWeight: 900, color: 'text.primary' }}>
-            Frequently Asked Questions
+            {t('Frequently Asked Questions')}
           </Typography>
 
           <Typography
@@ -113,13 +116,13 @@ export default function FAQSection() {
               lineHeight: 1.7,
             }}
           >
-            Admissions, facilities, documents and school access points are answered here for parents and guardians.
+            {t('Admissions, facilities, documents and school access points are answered here for parents and guardians.')}
           </Typography>
         </Paper>
 
         {/* Accordion Section */}
         <Box sx={{ mt: 4 }}>
-          <Accordion items={faqs} />
+          <Accordion items={localizedFaqs} />
         </Box>
       </Container>
     </Box>

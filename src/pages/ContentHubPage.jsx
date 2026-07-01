@@ -23,31 +23,34 @@ import {
 import PageHero from '../components/ui/PageHero'
 import Seo from '../components/ui/Seo'
 import { findHubPageByPath } from '../data/contentHub'
+import { useLocale } from '../context/LocaleContext'
 
 /* ---------------- PAGE ---------------- */
 export default function ContentHubPage() {
   const location = useLocation()
+  const { localize, t } = useLocale()
   const page = findHubPageByPath(location.pathname)
+  const localizedPage = page ? localize(page) : null
 
-  if (!page) return null
+  if (!localizedPage) return null
 
   return (
     <>
       {/* SEO */}
       <Seo
         title={page.title}
-        description={page.description}
-        path={page.path}
-        image={page.image}
+        description={localizedPage.description}
+        path={localizedPage.path}
+        image={localizedPage.image}
       />
 
       {/* HERO */}
       <PageHero
-        crumb={page.category}
-        eyebrow={page.category}
-        title={page.title}
-        subtitle={page.description}
-        image={page.image}
+        crumb={localizedPage.category}
+        eyebrow={localizedPage.category}
+        title={localizedPage.title}
+        subtitle={localizedPage.description}
+        image={localizedPage.image}
       />
 
       {/* ---------------- MAIN ---------------- */}
@@ -95,7 +98,7 @@ export default function ContentHubPage() {
                     color: 'primary.main',
                   }}
                 >
-                  {page.category}
+                  {localizedPage.category}
                 </Typography>
 
                 {/* TITLE */}
@@ -104,18 +107,18 @@ export default function ContentHubPage() {
                   fontWeight={800}
                   sx={{ mt: 2, lineHeight: 1.1, fontSize: { xs: '1.7rem', sm: '2.125rem' } }}
                 >
-                  Local school content without external dependency
+                  {t('Local school content without external dependency')}
                 </Typography>
 
                 {/* DESCRIPTION */}
                 <Typography variant="body1" sx={{ mt: 3, color: 'text.secondary' }}>
-                  {page.description}
+                  {localizedPage.description}
                 </Typography>
 
                 {/* HIGHLIGHTS */}
-                {page.highlights?.length ? (
+                {localizedPage.highlights?.length ? (
                   <Grid container spacing={2} sx={{ mt: 3 }}>
-                    {page.highlights.map((item) => (
+                    {localizedPage.highlights.map((item) => (
                       <Grid item xs={12} sm={6} key={item}>
                         <Paper
                           variant="outlined"
@@ -141,7 +144,7 @@ export default function ContentHubPage() {
               <Stack spacing={3}>
 
                 {/* SECTIONS */}
-                {page.sections.map((section) => (
+                {localizedPage.sections.map((section) => (
                   <Paper
                     key={section.title}
                     elevation={1}
@@ -161,20 +164,20 @@ export default function ContentHubPage() {
                 ))}
 
                 {/* DOWNLOADS */}
-                {page.attachments?.length ? (
+                {localizedPage.attachments?.length ? (
                   <Paper sx={{ p: 3, borderRadius: 4 }}>
 
                     <Stack direction="row" spacing={1} alignItems="center">
                       <Download color="primary" />
                       <Typography variant="h6" fontWeight={700}>
-                        Downloads
+                        {t('Downloads')}
                       </Typography>
                     </Stack>
 
                     <Divider sx={{ my: 2 }} />
 
                     <Stack spacing={1}>
-                      {page.attachments.map((file) => (
+                      {localizedPage.attachments.map((file) => (
                         <Button
                           key={file.label}
                           component="a"
@@ -210,7 +213,7 @@ export default function ContentHubPage() {
                     width: { xs: '100%', sm: 'auto' },
                   }}
                 >
-                  Contact School Office
+                  {t('Contact School Office')}
                 </Button>
 
               </Stack>

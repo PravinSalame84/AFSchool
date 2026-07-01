@@ -21,6 +21,7 @@ import siteAssets from '../data/siteAssets'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 import OptimizedImage from '../components/ui/OptimizedImage'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 function panelSx(theme) {
   return {
@@ -36,9 +37,11 @@ function panelSx(theme) {
 
 export default function NoticeBoard() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { content: runtimeContent, source } = useRuntimeContent()
-  const notices = runtimeContent.notices?.length ? runtimeContent.notices : schoolContent.notices
-  const events = runtimeContent.events?.length ? runtimeContent.events : schoolContent.events
+  const localizedSchoolContent = localize(schoolContent)
+  const notices = runtimeContent.notices?.length ? localize(runtimeContent.notices) : localizedSchoolContent.notices
+  const events = runtimeContent.events?.length ? localize(runtimeContent.events) : localizedSchoolContent.events
 
   return (
     <>
@@ -191,7 +194,7 @@ export default function NoticeBoard() {
                   </Grid>
 
                   <Stack spacing={1.25} sx={{ mt: 2 }}>
-                    {schoolContent.resources.slice(0, 4).map((resource) => (
+                    {localizedSchoolContent.resources.slice(0, 4).map((resource) => (
                       <Paper
                         key={resource.label}
                         component={RouterLink}

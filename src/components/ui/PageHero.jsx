@@ -8,8 +8,11 @@ import Container from './Container'
 import OptimizedImage from './OptimizedImage'
 import Stack from './Stack'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 function PageHero({ eyebrow, title, subtitle, crumb, image }) {
+  const { t } = useLocale()
+
   return (
     <Box
       component="section"
@@ -54,11 +57,11 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
             to="/"
             sx={{ color: 'inherit', textDecoration: 'none', '&:hover': { color: '#ffd707' } }}
           >
-            Home
+            {t('Home')}
           </Box>
           <ChevronRight size={14} />
           <Box component="span" sx={(theme) => ({ color: theme.palette.mode === 'dark' ? '#d7eff6' : theme.palette.primary.main })}>
-            {crumb}
+            {t(crumb)}
           </Box>
         </Stack>
 
@@ -73,7 +76,7 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
           <Box>
             {eyebrow ? (
               <Typography component="span" sx={{ display: 'block', color: 'secondary.main', fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.28em' }}>
-                {eyebrow}
+                {t(eyebrow)}
               </Typography>
             ) : null}
 
@@ -88,7 +91,7 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
                 fontSize: { xs: '2.1rem', sm: '3.25rem' },
               }}
             >
-              {title}
+              {t(title)}
             </Typography>
 
             {subtitle ? (
@@ -101,7 +104,7 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
                   lineHeight: 1.8,
                 })}
               >
-                {subtitle}
+                {t(subtitle)}
               </Typography>
             ) : null}
           </Box>
@@ -119,7 +122,7 @@ function PageHero({ eyebrow, title, subtitle, crumb, image }) {
               />
               <OptimizedImage
                 src={image}
-                alt={title}
+                alt={t(title)}
                 wrapperClassName="student-mask"
                 wrapperSx={{ position: 'relative' }}
                 sx={{

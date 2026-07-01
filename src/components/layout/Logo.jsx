@@ -4,9 +4,12 @@ import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function Logo({ tone = 'dark', variant = 'default', className = '' }) {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
   const isFooter = variant === 'footer'
   const isLight = tone === 'light'
   const titleColor = isLight
@@ -24,7 +27,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
     <Box
       component={Link}
       to="/"
-      aria-label="Air Force School home"
+      aria-label={t('Air Force School home')}
       className={className}
       sx={{
         display: 'flex',
@@ -66,7 +69,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
         <Box
           component="img"
           src="/favicon.png"
-          alt={`${siteConfig.brandName} logo`}
+          alt={`${localizedSiteConfig.brandName} logo`}
           sx={{
             width: isFooter ? { xs: 40, sm: 52 } : { xs: 34, sm: 44 },
             height: isFooter ? { xs: 40, sm: 52 } : { xs: 34, sm: 44 },
@@ -89,7 +92,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
             textShadow: 'none',
           }}
         >
-          {siteConfig.brandName}
+          {localizedSiteConfig.brandName}
         </Typography>
 
         <Typography
@@ -102,7 +105,7 @@ export default function Logo({ tone = 'dark', variant = 'default', className = '
             color: subtitleColor,
           }}
         >
-          {siteConfig.brandSuffix}
+          {localizedSiteConfig.brandSuffix}
         </Typography>
       </Box>
     </Box>

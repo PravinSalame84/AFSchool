@@ -32,6 +32,7 @@ import {
 } from '../../utils/formValidation'
 import { brandColors } from '../../theme/colorTokens'
 import { getVisitorMetrics, METRICS_EVENT, submitVisitorFeedback } from '../../utils/visitorFeedback'
+import { useLocale } from '../../context/LocaleContext'
 
 const standards = ['LKG', 'UKG', ...Array.from({ length: 9 }, (_, index) => `Class ${index + 1}`)]
 
@@ -58,37 +59,37 @@ const emptyForm = {
   agree: false,
 }
 
-function getFieldError(field, form, challenge) {
+function getFieldError(field, form, challenge, t) {
   switch (field) {
     case 'firstName':
-      if (!normalizeWhitespace(form.firstName)) return "Please enter your child's first name"
-      if (!isValidPersonName(form.firstName)) return 'Use at least 2 letters and avoid numbers'
+      if (!normalizeWhitespace(form.firstName)) return t("Please enter your child's first name")
+      if (!isValidPersonName(form.firstName)) return t('Use at least 2 letters and avoid numbers')
       return ''
     case 'lastName':
       if (!normalizeWhitespace(form.lastName)) return ''
-      if (!isValidPersonName(form.lastName)) return 'Please enter a valid last name'
+      if (!isValidPersonName(form.lastName)) return t('Please enter a valid last name')
       return ''
     case 'standard':
-      return form.standard ? '' : 'Please select the applying class'
+      return form.standard ? '' : t('Please select the applying class')
     case 'email':
-      if (!normalizeWhitespace(form.email)) return 'Please enter the parent email address'
-      return isValidEmail(form.email) ? '' : 'Please enter a valid email address'
+      if (!normalizeWhitespace(form.email)) return t('Please enter the parent email address')
+      return isValidEmail(form.email) ? '' : t('Please enter a valid email address')
     case 'phone':
-      if (!form.phone) return 'Please enter the parent mobile number'
-      return isValidIndianMobile(form.phone) ? '' : 'Enter a valid 10-digit Indian mobile number'
+      if (!form.phone) return t('Please enter the parent mobile number')
+      return isValidIndianMobile(form.phone) ? '' : t('Enter a valid 10-digit Indian mobile number')
     case 'captcha':
-      if (!form.captcha) return 'Please solve the quick verification question'
-      return Number(form.captcha) === challenge.answer ? '' : 'That answer does not look right'
+      if (!form.captcha) return t('Please solve the quick verification question')
+      return Number(form.captcha) === challenge.answer ? '' : t('That answer does not look right')
     case 'agree':
-      return form.agree ? '' : 'Please accept the terms to continue'
+      return form.agree ? '' : t('Please accept the terms to continue')
     default:
       return ''
   }
 }
 
-function buildErrors(form, challenge) {
+function buildErrors(form, challenge, t) {
   return fieldOrder.reduce((acc, field) => {
-    const error = getFieldError(field, form, challenge)
+    const error = getFieldError(field, form, challenge, t)
     if (error) acc[field] = error
     return acc
   }, {})
@@ -96,6 +97,8 @@ function buildErrors(form, challenge) {
 
 function SuccessState({ firstName, phone, context }) {
   const theme = useTheme()
+  const { t } = useLocale()
+  const localizedContext = t(context)
 
   return (
     <Box
@@ -133,22 +136,22 @@ function SuccessState({ firstName, phone, context }) {
 
       <Chip
         icon={<BadgeCheck size={16} />}
-        label="Enquiry Received"
+        label={t('Enquiry Received')}
         color="secondary"
         variant="outlined"
         sx={{ fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}
       />
 
       <Typography component="h4" variant="h6" sx={{ fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
-        Thank you, {firstName}.
+        {t('Thank you')}, {firstName}.
       </Typography>
 
       <Typography sx={{ maxWidth: 420, fontSize: '0.97rem', color: 'text.secondary', lineHeight: 1.8 }}>
-        Your {context.toLowerCase()} has been received. The school team will connect with you on{' '}
+        {t('Your enquiry confirmation').replace('{context}', localizedContext.toLowerCase())}{' '}
         <Box component="span" sx={{ fontWeight: 800, color: 'text.primary' }}>
           {phone}
         </Box>{' '}
-        with the next steps and details shortly.
+        {t('with the next steps and details shortly.')}
       </Typography>
     </Box>
   )
@@ -156,6 +159,7 @@ function SuccessState({ firstName, phone, context }) {
 
 function IntroPanel({ context }) {
   const theme = useTheme()
+  const { t } = useLocale()
 
   return (
     <Box
@@ -192,13 +196,13 @@ function IntroPanel({ context }) {
         </Box>
         <Box sx={{ minWidth: 0 }}>
           <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'secondary.main' }}>
-            Parent-Friendly Enquiry
+            {t('Parent-Friendly Enquiry')}
           </Typography>
           <Typography variant="h6" sx={{ mt: 0.25, fontWeight: 800, lineHeight: 1.2, fontSize: { xs: '1.02rem', sm: '1.1rem' } }}>
-            {context}
+            {t(context)}
           </Typography>
           <Typography sx={{ mt: 0.45, color: 'text.secondary', lineHeight: 1.6, fontSize: '0.88rem' }}>
-            Share the essentials and the school team can guide you with the right next step.
+            {t('Share the essentials and the school team can guide you with the right next step.')}
           </Typography>
         </Box>
       </Stack>
@@ -208,6 +212,7 @@ function IntroPanel({ context }) {
 
 function CampusSummary({ school, city, state }) {
   const theme = useTheme()
+  const { t } = useLocale()
 
   return (
     <Box
@@ -221,7 +226,7 @@ function CampusSummary({ school, city, state }) {
       }}
     >
       <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'text.secondary' }}>
-        Selected Campus
+        {t('Selected Campus')}
       </Typography>
       <Typography sx={{ mt: 0.45, fontWeight: 800, color: 'text.primary' }}>
         {school}
@@ -235,6 +240,7 @@ function CampusSummary({ school, city, state }) {
 
 export default function EnquiryFormFields({ context = 'General Enquiry', onSuccess }) {
   const theme = useTheme()
+  const { t, locale } = useLocale()
   const [form, setForm] = useState(emptyForm)
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
@@ -264,7 +270,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
   }, [])
 
   const setFieldError = (field, nextForm) => {
-    const error = getFieldError(field, nextForm, challenge)
+    const error = getFieldError(field, nextForm, challenge, t)
     setErrors((prev) => {
       const next = { ...prev }
       if (error) next[field] = error
@@ -326,7 +332,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
       phone: normalizePhone(form.phone),
     }
 
-    const nextErrors = buildErrors(normalizedForm, challenge)
+    const nextErrors = buildErrors(normalizedForm, challenge, t)
     setForm(normalizedForm)
     setErrors(nextErrors)
     setTouched(fieldOrder.reduce((acc, field) => ({ ...acc, [field]: true }), {}))
@@ -371,16 +377,16 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }}>
           <Box>
             <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'text.secondary' }}>
-              Visitor Snapshot
+              {t('Visitor Snapshot')}
             </Typography>
             <Typography sx={{ mt: 0.4, fontWeight: 800, color: 'text.primary' }}>
-              {visitorMetrics.visitorCount.toLocaleString('en-IN')} visitors checked this page
+              {visitorMetrics.visitorCount.toLocaleString(locale === 'mr' ? 'mr-IN' : locale === 'hi' ? 'hi-IN' : 'en-IN')} {t('visitors checked this page')}
             </Typography>
           </Box>
           <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
-            <Chip label={`${visitorMetrics.ratingCount} ratings`} size="small" variant="outlined" />
+            <Chip label={`${visitorMetrics.ratingCount} ${t('ratings')}`} size="small" variant="outlined" />
             <Chip
-              label={visitorMetrics.ratingCount > 0 ? `${visitorMetrics.averageRating.toFixed(1)}/5 average` : 'No ratings yet'}
+              label={visitorMetrics.ratingCount > 0 ? `${visitorMetrics.averageRating.toFixed(1)}/5 ${t('average')}` : t('No ratings yet')}
               size="small"
               color="secondary"
               variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
@@ -390,7 +396,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
 
         <Box sx={{ mt: 1.25 }}>
           <Typography sx={{ mb: 0.75, fontSize: '0.75rem', fontWeight: 800, color: 'text.secondary' }}>
-            Recent Reviews
+            {t('Recent Reviews')}
           </Typography>
           {visitorMetrics.reviews.length > 0 ? (
             <Stack spacing={0.85}>
@@ -415,7 +421,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             </Stack>
           ) : (
             <Typography sx={{ fontSize: '0.84rem', color: 'text.secondary', lineHeight: 1.6 }}>
-              No reviews yet. Add a rating and short review below.
+              {t('No reviews yet. Add a rating and short review below.')}
             </Typography>
           )}
         </Box>
@@ -426,14 +432,14 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         <Grid item xs={12} sm={6}>
           <Input
             id="firstName"
-            label="Child's First Name"
+            label={t("Child's First Name")}
             required
-            placeholder="e.g. Aarav"
+            placeholder={t('e.g. Aarav')}
             value={form.firstName}
             onChange={update('firstName')}
             onBlur={handleBlur('firstName')}
             error={touched.firstName ? errors.firstName : ''}
-            helperText="Student's given name"
+            helperText={t("Student's given name")}
             startAdornment={<UserRound size={16} />}
           />
         </Grid>
@@ -441,28 +447,28 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         <Grid item xs={12} sm={6}>
           <Input
             id="lastName"
-            label="Child's Last Name"
-            placeholder="e.g. Sharma"
+            label={t("Child's Last Name")}
+            placeholder={t('e.g. Sharma')}
             value={form.lastName}
             onChange={update('lastName')}
             onBlur={handleBlur('lastName')}
             error={touched.lastName ? errors.lastName : ''}
-            helperText="Optional"
+            helperText={t('Optional')}
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <Select
             id="standard"
-            label="Class Applying For"
+            label={t('Class Applying For')}
             required
-            placeholder="Select class"
-            options={standards}
+            placeholder={t('Select class')}
+            options={standards.map((item) => ({ value: item, label: t(item) }))}
             value={form.standard}
             onChange={update('standard')}
             onBlur={handleBlur('standard')}
             error={touched.standard ? errors.standard : ''}
-            helperText="Choose the applying class"
+            helperText={t('Choose the applying class')}
           />
         </Grid>
 
@@ -470,14 +476,14 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
           <Input
             id="email"
             type="email"
-            label="Parent's Email"
+            label={t("Parent's Email")}
             required
-            placeholder="you@email.com"
+            placeholder={t('you@email.com')}
             value={form.email}
             onChange={update('email')}
             onBlur={handleBlur('email')}
             error={touched.email ? errors.email : ''}
-            helperText="For school updates and follow-up"
+            helperText={t('For school updates and follow-up')}
             startAdornment={<Mail size={16} />}
           />
         </Grid>
@@ -486,14 +492,14 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
           <Input
             id="phone"
             type="tel"
-            label="Parent's Mobile Number"
+            label={t("Parent's Mobile Number")}
             required
-            placeholder="10-digit number"
+            placeholder={t('10-digit number')}
             value={form.phone}
             onChange={update('phone')}
             onBlur={handleBlur('phone')}
             error={touched.phone ? errors.phone : ''}
-            helperText="Active 10-digit mobile number"
+            helperText={t('Active 10-digit mobile number')}
             startAdornment={<Phone size={16} />}
           />
         </Grid>
@@ -508,10 +514,10 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             }}
           >
             <Typography sx={{ fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'text.secondary' }}>
-              Visitor Rating
+              {t('Visitor Rating')}
             </Typography>
             <Typography sx={{ mt: 0.4, mb: 1.1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.65 }}>
-              Rate your website visit while sending your enquiry.
+              {t('Rate your website visit while sending your enquiry.')}
             </Typography>
             <Rating
               name="visitor-rating"
@@ -522,17 +528,17 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
               }}
             />
             <Typography sx={{ mt: 0.8, color: 'text.secondary', fontSize: '0.82rem' }}>
-              {form.rating > 0 ? `You selected ${form.rating} out of 5 stars.` : 'Optional, but helpful for future visitors.'}
+              {form.rating > 0 ? `${t('You selected')} ${form.rating} ${t('out of 5 stars.')}` : t('Optional, but helpful for future visitors.')}
             </Typography>
 
             <TextField
-              label="Short Review"
+              label={t('Short Review')}
               value={form.review}
               onChange={update('review')}
               multiline
               minRows={3}
               fullWidth
-              placeholder="Tell future visitors about your experience."
+              placeholder={t('Tell future visitors about your experience.')}
               sx={{
                 mt: 1.25,
                 '& .MuiOutlinedInput-root': {
@@ -545,22 +551,22 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
 
         <Grid item xs={12}>
           <Typography sx={{ mb: 0.8, fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'text.secondary' }}>
-            Quick Verification
+            {t('Quick Verification')}
           </Typography>
           <TextField
-            label={`What is ${challenge.a} + ${challenge.b}?`}
+            label={`${t('What is')} ${challenge.a} + ${challenge.b}?`}
             value={form.captcha}
             onChange={update('captcha')}
             onBlur={handleBlur('captcha')}
             error={Boolean(touched.captcha && errors.captcha)}
-            helperText={touched.captcha && errors.captcha ? errors.captcha : 'Quick verification to prevent spam'}
+            helperText={touched.captcha && errors.captcha ? errors.captcha : t('Quick verification to prevent spam')}
             fullWidth
             size="small"
             slotProps={{
               input: {
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={refreshChallenge} edge="end" aria-label="Refresh verification challenge">
+                    <IconButton onClick={refreshChallenge} edge="end" aria-label={t('Refresh verification challenge')}>
                       <RefreshCw size={16} />
                     </IconButton>
                   </InputAdornment>
@@ -589,15 +595,15 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
               onChange={update('agree')}
               onBlur={handleBlur('agree')}
               error={touched.agree ? errors.agree : ''}
-              helperText="Used only for this school enquiry."
-              label="By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry."
+              helperText={t('Used only for this school enquiry.')}
+              label={t('By submitting, you agree to be contacted by Air Force School, VayuSena Nagar regarding this enquiry.')}
             />
           </Box>
         </Grid>
 
         <Grid item xs={12}>
           <Button type="submit" variant="dark" fullWidth size="lg">
-            Send {context.includes('Details') ? 'Request' : 'Enquiry'}
+            {t('Send')} {context.includes('Details') ? t('Request') : t('Enquiry')}
           </Button>
         </Grid>
       </Grid>

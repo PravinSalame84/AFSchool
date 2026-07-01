@@ -21,6 +21,7 @@ import schoolContent from '../data/schoolContent'
 import siteAssets from '../data/siteAssets'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 import { brandColors, downloadToneTokens } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 const tones = downloadToneTokens
 
@@ -38,8 +39,10 @@ function cardSx(theme) {
 
 export default function Downloads() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
   const { content: runtimeContent, source } = useRuntimeContent()
-  const downloads = runtimeContent.downloads?.length ? runtimeContent.downloads : schoolContent.downloads
+  const localizedSchoolContent = localize(schoolContent)
+  const downloads = runtimeContent.downloads?.length ? localize(runtimeContent.downloads) : localizedSchoolContent.downloads
 
   return (
     <>
@@ -117,7 +120,7 @@ export default function Downloads() {
 
                     <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2 }}>
                       <Typography sx={{ fontWeight: 700, color: 'primary.main' }}>
-                        Download File
+                        {t('Download File')}
                       </Typography>
                       <ArrowUpRight size={16} />
                     </Stack>
@@ -165,7 +168,7 @@ export default function Downloads() {
 
             <Grid item xs={12} lg={7}>
               <Stack spacing={2}>
-                {schoolContent.resources.map((resource, index) => {
+                {localizedSchoolContent.resources.map((resource, index) => {
                   const tone = tones[index % tones.length]
 
                   return (

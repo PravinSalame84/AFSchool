@@ -13,16 +13,20 @@ import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
 import useRuntimeContent from '../../hooks/useRuntimeContent'
 import { brandColors, gradientTokens } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function AnnouncementBar({ compact = false }) {
+  const { localize } = useLocale()
   const { content } = useRuntimeContent()
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedSchoolContent = localize(schoolContent)
 
-  const announcementBar = content.announcementBar ?? schoolContent.announcementBar
+  const announcementBar = content.announcementBar ? localize(content.announcementBar) : localizedSchoolContent.announcementBar
   const marqueeItems = content.marquee?.length
-    ? content.marquee
-    : schoolContent.marquee
+    ? localize(content.marquee)
+    : localizedSchoolContent.marquee
 
-  if (!siteConfig.features.announcementBar) return null
+  if (!localizedSiteConfig.features.announcementBar) return null
 
   /* ---------------- OPTIMIZED MARQUEE LIST ---------------- */
   const chips = useMemo(() => {

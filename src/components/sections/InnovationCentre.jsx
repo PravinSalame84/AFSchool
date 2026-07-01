@@ -20,6 +20,7 @@ import {
 import { useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 const pillars = [
   { icon: GraduationCap, label: 'Teacher Training' },
@@ -30,6 +31,9 @@ const pillars = [
 
 export default function InnovationCentre() {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
+  const localizedPillars = localize(pillars)
 
   return (
     <Box
@@ -52,7 +56,7 @@ export default function InnovationCentre() {
               variant="overline"
               sx={{ color: alpha(brandColors.orangeSoft, 0.9), letterSpacing: 2 }}
             >
-              {siteConfig.shortName} Innovation Centre
+              {localizedSiteConfig.shortName} {t('Innovation Centre')}
             </Typography>
 
             <Typography
@@ -63,7 +67,7 @@ export default function InnovationCentre() {
                 lineHeight: 1.1,
               }}
             >
-              Where curriculum is built, tested and refined
+              {t('Where curriculum is built, tested and refined')}
             </Typography>
 
             <Typography
@@ -74,9 +78,7 @@ export default function InnovationCentre() {
                 fontSize: '0.95rem',
               }}
             >
-              A team of academicians, technologists and subject experts work
-              year-round so every classroom benefits from modern pedagogy,
-              structured learning systems and continuous improvement.
+              {t('A team of academicians, technologists and subject experts work year-round so every classroom benefits from modern pedagogy, structured learning systems and continuous improvement.')}
             </Typography>
 
             <Button
@@ -95,14 +97,14 @@ export default function InnovationCentre() {
                 },
               }}
             >
-              Explore Innovation Centre
+              {t('Explore Innovation Centre')}
             </Button>
           </Grid>
 
           {/* RIGHT GRID */}
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
-              {pillars.map((p, i) => {
+              {localizedPillars.map((p, i) => {
                 const Icon = p.icon
                 return (
                   <Grid item xs={6} key={p.label}>
