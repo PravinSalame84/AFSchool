@@ -77,8 +77,8 @@ export default function Header() {
 
   return (
     <Box component="header" sx={{ position: 'sticky', top: 0, zIndex: 50 }}>
-      <AnnouncementBar compact={isDesktopHeader ? compact : false} />
-      <TopBar compact={isDesktopHeader ? compact : false} />
+      {isDesktopHeader ? <AnnouncementBar compact={compact} /> : null}
+      {isDesktopHeader ? <TopBar compact={compact} /> : null}
       <Navbar compact={isDesktopHeader ? compact : false} />
     </Box>
   )
