@@ -11,6 +11,7 @@ import {
   AppBar,
   Box,
   Button,
+  Chip,
   Collapse,
   Divider,
   Drawer,
@@ -34,6 +35,7 @@ import ThemeToggle from '../ui/ThemeToggle'
 import SiteSearch from './SiteSearch'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
+import { getVisitorMetrics, initializeVisitorSession, METRICS_EVENT } from '../../utils/visitorFeedback'
 
 const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
   px: 1.6,
@@ -249,15 +251,35 @@ function MobileItem({ item, onClose }) {
 export default function Navbar({ compact = false }) {
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [visitorMetrics, setVisitorMetrics] = useState({ visitorCount: 0, ratingCount: 0, averageRating: 0, reviews: [] })
   const { openEnquiry } = useEnquiryModal()
   const location = useLocation()
 
   useEffect(() => setMobileOpen(false), [location.pathname])
 
+  useEffect(() => {
+    setVisitorMetrics(initializeVisitorSession())
+
+    const syncMetrics = () => setVisitorMetrics(getVisitorMetrics())
+    window.addEventListener(METRICS_EVENT, syncMetrics)
+    window.addEventListener('storage', syncMetrics)
+
+    return () => {
+      window.removeEventListener(METRICS_EVENT, syncMetrics)
+      window.removeEventListener('storage', syncMetrics)
+    }
+  }, [])
+
   const headerNote = useMemo(
     () => `${siteConfig.brandName} • ${siteConfig.brandSuffix}`,
     [],
   )
+
+  const visitorCountLabel = `${visitorMetrics.visitorCount.toLocaleString('en-IN')} visitors`
+  const ratingLabel =
+    visitorMetrics.ratingCount > 0
+      ? `${visitorMetrics.averageRating.toFixed(1)}/5 from ${visitorMetrics.ratingCount} ratings`
+      : '0 ratings • Submit review'
 
   return (
     <>
@@ -291,6 +313,23 @@ export default function Navbar({ compact = false }) {
           </Box>
 
           <Stack direction="row" spacing={1.2} alignItems="center" sx={{ display: { xs: 'none', lg: 'flex' } }}>
+            <Chip
+              label={visitorCountLabel}
+              size="small"
+              variant="outlined"
+              sx={{
+                fontWeight: 700,
+                borderColor: alpha(theme.palette.primary.main, 0.12),
+                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.38) : alpha(brandColors.white, 0.74),
+              }}
+            />
+            <Chip
+              label={ratingLabel}
+              size="small"
+              color="secondary"
+              variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
+              sx={{ fontWeight: 700 }}
+            />
             <SiteSearch />
             <ThemeToggle />
             <Button variant="contained" onClick={() => openEnquiry('General Enquiry')}>
@@ -339,6 +378,17 @@ export default function Navbar({ compact = false }) {
           <Stack direction="row" spacing={1} sx={{ mb: 2, minWidth: 0 }}>
             <SiteSearch compact />
             <ThemeToggle />
+          </Stack>
+
+          <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
+            <Chip label={visitorCountLabel} size="small" variant="outlined" sx={{ fontWeight: 700 }} />
+            <Chip
+              label={ratingLabel}
+              size="small"
+              color="secondary"
+              variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
+              sx={{ fontWeight: 700 }}
+            />
           </Stack>
 
           <Divider sx={{ mb: 1.5 }} />

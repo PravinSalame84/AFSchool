@@ -1,15 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 import AnnouncementBar from './AnnouncementBar'
 import TopBar from './TopBar'
 import Navbar from './Navbar'
 
 export default function Header() {
+  const theme = useTheme()
+  const isDesktopHeader = useMediaQuery(theme.breakpoints.up('lg'))
   const [compact, setCompact] = useState(false)
   const compactRef = useRef(false)
   const lockUntilRef = useRef(0)
 
   useEffect(() => {
+    if (!isDesktopHeader) {
+      compactRef.current = false
+      lockUntilRef.current = 0
+      setCompact(false)
+      return undefined
+    }
+
     let lastY = window.scrollY
     let ticking = false
 
@@ -62,13 +73,13 @@ export default function Header() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isDesktopHeader])
 
   return (
     <Box component="header" sx={{ position: 'sticky', top: 0, zIndex: 50 }}>
-      <AnnouncementBar compact={compact} />
-      <TopBar compact={compact} />
-      <Navbar compact={compact} />
+      <AnnouncementBar compact={isDesktopHeader ? compact : false} />
+      <TopBar compact={isDesktopHeader ? compact : false} />
+      <Navbar compact={isDesktopHeader ? compact : false} />
     </Box>
   )
 }

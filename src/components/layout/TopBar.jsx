@@ -4,9 +4,8 @@ import {
   Button,
   Chip,
   Container,
-  Link as MuiLink,
   Toolbar,
-  Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material'
 import Stack from '../ui/Stack'
@@ -19,6 +18,9 @@ import { brandColors } from '../../theme/colorTokens'
 export default function TopBar({ compact = false }) {
   const { openEnquiry } = useEnquiryModal()
   const theme = useTheme()
+  const isDesktopHeader = useMediaQuery(theme.breakpoints.up('lg'))
+
+  if (!isDesktopHeader) return null
 
   return (
     <AppBar
@@ -40,12 +42,19 @@ export default function TopBar({ compact = false }) {
         <Toolbar
           disableGutters
           sx={{
-            minHeight: 54,
+            minHeight: 60,
             justifyContent: 'space-between',
             gap: 2,
+            py: 0.75,
+            flexWrap: 'wrap',
           }}
         >
-          <Stack direction="row" spacing={2.5} alignItems="center" sx={{ minWidth: 0, flexWrap: 'wrap' }}>
+          <Stack
+            direction="row"
+            spacing={1.25}
+            alignItems="center"
+            sx={{ minWidth: 0, flex: '1 1 36rem', flexWrap: 'wrap' }}
+          >
             <Chip
               component="a"
               clickable
@@ -62,6 +71,12 @@ export default function TopBar({ compact = false }) {
                     ? alpha(theme.palette.background.paper, 0.36)
                     : alpha(brandColors.white, 0.72),
                 fontWeight: 700,
+                maxWidth: '100%',
+                '& .MuiChip-label': {
+                  display: 'block',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                },
                 '&:hover': {
                   bgcolor:
                     theme.palette.mode === 'dark'
@@ -87,6 +102,13 @@ export default function TopBar({ compact = false }) {
                     ? alpha(theme.palette.background.paper, 0.36)
                     : alpha(brandColors.white, 0.72),
                 fontWeight: 700,
+                maxWidth: '100%',
+                '& .MuiChip-label': {
+                  display: 'block',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: { lg: 160, xl: 'none' },
+                },
                 '&:hover': {
                   bgcolor:
                     theme.palette.mode === 'dark'
@@ -104,43 +126,56 @@ export default function TopBar({ compact = false }) {
               sx={{
                 borderColor: alpha(theme.palette.primary.main, 0.12),
                 bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.36) : alpha(brandColors.white, 0.72),
+                maxWidth: '100%',
+                '& .MuiChip-label': {
+                  display: 'block',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: { lg: 180, xl: 'none' },
+                },
               }}
             />
           </Stack>
 
-          <Stack direction="row" spacing={1.5} alignItems="center">
-          <Chip
-            component="a"
-            clickable
-            href={schoolContent.contact.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            icon={<MapPinned size={14} />}
-            label="Visit Campus"
-            variant="outlined"
-            size="small"
-            sx={{
-              textDecoration: 'none',
-              fontWeight: 700,
-              borderColor: alpha(theme.palette.primary.main, 0.12),
-              bgcolor:
-                theme.palette.mode === 'dark'
-                  ? alpha(theme.palette.background.paper, 0.36)
-                  : alpha(brandColors.white, 0.72),
-              '&:hover': {
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            justifyContent="flex-end"
+            sx={{ flex: '0 1 auto', flexWrap: 'wrap' }}
+          >
+            <Chip
+              component="a"
+              clickable
+              href={schoolContent.contact.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              icon={<MapPinned size={14} />}
+              label="Visit Campus"
+              variant="outlined"
+              size="small"
+              sx={{
+                textDecoration: 'none',
+                fontWeight: 700,
+                borderColor: alpha(theme.palette.primary.main, 0.12),
                 bgcolor:
                   theme.palette.mode === 'dark'
-                    ? alpha(theme.palette.primary.main, 0.12)
-                    : alpha(theme.palette.primary.main, 0.06),
-              },
-            }}
-          />
+                    ? alpha(theme.palette.background.paper, 0.36)
+                    : alpha(brandColors.white, 0.72),
+                '&:hover': {
+                  bgcolor:
+                    theme.palette.mode === 'dark'
+                      ? alpha(theme.palette.primary.main, 0.12)
+                      : alpha(theme.palette.primary.main, 0.06),
+                },
+              }}
+            />
 
             <Button
               variant="contained"
               color="secondary"
               onClick={() => openEnquiry('School Details Request')}
-              sx={{ fontWeight: 800 }}
+              sx={{ fontWeight: 800, whiteSpace: 'nowrap' }}
             >
               Request School Details
             </Button>

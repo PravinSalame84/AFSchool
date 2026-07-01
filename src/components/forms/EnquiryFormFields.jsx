@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box'
+import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
+import Rating from '@mui/material/Rating'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
@@ -29,6 +31,7 @@ import {
   normalizeWhitespace,
 } from '../../utils/formValidation'
 import { brandColors } from '../../theme/colorTokens'
+import { getVisitorMetrics, METRICS_EVENT, submitVisitorFeedback } from '../../utils/visitorFeedback'
 
 const standards = ['LKG', 'UKG', ...Array.from({ length: 9 }, (_, index) => `Class ${index + 1}`)]
 
@@ -49,6 +52,8 @@ const emptyForm = {
   standard: '',
   email: '',
   phone: '',
+  rating: 0,
+  review: '',
   captcha: '',
   agree: false,
 }
@@ -235,6 +240,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
   const [touched, setTouched] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [challenge, setChallenge] = useState(randomMathChallenge)
+  const [visitorMetrics, setVisitorMetrics] = useState({ visitorCount: 0, ratingCount: 0, averageRating: 0, reviews: [] })
   const closeTimerRef = useRef(null)
 
   useEffect(
@@ -243,6 +249,19 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
     },
     [],
   )
+
+  useEffect(() => {
+    setVisitorMetrics(getVisitorMetrics())
+
+    const syncMetrics = () => setVisitorMetrics(getVisitorMetrics())
+    window.addEventListener(METRICS_EVENT, syncMetrics)
+    window.addEventListener('storage', syncMetrics)
+
+    return () => {
+      window.removeEventListener(METRICS_EVENT, syncMetrics)
+      window.removeEventListener('storage', syncMetrics)
+    }
+  }, [])
 
   const setFieldError = (field, nextForm) => {
     const error = getFieldError(field, nextForm, challenge)
@@ -313,6 +332,15 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
     setTouched(fieldOrder.reduce((acc, field) => ({ ...acc, [field]: true }), {}))
 
     if (Object.keys(nextErrors).length === 0) {
+      if (normalizedForm.rating > 0 || normalizeWhitespace(normalizedForm.review)) {
+        setVisitorMetrics(
+          submitVisitorFeedback({
+            rating: normalizedForm.rating,
+            review: normalizeWhitespace(normalizedForm.review),
+            name: [normalizedForm.firstName, normalizedForm.lastName].filter(Boolean).join(' '),
+          }),
+        )
+      }
       setSubmitted(true)
       if (onSuccess) {
         closeTimerRef.current = window.setTimeout(onSuccess, 1800)
@@ -329,6 +357,69 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
       <IntroPanel context={context} />
 
       <CampusSummary school={form.school} city={form.city} state={form.state} />
+
+      <Box
+        sx={{
+          mb: 2.25,
+          px: 1.5,
+          py: 1.25,
+          borderRadius: 4,
+          border: `1px solid ${alpha(theme.palette.secondary.main, 0.16)}`,
+          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.34) : alpha(brandColors.white, 0.8),
+        }}
+      >
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }}>
+          <Box>
+            <Typography sx={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'text.secondary' }}>
+              Visitor Snapshot
+            </Typography>
+            <Typography sx={{ mt: 0.4, fontWeight: 800, color: 'text.primary' }}>
+              {visitorMetrics.visitorCount.toLocaleString('en-IN')} visitors checked this page
+            </Typography>
+          </Box>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
+            <Chip label={`${visitorMetrics.ratingCount} ratings`} size="small" variant="outlined" />
+            <Chip
+              label={visitorMetrics.ratingCount > 0 ? `${visitorMetrics.averageRating.toFixed(1)}/5 average` : 'No ratings yet'}
+              size="small"
+              color="secondary"
+              variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
+            />
+          </Stack>
+        </Stack>
+
+        <Box sx={{ mt: 1.25 }}>
+          <Typography sx={{ mb: 0.75, fontSize: '0.75rem', fontWeight: 800, color: 'text.secondary' }}>
+            Recent Reviews
+          </Typography>
+          {visitorMetrics.reviews.length > 0 ? (
+            <Stack spacing={0.85}>
+              {visitorMetrics.reviews.slice(0, 2).map((item, index) => (
+                <Box
+                  key={`${item.name}-${item.createdAt}-${index}`}
+                  sx={{
+                    p: 1.1,
+                    borderRadius: 3,
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                    bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.26) : alpha(brandColors.white, 0.66),
+                  }}
+                >
+                  <Typography sx={{ fontSize: '0.82rem', fontWeight: 800, color: 'text.primary' }}>
+                    {item.name}
+                  </Typography>
+                  <Typography sx={{ mt: 0.2, fontSize: '0.82rem', color: 'text.secondary', lineHeight: 1.6 }}>
+                    {item.rating ? `${item.rating}/5 • ` : ''}{item.review}
+                  </Typography>
+                </Box>
+              ))}
+            </Stack>
+          ) : (
+            <Typography sx={{ fontSize: '0.84rem', color: 'text.secondary', lineHeight: 1.6 }}>
+              No reviews yet. Add a rating and short review below.
+            </Typography>
+          )}
+        </Box>
+      </Box>
 
       <Grid container spacing={2.25}>
 
@@ -405,6 +496,51 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             helperText="Active 10-digit mobile number"
             startAdornment={<Phone size={16} />}
           />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Box
+            sx={{
+              borderRadius: 4,
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+              bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.34) : alpha(brandColors.white, 0.72),
+              p: 1.5,
+            }}
+          >
+            <Typography sx={{ fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'text.secondary' }}>
+              Visitor Rating
+            </Typography>
+            <Typography sx={{ mt: 0.4, mb: 1.1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.65 }}>
+              Rate your website visit while sending your enquiry.
+            </Typography>
+            <Rating
+              name="visitor-rating"
+              precision={1}
+              value={form.rating}
+              onChange={(_, value) => {
+                setForm((prev) => ({ ...prev, rating: value || 0 }))
+              }}
+            />
+            <Typography sx={{ mt: 0.8, color: 'text.secondary', fontSize: '0.82rem' }}>
+              {form.rating > 0 ? `You selected ${form.rating} out of 5 stars.` : 'Optional, but helpful for future visitors.'}
+            </Typography>
+
+            <TextField
+              label="Short Review"
+              value={form.review}
+              onChange={update('review')}
+              multiline
+              minRows={3}
+              fullWidth
+              placeholder="Tell future visitors about your experience."
+              sx={{
+                mt: 1.25,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 3,
+                },
+              }}
+            />
+          </Box>
         </Grid>
 
         <Grid item xs={12}>
