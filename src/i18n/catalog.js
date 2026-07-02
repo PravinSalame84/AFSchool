@@ -450,6 +450,24 @@ const hi = {
   'School event': 'विद्यालय कार्यक्रम',
   'Quick Access': 'त्वरित पहुँच',
   'School resource preview': 'विद्यालय संसाधन पूर्वावलोकन',
+  'Access school documents, homework and academic resources.': 'विद्यालय दस्तावेज़, गृहकार्य और शैक्षणिक संसाधनों तक पहुँचें।',
+  'School activities and campus life gallery.': 'विद्यालय गतिविधियों और कैंपस जीवन की गैलरी।',
+  'Explore the learning environment, student support, infrastructure and holistic development pillars at Air Force School, VayuSena Nagar, Nagpur.':
+    'एयर फोर्स स्कूल, वायुसैनिक नगर, नागपुर में अधिगम वातावरण, छात्र सहायता, अवसंरचना और समग्र विकास के स्तंभों को जानें।',
+  'Contact Air Force School VayuSena Nagar, Nagpur for admissions, campus support and general enquiries.':
+    'प्रवेश, कैंपस सहायता और सामान्य पूछताछ के लिए एयर फोर्स स्कूल वायुसैनिक नगर, नागपुर से संपर्क करें।',
+  'Admission process, required documents and enquiry support for Air Force School VayuSena Nagar, Nagpur.':
+    'एयर फोर्स स्कूल वायुसैनिक नगर, नागपुर के लिए प्रवेश प्रक्रिया, आवश्यक दस्तावेज़ और पूछताछ सहायता।',
+  'Learn about the Air Force School story, vision, mission, initiatives and school life.':
+    'एयर फोर्स स्कूल की कहानी, दृष्टि, मिशन, पहलों और विद्यालय जीवन के बारे में जानें।',
+  'Explore curriculum, co-curricular activity, sports and school learning culture at Air Force School.':
+    'एयर फोर्स स्कूल में पाठ्यक्रम, सह-पाठ्यक्रम गतिविधियाँ, खेल और विद्यालय की अधिगम संस्कृति को जानें।',
+  'The school website is temporarily under maintenance.': 'विद्यालय की वेबसाइट अस्थायी रूप से रखरखाव में है।',
+  'Please read these terms carefully before using this website.': 'इस वेबसाइट का उपयोग करने से पहले कृपया इन शर्तों को ध्यान से पढ़ें।',
+  'Learn how we collect, use and protect your personal information.': 'जानें कि हम आपकी व्यक्तिगत जानकारी कैसे एकत्र, उपयोग और सुरक्षित रखते हैं।',
+  'The page you are looking for could not be found.': 'आप जिस पृष्ठ को खोज रहे हैं वह नहीं मिला।',
+  'Career opportunities and future recruitment updates from Air Force School.': 'एयर फोर्स स्कूल से करियर अवसर और भविष्य की भर्ती अपडेट्स।',
+  'School governance and leadership information.': 'विद्यालय प्रशासन और नेतृत्व संबंधी जानकारी।',
   'Campus Life Overview': 'कैंपस जीवन अवलोकन',
   'Learning, wellbeing and participation move together here.': 'यहाँ अधिगम, कल्याण और सहभागिता साथ-साथ चलते हैं।',
   'Campus life at Air Force School is shaped by academic focus, co-curricular participation, structured routines and a supportive environment that helps children grow with confidence.':
@@ -520,6 +538,7 @@ const hi = {
   'Join the alumni network to stay connected, mentor students, and attend reunions.':
     'जुड़े रहने, छात्रों का मार्गदर्शन करने और पुनर्मिलन में शामिल होने के लिए पूर्व छात्र नेटवर्क से जुड़ें।',
   'Join the Alumni Network': 'पूर्व छात्र नेटवर्क से जुड़ें',
+  'Website': 'वेबसाइट',
   'Back to top': 'ऊपर जाएँ',
   'Open enquiry form': 'पूछताछ फ़ॉर्म खोलें',
   'Chat on WhatsApp': 'व्हाट्सऐप पर चैट करें',

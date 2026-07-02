@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useState } from 'react'
 import Grid from '../components/ui/Grid'
@@ -30,6 +31,10 @@ export default function Blog() {
 
   const [active, setActive] = useState(t('All'))
 
+  useEffect(() => {
+    setActive(t('All'))
+  }, [t])
+
   const filtered =
     active === t('All')
       ? localizedNews
@@ -55,6 +60,8 @@ export default function Blog() {
                 flexWrap: 'wrap',
                 gap: 1,
                 '& .MuiToggleButton-root': {
+                  flex: { xs: '1 1 calc(50% - 0.5rem)', sm: '0 0 auto' },
+                  minWidth: { xs: 'calc(50% - 0.5rem)', sm: 'auto' },
                   borderRadius: 4,
                   px: 2.5,
                   textTransform: 'none',

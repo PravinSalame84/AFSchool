@@ -2,6 +2,7 @@ import { alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { brandColors, gradientTokens } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function SectionHeading({
   eyebrow,
@@ -12,6 +13,7 @@ export default function SectionHeading({
   className = '',
   sx,
 }) {
+  const { t } = useLocale()
   const centered = align === 'center'
   const isLight = tone === 'light'
 
@@ -49,7 +51,7 @@ export default function SectionHeading({
               background: gradientTokens.goldBadgeVertical,
             }}
           />
-          {eyebrow}
+          {t(eyebrow)}
         </Box>
       ) : null}
 
@@ -63,7 +65,7 @@ export default function SectionHeading({
           fontSize: { xs: '2rem', sm: '2.5rem' },
         }}
       >
-        {title}
+        {t(title)}
       </Typography>
 
       {subtitle ? (
@@ -75,7 +77,7 @@ export default function SectionHeading({
             lineHeight: 1.75,
           })}
         >
-          {subtitle}
+          {t(subtitle)}
         </Typography>
       ) : null}
     </Box>

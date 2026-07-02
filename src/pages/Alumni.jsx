@@ -35,7 +35,7 @@ export default function Alumni() {
         subtitle="Thousands of graduates, one shared foundation."
       />
 
-      <Box sx={{ py: 8, bgcolor: 'background.default' }}>
+      <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: 'background.default' }}>
         <Container>
           {/* Testimonials Grid */}
           <Grid container spacing={3}>
@@ -88,7 +88,7 @@ export default function Alumni() {
               elevation={0}
               sx={{
                 mt: 8,
-                p: { xs: 4, md: 6 },
+                p: { xs: 3, sm: 4, md: 6 },
                 borderRadius: 4,
                 textAlign: 'center',
                 background: 'linear-gradient(135deg,#1d213c,#2a3946)',
@@ -106,7 +106,8 @@ export default function Alumni() {
                 variant="contained"
                 sx={{
                   mt: 3,
-                  px: 4,
+                  width: { xs: '100%', sm: 'auto' },
+                  px: { xs: 3, sm: 4 },
                   py: 1.5,
                   borderRadius: 4,
                   fontWeight: 700,

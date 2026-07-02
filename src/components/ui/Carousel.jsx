@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { alpha } from '@mui/material/styles'
 import { useLocale } from '../../context/LocaleContext'
-import { Box, IconButton, useTheme } from '@mui/material'
+import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material'
+import { useReducedMotion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Carousel({
@@ -12,14 +13,19 @@ export default function Carousel({
 }) {
   const theme = useTheme()
   const { t } = useLocale()
+  const prefersReducedMotion = useReducedMotion()
+  const canAutoPlayOnViewport = useMediaQuery(theme.breakpoints.up('md'))
   const trackRef = useRef(null)
   const frameRef = useRef(0)
+  const sectionRef = useRef(null)
 
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
 
   const itemCount = Array.isArray(children) ? children.length : 1
+  const shouldAutoPlay = autoPlay && itemCount > 1 && canAutoPlayOnViewport && !prefersReducedMotion && isVisible
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current
@@ -71,7 +77,23 @@ export default function Carousel({
   }, [updateEdges])
 
   useEffect(() => {
-    if (!autoPlay) return
+    if (!('IntersectionObserver' in window)) return undefined
+
+    const el = sectionRef.current
+    if (!el) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 },
+    )
+
+    observer.observe(el)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldAutoPlay) return
 
     const id = setInterval(() => {
       if (document.hidden) return
@@ -89,10 +111,10 @@ export default function Carousel({
     }, interval)
 
     return () => clearInterval(id)
-  }, [autoPlay, interval, scrollByCard])
+  }, [interval, scrollByCard, shouldAutoPlay])
 
   return (
-    <Box component="section" role="region" aria-label={ariaLabel} sx={{ position: 'relative', minWidth: 0 }}>
+    <Box ref={sectionRef} component="section" role="region" aria-label={ariaLabel} sx={{ position: 'relative', minWidth: 0 }}>
       {/* Left fade */}
       <Box
         sx={{

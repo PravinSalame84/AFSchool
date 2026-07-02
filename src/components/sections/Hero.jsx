@@ -6,7 +6,8 @@ import Grid from '../ui/Grid'
 import Stack from '../ui/Stack'
 import { Link } from 'react-router-dom'
 import { motion,
-  AnimatePresence } from 'framer-motion'
+  AnimatePresence,
+  useReducedMotion } from 'framer-motion'
 import { alpha } from '@mui/material/styles'
 import {
   Box,
@@ -27,9 +28,34 @@ import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
 import { useLocale } from '../../context/LocaleContext'
 
+const heroCopyVariants = {
+  hidden: { opacity: 0, y: 22 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.08,
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+}
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
 export default function Hero() {
   const theme = useTheme()
   const { localize, t } = useLocale()
+  const shouldReduceMotion = useReducedMotion()
   const { openEnquiry } = useEnquiryModal()
   const localizedSchoolContent = localize(schoolContent)
   const localizedSiteConfig = localize(siteConfig)
@@ -87,6 +113,9 @@ export default function Hero() {
       />
       <Box
         className="hero-ambient-overlay"
+        component={motion.div}
+        animate={shouldReduceMotion ? undefined : { rotate: [0, 2, -2, 0], scale: [1, 1.02, 0.99, 1] }}
+        transition={shouldReduceMotion ? undefined : { duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         sx={{
           background:
             'radial-gradient(circle at top right, rgba(240,147,75,0.18), transparent 24%), radial-gradient(circle at left, rgba(93,138,168,0.18), transparent 30%)',
@@ -97,31 +126,36 @@ export default function Hero() {
       <Container maxWidth="xl" className="hero-inner">
         <Grid container spacing={{ xs: 4, lg: 5 }} alignItems="center">
           <Grid item xs={12} lg={6} sx={{ position: 'relative' }}>
-            <Box className="hero-copy">
+            <Box component={motion.div} className="hero-copy" variants={heroCopyVariants} initial="hidden" animate="show">
               <Typography
+                component={motion.p}
                 variant="overline"
                 className="hero-eyebrow"
+                variants={heroItemVariants}
                 sx={{ color: 'secondary.main' }}
               >
                 {localizedSchoolContent.hero.eyebrow}
               </Typography>
 
               <Typography
-                component="h1"
+                component={motion.h1}
                 className="hero-title"
+                variants={heroItemVariants}
                 sx={{ color: 'text.primary' }}
               >
                 {localizedSchoolContent.hero.title}
               </Typography>
 
               <Typography
+                component={motion.p}
                 className="hero-subtitle"
+                variants={heroItemVariants}
                 sx={{ color: 'text.secondary' }}
               >
                 {localizedSchoolContent.hero.subtitle}
               </Typography>
 
-              <Stack className="hero-badges" direction="row" flexWrap="wrap">
+              <Stack component={motion.div} variants={heroItemVariants} className="hero-badges" direction="row" flexWrap="wrap">
                 {localizedSchoolContent.hero.badges.map((badge) => (
                   <Chip
                     key={badge}
@@ -136,7 +170,7 @@ export default function Hero() {
                 ))}
               </Stack>
 
-              <Stack className="cta-stack-responsive" direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
+              <Stack component={motion.div} variants={heroItemVariants} className="cta-stack-responsive" direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                 <Button size="lg" onClick={() => openEnquiry('General Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                   {t('Start General Enquiry')}
                 </Button>
@@ -156,7 +190,11 @@ export default function Hero() {
               >
                 {[siteAssets.images.studentHeroSix, siteAssets.images.studentHeroNine, siteAssets.images.studentHeroEleven].map((image, index) => (
                   <Box
+                    component={motion.div}
                     key={image}
+                    animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [index === 1 ? 0 : index === 0 ? -5 : 5, index === 1 ? 2 : index === 0 ? -8 : 8, index === 1 ? 0 : index === 0 ? -5 : 5] }}
+                    transition={shouldReduceMotion ? undefined : { duration: 4.6 + index * 0.4, repeat: Infinity, ease: 'easeInOut' }}
+                    className={`motion-float-soft ${index === 1 ? 'delay-1' : index === 2 ? 'delay-2' : ''}`}
                     sx={{
                       width: index === 1 ? 64 : 56,
                       height: index === 1 ? 82 : 72,
@@ -175,6 +213,9 @@ export default function Hero() {
               </Stack>
 
               <Box
+                component={motion.div}
+                variants={heroItemVariants}
+                whileHover={shouldReduceMotion ? undefined : { rotate: -0.35, y: -4, scale: 1.01 }}
                 sx={{
                   mt: 3,
                   p: { xs: 2, sm: 2.25 },
@@ -340,7 +381,12 @@ export default function Hero() {
 
           <Grid item xs={12} lg={6}>
             <Box
-              className="surface-card hero-stage-frame"
+              component={motion.div}
+              className="surface-card hero-stage-frame motion-swivel-soft panel-spotlight"
+              initial={shouldReduceMotion ? undefined : { opacity: 0, y: 24, rotate: 0.8, scale: 0.98 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0, rotate: 0, scale: 1 }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.85, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={shouldReduceMotion ? undefined : { y: -6, rotate: -0.45, scale: 1.01 }}
               sx={{
                 '--surface-border': alpha(theme.palette.primary.main, 0.1),
                 '--surface-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.5) : alpha('#fafdff', 0.86),
@@ -352,10 +398,10 @@ export default function Hero() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeSlide.id}
-                    initial={{ opacity: 0.4, scale: 1.03 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0.35, scale: 0.99 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.14, rotate: -5, filter: 'blur(6px)' }}
+                    animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, rotate: 0, filter: 'blur(0px)' }}
+                    exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.92, rotate: 4, filter: 'blur(5px)' }}
+                    transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
                     style={{ position: 'absolute', inset: 0 }}
                   >
                     <OptimizedImage
@@ -469,7 +515,12 @@ export default function Hero() {
             </Box>
 
             <Paper
-              className="surface-card hero-stage-aside"
+              component={motion.div}
+              className="surface-card hero-stage-aside motion-hover-lift panel-spotlight"
+              initial={shouldReduceMotion ? undefined : { opacity: 0, y: 26, rotate: 0.6 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0, rotate: 0 }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.8, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={shouldReduceMotion ? undefined : { y: -4, rotate: 0.35 }}
               sx={{
                 '--surface-border': alpha(theme.palette.primary.main, 0.08),
                 '--surface-bg': theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.92) : alpha('#fafdff', 0.96),
@@ -504,6 +555,7 @@ export default function Hero() {
               }}
             >
               <Box
+                component={motion.div}
                 sx={{
                   position: 'absolute',
                   top: -400,
@@ -513,6 +565,8 @@ export default function Hero() {
                   transform: 'rotate(5deg)',
                   filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.24))',
                 }}
+                animate={shouldReduceMotion ? undefined : { y: [0, -10, 0], rotate: [5, 8, 5] }}
+                transition={shouldReduceMotion ? undefined : { duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <OptimizedImage
                   src={heroCutouts[0]}
@@ -523,6 +577,7 @@ export default function Hero() {
               </Box>
 
               <Box
+                component={motion.div}
                 sx={{
                   position: 'absolute',
                   top: -270,
@@ -532,6 +587,8 @@ export default function Hero() {
                   transform: 'rotate(-5deg)',
                   filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.28))',
                 }}
+                animate={shouldReduceMotion ? undefined : { y: [0, -14, 0], rotate: [-5, -8, -5] }}
+                transition={shouldReduceMotion ? undefined : { duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <OptimizedImage
                   src={heroCutouts[1]}
@@ -542,7 +599,10 @@ export default function Hero() {
               </Box>
 
               <Paper
+                component={motion.div}
                 elevation={0}
+                animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], rotate: [0, 1.2, 0] }}
+                transition={shouldReduceMotion ? undefined : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
                 sx={{
                   position: 'absolute',
                   top: -248,

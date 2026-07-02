@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import Grid from '../components/ui/Grid'
 import Stack from '../components/ui/Stack'
 import { Link } from 'react-router-dom'
@@ -85,6 +85,17 @@ const rise = {
   }),
 }
 
+const swivelReveal = {
+  hidden: { opacity: 0, y: 24, rotate: -1.4, scale: 0.98 },
+  show: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    scale: 1,
+    transition: { duration: 0.78, delay, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
+
 function glassCardSx(theme) {
   return {
     position: 'relative',
@@ -156,6 +167,7 @@ function horizontalScrollerSx(theme) {
 
 export default function Home() {
   const theme = useTheme()
+  const shouldReduceMotion = useReducedMotion()
   const { localize, t, locale } = useLocale()
   const { openEnquiry } = useEnquiryModal()
   const { content: runtimeContent, source } = useRuntimeContent()
@@ -545,6 +557,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -8, rotate: index % 2 === 0 ? -0.7 : 0.7, scale: 1.015 }}
+                  className="motion-spiral-entry"
                 >
                   <Button
                     to={item.to}
@@ -601,7 +615,11 @@ export default function Home() {
         <Container>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.15fr 0.85fr' }, gap: 3 }}>
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0} variants={rise}>
-              <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}>
+              <Paper
+                component={motion.div}
+                whileHover={shouldReduceMotion ? undefined : { y: -6, rotate: -0.35 }}
+                sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: { xs: 3, sm: 4 } })}
+              >
                 <Box sx={{ position: 'relative' }}>
                   <Eyebrow>{t('About The School')}</Eyebrow>
                   <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.4rem', sm: '3.25rem' } }}>
@@ -644,7 +662,7 @@ export default function Home() {
 
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} custom={0.14} variants={rise}>
               <Stack spacing={3}>
-                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
+                <Paper component={motion.div} whileHover={shouldReduceMotion ? undefined : { y: -5, rotate: -0.3 }} sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
                   <Stack direction="row" spacing={2} alignItems="center">
                     <Avatar sx={{ bgcolor: 'primary.main', color: brandColors.white }}>
                       <Compass size={20} />
@@ -663,7 +681,7 @@ export default function Home() {
                   </Typography>
                 </Paper>
 
-                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
+                <Paper component={motion.div} whileHover={shouldReduceMotion ? undefined : { y: -5, rotate: 0.3 }} sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 3 })}>
                   <Stack direction="row" spacing={2} alignItems="center">
                     <Avatar sx={{ bgcolor: 'secondary.main', color: brandColors.white }}>
                       <Flag size={20} />
@@ -759,12 +777,16 @@ export default function Home() {
                 return (
                   <motion.div
                     key={facility}
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial="hidden"
+                    whileInView="show"
                     viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.7, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    custom={index * 0.06}
+                    variants={swivelReveal}
+                    whileHover={shouldReduceMotion ? undefined : { y: -8, rotate: index % 2 === 0 ? -0.8 : 0.8, scale: 1.02 }}
+                    className="motion-spiral-entry"
                   >
                     <Paper
+                      className="panel-spotlight"
                       sx={(currentTheme) => ({
                         ...glassCardSx(currentTheme),
                         p: 3,
@@ -842,9 +864,11 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -10, rotate: index % 2 === 0 ? -0.9 : 0.9, scale: 1.02 }}
+                  className="motion-hover-lift"
                   style={{ minHeight: 250, width: 'min(340px, 88vw)', flexShrink: 0 }}
                 >
-                  <Paper sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)' }}>
+                  <Paper className="panel-spotlight" sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 24px 56px -30px rgba(17, 26, 36, 0.28)' }}>
                     <OptimizedImage
                       src={item.image}
                       alt={item.title}
@@ -984,7 +1008,7 @@ export default function Home() {
 
             <Stack spacing={3} sx={{ minWidth: 0 }}>
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1.15fr 0.85fr' }, gap: 2, minWidth: 0 }}>
-                <Paper sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.5 })}>
+                <Paper component={motion.div} whileHover={shouldReduceMotion ? undefined : { y: -6, rotate: -0.45, scale: 1.01 }} sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.5 })}>
                   <Box sx={{ position: 'relative' }}>
                     <OptimizedImage
                       src={siteAssets.images.campusActivities}
@@ -1022,8 +1046,13 @@ export default function Home() {
                       title: 'Movement and mindfulness remain part of school life.',
                       color: '#ff671f',
                     },
-                  ].map((item) => (
-                    <Paper key={item.title} sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.25, flex: 1 })}>
+                  ].map((item, itemIndex) => (
+                    <Paper
+                      key={item.title}
+                      component={motion.div}
+                      whileHover={shouldReduceMotion ? undefined : { y: -5, rotate: itemIndex % 2 === 0 ? -0.5 : 0.5, scale: 1.01 }}
+                      sx={(currentTheme) => ({ ...glassCardSx(currentTheme), p: 1.25, flex: 1 })}
+                    >
                       <OptimizedImage
                         src={item.src}
                         alt={item.alt}

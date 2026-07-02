@@ -7,6 +7,7 @@ function OptimizedImage({
   className = '',
   wrapperClassName = '',
   priority = false,
+  sizes,
   sx,
   wrapperSx,
   ...rest
@@ -45,7 +46,9 @@ function OptimizedImage({
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         fetchpriority={priority ? 'high' : 'auto'}
+        sizes={sizes}
         onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
         className={className}
         sx={{
           width: '100%',
@@ -53,6 +56,9 @@ function OptimizedImage({
           opacity: loaded ? 1 : 0,
           transition: 'opacity 500ms ease',
           objectFit: 'cover',
+          contentVisibility: priority ? 'visible' : 'auto',
+          containIntrinsicSize: priority ? 'auto' : '320px',
+          willChange: loaded ? 'auto' : 'opacity',
           ...(Array.isArray(sx) ? Object.assign({}, ...sx) : sx),
         }}
         {...rest}

@@ -26,12 +26,23 @@ const Terms = lazy(() => import('./pages/Terms'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true)
+  const [showSplash, setShowSplash] = useState(false)
 
   useEffect(() => {
+    const splashSeenKey = 'afs-splash-seen'
+    const hasSeenSplash = window.sessionStorage.getItem(splashSeenKey) === '1'
+
+    if (hasSeenSplash) {
+      setShowSplash(false)
+      return undefined
+    }
+
+    setShowSplash(true)
+    window.sessionStorage.setItem(splashSeenKey, '1')
+
     const timer = window.setTimeout(() => {
       setShowSplash(false)
-    }, 1900)
+    }, 900)
 
     return () => window.clearTimeout(timer)
   }, [])
