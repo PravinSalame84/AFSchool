@@ -10,6 +10,8 @@ import { alpha } from '@mui/material/styles'
 import Accordion from '../ui/Accordion'
 import faqs from '../../data/faqs'
 import { useLocale } from '../../context/LocaleContext'
+import siteAssets from '../../data/siteAssets'
+import OptimizedImage from '../ui/OptimizedImage'
 
 export default function FAQSection() {
   const theme = useTheme()
@@ -56,6 +58,33 @@ export default function FAQSection() {
           filter: 'blur(50px)',
         }}
       />
+
+      <Box
+        sx={{
+          position: 'absolute',
+          top: { xs: 18, md: 30 },
+          left: { xs: 12, md: 36 },
+          width: { xs: 48, md: 82 },
+          opacity: 0.9,
+          pointerEvents: 'none',
+        }}
+      >
+        <OptimizedImage src={siteAssets.images.studentHeroEleven} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
+      </Box>
+
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: { xs: 16, md: 26 },
+          right: { xs: 12, md: 42 },
+          width: { xs: 54, md: 92 },
+          opacity: 0.88,
+          pointerEvents: 'none',
+          display: { xs: 'none', sm: 'block' },
+        }}
+      >
+        <OptimizedImage src={siteAssets.images.studentHeroSix} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
+      </Box>
 
       <Container maxWidth="md" sx={{ position: 'relative' }}>
         {/* Header Card */}

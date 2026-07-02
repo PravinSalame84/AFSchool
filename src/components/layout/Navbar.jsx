@@ -11,7 +11,6 @@ import {
   AppBar,
   Box,
   Button,
-  Chip,
   Collapse,
   Divider,
   Drawer,
@@ -36,7 +35,6 @@ import LanguageSwitcher from '../ui/LanguageSwitcher'
 import SiteSearch from './SiteSearch'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
-import { getVisitorMetrics, initializeVisitorSession, METRICS_EVENT } from '../../utils/visitorFeedback'
 import { useLocale } from '../../context/LocaleContext'
 
 const desktopButtonSx = (theme, isActive, hasChildren = false) => ({
@@ -252,39 +250,19 @@ function MobileItem({ item, onClose }) {
 
 export default function Navbar({ compact = false }) {
   const theme = useTheme()
-  const { localize, t, locale } = useLocale()
+  const { localize, t } = useLocale()
   const localizedNavigation = localize(navigation)
   const localizedSiteConfig = localize(siteConfig)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [visitorMetrics, setVisitorMetrics] = useState({ visitorCount: 0, ratingCount: 0, averageRating: 0, reviews: [] })
   const { openEnquiry } = useEnquiryModal()
   const location = useLocation()
 
   useEffect(() => setMobileOpen(false), [location.pathname])
 
-  useEffect(() => {
-    setVisitorMetrics(initializeVisitorSession())
-
-    const syncMetrics = () => setVisitorMetrics(getVisitorMetrics())
-    window.addEventListener(METRICS_EVENT, syncMetrics)
-    window.addEventListener('storage', syncMetrics)
-
-    return () => {
-      window.removeEventListener(METRICS_EVENT, syncMetrics)
-      window.removeEventListener('storage', syncMetrics)
-    }
-  }, [])
-
   const headerNote = useMemo(
     () => `${localizedSiteConfig.brandName} • ${localizedSiteConfig.brandSuffix}`,
     [localizedSiteConfig.brandName, localizedSiteConfig.brandSuffix],
   )
-
-  const visitorCountLabel = `${visitorMetrics.visitorCount.toLocaleString(locale === 'mr' ? 'mr-IN' : locale === 'hi' ? 'hi-IN' : 'en-IN')} ${t('visitors')}`
-  const ratingLabel =
-    visitorMetrics.ratingCount > 0
-      ? `${visitorMetrics.averageRating.toFixed(1)}/5 ${t('from')} ${visitorMetrics.ratingCount} ${t('ratings')}`
-      : `0 ${t('ratings')} • ${t('Submit review')}`
 
   return (
     <>
@@ -318,25 +296,8 @@ export default function Navbar({ compact = false }) {
           </Box>
 
           <Stack direction="row" spacing={1.2} alignItems="center" sx={{ display: { xs: 'none', lg: 'flex' } }}>
-            <Chip
-              label={visitorCountLabel}
-              size="small"
-              variant="outlined"
-              sx={{
-                fontWeight: 700,
-                borderColor: alpha(theme.palette.primary.main, 0.12),
-                bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.38) : alpha(brandColors.white, 0.74),
-              }}
-            />
-            <Chip
-              label={ratingLabel}
-              size="small"
-              color="secondary"
-              variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
-              sx={{ fontWeight: 700 }}
-            />
             <SiteSearch />
-            <Box sx={{ width: 220 }}>
+            <Box sx={{ width: { lg: 118, xl: 124 }, flexShrink: 0 }}>
               <LanguageSwitcher compact align="flex-end" />
             </Box>
             <ThemeToggle />
@@ -370,6 +331,7 @@ export default function Navbar({ compact = false }) {
             p: { xs: 1.5, sm: 2.25 },
             bgcolor: 'background.paper',
             color: 'text.primary',
+            overflowY: 'auto',
           }}
         >
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
@@ -388,24 +350,13 @@ export default function Navbar({ compact = false }) {
             <ThemeToggle />
           </Stack>
 
-          <Box sx={{ mb: 2 }}>
-            <LanguageSwitcher />
+          <Box sx={{ mb: 2, width: '100%' }}>
+            <LanguageSwitcher fullWidth />
           </Box>
-
-          <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
-            <Chip label={visitorCountLabel} size="small" variant="outlined" sx={{ fontWeight: 700 }} />
-            <Chip
-              label={ratingLabel}
-              size="small"
-              color="secondary"
-              variant={visitorMetrics.ratingCount > 0 ? 'filled' : 'outlined'}
-              sx={{ fontWeight: 700 }}
-            />
-          </Stack>
 
           <Divider sx={{ mb: 1.5 }} />
 
-          <List sx={{ py: 0 }}>
+          <List sx={{ py: 0, width: '100%' }} component="nav" aria-label={t('Main navigation')}>
             {localizedNavigation.map((item) => (
               <MobileItem key={item.label} item={item} onClose={() => setMobileOpen(false)} />
             ))}

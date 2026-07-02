@@ -46,6 +46,14 @@ export default function Hero() {
 
   const activeSlide = slides[activeIndex]
   const stats = useMemo(() => localizedSchoolContent.facts.slice(0, 4), [localizedSchoolContent.facts])
+  const heroCutouts = useMemo(
+    () => [
+      siteAssets.images.studentHeroSix,
+      siteAssets.images.studentHeroNine,
+      siteAssets.images.studentHeroEleven,
+    ],
+    [],
+  )
 
   const navigateSlide = (direction) => {
     setActiveIndex((current) => (current + direction + slides.length) % slides.length)
@@ -88,7 +96,7 @@ export default function Hero() {
 
       <Container maxWidth="xl" className="hero-inner">
         <Grid container spacing={{ xs: 4, lg: 5 }} alignItems="center">
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={6} sx={{ position: 'relative' }}>
             <Box className="hero-copy">
               <Typography
                 variant="overline"
@@ -135,6 +143,35 @@ export default function Hero() {
                 <Button size="lg" variant="outline" onClick={() => openEnquiry('School Details Request')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                   {t('Request School Details')}
                 </Button>
+              </Stack>
+
+              <Stack
+                direction="row"
+                spacing={1.25}
+                sx={{
+                  mt: 2.25,
+                  display: { xs: 'flex', lg: 'none' },
+                  alignItems: 'flex-end',
+                }}
+              >
+                {[siteAssets.images.studentHeroSix, siteAssets.images.studentHeroNine, siteAssets.images.studentHeroEleven].map((image, index) => (
+                  <Box
+                    key={image}
+                    sx={{
+                      width: index === 1 ? 64 : 56,
+                      height: index === 1 ? 82 : 72,
+                      filter: 'drop-shadow(0 14px 20px rgba(17, 26, 36, 0.18))',
+                      transform: `rotate(${index === 1 ? 0 : index === 0 ? -5 : 5}deg)`,
+                    }}
+                  >
+                    <OptimizedImage
+                      src={image}
+                      alt={`Student cutout ${index + 1}`}
+                      wrapperSx={{ height: '100%' }}
+                      sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+                    />
+                  </Box>
+                ))}
               </Stack>
 
               <Box
@@ -457,6 +494,94 @@ export default function Hero() {
                 </Box>
               </Stack>
             </Paper>
+
+            <Box
+              sx={{
+                position: 'relative',
+                display: { xs: 'none', lg: 'block' },
+                pointerEvents: 'none',
+                zIndex: 3,
+              }}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -400,
+                  right: -78,
+                  width: 230,
+                  height: 276,
+                  transform: 'rotate(5deg)',
+                  filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.24))',
+                }}
+              >
+                <OptimizedImage
+                  src={heroCutouts[0]}
+                  alt="Student spotlight"
+                  wrapperSx={{ height: '100%' }}
+                  sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -270,
+                  left: -18,
+                  width: 244,
+                  height: 296,
+                  transform: 'rotate(-5deg)',
+                  filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.28))',
+                }}
+              >
+                <OptimizedImage
+                  src={heroCutouts[1]}
+                  alt="Student cutout"
+                  wrapperSx={{ height: '100%' }}
+                  sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+                />
+              </Box>
+
+              <Paper
+                elevation={0}
+                sx={{
+                  position: 'absolute',
+                  top: -248,
+                  right: 18,
+                  width: 184,
+                  p: 1.15,
+                  borderRadius: 4,
+                  border: `1px solid ${alpha(brandColors.white, 0.22)}`,
+                  background: alpha('#fafdff', 0.92),
+                  boxShadow: '0 18px 34px rgba(17, 26, 36, 0.18)',
+                }}
+              >
+                <Stack direction="row" spacing={1.1} alignItems="center">
+                  <Box
+                    sx={{
+                      width: 44,
+                      height: 52,
+                      overflow: 'hidden',
+                      filter: 'drop-shadow(0 8px 14px rgba(17, 26, 36, 0.12))',
+                    }}
+                  >
+                    <OptimizedImage
+                      src={heroCutouts[2]}
+                      alt="Learning spotlight"
+                      wrapperSx={{ height: '100%' }}
+                      sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontSize: '0.64rem', fontWeight: 900, letterSpacing: '0.16em', textTransform: 'uppercase', color: theme.palette.primary.main }}>
+                      {t('Campus Life')}
+                    </Typography>
+                    <Typography sx={{ mt: 0.45, fontSize: '0.8rem', lineHeight: 1.35, fontWeight: 800, color: theme.palette.primary.dark }}>
+                      {t('A Glimpse Into Campus Life')}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Paper>
+            </Box>
           </Grid>
         </Grid>
       </Container>

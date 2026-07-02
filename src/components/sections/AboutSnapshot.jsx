@@ -13,6 +13,8 @@ import { alpha, useTheme } from '@mui/material/styles'
 import Grid from '../ui/Grid'
 import { brandColors } from '../../theme/colorTokens'
 import { useLocale } from '../../context/LocaleContext'
+import siteAssets from '../../data/siteAssets'
+import OptimizedImage from '../ui/OptimizedImage'
 
 export default function AboutSnapshot() {
   const theme = useTheme()
@@ -25,11 +27,19 @@ export default function AboutSnapshot() {
       component="section"
       id="about-snapshot"
       sx={{
+        position: 'relative',
+        overflow: 'hidden',
         py: { xs: 8, md: 12 },
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
         color: brandColors.white,
       }}
     >
+      <Box sx={{ position: 'absolute', top: 28, right: 18, width: { md: 126, lg: 170 }, opacity: 0.9, pointerEvents: 'none', display: { xs: 'none', md: 'block' } }}>
+        <OptimizedImage src={siteAssets.images.studentHeroTwo} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
+      </Box>
+      <Box sx={{ position: 'absolute', bottom: 10, left: 24, width: { md: 104, lg: 138 }, opacity: 0.88, pointerEvents: 'none', display: { xs: 'none', lg: 'block' } }}>
+        <OptimizedImage src={siteAssets.images.studentHeroFive} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
+      </Box>
       <Container>
         <Grid container spacing={6} alignItems="flex-start">
 

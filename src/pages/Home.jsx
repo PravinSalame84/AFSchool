@@ -1,5 +1,5 @@
-import {
-  motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import Grid from '../components/ui/Grid'
 import Stack from '../components/ui/Stack'
 import { Link } from 'react-router-dom'
@@ -19,6 +19,7 @@ import {
   CalendarDays,
   Compass,
   DownloadCloud,
+  Eye,
   FileText,
   Flag,
   Laptop,
@@ -26,6 +27,7 @@ import {
   Music4,
   Phone,
   ShieldCheck,
+  Star,
   Trophy,
 } from 'lucide-react'
 import Hero from '../components/sections/Hero'
@@ -44,10 +46,35 @@ import { useEnquiryModal } from '../context/EnquiryModalContext'
 import useRuntimeContent from '../hooks/useRuntimeContent'
 import { activityToneTokens, brandColors } from '../theme/colorTokens'
 import { useLocale } from '../context/LocaleContext'
+import { getVisitorMetrics, initializeVisitorSession, METRICS_EVENT } from '../utils/visitorFeedback'
 
 const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Trophy]
 
 const activityTones = activityToneTokens
+const studentCutoutParade = [
+  siteAssets.images.studentHeroOne,
+  siteAssets.images.studentHeroFour,
+  siteAssets.images.studentHeroSeven,
+  siteAssets.images.studentHeroTen,
+]
+
+const studentShowcaseTiles = [
+  {
+    image: siteAssets.images.studentDigitalLearning,
+    title: 'Digital Learning',
+    tone: 'linear-gradient(135deg, rgba(0,164,228,0.18), rgba(255,255,255,0.02))',
+  },
+  {
+    image: siteAssets.images.studentCampusEvent,
+    title: 'Student Life',
+    tone: 'linear-gradient(135deg, rgba(240,147,75,0.18), rgba(255,255,255,0.02))',
+  },
+  {
+    image: siteAssets.images.studentGroupFun,
+    title: 'Campus Life',
+    tone: 'linear-gradient(135deg, rgba(84,180,53,0.16), rgba(255,255,255,0.02))',
+  },
+]
 
 const rise = {
   hidden: { opacity: 0, y: 28 },
@@ -129,14 +156,35 @@ function horizontalScrollerSx(theme) {
 
 export default function Home() {
   const theme = useTheme()
-  const { localize, t } = useLocale()
+  const { localize, t, locale } = useLocale()
   const { openEnquiry } = useEnquiryModal()
   const { content: runtimeContent, source } = useRuntimeContent()
   const localizedSchoolContent = localize(schoolContent)
+  const [visitorMetrics, setVisitorMetrics] = useState({ visitorCount: 0, ratingCount: 0, averageRating: 0, reviews: [] })
 
   const liveMarquee = runtimeContent.marquee?.length ? localize(runtimeContent.marquee) : localizedSchoolContent.marquee
   const liveNotices = runtimeContent.notices?.length ? localize(runtimeContent.notices) : localizedSchoolContent.notices
   const liveDownloads = runtimeContent.downloads?.length ? localize(runtimeContent.downloads) : localizedSchoolContent.downloads
+
+  useEffect(() => {
+    setVisitorMetrics(initializeVisitorSession())
+
+    const syncMetrics = () => setVisitorMetrics(getVisitorMetrics())
+    window.addEventListener(METRICS_EVENT, syncMetrics)
+    window.addEventListener('storage', syncMetrics)
+
+    return () => {
+      window.removeEventListener(METRICS_EVENT, syncMetrics)
+      window.removeEventListener('storage', syncMetrics)
+    }
+  }, [])
+
+  const localeCode = locale === 'hi' ? 'hi-IN' : locale === 'mr' ? 'mr-IN' : 'en-IN'
+  const visitorCountLabel = visitorMetrics.visitorCount.toLocaleString(localeCode)
+  const ratingSummary =
+    visitorMetrics.ratingCount > 0
+      ? `${visitorMetrics.averageRating.toFixed(1)}/5`
+      : `0/5`
 
   return (
     <>
@@ -148,6 +196,117 @@ export default function Home() {
       />
 
       <Hero />
+
+      <Box component="section" sx={{ ...sectionShell(theme, 'clear'), px: { xs: 2, sm: 3, lg: 4 }, mt: { xs: -1, md: -2 }, position: 'relative', zIndex: 1 }}>
+        <Container>
+          <Paper
+            elevation={0}
+            sx={{
+              position: 'relative',
+              overflow: 'hidden',
+              px: { xs: 2, sm: 3, lg: 4 },
+              py: { xs: 2.25, sm: 2.75 },
+              borderRadius: 5,
+              border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.22 : 0.1)}`,
+              background:
+                theme.palette.mode === 'dark'
+                  ? 'linear-gradient(135deg, rgba(14,20,24,0.95), rgba(29,33,60,0.9), rgba(14,20,24,0.92))'
+                  : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(228,246,251,0.9), rgba(255,244,231,0.9))',
+              boxShadow: '0 24px 50px -34px rgba(17, 26, 36, 0.28)',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                inset: 0,
+                background:
+                  'radial-gradient(circle at 14% 20%, rgba(240,147,75,0.18), transparent 18%), radial-gradient(circle at 85% 28%, rgba(0,164,228,0.16), transparent 20%), radial-gradient(circle at 72% 82%, rgba(84,180,53,0.12), transparent 18%)',
+                pointerEvents: 'none',
+              },
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                inset: 0,
+                backgroundImage:
+                  'radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)',
+                backgroundSize: '22px 22px, 28px 28px',
+                backgroundPosition: '0 0, 12px 12px',
+                opacity: theme.palette.mode === 'dark' ? 0.12 : 0.3,
+                pointerEvents: 'none',
+              },
+            }}
+          >
+            <Stack direction={{ xs: 'column', lg: 'row' }} spacing={{ xs: 2.5, lg: 3 }} alignItems={{ xs: 'stretch', lg: 'center' }} justifyContent="space-between" sx={{ position: 'relative', zIndex: 1 }}>
+              <Box sx={{ maxWidth: 560 }}>
+                <Eyebrow>{t('Visitor Snapshot')}</Eyebrow>
+                <Typography variant="h3" sx={{ mt: 1.25, fontWeight: 800, fontSize: { xs: '1.7rem', sm: '2.15rem' }, lineHeight: 1 }}>
+                  {t('Featured Moments')}
+                </Typography>
+                <Typography sx={{ mt: 1.15, ...mutedTextSx(theme), maxWidth: 520 }}>
+                  {t('A focused digital experience for families, parents and school stakeholders with fast access to notices, downloads, academics, admissions and school support.')}
+                </Typography>
+              </Box>
+
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ width: { xs: '100%', lg: 'auto' } }}>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    minWidth: { xs: '100%', sm: 210 },
+                    px: 2,
+                    py: 1.75,
+                    borderRadius: 4,
+                    bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.54) : alpha(brandColors.white, 0.76),
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+                    backdropFilter: 'blur(14px)',
+                  }}
+                >
+                  <Stack direction="row" spacing={1.25} alignItems="center">
+                    <Avatar sx={{ width: 44, height: 44, borderRadius: 3, bgcolor: alpha('#00a4e4', 0.16), color: '#0076b6' }}>
+                      <Eye size={20} />
+                    </Avatar>
+                    <Box>
+                      <Typography sx={{ fontSize: '0.73rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary' }}>
+                        {t('visitors')}
+                      </Typography>
+                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 900, lineHeight: 1.1 }}>
+                        {visitorCountLabel}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Paper>
+
+                <Paper
+                  elevation={0}
+                  sx={{
+                    minWidth: { xs: '100%', sm: 240 },
+                    px: 2,
+                    py: 1.75,
+                    borderRadius: 4,
+                    bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.54) : alpha(brandColors.white, 0.76),
+                    border: `1px solid ${alpha(theme.palette.secondary.main, 0.2)}`,
+                    backdropFilter: 'blur(14px)',
+                  }}
+                >
+                  <Stack direction="row" spacing={1.25} alignItems="center">
+                    <Avatar sx={{ width: 44, height: 44, borderRadius: 3, bgcolor: alpha(theme.palette.secondary.main, 0.16), color: theme.palette.secondary.main }}>
+                      <Star size={20} />
+                    </Avatar>
+                    <Box sx={{ minWidth: 0 }}>
+                      <Typography sx={{ fontSize: '0.73rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary' }}>
+                        {t('ratings')}
+                      </Typography>
+                      <Typography sx={{ fontSize: '1.5rem', fontWeight: 900, lineHeight: 1.1 }}>
+                        {ratingSummary}
+                      </Typography>
+                      <Typography sx={{ mt: 0.35, fontSize: '0.82rem', color: 'text.secondary' }}>
+                        {visitorMetrics.ratingCount > 0 ? `${t('from')} ${visitorMetrics.ratingCount} ${t('ratings')}` : t('Submit review')}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Paper>
+              </Stack>
+            </Stack>
+          </Paper>
+        </Container>
+      </Box>
 
       <Box component="section" sx={{ ...sectionShell(theme, 'clear'), px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
@@ -200,8 +359,172 @@ export default function Home() {
         </Container>
       </Box>
 
+      <Box component="section" sx={{ ...sectionShell(theme, 'clear'), py: { xs: 6, md: 8 }, px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Container>
+          <Paper
+            elevation={0}
+            sx={{
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: 5,
+              border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.08)}`,
+              background:
+                theme.palette.mode === 'dark'
+                  ? 'linear-gradient(135deg, rgba(12,18,28,0.96), rgba(29,33,60,0.9), rgba(17,28,43,0.94))'
+                  : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(232,247,252,0.96), rgba(255,249,241,0.92))',
+              boxShadow: '0 26px 56px -36px rgba(17, 26, 36, 0.28)',
+              px: { xs: 2.25, sm: 3.5, lg: 4.5 },
+              py: { xs: 3, sm: 3.5, lg: 4.5 },
+            }}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background:
+                  'radial-gradient(circle at 12% 18%, rgba(240,147,75,0.18), transparent 18%), radial-gradient(circle at 88% 22%, rgba(0,164,228,0.16), transparent 20%), radial-gradient(circle at 68% 84%, rgba(84,180,53,0.12), transparent 18%)',
+              }}
+            />
+
+            <Box sx={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '0.95fr 1.05fr' }, gap: { xs: 3, xl: 4 } }}>
+              <Box>
+                <Eyebrow>{t('Campus Life')}</Eyebrow>
+                <Typography variant="h2" sx={{ mt: 1.4, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.2rem', sm: '3rem' }, maxWidth: 560 }}>
+                  {t('A Glimpse Into Campus Life')}
+                </Typography>
+                <Typography sx={{ mt: 2, maxWidth: 560, fontSize: '0.98rem', lineHeight: 1.85, ...mutedTextSx(theme) }}>
+                  {t('An Air Force School education adapts to become whatever your child needs')}
+                </Typography>
+
+                <Stack direction="row" spacing={{ xs: 1, sm: 1.4 }} sx={{ mt: 3.5, flexWrap: 'wrap', rowGap: 1.4 }}>
+                  {studentCutoutParade.map((image, index) => (
+                    <Box
+                      key={image}
+                      sx={{
+                        width: { xs: 104, sm: 128, md: 144 },
+                        height: { xs: 144, sm: 178, md: 194 },
+                        filter: 'drop-shadow(0 18px 28px rgba(17, 26, 36, 0.18))',
+                        transform: { xs: 'none', sm: `translateY(${index % 2 === 0 ? 0 : 18}px) rotate(${index % 2 === 0 ? -3 : 3}deg)` },
+                      }}
+                    >
+                      <OptimizedImage
+                        src={image}
+                        alt={`Student highlight ${index + 1}`}
+                        wrapperSx={{ height: '100%' }}
+                        sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+                      />
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
+
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', sm: '1.02fr 0.98fr' },
+                  gap: 2,
+                  alignItems: 'stretch',
+                }}
+              >
+                <Box
+                  sx={{
+                    position: 'relative',
+                    minHeight: { xs: 300, sm: 420 },
+                    borderRadius: 5,
+                    overflow: 'hidden',
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                    boxShadow: '0 22px 44px rgba(17, 26, 36, 0.16)',
+                  }}
+                >
+                  <OptimizedImage
+                    src={siteAssets.images.studentClassPhoto}
+                    alt="Student collage spotlight"
+                    wrapperSx={{ height: '100%' }}
+                    sx={{ height: '100%' }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(180deg, rgba(17,26,36,0.08), rgba(17,26,36,0.2) 42%, rgba(17,26,36,0.88))',
+                    }}
+                  />
+                  <Box sx={{ position: 'absolute', left: 18, right: 18, bottom: 18 }}>
+                    <Chip
+                      label={t('Featured Moments')}
+                      sx={{
+                        mb: 1.15,
+                        bgcolor: alpha(brandColors.white, 0.14),
+                        color: brandColors.white,
+                        border: `1px solid ${alpha(brandColors.white, 0.18)}`,
+                        fontWeight: 800,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}
+                    />
+                    <Typography sx={{ color: brandColors.white, fontSize: { xs: '1.15rem', sm: '1.35rem' }, fontWeight: 800, lineHeight: 1.2 }}>
+                      {t('Learning with discipline, warmth and confidence.')}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Stack spacing={2}>
+                  {studentShowcaseTiles.map((tile) => (
+                    <Paper
+                      key={tile.image}
+                      elevation={0}
+                      sx={{
+                        position: 'relative',
+                        overflow: 'hidden',
+                        minHeight: 132,
+                        borderRadius: 4,
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                        boxShadow: '0 18px 34px rgba(17, 26, 36, 0.12)',
+                      }}
+                    >
+                      <OptimizedImage src={tile.image} alt={t(tile.title)} wrapperSx={{ height: '100%' }} sx={{ height: '100%' }} />
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: `${tile.tone}, linear-gradient(180deg, rgba(17,26,36,0.04), rgba(17,26,36,0.82))`,
+                        }}
+                      />
+                      <Box sx={{ position: 'absolute', left: 14, right: 14, bottom: 14 }}>
+                        <Typography sx={{ color: brandColors.white, fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                          {t(tile.title)}
+                        </Typography>
+                      </Box>
+                    </Paper>
+                  ))}
+                </Stack>
+              </Box>
+            </Box>
+          </Paper>
+        </Container>
+      </Box>
+
       <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: { xs: -200, lg: -300 },
+              left: 0,
+              width: { xs: 180, lg: 244 },
+              height: { xs: 200, lg: 296 },
+              transform: 'rotate(-5deg)',
+              filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.28))',
+            }}
+          >
+            <OptimizedImage
+              src={siteAssets.images.studentHeroEleven}
+              alt="Student cutout"
+              wrapperSx={{ height: '100%' }}
+              sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
+            />
+          </Box>
           <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
             <Box>
               <Eyebrow>{t('Quick Navigation')}</Eyebrow>

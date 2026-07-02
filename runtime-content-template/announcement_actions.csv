@@ -1,0 +1,4 @@
+label,to,isPublished
+Notice Board,/notice-board,TRUE
+Downloads,/downloads,TRUE
+Admissions,/admissions,TRUE

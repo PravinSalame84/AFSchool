@@ -17,6 +17,8 @@ import { brandColors } from '../../theme/colorTokens'
 
 import news from '../../data/news'
 import { useLocale } from '../../context/LocaleContext'
+import siteAssets from '../../data/siteAssets'
+import OptimizedImage from '../ui/OptimizedImage'
 
 export default function LatestNews() {
   const { localize, t } = useLocale()
@@ -26,6 +28,8 @@ export default function LatestNews() {
     <Box
       component="section"
       sx={(theme) => ({
+        position: 'relative',
+        overflow: 'hidden',
         py: { xs: 8, md: 12 },
         background:
           theme.palette.mode === 'dark'
@@ -33,6 +37,9 @@ export default function LatestNews() {
             : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
       })}
     >
+      <Box sx={{ position: 'absolute', top: 34, right: 28, width: { md: 92, lg: 122 }, opacity: 0.92, pointerEvents: 'none', display: { xs: 'none', md: 'block' } }}>
+        <OptimizedImage src={siteAssets.images.studentHeroTen} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
+      </Box>
       <Container maxWidth="lg">
         
         {/* HEADER */}

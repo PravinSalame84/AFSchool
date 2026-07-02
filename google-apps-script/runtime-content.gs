@@ -72,7 +72,7 @@ function readRows(ss, sheetName) {
     .slice(1)
     .map((row) => {
       return headers.reduce((acc, header, index) => {
-        acc[header] = normalizeCell(row[index])
+        acc[header] = normalizeCell(row[index], header)
         return acc
       }, {})
     })
@@ -82,8 +82,36 @@ function readRows(ss, sheetName) {
     })
 }
 
-function normalizeCell(value) {
+function normalizeCell(value, header) {
   if (value === null || value === undefined) return ''
   if (value instanceof Date) return Utilities.formatDate(value, Session.getScriptTimeZone(), 'dd MMM yyyy')
-  return String(value).trim()
+
+  const normalized = String(value).trim()
+
+  if (header === 'href') {
+    return normalizeDriveUrl(normalized)
+  }
+
+  return normalized
+}
+
+function normalizeDriveUrl(url) {
+  if (!url) return ''
+
+  const directMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/)
+  if (directMatch) {
+    return 'https://drive.google.com/uc?export=download&id=' + directMatch[1]
+  }
+
+  const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+  if (fileMatch) {
+    return 'https://drive.google.com/uc?export=download&id=' + fileMatch[1]
+  }
+
+  const openMatch = url.match(/\/open\?id=([a-zA-Z0-9_-]+)/)
+  if (openMatch) {
+    return 'https://drive.google.com/uc?export=download&id=' + openMatch[1]
+  }
+
+  return url
 }
