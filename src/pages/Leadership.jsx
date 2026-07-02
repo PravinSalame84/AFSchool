@@ -27,7 +27,7 @@ import { useLocale } from '../context/LocaleContext'
 
 /* ---------------- PAGE ---------------- */
 export default function Leadership() {
-  const { localize } = useLocale()
+  const { localize, t } = useLocale()
   const localizedSchoolContent = localize(schoolContent)
 
   return (
@@ -83,12 +83,12 @@ export default function Leadership() {
                   color="primary"
                   sx={{ mt: 3, display: 'block' }}
                 >
-                  Governance Overview
+                  {t('Governance Overview')}
                 </Typography>
 
                 {/* TITLE */}
                 <Typography variant="h4" fontWeight={800} sx={{ mt: 2, fontSize: { xs: '1.7rem', sm: '2.125rem' } }}>
-                  Leadership information for parents & stakeholders
+                  {t('Leadership information for parents & stakeholders')}
                 </Typography>
 
                 {/* INTRO */}
@@ -108,22 +108,20 @@ export default function Leadership() {
                   }}
                 >
                   <Typography variant="caption" sx={{ opacity: 0.7 }}>
-                    Published Resources
+                    {t('Published Resources')}
                   </Typography>
 
                   <Stack spacing={1.5} mt={2}>
-                    <Typography variant="body2">
-                      • School Management Committee details
-                    </Typography>
-                    <Typography variant="body2">
-                      • Institutional profile & information
-                    </Typography>
-                    <Typography variant="body2">
-                      • Staff details & annual reports
-                    </Typography>
-                    <Typography variant="body2">
-                      • Transfer certificate references
-                    </Typography>
+                    {[
+                      'School Management Committee details',
+                      'Institutional profile & information',
+                      'Staff details & annual reports',
+                      'Transfer certificate references',
+                    ].map((item) => (
+                      <Typography key={item} variant="body2">
+                        • {t(item)}
+                      </Typography>
+                    ))}
                   </Stack>
                 </Paper>
               </Paper>
@@ -163,7 +161,7 @@ export default function Leadership() {
                       >
                         <Box>
                           <Chip
-                            label="Official Resource"
+                            label={t('Official Resource')}
                             size="small"
                             sx={{ mb: 1 }}
                           />
@@ -198,12 +196,12 @@ export default function Leadership() {
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ xs: 'flex-start', sm: 'center' }}>
                   <Groups color="primary" />
                   <Typography variant="h6" fontWeight={800}>
-                    Administrative Contacts
+                    {t('Administrative Contacts')}
                   </Typography>
                 </Stack>
 
                 <Typography variant="body2" sx={{ mt: 2 }}>
-                  Admin Phone:{' '}
+                  {t('Admin Phone:')}{' '}
                   <strong>{localizedSchoolContent.contact.adminPhone}</strong>
                 </Typography>
 
@@ -227,13 +225,12 @@ export default function Leadership() {
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ xs: 'flex-start', sm: 'center' }}>
                   <Description color="primary" />
                   <Typography variant="h6" fontWeight={800}>
-                    Compliance & Reporting
+                    {t('Compliance & Reporting')}
                   </Typography>
                 </Stack>
 
                 <Typography variant="body2" sx={{ mt: 2, color: 'text.secondary' }}>
-                  Mandatory disclosures and institutional reports are available
-                  for public access.
+                  {t('Mandatory disclosures and institutional reports are available for public access.')}
                 </Typography>
 
                 <Button

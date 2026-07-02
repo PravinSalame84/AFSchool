@@ -96,7 +96,7 @@ export default function StatusScreen({
                 <Stack spacing={4} sx={{ position: 'relative', minHeight: 260 }}>
                   <Box>
                     <Chip
-                      label={badge}
+                      label={t(badge)}
                       sx={{
                         bgcolor: alpha(brandColors.white, 0.15),
                         color: brandColors.white,

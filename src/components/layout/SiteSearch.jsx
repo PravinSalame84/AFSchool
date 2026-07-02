@@ -110,7 +110,7 @@ export default function SiteSearch({ compact = false }) {
 
         {!compact ? (
           <Chip
-            label="Ctrl K"
+            label={t('Ctrl K')}
             size="small"
             sx={{
               height: 22,
@@ -179,9 +179,9 @@ export default function SiteSearch({ compact = false }) {
               {['Admissions', 'Downloads', 'Notice Board', 'Careers'].map((item) => (
                 <Chip
                   key={item}
-                  label={item}
+                  label={t(item)}
                   size="small"
-                  onClick={() => setQuery(item)}
+                  onClick={() => setQuery(t(item))}
                   sx={{
                     cursor: 'pointer',
                     bgcolor: alpha(theme.palette.secondary.main, 0.1),

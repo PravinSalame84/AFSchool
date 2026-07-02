@@ -136,16 +136,16 @@ export default function Downloads() {
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} alignItems={{ xs: 'flex-start', sm: 'center' }}>
                     <FileBadge2 size={18} color={theme.palette.secondary.main} />
                     <Typography variant="h6" sx={{ fontWeight: 800 }}>
-                      More Official Resources
+                      {t('More Official Resources')}
                     </Typography>
-                    <Chip label={source === 'live' ? 'Live' : 'Local'} size="small" color="secondary" />
+                    <Chip label={source === 'live' ? t('Live') : t('Local')} size="small" color="secondary" />
                   </Stack>
 
                   <Grid container spacing={2} sx={{ mt: 1 }}>
                     <Grid item xs={12} sm={6}>
                       <OptimizedImage
                         src={siteAssets.images.studentDigitalLearning}
-                        alt="Digital learning"
+                        alt={t('Digital learning')}
                       wrapperSx={{ borderRadius: 4 }}
                       sx={{ height: 150, borderRadius: 4 }}
                     />
@@ -153,7 +153,7 @@ export default function Downloads() {
                     <Grid item xs={12} sm={6}>
                       <OptimizedImage
                         src={siteAssets.images.teacherMeeting}
-                        alt="Teacher collaboration"
+                        alt={t('Teacher collaboration')}
                       wrapperSx={{ borderRadius: 4 }}
                       sx={{ height: 150, borderRadius: 4 }}
                     />
@@ -161,7 +161,7 @@ export default function Downloads() {
                 </Grid>
 
                 <Typography sx={{ mt: 2, fontSize: '0.92rem', lineHeight: 1.8, color: 'text.secondary' }}>
-                  Parent access documents and internal resources are available through official links and can be updated through the runtime content feed.
+                  {t('Parent access documents and internal resources are available through official links and can be updated through the runtime content feed.')}
                 </Typography>
               </Paper>
             </Grid>

@@ -379,7 +379,7 @@ export default function Hero() {
                 <Stack className="hero-nav-controls" direction="row" spacing={1}>
                   <IconButton
                     onClick={() => navigateSlide(-1)}
-                    aria-label="Previous slide"
+                    aria-label={t('Previous slide')}
                     className="hero-nav-button"
                     sx={{
                       bgcolor: 'rgba(255,255,255,0.14)',
@@ -391,7 +391,7 @@ export default function Hero() {
                   </IconButton>
                   <IconButton
                     onClick={() => navigateSlide(1)}
-                    aria-label="Next slide"
+                    aria-label={t('Next slide')}
                     className="hero-nav-button"
                     sx={{
                       bgcolor: 'rgba(255,255,255,0.14)',

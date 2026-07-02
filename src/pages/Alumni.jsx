@@ -18,10 +18,13 @@ import RevealOnScroll from '../components/ui/RevealOnScroll'
 import testimonials from '../data/testimonials'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
 import { brandColors } from '../theme/colorTokens'
+import { useLocale } from '../context/LocaleContext'
 
 export default function Alumni() {
   const { openEnquiry } = useEnquiryModal()
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedTestimonials = localize(testimonials)
 
   return (
     <>
@@ -36,8 +39,8 @@ export default function Alumni() {
         <Container>
           {/* Testimonials Grid */}
           <Grid container spacing={3}>
-            {testimonials.map((t, i) => (
-              <Grid item xs={12} sm={6} key={t.name}>
+            {localizedTestimonials.map((item, i) => (
+              <Grid item xs={12} sm={6} key={item.name}>
                 <RevealOnScroll delay={i * 80}>
                   <Paper
                     elevation={0}
@@ -63,13 +66,13 @@ export default function Alumni() {
                           color: 'text.primary',
                         }}
                       >
-                        “{t.quote}”
+                        “{item.quote}”
                       </Typography>
 
                       <Box>
-                        <Typography fontWeight={800}>{t.name}</Typography>
+                        <Typography fontWeight={800}>{item.name}</Typography>
                         <Typography variant="caption" color="text.secondary">
-                          {t.batch}
+                          {item.batch}
                         </Typography>
                       </Box>
                     </Stack>
@@ -93,8 +96,8 @@ export default function Alumni() {
               }}
             >
               <SectionHeading
-                title="Are you an Airforce School graduate?"
-                subtitle="Join the alumni network to stay connected, mentor students, and attend reunions."
+                title={t('Are you an Airforce School graduate?')}
+                subtitle={t('Join the alumni network to stay connected, mentor students, and attend reunions.')}
                 align="center"
                 tone="light"
               />
@@ -116,7 +119,7 @@ export default function Alumni() {
                 }}
                 onClick={() => openEnquiry('Alumni Sign-up')}
               >
-                Join the Alumni Network
+                {t('Join the Alumni Network')}
               </Button>
             </Paper>
           </RevealOnScroll>

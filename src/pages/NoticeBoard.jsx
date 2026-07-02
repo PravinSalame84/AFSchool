@@ -70,16 +70,16 @@ export default function NoticeBoard() {
                     <Stack direction="row" spacing={1.25} alignItems="center">
                       <NewspaperIcon color="primary" />
                       <Typography variant="h5" sx={{ fontWeight: 800 }}>
-                        Latest Notices
+                        {t('Latest Notices')}
                       </Typography>
                     </Stack>
                     <Typography sx={{ mt: 1, color: 'text.secondary' }}>
-                      Dynamic notices can be updated from the runtime content source without rebuilding the website.
+                      {t('Dynamic notices can be updated from the runtime content source without rebuilding the website.')}
                     </Typography>
                   </Box>
 
                   <Chip
-                    label={source === 'live' ? 'Live Runtime Feed' : 'Local Fallback'}
+                    label={source === 'live' ? t('Live Runtime Feed') : t('Local Fallback')}
                     color={source === 'live' ? 'success' : 'default'}
                     sx={{ alignSelf: { xs: 'stretch', sm: 'flex-start' }, fontWeight: 700, maxWidth: '100%' }}
                   />
@@ -139,13 +139,13 @@ export default function NoticeBoard() {
                   <Stack direction="row" spacing={1.25} alignItems="center">
                     <CalendarMonthIcon color="primary" />
                     <Typography variant="h6" sx={{ fontWeight: 800 }}>
-                      Event Highlights
+                      {t('Event Highlights')}
                     </Typography>
                   </Stack>
 
                   <OptimizedImage
                     src={siteAssets.images.studentConference}
-                    alt="School event"
+                    alt={t('School event')}
                     wrapperSx={{ mt: 2, borderRadius: 4 }}
                     sx={{ height: { xs: 170, sm: 190 }, borderRadius: 4 }}
                   />
@@ -181,14 +181,14 @@ export default function NoticeBoard() {
                   <Stack direction="row" spacing={1.25} alignItems="center">
                     <NewspaperIcon color="primary" />
                     <Typography variant="h6" sx={{ fontWeight: 800 }}>
-                      Quick Access
+                      {t('Quick Access')}
                     </Typography>
                   </Stack>
 
                   <Grid container spacing={1.5} sx={{ mt: 1 }}>
                     {[siteAssets.images.schoolGate, siteAssets.images.studentLibrary].map((src) => (
                       <Grid item xs={12} sm={6} key={src}>
-                        <OptimizedImage src={src} alt="School resource preview" wrapperSx={{ borderRadius: 4, }} sx={{ height: 100, borderRadius: 4, }} />
+                        <OptimizedImage src={src} alt={t('School resource preview')} wrapperSx={{ borderRadius: 4, }} sx={{ height: 100, borderRadius: 4, }} />
                       </Grid>
                     ))}
                   </Grid>

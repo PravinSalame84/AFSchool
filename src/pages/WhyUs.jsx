@@ -35,7 +35,7 @@ const icons = [
 const MotionCard = motion.create(Card)
 
 export default function WhyUs() {
-  const { localize } = useLocale()
+  const { localize, t } = useLocale()
   const localizedSchoolContent = localize(schoolContent)
 
   return (
@@ -59,13 +59,13 @@ export default function WhyUs() {
         <Container maxWidth="xl">
           <Stack spacing={2} sx={{ mb: 5, maxWidth: 760 }}>
             <Typography variant="overline" color="secondary.main" fontWeight={800} sx={{ letterSpacing: '0.2em' }}>
-              Campus Life Overview
+              {t('Campus Life Overview')}
             </Typography>
             <Typography variant="h3" sx={{ fontWeight: 800, lineHeight: 0.98 }}>
-              Learning, wellbeing and participation move together here.
+              {t('Learning, wellbeing and participation move together here.')}
             </Typography>
             <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
-              Campus life at Air Force School is shaped by academic focus, co-curricular participation, structured routines and a supportive environment that helps children grow with confidence.
+              {t('Campus life at Air Force School is shaped by academic focus, co-curricular participation, structured routines and a supportive environment that helps children grow with confidence.')}
             </Typography>
           </Stack>
 

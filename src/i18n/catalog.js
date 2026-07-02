@@ -435,6 +435,91 @@ const hi = {
   'Refresh Page': 'पृष्ठ रीफ्रेश करें',
   'If the issue continues, keep using the homepage or contact the school office while we restore the page.':
     'यदि समस्या बनी रहती है, तो कृपया होमपेज का उपयोग करते रहें या पृष्ठ बहाल होने तक विद्यालय कार्यालय से संपर्क करें।',
+  'Ctrl K': 'Ctrl K',
+  'Digital learning': 'डिजिटल अधिगम',
+  'Teacher collaboration': 'शिक्षक सहयोग',
+  'Parent access documents and internal resources are available through official links and can be updated through the runtime content feed.':
+    'अभिभावक उपयोग दस्तावेज़ और आंतरिक संसाधन आधिकारिक लिंक के माध्यम से उपलब्ध हैं और रनटाइम कंटेंट फ़ीड से अपडेट किए जा सकते हैं।',
+  'School notices and announcements': 'विद्यालय नोटिस और घोषणाएँ',
+  'Latest Notices': 'नवीनतम नोटिस',
+  'Dynamic notices can be updated from the runtime content source without rebuilding the website.':
+    'डायनामिक नोटिस को वेबसाइट दोबारा बनाए बिना रनटाइम कंटेंट स्रोत से अपडेट किया जा सकता है।',
+  'Live Runtime Feed': 'लाइव रनटाइम फ़ीड',
+  'Local Fallback': 'लोकल फ़ॉलबैक',
+  'Event Highlights': 'कार्यक्रम मुख्य बिंदु',
+  'School event': 'विद्यालय कार्यक्रम',
+  'Quick Access': 'त्वरित पहुँच',
+  'School resource preview': 'विद्यालय संसाधन पूर्वावलोकन',
+  'Campus Life Overview': 'कैंपस जीवन अवलोकन',
+  'Learning, wellbeing and participation move together here.': 'यहाँ अधिगम, कल्याण और सहभागिता साथ-साथ चलते हैं।',
+  'Campus life at Air Force School is shaped by academic focus, co-curricular participation, structured routines and a supportive environment that helps children grow with confidence.':
+    'एयर फोर्स स्कूल का कैंपस जीवन शैक्षणिक फोकस, सह-पाठ्यक्रम सहभागिता, सुव्यवस्थित दिनचर्या और सहयोगी वातावरण से निर्मित है जो बच्चों को आत्मविश्वास के साथ बढ़ने में मदद करता है।',
+  'School governance and leadership information.': 'विद्यालय प्रशासन और नेतृत्व संबंधी जानकारी।',
+  'School Management Committee details': 'स्कूल मैनेजमेंट कमेटी विवरण',
+  'Institutional profile & information': 'संस्थागत प्रोफ़ाइल और जानकारी',
+  'Staff details & annual reports': 'स्टाफ विवरण और वार्षिक रिपोर्ट',
+  'Transfer certificate references': 'स्थानांतरण प्रमाणपत्र संदर्भ',
+  'Admin Phone:': 'प्रशासनिक फ़ोन:',
+  'Compliance & Reporting': 'अनुपालन और रिपोर्टिंग',
+  'Mandatory disclosures and institutional reports are available for public access.':
+    'अनिवार्य प्रकटीकरण और संस्थागत रिपोर्ट सार्वजनिक पहुँच के लिए उपलब्ध हैं।',
+  'Career opportunities and future recruitment updates from Air Force School.': 'एयर फोर्स स्कूल से करियर अवसर और भविष्य की भर्ती अपडेट्स।',
+  'The page you are looking for could not be found.': 'आप जिस पृष्ठ को खोज रहे हैं वह नहीं मिला।',
+  Blog: 'ब्लॉग',
+  'Newsroom & Insights': 'न्यूज़रूम और इनसाइट्स',
+  'Air Force School Blog': 'एयर फोर्स स्कूल ब्लॉग',
+  'Stories from our campuses, parenting advice and the latest in education research.':
+    'हमारे कैंपस की कहानियाँ, अभिभावक मार्गदर्शन और शिक्षा शोध की नवीनतम जानकारियाँ।',
+  All: 'सभी',
+  Notice: 'नोटिस',
+  Download: 'डाउनलोड',
+  Calendar: 'कैलेंडर',
+  Event: 'कार्यक्रम',
+  Compliance: 'अनुपालन',
+  'Terms and website usage information for': 'के लिए नियम और वेबसाइट उपयोग जानकारी',
+  "This page currently contains placeholder Terms & Conditions. Replace this content with your organization's legally approved terms before publishing the website.":
+    'यह पृष्ठ फिलहाल प्लेसहोल्डर नियम एवं शर्तें दिखा रहा है। वेबसाइट प्रकाशित करने से पहले इसे अपनी संस्था द्वारा अनुमोदित कानूनी शर्तों से बदलें।',
+  'By accessing or using the': 'का उपयोग या एक्सेस करके आप',
+  'website, you agree to comply with these Terms & Conditions. If you do not agree, please refrain from using this website.':
+    'वेबसाइट के नियम एवं शर्तों का पालन करने के लिए सहमत होते हैं। यदि आप सहमत नहीं हैं, तो कृपया इस वेबसाइट का उपयोग न करें।',
+  'Use of This Website': 'इस वेबसाइट का उपयोग',
+  'The content provided on this website is intended for general information about the school, admissions, academic programs, and related services. Unauthorized copying, distribution or misuse of any content is prohibited.':
+    'इस वेबसाइट पर दी गई सामग्री विद्यालय, प्रवेश, शैक्षणिक कार्यक्रमों और संबंधित सेवाओं की सामान्य जानकारी के लिए है। किसी भी सामग्री की अनधिकृत प्रतिलिपि, वितरण या दुरुपयोग निषिद्ध है।',
+  'Admissions & Fees': 'प्रवेश और शुल्क',
+  'Admission decisions, fee structures and school policies are governed by the official regulations published by the school. Information available on this website should be read together with official admission notifications and circulars.':
+    'प्रवेश निर्णय, शुल्क संरचना और विद्यालय नीतियाँ विद्यालय द्वारा प्रकाशित आधिकारिक नियमों के अनुसार संचालित होती हैं। इस वेबसाइट की जानकारी को आधिकारिक प्रवेश नोटिस और परिपत्रों के साथ पढ़ा जाना चाहिए।',
+  'Intellectual Property': 'बौद्धिक संपदा',
+  'All website content, including text, images, graphics, logos, and downloadable materials, remains the property of the school unless otherwise stated. Reproduction without permission is prohibited.':
+    'पाठ, चित्र, ग्राफिक्स, लोगो और डाउनलोड योग्य सामग्री सहित वेबसाइट की सभी सामग्री विद्यालय की संपत्ति है, जब तक अन्यथा न कहा गया हो। अनुमति के बिना पुनरुत्पादन निषिद्ध है।',
+  'Limitation of Liability': 'दायित्व की सीमा',
+  'While reasonable efforts are made to keep information accurate and up to date, the school does not guarantee that all information is free from errors or omissions and reserves the right to update website content at any time.':
+    'जानकारी को सटीक और अद्यतन रखने के उचित प्रयास किए जाते हैं, लेकिन विद्यालय यह गारंटी नहीं देता कि सभी जानकारी त्रुटि या चूक से मुक्त है और वह किसी भी समय वेबसाइट सामग्री अपडेट करने का अधिकार सुरक्षित रखता है।',
+  'If you have any questions regarding these Terms & Conditions, please contact us at':
+    'यदि इन नियम एवं शर्तों के संबंध में आपका कोई प्रश्न है, तो कृपया हमसे इस ईमेल पर संपर्क करें:',
+  "This page currently contains placeholder content. Replace it with your organization's legally approved Privacy Policy before publishing the website.":
+    'यह पृष्ठ फिलहाल प्लेसहोल्डर सामग्री दिखा रहा है। वेबसाइट प्रकाशित करने से पहले इसे अपनी संस्था द्वारा अनुमोदित गोपनीयता नीति से बदलें।',
+  'This Privacy Policy explains how': 'यह गोपनीयता नीति बताती है कि',
+  'collects, uses, stores and protects information submitted through this website.':
+    'इस वेबसाइट के माध्यम से भेजी गई जानकारी को कैसे एकत्र, उपयोग, संग्रहीत और सुरक्षित करता है।',
+  'Information We Collect': 'हम कौन-सी जानकारी एकत्र करते हैं',
+  'We may collect personal information such as your name, email address, phone number and enquiry details when you submit forms on this website.':
+    'जब आप इस वेबसाइट पर फ़ॉर्म जमा करते हैं, तो हम आपका नाम, ईमेल, फ़ोन नंबर और पूछताछ विवरण जैसी व्यक्तिगत जानकारी एकत्र कर सकते हैं।',
+  'How We Use Your Information': 'हम आपकी जानकारी का उपयोग कैसे करते हैं',
+  'Information provided through this website is used only for responding to enquiries, admissions, school communication and improving our services.':
+    'इस वेबसाइट के माध्यम से दी गई जानकारी का उपयोग केवल पूछताछ का उत्तर देने, प्रवेश, विद्यालय संचार और हमारी सेवाओं में सुधार के लिए किया जाता है।',
+  'Data Security': 'डेटा सुरक्षा',
+  'We take reasonable measures to protect personal information from unauthorized access, disclosure or misuse.':
+    'हम व्यक्तिगत जानकारी को अनधिकृत पहुँच, प्रकटीकरण या दुरुपयोग से बचाने के लिए उचित उपाय करते हैं।',
+  'If you have any questions regarding this Privacy Policy, please contact us at':
+    'यदि इस गोपनीयता नीति के संबंध में आपका कोई प्रश्न है, तो कृपया हमसे इस ईमेल पर संपर्क करें:',
+  Alumni: 'पूर्व छात्र',
+  'Stay Connected': 'जुड़े रहें',
+  'The Airforce School Alumni Community': 'एयरफोर्स स्कूल पूर्व छात्र समुदाय',
+  'Thousands of graduates, one shared foundation.': 'हज़ारों स्नातक, एक साझा आधार।',
+  'Are you an Airforce School graduate?': 'क्या आप एयरफोर्स स्कूल के पूर्व छात्र हैं?',
+  'Join the alumni network to stay connected, mentor students, and attend reunions.':
+    'जुड़े रहने, छात्रों का मार्गदर्शन करने और पुनर्मिलन में शामिल होने के लिए पूर्व छात्र नेटवर्क से जुड़ें।',
+  'Join the Alumni Network': 'पूर्व छात्र नेटवर्क से जुड़ें',
   'Back to top': 'ऊपर जाएँ',
   'Open enquiry form': 'पूछताछ फ़ॉर्म खोलें',
   'Chat on WhatsApp': 'व्हाट्सऐप पर चैट करें',

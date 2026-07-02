@@ -50,20 +50,17 @@ export default function PrivacyPolicy() {
           >
             <Stack spacing={4}>
               <Alert severity="info" variant="outlined">
-                This page currently contains placeholder content. Replace it
-                with your organization's legally approved Privacy Policy before
-                publishing the website.
+                {t("This page currently contains placeholder content. Replace it with your organization's legally approved Privacy Policy before publishing the website.")}
               </Alert>
 
               <Box>
                 <Typography variant="h4" fontWeight={700} gutterBottom>
-                  Privacy Policy
+                  {t('Privacy Policy')}
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  This Privacy Policy explains how {localizedSiteConfig.brandName}{' '}
-                  {localizedSiteConfig.brandSuffix} collects, uses, stores and protects
-                  information submitted through this website.
+                  {t('This Privacy Policy explains how')} {localizedSiteConfig.brandName}{' '}
+                  {localizedSiteConfig.brandSuffix} {t('collects, uses, stores and protects information submitted through this website.')}
                 </Typography>
               </Box>
 
@@ -71,13 +68,11 @@ export default function PrivacyPolicy() {
 
               <Box>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
-                  Information We Collect
+                  {t('Information We Collect')}
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  We may collect personal information such as your name, email
-                  address, phone number and enquiry details when you submit
-                  forms on this website.
+                  {t('We may collect personal information such as your name, email address, phone number and enquiry details when you submit forms on this website.')}
                 </Typography>
               </Box>
 
@@ -85,13 +80,11 @@ export default function PrivacyPolicy() {
 
               <Box>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
-                  How We Use Your Information
+                  {t('How We Use Your Information')}
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  Information provided through this website is used only for
-                  responding to enquiries, admissions, school communication and
-                  improving our services.
+                  {t('Information provided through this website is used only for responding to enquiries, admissions, school communication and improving our services.')}
                 </Typography>
               </Box>
 
@@ -99,12 +92,11 @@ export default function PrivacyPolicy() {
 
               <Box>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
-                  Data Security
+                  {t('Data Security')}
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  We take reasonable measures to protect personal information
-                  from unauthorized access, disclosure or misuse.
+                  {t('We take reasonable measures to protect personal information from unauthorized access, disclosure or misuse.')}
                 </Typography>
               </Box>
 
@@ -112,12 +104,11 @@ export default function PrivacyPolicy() {
 
               <Box>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
-                  Contact Us
+                  {t('Contact Us')}
                 </Typography>
 
                 <Typography color="text.secondary" lineHeight={1.9}>
-                  If you have any questions regarding this Privacy Policy,
-                  please contact us at{' '}
+                  {t('If you have any questions regarding this Privacy Policy, please contact us at')}{' '}
                   <Link
                     href={`mailto:${localizedSiteConfig.contact.email}`}
                     underline="hover"

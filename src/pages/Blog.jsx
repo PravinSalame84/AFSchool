@@ -18,19 +18,22 @@ import {
 import PageHero from '../components/ui/PageHero'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import news from '../data/news'
+import { useLocale } from '../context/LocaleContext'
 
 export default function Blog() {
+  const { localize, t } = useLocale()
+  const localizedNews = localize(news)
   const categories = useMemo(
-    () => ['All', ...new Set(news.map((n) => n.category))],
-    [],
+    () => [t('All'), ...new Set(localizedNews.map((n) => n.category))],
+    [localizedNews, t],
   )
 
-  const [active, setActive] = useState('All')
+  const [active, setActive] = useState(t('All'))
 
   const filtered =
-    active === 'All'
-      ? news
-      : news.filter((item) => item.category === active)
+    active === t('All')
+      ? localizedNews
+      : localizedNews.filter((item) => item.category === active)
 
   return (
     <>

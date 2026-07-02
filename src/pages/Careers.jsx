@@ -5,7 +5,7 @@ import siteAssets from '../data/siteAssets'
 import { useLocale } from '../context/LocaleContext'
 
 export default function Careers() {
-  useLocale()
+  const { t } = useLocale()
 
   return (
     <>
@@ -25,14 +25,14 @@ export default function Careers() {
       />
 
       <StatusScreen
-        badge="Careers"
+        badge={t('Careers')}
         code="Openings"
-        title="Career opportunities will be published here"
-        message="This page is now live for production use. When the school is hiring, role descriptions, qualification requirements, contact instructions and timelines can be updated here or through the runtime notice workflow."
+        title={t('Career opportunities will be published here')}
+        message={t('This page is now live for production use. When the school is hiring, role descriptions, qualification requirements, contact instructions and timelines can be updated here or through the runtime notice workflow.')}
         icon="maintenance"
-        primaryAction={{ to: '/contact', label: 'Contact School Office', variant: 'dark' }}
-        secondaryAction={{ to: '/notice-board', label: 'Check Latest Notices', variant: 'outline' }}
-        note="You can also publish recruitment notices in the dynamic notice board so vacancies appear across the website without a full rebuild."
+        primaryAction={{ to: '/contact', label: t('Contact School Office'), variant: 'dark' }}
+        secondaryAction={{ to: '/notice-board', label: t('Check Latest Notices'), variant: 'outline' }}
+        note={t('You can also publish recruitment notices in the dynamic notice board so vacancies appear across the website without a full rebuild.')}
       />
     </>
   )
