@@ -147,20 +147,20 @@ export default function Contact() {
               <Stack spacing={3} sx={{ height: '100%' }}>
                 <Paper sx={{ ...cardSx(theme), p: { xs: 2.5, sm: 3.5 } }}>
                   <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: '0.2em' }}>
-                    Send A Message
+                    {t('Send A Message')}
                   </Typography>
                   <Typography variant="h4" sx={{ mt: 1, fontWeight: 800 }}>
-                    We will help you quickly
+                    {t('We will help you quickly')}
                   </Typography>
 
                   {sent ? (
                     <Stack spacing={2} sx={{ mt: 4 }}>
                       <CheckCircle color="success" sx={{ fontSize: 52 }} />
                       <Typography variant="h6" sx={{ fontWeight: 800 }}>
-                        Message sent successfully
+                        {t('Message sent successfully')}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        We will contact you at {form.email}
+                        {t('We will contact you at')} {form.email}
                       </Typography>
                     </Stack>
                   ) : (
@@ -195,10 +195,10 @@ export default function Contact() {
 
                 <Paper sx={{ ...cardSx(theme, 'dark'), p: 3.25 }}>
                   <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
-                    Quick Support
+                    {t('Quick Support')}
                   </Typography>
                   <Typography variant="h5" sx={{ mt: 1.25, fontWeight: 800 }}>
-                    Need faster help for admissions or school details?
+                    {t('Need faster help for admissions or school details?')}
                   </Typography>
                   <Typography sx={{ mt: 1.5, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
                     {t('Use the enquiry flow for admission-related questions or request school details directly from the school office.')}

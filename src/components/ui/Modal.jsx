@@ -5,9 +5,11 @@ import IconButton from '@mui/material/IconButton'
 import { alpha } from '@mui/material/styles'
 import { useId } from 'react'
 import { X } from 'lucide-react'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function Modal({ open, onClose, title, children }) {
   const titleId = useId()
+  const { t } = useLocale()
 
   return (
     <Dialog
@@ -57,7 +59,7 @@ export default function Modal({ open, onClose, title, children }) {
         {title}
         <IconButton
           onClick={onClose}
-          aria-label="Close dialog"
+          aria-label={t('Close dialog')}
           sx={{
             color: 'text.secondary',
             '&:hover': {

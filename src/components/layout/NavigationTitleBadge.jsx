@@ -3,15 +3,18 @@ import { Box, Typography } from '@mui/material'
 import { alpha, useTheme } from '@mui/material/styles'
 import siteConfig from '../../data/siteConfig'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function NavigationTitleBadge({ className = '' }) {
   const theme = useTheme()
+  const { localize, t } = useLocale()
+  const localizedSiteConfig = localize(siteConfig)
 
   return (
     <Box
       component={Link}
       to="/"
-      aria-label="Air Force School home"
+      aria-label={t('Air Force School home')}
       sx={{
         display: { xs: 'none', xl: 'flex' },
         alignItems: 'center',
@@ -63,7 +66,7 @@ export default function NavigationTitleBadge({ className = '' }) {
         <Box
           component="img"
           src="/favicon.png"
-          alt={`${siteConfig.brandName} logo`}
+          alt={`${localizedSiteConfig.brandName} logo`}
           sx={{
             width: 46,
             height: 46,
@@ -85,7 +88,7 @@ export default function NavigationTitleBadge({ className = '' }) {
           color: theme.palette.mode === 'dark' ? brandColors.white : theme.palette.primary.dark,
         }}
       >
-          AIR FORCE
+          {t('AIR FORCE')}
         </Typography>
 
         <Typography
@@ -98,7 +101,7 @@ export default function NavigationTitleBadge({ className = '' }) {
           color: theme.palette.mode === 'dark' ? theme.palette.secondary.light : theme.palette.primary.main,
         }}
       >
-          SCHOOL
+          {t('SCHOOL')}
         </Typography>
 
         <Typography
@@ -111,7 +114,7 @@ export default function NavigationTitleBadge({ className = '' }) {
             color: alpha(theme.palette.text.secondary, 0.8),
           }}
         >
-          {siteConfig.brandSuffix}
+          {localizedSiteConfig.brandSuffix}
         </Typography>
       </Box>
     </Box>

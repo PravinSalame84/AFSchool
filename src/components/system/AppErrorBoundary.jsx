@@ -1,7 +1,10 @@
 import React from 'react'
 import StatusScreen from '../ui/StatusScreen'
+import { LocaleContext } from '../../context/LocaleContext'
 
 export default class AppErrorBoundary extends React.Component {
+  static contextType = LocaleContext
+
   constructor(props) {
     super(props)
     this.state = { hasError: false }
@@ -18,6 +21,8 @@ export default class AppErrorBoundary extends React.Component {
   }
 
   render() {
+    const t = this.context?.t ?? ((value) => value)
+
     if (this.state.hasError) {
       return (
         <StatusScreen

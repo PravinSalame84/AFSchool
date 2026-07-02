@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { alpha, Fab, Zoom } from '@mui/material'
 import { ArrowUp } from 'lucide-react'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function BackToTopButton() {
   const [visible, setVisible] = useState(false)
+  const { t } = useLocale()
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,7 +27,7 @@ export default function BackToTopButton() {
     <Zoom in={visible}>
       <Fab
         onClick={scrollToTop}
-        aria-label="Back to top"
+        aria-label={t('Back to top')}
         size="medium"
         sx={{
           position: 'fixed',

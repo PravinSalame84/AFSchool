@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { defaultLocale, localeOptions, localeStorageKey, localizeValue, translate } from '../i18n/catalog'
 
-const LocaleContext = createContext(null)
+export const LocaleContext = createContext(null)
 
 function getInitialLocale() {
   if (typeof window === 'undefined') return defaultLocale

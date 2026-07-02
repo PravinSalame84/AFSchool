@@ -4,9 +4,11 @@ import { Send, MessageCircle } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { brandColors } from '../../theme/colorTokens'
+import { useLocale } from '../../context/LocaleContext'
 
 export default function FloatingButtons() {
   const { openEnquiry } = useEnquiryModal()
+  const { t } = useLocale()
 
   if (!siteConfig.features.floatingWhatsapp && !siteConfig.features.floatingEnquire) {
     return null
@@ -29,7 +31,7 @@ export default function FloatingButtons() {
       {siteConfig.features.floatingEnquire && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Chip
-            label="Enquire"
+            label={t('Enquire')}
             sx={{
               display: { xs: 'none', sm: 'flex' },
               fontWeight: 700,
@@ -41,7 +43,7 @@ export default function FloatingButtons() {
             }}
           />
 
-          <Tooltip title="Open enquiry form">
+          <Tooltip title={t('Open enquiry form')}>
             <Fab
               onClick={() => openEnquiry('General Enquiry')}
               sx={{
@@ -65,7 +67,7 @@ export default function FloatingButtons() {
       {siteConfig.features.floatingWhatsapp && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <Chip
-            label="WhatsApp"
+            label={t('WhatsApp')}
             sx={{
               display: { xs: 'none', sm: 'flex' },
               fontWeight: 700,
@@ -77,7 +79,7 @@ export default function FloatingButtons() {
             }}
           />
 
-          <Tooltip title="Chat on WhatsApp">
+          <Tooltip title={t('Chat on WhatsApp')}>
             <Fab
               component="a"
               href={`https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Air%20Force%20School%20Nagpur`}

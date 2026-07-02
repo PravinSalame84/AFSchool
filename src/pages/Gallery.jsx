@@ -77,13 +77,13 @@ export default function Gallery() {
             </Box>
             <Box>
               <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: '0.2em' }}>
-                Interactive Gallery
+                {t('Interactive Gallery')}
               </Typography>
               <Typography variant="h4" sx={{ fontWeight: 800 }}>
-                Campus, events and achievements
+                {t('Campus, events and achievements')}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Featured carousel with archive browsing across desktop and mobile.
+                {t('Featured carousel with archive browsing across desktop and mobile.')}
               </Typography>
             </Box>
           </Stack>
@@ -136,9 +136,9 @@ export default function Gallery() {
 
           <Box sx={{ mb: 5 }}>
             <Typography variant="h5" sx={{ fontWeight: 800, mb: 2.5 }}>
-              Auto-Scrolling Archive Strip
+              {t('Auto-Scrolling Archive Strip')}
             </Typography>
-            <Carousel autoPlay interval={2600} ariaLabel="Full gallery archive strip">
+            <Carousel autoPlay interval={2600} ariaLabel={t('Full gallery archive strip')}>
               {localizedSchoolContent.gallery.map((item) => (
                 <Box key={`strip-${item.title}`} data-carousel-item sx={{ width: { xs: 'min(82vw, 260px)', sm: 'min(280px, 72vw)' }, flexShrink: 0 }}>
                   <Paper

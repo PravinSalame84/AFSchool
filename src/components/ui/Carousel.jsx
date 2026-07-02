@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { alpha } from '@mui/material/styles'
+import { useLocale } from '../../context/LocaleContext'
 import { Box, IconButton, useTheme } from '@mui/material'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -10,6 +11,7 @@ export default function Carousel({
   ariaLabel = 'Carousel',
 }) {
   const theme = useTheme()
+  const { t } = useLocale()
   const trackRef = useRef(null)
   const frameRef = useRef(0)
 
@@ -170,7 +172,7 @@ export default function Carousel({
         <IconButton
           onClick={() => scrollByCard(-1)}
           disabled={atStart}
-          aria-label="Previous"
+          aria-label={t('Previous')}
           sx={{
             border: '1px solid',
             borderColor: 'divider',
@@ -205,7 +207,7 @@ export default function Carousel({
         <IconButton
           onClick={() => scrollByCard(1)}
           disabled={atEnd}
-          aria-label="Next"
+          aria-label={t('Next')}
           sx={{
             border: '1px solid',
             borderColor: 'divider',

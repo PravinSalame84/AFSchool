@@ -231,7 +231,7 @@ export default function Locations() {
                   color="text.secondary"
                   py={6}
                 >
-                  No campuses match your search.
+                  {t('No campuses match your search.')}
                 </Typography>
               </Grid>
             )}
@@ -246,7 +246,7 @@ export default function Locations() {
                 openEnquiry('General Enquiry')
               }
             >
-              Can't find a campus near you? Ask us
+              {t("Can't find a campus near you? Ask us")}
             </Button>
           </Box>
 

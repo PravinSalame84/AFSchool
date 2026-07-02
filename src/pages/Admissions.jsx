@@ -83,10 +83,10 @@ export default function Admissions() {
         <Container maxWidth="xl">
           <Box sx={{ maxWidth: 760, mb: 5 }}>
             <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: '0.2em' }}>
-              Admission Journey
+              {t('Admission Journey')}
             </Typography>
             <Typography variant="h2" sx={{ mt: 1.5, fontWeight: 800, lineHeight: 0.96, fontSize: { xs: '2.2rem', sm: '3rem' } }}>
-              Start with the school office and move ahead with clarity.
+              {t('Start with the school office and move ahead with clarity.')}
             </Typography>
             <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.85 }}>
               {localizedSchoolContent.admissions.intro}
@@ -137,10 +137,10 @@ export default function Admissions() {
                 <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.12} variants={reveal}>
                   <Paper sx={{ ...panelSx(theme), p: { xs: 3, sm: 4 } }}>
                     <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 800, letterSpacing: '0.2em' }}>
-                      Required Documents
+                      {t('Required Documents')}
                     </Typography>
                     <Typography variant="h4" sx={{ mt: 1, mb: 3, fontWeight: 800 }}>
-                      Keep these ready.
+                      {t('Keep these ready.')}
                     </Typography>
 
                     <Stack spacing={1.5}>
@@ -176,13 +176,13 @@ export default function Admissions() {
                 <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} custom={0.18} variants={reveal}>
                   <Paper sx={{ ...panelSx(theme, 'dark'), p: 3.5 }}>
                     <Typography variant="overline" sx={{ color: alpha(brandColors.white, 0.72), fontWeight: 800, letterSpacing: '0.18em' }}>
-                      Admission Support
+                      {t('Admission Support')}
                     </Typography>
                     <Typography variant="h5" sx={{ mt: 1.25, fontWeight: 800 }}>
-                      Need help choosing the right next step?
+                      {t('Need help choosing the right next step?')}
                     </Typography>
                     <Typography sx={{ mt: 1.5, color: alpha(brandColors.white, 0.8), lineHeight: 1.8 }}>
-                      Call the school office or request a guided admission response for process, class availability and required records.
+                      {t('Call the school office or request a guided admission response for process, class availability and required records.')}
                     </Typography>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
                       <Button variant="contained" color="secondary" onClick={() => openEnquiry('Admissions Enquiry')} sx={{ width: { xs: '100%', sm: 'auto' } }}>
@@ -212,12 +212,12 @@ export default function Admissions() {
               {
                 icon: ArrowRightLeft,
                 title: 'Inter-School Transfer',
-                description: 'If the family is relocating, the school office can guide parents on record continuity and transfer readiness.',
+                description: t('If the family is relocating, the school office can guide parents on record continuity and transfer readiness.'),
               },
               {
                 icon: Award,
                 title: 'Merit & Support Guidance',
-                description: 'Parents can contact the school office directly for updated information on merit-based or need-based support.',
+                description: t('Parents can contact the school office directly for updated information on merit-based or need-based support.'),
               },
             ].map((item, index) => {
               const Icon = item.icon
