@@ -15,10 +15,7 @@ import {
   MapPin,
   ExternalLink,
 } from 'lucide-react'
-import { brandColors } from '../../theme/colorTokens'
 import { useLocale } from '../../context/LocaleContext'
-import siteAssets from '../../data/siteAssets'
-import OptimizedImage from '../ui/OptimizedImage'
 
 const links = [
   { icon: Star, label: 'About Us', to: '/about' },
@@ -47,12 +44,6 @@ export default function QuickLinksStrip() {
             : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
       })}
     >
-      <Box sx={{ position: 'absolute', top: 4, left: 24, width: { md: 84, lg: 98 }, opacity: 0.9, pointerEvents: 'none', display: { xs: 'none', md: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroThree} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
-      <Box sx={{ position: 'absolute', right: 24, bottom: -6, width: { md: 88, lg: 106 }, opacity: 0.9, pointerEvents: 'none', display: { xs: 'none', lg: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroEight} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
       <Container maxWidth="lg">
 
         <Stack

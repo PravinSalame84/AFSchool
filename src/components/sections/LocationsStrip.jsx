@@ -13,8 +13,6 @@ import {
 import { states } from '../../data/locations'
 import { brandColors } from '../../theme/colorTokens'
 import { useLocale } from '../../context/LocaleContext'
-import siteAssets from '../../data/siteAssets'
-import OptimizedImage from '../ui/OptimizedImage'
 
 export default function LocationsStrip() {
   const { t } = useLocale()
@@ -31,9 +29,6 @@ export default function LocationsStrip() {
             : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
       })}
     >
-      <Box sx={{ position: 'absolute', top: 6, right: { xs: 10, md: 30 }, width: { xs: 46, md: 76 }, opacity: 0.9, pointerEvents: 'none' }}>
-        <OptimizedImage src={siteAssets.images.studentHeroNine} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
       <Container maxWidth="lg">
 
         <Stack

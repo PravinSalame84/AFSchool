@@ -75,7 +75,6 @@ export default function Hero() {
   const heroCutouts = useMemo(
     () => [
       siteAssets.images.studentHeroSix,
-      siteAssets.images.studentHeroNine,
       siteAssets.images.studentHeroEleven,
     ],
     [],
@@ -188,18 +187,18 @@ export default function Hero() {
                   alignItems: 'flex-end',
                 }}
               >
-                {[siteAssets.images.studentHeroSix, siteAssets.images.studentHeroNine, siteAssets.images.studentHeroEleven].map((image, index) => (
+                {[siteAssets.images.studentHeroSix, siteAssets.images.studentHeroEleven].map((image, index) => (
                   <Box
                     component={motion.div}
                     key={image}
-                    animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [index === 1 ? 0 : index === 0 ? -5 : 5, index === 1 ? 2 : index === 0 ? -8 : 8, index === 1 ? 0 : index === 0 ? -5 : 5] }}
-                    transition={shouldReduceMotion ? undefined : { duration: 4.6 + index * 0.4, repeat: Infinity, ease: 'easeInOut' }}
-                    className={`motion-float-soft ${index === 1 ? 'delay-1' : index === 2 ? 'delay-2' : ''}`}
+                    animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [index === 0 ? -4 : 4, index === 0 ? -6 : 6, index === 0 ? -4 : 4] }}
+                    transition={shouldReduceMotion ? undefined : { duration: 4.8 + index * 0.4, repeat: Infinity, ease: 'easeInOut' }}
+                    className={`motion-float-soft ${index === 1 ? 'delay-1' : ''}`}
                     sx={{
-                      width: index === 1 ? 64 : 56,
-                      height: index === 1 ? 82 : 72,
+                      width: 60,
+                      height: 78,
                       filter: 'drop-shadow(0 14px 20px rgba(17, 26, 36, 0.18))',
-                      transform: `rotate(${index === 1 ? 0 : index === 0 ? -5 : 5}deg)`,
+                      transform: `rotate(${index === 0 ? -4 : 4}deg)`,
                     }}
                   >
                     <OptimizedImage
@@ -558,41 +557,19 @@ export default function Hero() {
                 component={motion.div}
                 sx={{
                   position: 'absolute',
-                  top: -400,
-                  right: -78,
-                  width: 230,
-                  height: 276,
-                  transform: 'rotate(5deg)',
+                  top: -318,
+                  right: -14,
+                  width: 248,
+                  height: 314,
+                  transform: 'rotate(2deg)',
                   filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.24))',
                 }}
-                animate={shouldReduceMotion ? undefined : { y: [0, -10, 0], rotate: [5, 8, 5] }}
+                animate={shouldReduceMotion ? undefined : { y: [0, -10, 0], rotate: [2, 4, 2] }}
                 transition={shouldReduceMotion ? undefined : { duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <OptimizedImage
                   src={heroCutouts[0]}
                   alt="Student spotlight"
-                  wrapperSx={{ height: '100%' }}
-                  sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
-                />
-              </Box>
-
-              <Box
-                component={motion.div}
-                sx={{
-                  position: 'absolute',
-                  top: -270,
-                  left: -18,
-                  width: 244,
-                  height: 296,
-                  transform: 'rotate(-5deg)',
-                  filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.28))',
-                }}
-                animate={shouldReduceMotion ? undefined : { y: [0, -14, 0], rotate: [-5, -8, -5] }}
-                transition={shouldReduceMotion ? undefined : { duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <OptimizedImage
-                  src={heroCutouts[1]}
-                  alt="Student cutout"
                   wrapperSx={{ height: '100%' }}
                   sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
                 />
@@ -605,10 +582,10 @@ export default function Hero() {
                 transition={shouldReduceMotion ? undefined : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
                 sx={{
                   position: 'absolute',
-                  top: -248,
-                  right: 18,
-                  width: 184,
-                  p: 1.15,
+                  top: -180,
+                  left: 36,
+                  width: 204,
+                  p: 1.2,
                   borderRadius: 4,
                   border: `1px solid ${alpha(brandColors.white, 0.22)}`,
                   background: alpha('#fafdff', 0.92),
@@ -625,7 +602,7 @@ export default function Hero() {
                     }}
                   >
                     <OptimizedImage
-                      src={heroCutouts[2]}
+                      src={heroCutouts[1]}
                       alt="Learning spotlight"
                       wrapperSx={{ height: '100%' }}
                       sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}

@@ -17,8 +17,6 @@ import Carousel from '../ui/Carousel'
 import achievements from '../../data/achievements'
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../context/LocaleContext'
-import siteAssets from '../../data/siteAssets'
-import OptimizedImage from '../ui/OptimizedImage'
 
 export default function Achievements() {
   const theme = useTheme()
@@ -97,12 +95,6 @@ export default function Achievements() {
 
   return (
     <Box sx={{ ...styles.section, position: 'relative', overflow: 'hidden' }}>
-      <Box sx={{ position: 'absolute', top: 34, right: 28, width: { md: 188, lg: 218 }, opacity: 0.9, pointerEvents: 'none', display: { xs: 'none', md: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroSeven} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
-      <Box sx={{ position: 'absolute', bottom: 26, left: 30, width: { md: 212, lg: 256 }, opacity: 0.86, pointerEvents: 'none', display: { xs: 'none', lg: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroThree} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
       <Container>
         <Box sx={styles.headingWrap}>
           <Typography variant="overline" color="warning.main" fontWeight={700}>

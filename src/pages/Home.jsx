@@ -14,6 +14,7 @@ import {
 } from '@mui/material'
 import {
   ArrowUpRight,
+  Award,
   BookOpenCheck,
   Building2,
   CalendarDays,
@@ -22,8 +23,10 @@ import {
   Eye,
   FileText,
   Flag,
+  GraduationCap,
   Laptop,
   MapPin,
+  Medal,
   Music4,
   Phone,
   ShieldCheck,
@@ -53,9 +56,7 @@ const facilityIcons = [Laptop, BookOpenCheck, Building2, Music4, ShieldCheck, Tr
 const activityTones = activityToneTokens
 const studentCutoutParade = [
   siteAssets.images.studentHeroOne,
-  siteAssets.images.studentHeroFour,
   siteAssets.images.studentHeroSeven,
-  siteAssets.images.studentHeroTen,
 ]
 
 const studentShowcaseTiles = [
@@ -73,6 +74,155 @@ const studentShowcaseTiles = [
     image: siteAssets.images.studentGroupFun,
     title: 'Campus Life',
     tone: 'linear-gradient(135deg, rgba(84,180,53,0.16), rgba(255,255,255,0.02))',
+  },
+]
+
+const teacherProfiles = [
+  {
+    name: 'Mrs. Anjali Sharma',
+    designation: 'Senior English Faculty',
+    experience: '12+ years',
+    focus: 'Communication skills, debate and literature',
+    image: siteAssets.images.teacherMeeting,
+    accent: '#00a4e4',
+  },
+  {
+    name: 'Mr. Rajeev Singh',
+    designation: 'PGT Mathematics',
+    experience: '10+ years',
+    focus: 'Board exam mentoring and olympiad readiness',
+    image: siteAssets.images.smartClassroom,
+    accent: '#ff671f',
+  },
+  {
+    name: 'Mrs. Neha Verma',
+    designation: 'Primary Coordinator',
+    experience: '14+ years',
+    focus: 'Foundational learning and joyful classrooms',
+    image: siteAssets.images.bestTeacher,
+    accent: '#54b435',
+  },
+  {
+    name: 'Mr. Arvind Kumar',
+    designation: 'Sports Instructor',
+    experience: '9+ years',
+    focus: 'Football, cricket and all-round physical fitness',
+    image: siteAssets.images.campusActivities,
+    accent: '#f0934b',
+  },
+  {
+    name: 'Mrs. Pooja Nair',
+    designation: 'Science Faculty',
+    experience: '11+ years',
+    focus: 'Practical learning, labs and concept clarity',
+    image: siteAssets.images.campusLearning,
+    accent: '#0076b6',
+  },
+  {
+    name: 'Mrs. Kavita Joshi',
+    designation: 'School Counsellor',
+    experience: '8+ years',
+    focus: 'Student wellbeing, confidence and guidance',
+    image: siteAssets.images.teacherConference,
+    accent: '#d7a625',
+  },
+]
+
+const achieverGallery = [
+  {
+    name: 'Aarav Mehta',
+    classLabel: 'Class I Topper',
+    highlight: 'Academic Excellence Award',
+    image: siteAssets.images.bestAward,
+  },
+  {
+    name: 'Diya Chauhan',
+    classLabel: 'Class III Achiever',
+    highlight: 'Creative Writing & Overall Merit',
+    image: siteAssets.images.studentCelebration,
+  },
+  {
+    name: 'Vivaan Saxena',
+    classLabel: 'Class V Topper',
+    highlight: 'Mathematics and Attendance Honour',
+    image: siteAssets.images.studentClassPhoto,
+  },
+  {
+    name: 'Myra Kapoor',
+    classLabel: 'Class VII Achiever',
+    highlight: 'Science Project Recognition',
+    image: siteAssets.images.studentConference,
+  },
+  {
+    name: 'Aditya Rana',
+    classLabel: 'Class IX Topper',
+    highlight: 'Scholastic Excellence Medal',
+    image: siteAssets.images.studentDigitalLearning,
+  },
+  {
+    name: 'Saanvi Patel',
+    classLabel: 'Class XII Honouree',
+    highlight: 'Board Performance & Leadership',
+    image: siteAssets.images.studentUnityRun,
+  },
+]
+
+const activityShowcase = [
+  {
+    title: 'Football',
+    description: 'Structured drills, inter-house matches and teamwork-building sessions.',
+    image: siteAssets.images.campusActivities,
+    icon: Trophy,
+    accent: '#00a4e4',
+  },
+  {
+    title: 'Hockey',
+    description: 'Fast-paced field practice focused on control, stamina and coordination.',
+    image: siteAssets.images.studentCampusEvent,
+    icon: Flag,
+    accent: '#0076b6',
+  },
+  {
+    title: 'Cricket',
+    description: 'Net practice, match awareness and sportsmanship from junior to senior grades.',
+    image: siteAssets.images.studentGroupFun,
+    icon: Medal,
+    accent: '#ff671f',
+  },
+  {
+    title: 'Volleyball',
+    description: 'Serve, rally and movement drills that keep students active and confident.',
+    image: siteAssets.images.studentActivities,
+    icon: Award,
+    accent: '#f0934b',
+  },
+  {
+    title: 'Tennis',
+    description: 'Skill development sessions that improve agility, focus and discipline.',
+    image: siteAssets.images.studentGroupStudy,
+    icon: Star,
+    accent: '#54b435',
+  },
+  {
+    title: 'Carrom',
+    description: 'Indoor recreation that sharpens patience, touch and tactical thinking.',
+    image: siteAssets.images.studentClass,
+    icon: Compass,
+    accent: '#d7a625',
+  },
+  {
+    title: 'Chess',
+    description: 'Strategic play sessions that strengthen concentration and decision making.',
+    image: siteAssets.images.studentDigitalLearning,
+    icon: GraduationCap,
+    accent: '#1d213c',
+  },
+  {
+    title: 'Fun Activities',
+    description: 'Yoga, music, clubs, assemblies and joyful campus events round out the week.',
+    image: siteAssets.images.studentYoga,
+    icon: Music4,
+    accent: '#6a4c93',
   },
 ]
 
@@ -414,10 +564,10 @@ export default function Home() {
                     <Box
                       key={image}
                       sx={{
-                        width: { xs: 104, sm: 128, md: 144 },
-                        height: { xs: 144, sm: 178, md: 194 },
+                        width: { xs: 112, sm: 136, md: 154 },
+                        height: { xs: 148, sm: 184, md: 204 },
                         filter: 'drop-shadow(0 18px 28px rgba(17, 26, 36, 0.18))',
-                        transform: { xs: 'none', sm: `translateY(${index % 2 === 0 ? 0 : 18}px) rotate(${index % 2 === 0 ? -3 : 3}deg)` },
+                        transform: { xs: 'none', sm: `rotate(${index === 0 ? -2 : 2}deg)` },
                       }}
                     >
                       <OptimizedImage
@@ -450,7 +600,7 @@ export default function Home() {
                   }}
                 >
                   <OptimizedImage
-                    src={siteAssets.images.studentClassPhoto}
+                    src={siteAssets.images.studentUnityRun}
                     alt="Student collage spotlight"
                     wrapperSx={{ height: '100%' }}
                     sx={{ height: '100%' }}
@@ -519,24 +669,6 @@ export default function Home() {
 
       <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: { xs: -200, lg: -300 },
-              left: 0,
-              width: { xs: 180, lg: 244 },
-              height: { xs: 200, lg: 296 },
-              transform: 'rotate(-5deg)',
-              filter: 'drop-shadow(0 22px 34px rgba(17, 26, 36, 0.28))',
-            }}
-          >
-            <OptimizedImage
-              src={siteAssets.images.studentHeroEleven}
-              alt="Student cutout"
-              wrapperSx={{ height: '100%' }}
-              sx={{ height: '100%', objectFit: 'contain', objectPosition: 'center bottom' }}
-            />
-          </Box>
           <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={3} sx={{ mb: 5 }}>
             <Box>
               <Eyebrow>{t('Quick Navigation')}</Eyebrow>
@@ -1147,159 +1279,410 @@ export default function Home() {
         </Container>
       </Box>
 
-      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 7, md: 10 }, px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Box component="section" sx={{ ...sectionShell(theme, 'soft'), py: { xs: 5, md: 7 }, px: { xs: 2, sm: 3, lg: 4 } }}>
         <Container>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1.1fr 0.9fr' }, gap: 3 }}>
+          <Stack spacing={3}>
             <Paper
+              id="teachers"
               sx={{
                 ...glassCardSx(theme),
                 p: { xs: 3, sm: 4 },
+                scrollMarginTop: { xs: 96, lg: 152 },
                 background:
                   theme.palette.mode === 'dark'
-                    ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(52,70,86,0.94))'
-                    : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(255,215,7,0.08))',
+                    ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(21,56,78,0.9))'
+                    : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(232,247,252,0.96), rgba(255,243,229,0.94))',
               }}
             >
-              <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
-                <CalendarDays size={20} color="#ff671f" />
-                <Eyebrow>{t('Notice Board')}</Eyebrow>
-                <Chip
-                  label={source === 'live' ? t('Live Feed') : t('School Archive')}
-                  sx={{
-                    borderRadius: 4,
-                    bgcolor: alpha('#ffd707', 0.18),
-                    color: 'text.primary',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.16em',
-                  }}
-                />
+              <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={2.5} sx={{ mb: 3.5 }}>
+                <Box>
+                  <Eyebrow>{t('Meet Our Teachers')}</Eyebrow>
+                  <Typography variant="h2" sx={{ mt: 1.4, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2.2rem', sm: '3rem' }, maxWidth: 720 }}>
+                    {t('Dedicated mentors guiding every learner with care.')}
+                  </Typography>
+                </Box>
+                <Typography sx={{ maxWidth: 500, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                  {t('A warm team of educators, coordinators and activity leaders supporting academic progress, confidence and student wellbeing.')}
+                </Typography>
               </Stack>
 
-              <Stack spacing={2}>
-                {liveNotices.slice(0, 4).map((notice, index) => (
+              <Carousel autoPlay interval={3400} ariaLabel={t('Meet our teachers')}>
+                {teacherProfiles.map((teacher, index) => (
                   <motion.div
-                    key={notice.title}
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Box
-                      component={Link}
-                      to={notice.to}
-                      sx={{
-                        display: 'block',
-                        borderRadius: 4,
-                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
-                        p: 2.5,
-                        textDecoration: 'none',
-                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
-                        transition: 'transform 0.25s ease, border-color 0.25s ease',
-                        '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#ff671f', 0.3) },
-                      }}
-                    >
-                      <Stack direction="row" flexWrap="wrap" gap={1.25} alignItems="center">
-                        <Chip
-                          label={notice.category}
-                          sx={{
-                            borderRadius: 4,
-                            color: brandColors.white,
-                            background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
-                            fontWeight: 800,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.18em',
-                          }}
-                        />
-                        <Typography sx={{ fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
-                          {notice.date}
-                        </Typography>
-                      </Stack>
-                      <Typography variant="h5" sx={{ mt: 2, fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
-                        {notice.title}
-                      </Typography>
-                      <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
-                        {notice.excerpt}
-                      </Typography>
-                    </Box>
-                  </motion.div>
-                ))}
-              </Stack>
-
-              <Box sx={{ mt: 3 }}>
-                <Button to="/notice-board" variant="outline">
-                  {t('Explore All Notices')}
-                </Button>
-              </Box>
-            </Paper>
-
-            <Paper
-              sx={{
-                ...glassCardSx(theme),
-                p: { xs: 3, sm: 4 },
-                background:
-                  theme.palette.mode === 'dark'
-                    ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(0,212,250,0.08))'
-                    : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(0,212,250,0.08))',
-              }}
-            >
-              <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
-                <DownloadCloud size={20} color="#00d4fa" />
-                <Eyebrow>{t('Downloads')}</Eyebrow>
-              </Stack>
-
-              <Stack spacing={2}>
-                {liveDownloads.map((file, index) => (
-                  <motion.div
-                    key={file.label}
-                    initial={{ opacity: 0, y: 20 }}
+                    key={teacher.name}
+                    data-carousel-item
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={shouldReduceMotion ? undefined : { y: -8, rotate: index % 2 === 0 ? -0.6 : 0.6, scale: 1.01 }}
+                    style={{ width: 'min(340px, calc(100vw - 2.5rem))', flexShrink: 0 }}
                   >
-                    <Box
-                      component="a"
-                      href={file.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Paper
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        gap: 2,
+                        p: 1.5,
                         borderRadius: 4,
                         border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
-                        px: 2.5,
-                        py: 2,
-                        textDecoration: 'none',
-                        boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
-                        transition: 'transform 0.25s ease, border-color 0.25s ease',
-                        '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#00d4fa', 0.3) },
+                        bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.48) : alpha(brandColors.white, 0.9),
+                        boxShadow: '0 18px 36px rgba(17, 26, 36, 0.1)',
+                        overflow: 'hidden',
                       }}
                     >
-                      <Box>
-                        <Typography sx={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
-                          {file.category}
+                      <Box sx={{ position: 'relative' }}>
+                        <OptimizedImage
+                          src={teacher.image}
+                          alt={teacher.name}
+                          wrapperSx={{ borderRadius: 4 }}
+                          sx={{ height: 260, borderRadius: 4 }}
+                        />
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            inset: 0,
+                            borderRadius: 4,
+                            background: `linear-gradient(180deg, rgba(17,26,36,0.04), rgba(17,26,36,0.32), rgba(17,26,36,0.92))`,
+                          }}
+                        />
+                        <Chip
+                          label={teacher.experience}
+                          sx={{
+                            position: 'absolute',
+                            top: 14,
+                            left: 14,
+                            borderRadius: 4,
+                            bgcolor: alpha(brandColors.white, 0.16),
+                            color: brandColors.white,
+                            border: `1px solid ${alpha(brandColors.white, 0.2)}`,
+                            fontWeight: 800,
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                          }}
+                        />
+                        <Box sx={{ position: 'absolute', left: 18, right: 18, bottom: 18, color: brandColors.white }}>
+                          <Typography sx={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.2 }}>
+                            {t(teacher.name)}
+                          </Typography>
+                          <Typography sx={{ mt: 0.7, fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: alpha(brandColors.white, 0.76) }}>
+                            {t(teacher.designation)}
+                          </Typography>
+                        </Box>
+                      </Box>
+
+                      <Box sx={{ px: 0.75, pt: 2, pb: 0.5 }}>
+                        <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: teacher.accent }}>
+                          {t('Teaching Focus')}
                         </Typography>
-                        <Typography sx={{ mt: 0.75, fontSize: '0.95rem', fontWeight: 700, color: 'text.primary' }}>
-                          {file.label}
+                        <Typography sx={{ mt: 1, fontSize: '0.94rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                          {t(teacher.focus)}
                         </Typography>
                       </Box>
-                      <ArrowUpRight size={16} color={theme.palette.mode === 'dark' ? '#ffd707' : theme.palette.primary.light} />
-                    </Box>
+                    </Paper>
                   </motion.div>
                 ))}
-              </Stack>
-
-              <Box sx={{ mt: 3 }}>
-                <Button to="/downloads" variant="outline">
-                  {t('Open Download Centre')}
-                </Button>
-              </Box>
+              </Carousel>
             </Paper>
-          </Box>
+
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '0.92fr 1.08fr' }, gap: 3, alignItems: 'start' }}>
+              <Paper
+                id="achievers"
+                sx={{
+                  ...glassCardSx(theme),
+                  p: { xs: 3, sm: 4 },
+                  scrollMarginTop: { xs: 96, lg: 152 },
+                }}
+              >
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
+                  <Trophy size={20} color="#ff671f" />
+                  <Eyebrow>{t('Student Achievers')}</Eyebrow>
+                </Stack>
+                <Typography variant="h3" sx={{ fontWeight: 800, lineHeight: 1, fontSize: { xs: '1.8rem', sm: '2.3rem' }, maxWidth: 580 }}>
+                  {t('Rewarded students and toppers from across classes.')}
+                </Typography>
+                <Typography sx={{ mt: 1.5, fontSize: '0.94rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                  {t('Celebrate our bright learners, consistent performers and students who make the school community proud.')}
+                </Typography>
+
+                <Box sx={{ mt: 3 }}>
+                  <Carousel autoPlay interval={3600} ariaLabel={t('Student achievers')}>
+                    {achieverGallery.map((student, index) => (
+                      <motion.div
+                        key={student.name}
+                        data-carousel-item
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.65, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                        whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.01 }}
+                        style={{ width: 'min(290px, calc(100vw - 3rem))', flexShrink: 0 }}
+                      >
+                        <Paper
+                          sx={{
+                            p: 1.25,
+                            borderRadius: 4,
+                            border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.42) : alpha(brandColors.white, 0.9),
+                            boxShadow: '0 14px 30px rgba(17, 26, 36, 0.08)',
+                          }}
+                        >
+                          <OptimizedImage
+                            src={student.image}
+                            alt={student.name}
+                            wrapperSx={{ borderRadius: 4 }}
+                            sx={{ height: 188, borderRadius: 4 }}
+                          />
+                          <Box sx={{ px: 0.75, pt: 1.8, pb: 0.5 }}>
+                            <Chip
+                              label={t(student.classLabel)}
+                              sx={{
+                                borderRadius: 4,
+                                bgcolor: alpha('#ffd707', 0.18),
+                                color: 'text.primary',
+                                fontWeight: 800,
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.14em',
+                              }}
+                            />
+                            <Typography sx={{ mt: 1.4, fontSize: '1rem', fontWeight: 800, color: 'text.primary' }}>
+                              {t(student.name)}
+                            </Typography>
+                            <Typography sx={{ mt: 0.8, fontSize: '0.9rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                              {t(student.highlight)}
+                            </Typography>
+                          </Box>
+                        </Paper>
+                      </motion.div>
+                    ))}
+                  </Carousel>
+                </Box>
+              </Paper>
+
+              <Paper
+                id="activities"
+                sx={{
+                  ...glassCardSx(theme),
+                  p: { xs: 3, sm: 4 },
+                  scrollMarginTop: { xs: 96, lg: 152 },
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? 'linear-gradient(135deg, rgba(14,20,24,0.98), rgba(29,33,60,0.94), rgba(52,70,86,0.92))'
+                      : 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(235,249,245,0.94), rgba(232,247,252,0.96))',
+                }}
+              >
+                <Stack direction={{ xs: 'column', lg: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', lg: 'flex-end' }} spacing={2.5} sx={{ mb: 3 }}>
+                  <Box>
+                    <Eyebrow>{t('School Activities')}</Eyebrow>
+                    <Typography variant="h2" sx={{ mt: 1.4, fontWeight: 800, lineHeight: 0.95, fontSize: { xs: '2rem', sm: '2.5rem' }, maxWidth: 640 }}>
+                      {t('Sports, strategy games and fun campus experiences for every child.')}
+                    </Typography>
+                  </Box>
+                  <Typography sx={{ maxWidth: 460, fontSize: '0.95rem', lineHeight: 1.8, ...mutedTextSx(theme) }}>
+                    {t('From football and hockey to chess, carrom, yoga and creative activities, students get regular chances to move, play and discover their interests.')}
+                  </Typography>
+                </Stack>
+
+                <Carousel autoPlay interval={3300} ariaLabel={t('School activities showcase')}>
+                  {activityShowcase.map((item, index) => {
+                    const Icon = item.icon
+
+                    return (
+                      <motion.div
+                        key={item.title}
+                        data-carousel-item
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.65, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                        whileHover={shouldReduceMotion ? undefined : { y: -6, rotate: index % 2 === 0 ? -0.5 : 0.5 }}
+                        style={{ width: 'min(300px, calc(100vw - 3rem))', flexShrink: 0 }}
+                      >
+                        <Paper
+                          sx={{
+                            p: 1.3,
+                            borderRadius: 4,
+                            overflow: 'hidden',
+                            minHeight: '100%',
+                            border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                            bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.42) : alpha(brandColors.white, 0.9),
+                            boxShadow: '0 14px 30px rgba(17, 26, 36, 0.08)',
+                          }}
+                        >
+                          <OptimizedImage
+                            src={item.image}
+                            alt={item.title}
+                            wrapperSx={{ borderRadius: 4 }}
+                            sx={{ height: 164, borderRadius: 4 }}
+                          />
+                          <Stack direction="row" spacing={1.2} alignItems="center" sx={{ px: 0.6, pt: 1.8 }}>
+                            <Avatar sx={{ width: 42, height: 42, borderRadius: 3, bgcolor: alpha(item.accent, 0.14), color: item.accent }}>
+                              <Icon size={18} />
+                            </Avatar>
+                            <Typography sx={{ fontSize: '1rem', fontWeight: 800, color: 'text.primary' }}>
+                              {t(item.title)}
+                            </Typography>
+                          </Stack>
+                          <Typography sx={{ px: 0.6, pt: 1.2, fontSize: '0.9rem', lineHeight: 1.75, ...mutedTextSx(theme) }}>
+                            {t(item.description)}
+                          </Typography>
+                        </Paper>
+                      </motion.div>
+                    )
+                  })}
+                </Carousel>
+              </Paper>
+            </Box>
+
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', xl: '1fr 1fr' }, gap: 3, alignItems: 'start' }}>
+              <Paper
+                sx={{
+                  ...glassCardSx(theme),
+                  p: { xs: 3, sm: 4 },
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(52,70,86,0.94))'
+                      : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(255,215,7,0.08))',
+                }}
+              >
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
+                  <CalendarDays size={20} color="#ff671f" />
+                  <Eyebrow>{t('Notice Board')}</Eyebrow>
+                  <Chip
+                    label={source === 'live' ? t('Live Feed') : t('School Archive')}
+                    sx={{
+                      borderRadius: 4,
+                      bgcolor: alpha('#ffd707', 0.18),
+                      color: 'text.primary',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.16em',
+                    }}
+                  />
+                </Stack>
+
+                <Stack spacing={2}>
+                  {liveNotices.slice(0, 4).map((notice, index) => (
+                    <motion.div
+                      key={notice.title}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Box
+                        component={Link}
+                        to={notice.to}
+                        sx={{
+                          display: 'block',
+                          borderRadius: 4,
+                          border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
+                          p: 2.25,
+                          textDecoration: 'none',
+                          boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                          transition: 'transform 0.25s ease, border-color 0.25s ease',
+                          '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#ff671f', 0.3) },
+                        }}
+                      >
+                        <Stack direction="row" flexWrap="wrap" gap={1.25} alignItems="center">
+                          <Chip
+                            label={notice.category}
+                            sx={{
+                              borderRadius: 4,
+                              color: brandColors.white,
+                              background: 'linear-gradient(90deg, #ff671f 0%, #f0934b 100%)',
+                              fontWeight: 800,
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.18em',
+                            }}
+                          />
+                          <Typography sx={{ fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                            {notice.date}
+                          </Typography>
+                        </Stack>
+                        <Typography variant="h5" sx={{ mt: 2, fontWeight: 800, textTransform: 'uppercase', color: 'text.primary' }}>
+                          {notice.title}
+                        </Typography>
+                        <Typography sx={{ mt: 1, fontSize: '0.92rem', lineHeight: 1.7, ...mutedTextSx(theme) }}>
+                          {notice.excerpt}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  ))}
+                </Stack>
+
+                <Box sx={{ mt: 3 }}>
+                  <Button to="/notice-board" variant="outline">
+                    {t('Explore All Notices')}
+                  </Button>
+                </Box>
+              </Paper>
+
+              <Paper
+                sx={{
+                  ...glassCardSx(theme),
+                  p: { xs: 3, sm: 4 },
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? 'linear-gradient(135deg, rgba(14,20,24,0.96), rgba(29,33,60,0.94), rgba(0,212,250,0.08))'
+                      : 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.92), rgba(0,212,250,0.08))',
+                }}
+              >
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
+                  <DownloadCloud size={20} color="#00d4fa" />
+                  <Eyebrow>{t('Downloads')}</Eyebrow>
+                </Stack>
+
+                <Stack spacing={2}>
+                  {liveDownloads.map((file, index) => (
+                    <motion.div
+                      key={file.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Box
+                        component="a"
+                        href={file.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 2,
+                          borderRadius: 4,
+                          border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                          bgcolor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.dark, 0.46) : alpha(brandColors.white, 0.88),
+                          px: 2.25,
+                          py: 1.85,
+                          textDecoration: 'none',
+                          boxShadow: '0 12px 28px rgba(17, 26, 36, 0.08)',
+                          transition: 'transform 0.25s ease, border-color 0.25s ease',
+                          '&:hover': { transform: 'translateY(-3px)', borderColor: alpha('#00d4fa', 0.3) },
+                        }}
+                      >
+                        <Box>
+                          <Typography sx={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'text.secondary' }}>
+                            {file.category}
+                          </Typography>
+                          <Typography sx={{ mt: 0.75, fontSize: '0.95rem', fontWeight: 700, color: 'text.primary' }}>
+                            {file.label}
+                          </Typography>
+                        </Box>
+                        <ArrowUpRight size={16} color={theme.palette.mode === 'dark' ? '#ffd707' : theme.palette.primary.light} />
+                      </Box>
+                    </motion.div>
+                  ))}
+                </Stack>
+
+                <Box sx={{ mt: 3 }}>
+                  <Button to="/downloads" variant="outline">
+                    {t('Open Download Centre')}
+                  </Button>
+                </Box>
+              </Paper>
+            </Box>
+          </Stack>
         </Container>
       </Box>
 

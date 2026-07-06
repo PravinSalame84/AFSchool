@@ -26,8 +26,6 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { useLocale } from '../../context/LocaleContext'
-import siteAssets from '../../data/siteAssets'
-import OptimizedImage from '../ui/OptimizedImage'
 
 const iconMap = {
   campus: Building2,
@@ -63,12 +61,6 @@ export default function Initiatives() {
         bgcolor: alpha(theme.palette.primary.main, 0.03),
       }}
     >
-      <Box sx={{ position: 'absolute', top: { xs: 24, md: 30 }, right: { xs: 10, md: 26 }, width: { xs: 58, md: 92 }, opacity: 0.92, pointerEvents: 'none' }}>
-        <OptimizedImage src={siteAssets.images.studentHeroTwo} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
-      <Box sx={{ position: 'absolute', bottom: { xs: 18, md: 20 }, left: { xs: 8, md: 24 }, width: { xs: 52, md: 84 }, opacity: 0.88, pointerEvents: 'none', display: { xs: 'none', sm: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroEight} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
       <Container maxWidth="lg">
         {/* Heading */}
         <RevealOnScroll>

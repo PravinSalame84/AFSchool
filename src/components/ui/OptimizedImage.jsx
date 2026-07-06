@@ -30,7 +30,7 @@ function OptimizedImage({
       {!loaded && (
         <Skeleton
           variant="rectangular"
-          animation="pulse"
+          animation={false}
           sx={{
             position: 'absolute',
             inset: 0,
@@ -51,14 +51,15 @@ function OptimizedImage({
         onError={() => setLoaded(true)}
         className={className}
         sx={{
+          display: 'block',
           width: '100%',
           height: '100%',
           opacity: loaded ? 1 : 0,
-          transition: 'opacity 500ms ease',
+          transition: 'opacity 220ms ease',
           objectFit: 'cover',
-          contentVisibility: priority ? 'visible' : 'auto',
-          containIntrinsicSize: priority ? 'auto' : '320px',
           willChange: loaded ? 'auto' : 'opacity',
+          backfaceVisibility: 'hidden',
+          transform: 'translateZ(0)',
           ...(Array.isArray(sx) ? Object.assign({}, ...sx) : sx),
         }}
         {...rest}

@@ -1,6 +1,16 @@
 const navigation = [
   { label: 'Home', to: '/' },
   {
+    label: 'Highlights',
+    to: '/#teachers',
+    children: [
+      { label: 'Meet Our Teachers', to: '/#teachers' },
+      { label: 'Student Achievers', to: '/#achievers' },
+      { label: 'School Activities', to: '/#activities' },
+      { label: 'Campus Gallery', to: '/gallery' },
+    ],
+  },
+  {
     label: 'About',
     to: '/about',
     children: [

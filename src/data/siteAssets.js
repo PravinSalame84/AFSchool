@@ -5,6 +5,7 @@ const siteAssets = {
     schoolGate: '/media/school/school-gate.jpg',
     unityRun: '/media/school/unity-run-collage.png',
     bestAward: '/media/school/best-award.png',
+    bestTeacher: '/media/school/best-teacher.png',
     campusLearning: '/media/school/campus-learning.jpg',
     chief: '/media/school/chief.jpg',
     teacherMeeting: '/media/school/teacher-meeting.jpeg',

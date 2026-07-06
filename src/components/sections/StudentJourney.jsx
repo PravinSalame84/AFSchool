@@ -13,8 +13,6 @@ import Stack from '../ui/Stack'
 import studentJourney from '../../data/studentJourney'
 import { brandColors, gradientTokens, studentJourneyColors } from '../../theme/colorTokens'
 import { useLocale } from '../../context/LocaleContext'
-import siteAssets from '../../data/siteAssets'
-import OptimizedImage from '../ui/OptimizedImage'
 
 const colors = studentJourneyColors
 
@@ -35,12 +33,6 @@ export default function StudentJourney() {
             : 'linear-gradient(180deg, #F5FAFF 0%, #EEF6FF 100%)',
       })}
     >
-      <Box sx={{ position: 'absolute', top: 34, left: 12, width: { md: 94, lg: 126 }, opacity: 0.9, pointerEvents: 'none', display: { xs: 'none', md: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroOne} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
-      <Box sx={{ position: 'absolute', bottom: 22, right: 24, width: { md: 102, lg: 132 }, opacity: 0.88, pointerEvents: 'none', display: { xs: 'none', lg: 'block' } }}>
-        <OptimizedImage src={siteAssets.images.studentHeroFour} alt="Student cutout" wrapperSx={{ height: '100%' }} sx={{ height: '100%', objectFit: 'contain' }} />
-      </Box>
       <Container maxWidth="lg">
 
         {/* HEADER */}
