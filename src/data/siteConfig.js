@@ -6,9 +6,9 @@
 
 const siteConfig = {
   brandName: 'Air Force School',
-  brandSuffix: 'VayuSena Nagar, Nagpur',
+  brandSuffix: 'Vayusena Nagar, Nagpur',
   shortName: 'AFS Nagpur',
-  tagline: 'Discipline, care and future-ready learning for every child',
+  tagline: 'Discipline, dignity and future-ready learning for every child',
   yearsOfExperience: 58,
   yearFounded: 1968,
 
@@ -26,9 +26,9 @@ const siteConfig = {
   },
 
   cta: {
-    enquire: 'Schedule an Enquiry',
-    brochure: 'Request School Details',
-    admissions: 'Start Admission Enquiry',
+    enquire: 'Enquire Now',
+    brochure: 'Download Brochure',
+    admissions: 'Admissions',
   },
 
   // Toggle features on/off without deleting code — flip to false to hide a

@@ -1,74 +1,135 @@
-import { GraduationCap, Sparkles, Users } from 'lucide-react'
-import Container from '../ui/Container'
-import Button from '../ui/Button'
-import BlobIcon from '../ui/BlobIcon'
-import siteConfig from '../../data/siteConfig'
-import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { Box, Button, Container, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
+import afsCutoutGroup from '../../assets/images/afs-cutout-group.png'
+
+const heroCutouts = [
+  {
+    src: afsCutoutGroup,
+    alt: 'Air Force School student with books',
+    sx: {
+      right: { xs: '50%', lg: '2%' },
+      transform: { xs: 'translateX(50%)', lg: 'none' },
+      width: { xs: 280, sm: 360, md: 450, lg: 600, xl: 700 },
+      zIndex: 2,
+    },
+  },
+  // {
+  //   src: siteAssets.images.afsCutoutTwo,
+  //   alt: 'Air Force School student with glasses',
+  //   sx: {
+  //     right: { xs: -10, sm: -4, lg: 8 },
+  //     width: { xs: 225, sm: 275, md: 355, lg: 420, xl: 470 },
+  //     zIndex: 3,
+  //   },
+  // },
+]
 
 export default function Hero() {
-  const { openEnquiry } = useEnquiryModal()
-
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-skyback via-skyback to-skyback-soft">
-      {/* decorative background shapes */}
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary-100/40 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 top-1/3 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+    <Box
+      sx={{
+        position: 'relative',
+        mx: { xs: 0, md: 0.5 },
+        minHeight: { xs: 620, sm: 700, md: 760, xl: 820 },
+        overflow: 'hidden',
+        borderBottomLeftRadius: { xs: 18, md: 30 },
+        borderBottomRightRadius: { xs: 18, md: 30 },
+        // background: `linear-gradient(135deg, ${brandColors.navyBlue} 25%, ${brandColors.sky} 60%, ${brandColors.skyBright} 100%)`,
+      }}
+    >
+      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 8, lg: 12, xl: 16 } }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '0.95fr 1.05fr' },
+            alignItems: 'center',
+            minHeight: { xs: 620, sm: 700, md: 760, xl: 820 },
+            gap: { xs: 1, sm: 2, lg: 0 },
+          }}
+        >
+          <Box sx={{ pt: { xs: 7, sm: 8, md: 13 }, pb: { xs: 1, sm: 2, lg: 6 }, maxWidth: 720, textAlign: { xs: 'center', lg: 'left' } }}>
+            <Typography
+              sx={{
+                maxWidth: 700,
+                color: '#ffffff',
+                mx: { xs: 'auto', lg: 0 },
+                fontSize: { xs: '2.2rem', sm: '3rem', md: '4.15rem', xl: '5.35rem' },
+                lineHeight: { xs: 1.04, sm: 1, md: 0.99 },
+                fontWeight: 700,
+                letterSpacing: '-0.025em',
+                fontFamily: 'Georgia, "Times New Roman", serif',
+              }}
+            >
+              Excellence in Education at Air Force School
+            </Typography>
 
-      <Container className="relative grid grid-cols-1 items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-2 lg:px-8 lg:pb-24 lg:pt-16">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-primary-700 shadow-soft backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> {siteConfig.yearsOfExperience}+ Years of Excellence
-          </span>
-
-          <h1 className="mt-5 text-4xl font-extrabold leading-[1.1] text-primary-900 sm:text-5xl lg:text-[3.4rem]">
-            {siteConfig.yearsOfExperience}+ Years of Nurturing{' '}
-            <span className="text-accent-dark">Creative Thinkers</span>
-          </h1>
-
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-primary-600">
-            {siteConfig.tagline} — through a curriculum that balances academic rigour with real-world skills,
-            across {siteConfig.shortName} campuses nationwide.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button size="lg" variant="primary" onClick={() => openEnquiry('Admissions Enquiry')}>
-              {siteConfig.cta.admissions}
+            <Button
+              component={Link}
+              to="/admissions"
+              variant="contained"
+              sx={{
+                mt: { xs: 3, sm: 4, md: 6.5 },
+                minWidth: { xs: '100%', sm: 380, md: 560 },
+                maxWidth: { xs: 360, sm: 410, md: 560 },
+                mx: { xs: 'auto', lg: 0 },
+                px: { xs: 2.2, sm: 3.5 },
+                py: { xs: 1.5, md: 2.2 },
+                bgcolor: '#ffffff',
+                color: '#d27d05',
+                borderRadius: '0.85rem',
+                boxShadow: '0 6px 14px rgba(120, 82, 34, 0.12)',
+                border: '1px solid rgba(178, 126, 43, 0.18)',
+                fontSize: { xs: '0.94rem', sm: '1rem', md: '1.2rem' },
+                fontWeight: 500,
+                textTransform: 'none',
+                justifyContent: { xs: 'center', lg: 'flex-start' },
+                '&:hover': {
+                  bgcolor: '#fff8ee',
+                  color: '#a56f0d',
+                },
+              }}
+            >
+              Admissions Open For AY 2026-27
             </Button>
-            <Button size="lg" variant="outline" to="/why-us" icon={false}>
-              Explore Why Airforce School
-            </Button>
-          </div>
+          </Box>
 
-          <div className="mt-10 flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary-500" />
-              <span className="text-sm font-semibold text-primary-700">210,000+ Students</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <GraduationCap className="h-5 w-5 text-primary-500" />
-              <span className="text-sm font-semibold text-primary-700">142 Campuses</span>
-            </div>
-          </div>
-        </div>
+          <Box
+            sx={{
+              position: 'relative',
+              minHeight: { xs: 300, sm: 360, md: 520, lg: 720, xl: 820 },
+              mt: { xs: 2, lg: 0 },
+            }}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                inset: { xs: '10% 0 0 0', lg: '8% 0 0 8%' },
+                background: 'radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(255,255,255,0.02) 64%)',
+                filter: 'blur(10px)',
+                pointerEvents: 'none',
+              }}
+            />
 
-        <div className="relative mx-auto flex h-[360px] w-full max-w-md items-center justify-center sm:h-[440px]">
-          <div className="absolute inset-0 rounded-[3rem] bg-white/50 shadow-card backdrop-blur" />
-          <div className="relative grid grid-cols-2 gap-6 p-8">
-            <div className="animate-floatY" style={{ animationDelay: '0s' }}>
-              <BlobIcon icon="GraduationCap" tone="dark" size={120} blobIndex={0} />
-            </div>
-            <div className="animate-floatY" style={{ animationDelay: '0.6s' }}>
-              <BlobIcon icon="FlaskConical" tone="accent" size={100} blobIndex={1} />
-            </div>
-            <div className="animate-floatY" style={{ animationDelay: '1.2s' }}>
-              <BlobIcon icon="Globe2" tone="sky" size={100} blobIndex={2} />
-            </div>
-            <div className="animate-floatY" style={{ animationDelay: '0.3s' }}>
-              <BlobIcon icon="BookOpen" tone="primary" size={120} blobIndex={0} />
-            </div>
-          </div>
-        </div>
+            {heroCutouts.map((item) => (
+              <Box
+                key={item.src}
+                component="img"
+                src={item.src}
+                alt={item.alt}
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  userSelect: 'none',
+                  pointerEvents: 'none',
+                  maxWidth: '100%',
+                  height: 'auto',
+                  ...item.sx,
+                }}
+              />
+            ))}
+          </Box>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }
