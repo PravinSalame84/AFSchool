@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <Box component="section" sx={{ minHeight: '60vh', display: 'flex', alignItems: 'center', bgcolor: 'background.default', py: 7 }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
-        <Paper sx={{ maxWidth: 640, mx: 'auto', p: { xs: 4, sm: 5 }, textAlign: 'center', borderRadius: 5, boxShadow: 2 }}>
+        <Paper sx={{ maxWidth: 640, mx: 'auto', p: { xs: 4, sm: 5 }, textAlign: 'center', borderRadius: 1, boxShadow: 2 }}>
           <Box sx={{ display: 'inline-flex', width: 72, height: 72, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.main' }}>
             <Compass size={30} />
           </Box>

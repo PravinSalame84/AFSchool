@@ -155,9 +155,9 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
     const el = trackRef.current
     if (!el) return
     const card = el.querySelector('[data-carousel-item]')
-    const styles = card ? window.getComputedStyle(card) : null
-    const cardGap = styles ? Number.parseFloat(styles.marginRight || '0') : 0
-    const distance = card ? card.offsetWidth + cardGap + 24 : el.clientWidth * 0.8
+    const trackStyles = window.getComputedStyle(el)
+    const gap = Number.parseFloat(trackStyles.columnGap || trackStyles.gap || '0')
+    const distance = card ? card.getBoundingClientRect().width + gap : el.clientWidth * 0.82
     el.scrollBy({ left: dir * distance, behavior: 'smooth' })
   }, [])
 
@@ -245,10 +245,11 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
           sx={{
             width: { xs: 40, sm: 44 },
             height: { xs: 40, sm: 44 },
-            border: '1px solid rgba(17,26,36,0.12)',
-            backgroundColor: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.48)',
+            backgroundColor: 'rgba(255,255,255,0.58)',
+            backdropFilter: 'blur(16px)',
             '&:hover': {
-              backgroundColor: 'primary.main',
+              backgroundColor: 'rgba(17,26,36,0.88)',
               color: '#ffffff',
             },
           }}
@@ -262,10 +263,11 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
           sx={{
             width: { xs: 40, sm: 44 },
             height: { xs: 40, sm: 44 },
-            border: '1px solid rgba(17,26,36,0.12)',
-            backgroundColor: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.48)',
+            backgroundColor: 'rgba(255,255,255,0.58)',
+            backdropFilter: 'blur(16px)',
             '&:hover': {
-              backgroundColor: 'primary.main',
+              backgroundColor: 'rgba(17,26,36,0.88)',
               color: '#ffffff',
             },
           }}

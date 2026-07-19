@@ -38,8 +38,11 @@ const navButtonSx = {
   letterSpacing: '0.12em',
   textTransform: 'uppercase',
   whiteSpace: 'nowrap',
+  backgroundColor: 'rgba(255,255,255,0.18)',
+  border: '1px solid rgba(255,255,255,0.18)',
+  backdropFilter: 'blur(18px)',
   '&:hover': {
-    bgcolor: '#ffffff',
+    bgcolor: 'rgba(255,255,255,0.3)',
     color: '#14222f',
   },
 }
@@ -123,8 +126,8 @@ function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor })
             minWidth: 280,
             p: 1,
             borderRadius: '1.7rem',
-            border: '1px solid rgba(255,255,255,0.7)',
-            bgcolor: 'rgba(255,255,255,0.92)',
+            border: '1px solid rgba(255,255,255,0.24)',
+            bgcolor: 'rgba(231,241,248,0.72)',
             boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.4)',
             backdropFilter: 'blur(24px)',
           },
@@ -277,7 +280,7 @@ function MobileNavItem({ item, pathname, onNavigate }) {
                 sx={{
                   mx: 1,
                   mb: 0.5,
-                  borderRadius: 2,
+                  borderRadius: 1,
                   px: 2,
                   py: 1.1,
                   '&.Mui-selected': {
@@ -334,7 +337,7 @@ export default function Navbar() {
       position="static"
       elevation={0}
       color="transparent"
-      sx={{ px: { xs: 2, sm: 3, lg: 4 }, pt: 2, pb: 2 }}
+      sx={{ px: { xs: 1.25, sm: 3, lg: 4 }, pt: { xs: 1.25, sm: 2 }, pb: { xs: 1.25, sm: 2 } }}
     >
       <Toolbar
         disableGutters
@@ -342,14 +345,14 @@ export default function Navbar() {
           mx: 'auto',
           width: '100%',
           maxWidth: 1280,
-          minHeight: { xs: 76, sm: 84 },
+          minHeight: { xs: 68, sm: 84 },
           justifyContent: 'space-between',
-          gap: 2,
-          px: { xs: 2, sm: 3, lg: 4 },
-          py: 1.5,
+          gap: { xs: 1, sm: 2 },
+          px: { xs: 1.25, sm: 3, lg: 4 },
+          py: { xs: 1, sm: 1.5 },
           borderRadius: '999px',
-          bgcolor: 'rgba(255,255,255,0.7)',
-          border: '1px solid rgba(255,255,255,0.8)',
+          bgcolor: 'rgba(231,241,248,0.4)',
+          border: '1px solid rgba(255,255,255,0.24)',
           backdropFilter: 'blur(24px)',
           boxShadow: '0 18px 40px -28px rgba(22, 30, 37, 0.55)',
         }}
@@ -397,6 +400,8 @@ export default function Navbar() {
           onClick={() => setMobileOpen((prev) => !prev)}
           sx={{
             display: { xs: 'inline-flex', xl: 'none' },
+            width: { xs: 46, sm: 52 },
+            height: { xs: 46, sm: 52 },
             bgcolor: '#111a24',
             color: '#ffffff',
             '&:hover': {
@@ -422,9 +427,10 @@ export default function Navbar() {
         }}
         PaperProps={{
           sx: {
-            width: 'min(85vw, 380px)',
-            p: 3,
-            bgcolor: 'rgba(255,255,255,0.96)',
+            width: 'min(92vw, 380px)',
+            p: { xs: 2.25, sm: 3 },
+            bgcolor: 'rgba(235,243,249,0.78)',
+            borderLeft: '1px solid rgba(255,255,255,0.26)',
             backdropFilter: 'blur(24px)',
             boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.45)',
           },

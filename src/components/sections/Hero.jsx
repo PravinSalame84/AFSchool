@@ -32,12 +32,12 @@ export default function Hero() {
       sx={{
         position: 'relative',
         mx: { xs: 0, md: 0.5 },
-        minHeight: { xs: 620, sm: 700, md: 760, xl: 820 },
+        minHeight: { xs: 600, sm: 700, md: 760, xl: 820 },
         overflow: 'clip',
         borderBottomLeftRadius: { xs: 18, md: 30 },
         borderBottomRightRadius: { xs: 18, md: 30 },
         background:
-          'radial-gradient(circle at top left, rgba(93,138,168,0.3), transparent 30%), radial-gradient(circle at bottom right, rgba(240,147,75,0.18), transparent 24%), linear-gradient(135deg, #1a2735 12%, #2e475a 55%, #6c8aa1 100%)',
+          'radial-gradient(circle at top left, rgba(202,220,234,0.5), transparent 28%), radial-gradient(circle at bottom right, rgba(240,147,75,0.14), transparent 24%), linear-gradient(135deg, #233446 10%, #355469 54%, #7694aa 100%)',
       }}
     >
       <Box
@@ -49,23 +49,23 @@ export default function Hero() {
           pointerEvents: 'none',
         }}
       />
-      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 6, lg: 10, xl: 14 }, minWidth: 0 }}>
+      <Container maxWidth={false} sx={{ px: { xs: 1.5, sm: 3, md: 6, lg: 10, xl: 14 }, minWidth: 0 }}>
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', lg: '0.95fr 1.05fr' },
             alignItems: 'center',
-            minHeight: { xs: 620, sm: 700, md: 760, xl: 820 },
+            minHeight: { xs: 600, sm: 700, md: 760, xl: 820 },
             gap: { xs: 2.5, sm: 2.5, lg: 0 },
           }}
         >
-          <Box sx={{ pt: { xs: 7, sm: 8, md: 13 }, pb: { xs: 2, sm: 2, lg: 6 }, maxWidth: { xs: '100%', lg: 760 }, textAlign: { xs: 'center', lg: 'left' }, minWidth: 0 }}>
+          <Box sx={{ pt: { xs: 6, sm: 8, md: 13 }, pb: { xs: 2, sm: 2, lg: 6 }, maxWidth: { xs: '100%', lg: 760 }, textAlign: { xs: 'center', lg: 'left' }, minWidth: 0 }}>
             <Typography
               sx={{
                 color: 'rgba(255,255,255,0.72)',
-                fontSize: { xs: '0.72rem', sm: '0.82rem' },
+                fontSize: { xs: '0.68rem', sm: '0.82rem' },
                 fontWeight: 800,
-                letterSpacing: { xs: '0.18em', sm: '0.24em' },
+                letterSpacing: { xs: '0.14em', sm: '0.24em' },
                 textTransform: 'uppercase',
               }}
             >
@@ -77,11 +77,12 @@ export default function Hero() {
                 color: '#ffffff',
                 mx: { xs: 'auto', lg: 0 },
                 mt: 1.5,
-                fontSize: { xs: '1.95rem', sm: '2.8rem', md: '4rem', xl: '5rem' },
-                lineHeight: { xs: 1.08, sm: 1, md: 0.95 },
+                fontSize: { xs: '1.72rem', sm: '2.55rem', md: '4rem', xl: '5rem' },
+                lineHeight: { xs: 1.1, sm: 1, md: 0.95 },
                 fontWeight: 700,
                 letterSpacing: '-0.025em',
                 fontFamily: 'Georgia, "Times New Roman", serif',
+                textWrap: 'balance',
               }}
             >
               {schoolContent.hero.title}
@@ -92,7 +93,7 @@ export default function Hero() {
                 maxWidth: 620,
                 mx: { xs: 'auto', lg: 0 },
                 color: 'rgba(255,255,255,0.78)',
-                fontSize: { xs: '0.92rem', sm: '1rem', md: '1.05rem' },
+                fontSize: { xs: '0.88rem', sm: '1rem', md: '1.05rem' },
                 lineHeight: { xs: 1.7, sm: 1.8 },
               }}
             >
@@ -120,8 +121,10 @@ export default function Hero() {
                     fontSize: { xs: '0.7rem', sm: '0.78rem' },
                     fontWeight: 700,
                     backdropFilter: 'blur(18px)',
+                    maxWidth: '100%',
                     '& .MuiChip-label': {
                       px: { xs: 1.1, sm: 1.5 },
+                      whiteSpace: 'normal',
                     },
                   }}
                 />
@@ -141,6 +144,7 @@ export default function Hero() {
                 sx={{
                   width: { xs: '100%', sm: 'auto' },
                   minWidth: { xs: '100%', sm: 250, md: 320 },
+                  maxWidth: { xs: '100%', sm: 'none' },
                   px: { xs: 2.2, sm: 3.5 },
                   py: { xs: 1.4, md: 1.8 },
                   bgcolor: '#ffffff',
@@ -167,6 +171,7 @@ export default function Hero() {
                 sx={{
                   width: { xs: '100%', sm: 'auto' },
                   minWidth: { xs: '100%', sm: 210 },
+                  maxWidth: { xs: '100%', sm: 'none' },
                   px: 3.25,
                   py: 1.55,
                   borderRadius: '0.95rem',
@@ -190,7 +195,7 @@ export default function Hero() {
                 display: 'grid',
                 gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' },
                 gap: 1.5,
-                maxWidth: 560,
+                maxWidth: { xs: '100%', sm: 560 },
                 mx: { xs: 'auto', lg: 0 },
               }}
             >
@@ -203,7 +208,7 @@ export default function Hero() {
           <Box
             sx={{
               position: 'relative',
-              minHeight: { xs: 220, sm: 320, md: 520, lg: 720, xl: 820 },
+              minHeight: { xs: 200, sm: 320, md: 520, lg: 720, xl: 820 },
               mt: { xs: 1, lg: 0 },
             }}
           >
@@ -247,7 +252,7 @@ function PaperStat({ label, value }) {
       sx={{
         px: 2,
         py: 1.6,
-        borderRadius: 3,
+        borderRadius: 1,
         backgroundColor: 'rgba(255,255,255,0.1)',
         border: '1px solid rgba(255,255,255,0.16)',
         backdropFilter: 'blur(18px)',

@@ -89,7 +89,7 @@ export default function Locations() {
           <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 2.5 }}>
             {campuses.map((c, i) => (
               <RevealOnScroll key={`${c.school}-${i}`} delay={(i % 6) * 70}>
-                <Paper sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3, borderRadius: 4, boxShadow: 2 }}>
+                <Paper sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3, borderRadius: 1, boxShadow: 2 }}>
                   <Box sx={{ display: 'inline-flex', width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: '#d7eff6', color: 'primary.light' }}>
                     <MapPin size={20} />
                   </Box>

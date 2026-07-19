@@ -23,7 +23,7 @@ export default function Philosophy() {
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 }, textAlign: 'center' }}>
         <RevealOnScroll>
           <Typography sx={{ mx: 'auto', maxWidth: 760, color: '#fff', fontSize: { xs: '1.8rem', sm: '2.2rem' }, fontWeight: 700, lineHeight: 1.3 }}>
-            <Box component="img" src="/media/school/teacher2.png" alt="About Snapshot" sx={{ width: '100%', maxWidth: 750, mb: 3, borderRadius: 3, boxShadow: 5 }} />
+            <Box component="img" src="/media/school/teacher2.png" alt="About Snapshot" sx={{ width: '100%', maxWidth: 750, mb: 3, borderRadius: 1, boxShadow: 5 }} />
             Because we believe your child is{' '}
             <Box component="span" sx={{ color: 'secondary.main' }}>our responsibility</Box> - we groom, we nurture.
           </Typography>
@@ -32,7 +32,7 @@ export default function Philosophy() {
         <Box sx={{ mx: 'auto', mt: 6, maxWidth: 960, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
           {pillars.map((p, i) => (
             <RevealOnScroll key={p.title} delay={i * 120}>
-              <Box sx={{ borderRadius: 3, bgcolor: 'rgba(255,255,255,0.05)', p: 3.5, textAlign: 'left', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Box sx={{ borderRadius: 1, bgcolor: 'rgba(255,255,255,0.05)', p: 3.5, textAlign: 'left', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <p.icon size={32} color="#f0934b" />
                 <Typography sx={{ mt: 2, color: '#fff', fontSize: '1.125rem', fontWeight: 700 }}>{p.title}</Typography>
                 <Typography sx={{ mt: 1.25, color: 'rgba(215,239,246,0.75)', fontSize: '0.9rem', lineHeight: 1.8 }}>{p.description}</Typography>

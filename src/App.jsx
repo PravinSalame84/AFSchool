@@ -11,6 +11,7 @@ import Admissions from './pages/Admissions'
 import Locations from './pages/Locations'
 import Blog from './pages/Blog'
 import Alumni from './pages/Alumni'
+import Careers from './pages/Careers'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Terms from './pages/Terms'
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/locations" element={<Locations />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/alumni" element={<Alumni />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />

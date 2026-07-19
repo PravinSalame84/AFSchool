@@ -90,7 +90,7 @@ export default function Admissions() {
               />
             </RevealOnScroll>
             <RevealOnScroll delay={100}>
-              <Paper sx={{ p: { xs: 3, sm: 4 }, borderRadius: 5, boxShadow: 5 }}>
+              <Paper sx={{ p: { xs: 3, sm: 4 }, borderRadius: 1, boxShadow: 5 }}>
                 <EnquiryFormFields context="Admissions Enquiry" />
               </Paper>
             </RevealOnScroll>

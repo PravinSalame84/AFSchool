@@ -43,7 +43,7 @@ export default function WhyUs() {
                   sx={{
                     flexShrink: 0,
                     border: 0,
-                    borderRadius: 3,
+                    borderRadius: 1,
                     px: 2.5,
                     py: 1.6,
                     textAlign: 'left',
@@ -61,7 +61,7 @@ export default function WhyUs() {
             </Box>
 
             <RevealOnScroll key={current.id}>
-              <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 5, boxShadow: 5 }}>
+              <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 1, boxShadow: 5 }}>
                 <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'auto 1fr' }, alignItems: 'start', gap: 4 }}>
                   <BlobIcon icon="Lightbulb" tone="accent" size={88} />
                   <Box>

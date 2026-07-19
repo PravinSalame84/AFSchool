@@ -13,7 +13,9 @@ export default function Select({ label, error, required, options = [], placehold
       className={className}
       sx={{
         '& .MuiOutlinedInput-root': {
-          backgroundColor: '#ffffff',
+          backgroundColor: 'rgba(255,255,255,0.58)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: 3,
         },
         ...sx,
       }}

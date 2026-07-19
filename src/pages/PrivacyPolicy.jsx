@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
       <PageHero crumb="Privacy Policy" title="Privacy Policy" />
       <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
         <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
-          <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 5, boxShadow: 2 }}>
+          <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 1, boxShadow: 2 }}>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem', lineHeight: 1.85 }}>
               {siteConfig.brandName} {siteConfig.brandSuffix} respects the privacy of parents, students and visitors.
               This website may collect personal information that you choose to submit through enquiry, contact or

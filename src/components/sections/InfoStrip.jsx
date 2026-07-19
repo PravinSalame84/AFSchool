@@ -45,7 +45,7 @@ export default function InfoStrip() {
                   key={label}
                   component="button"
                   onClick={() => openEnquiry('General Enquiry')}
-                  sx={{ display: 'flex', alignItems: 'center', border: 0, borderRadius: 3, background: 'transparent', p: 1.15, textAlign: 'left', cursor: 'pointer', '&:hover': { backgroundColor: '#eef3f8' } }}
+                  sx={{ display: 'flex', alignItems: 'center', border: 0, borderRadius: 1, background: 'transparent', p: 1.15, textAlign: 'left', cursor: 'pointer', '&:hover': { backgroundColor: '#eef3f8' } }}
                 >
                   {inner}
                 </Box>
@@ -54,7 +54,7 @@ export default function InfoStrip() {
                   key={label}
                   component={Link}
                   to={to}
-                  sx={{ display: 'flex', alignItems: 'center', borderRadius: 3, p: 1.15, textDecoration: 'none', '&:hover': { backgroundColor: '#eef3f8' } }}
+                  sx={{ display: 'flex', alignItems: 'center', borderRadius: 1, p: 1.15, textDecoration: 'none', '&:hover': { backgroundColor: '#eef3f8' } }}
                 >
                   {inner}
                 </Box>

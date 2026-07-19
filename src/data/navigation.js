@@ -6,6 +6,7 @@ const navigation = [
   { label: 'About', to: '/about' },
   { label: 'Campus Life', to: '/why-us' },
   { label: 'Admissions', to: '/admissions' },
+  { label: 'Careers', to: '/careers' },
   {
     label: 'Resources',
     to: 'https://www.airforce.skoolmate.in/important-documents/',

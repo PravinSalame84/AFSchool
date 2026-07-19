@@ -39,7 +39,7 @@ export default function Logo({ tone = 'dark', className = '' }) {
             display: 'block',
             color: textTone,
             fontFamily: 'var(--font-display), Georgia, "Times New Roman", serif',
-            fontSize: '1.35rem',
+            fontSize: { xs: '0.98rem', sm: '1.12rem', md: '1.35rem' },
             fontWeight: 700,
             lineHeight: 1,
             letterSpacing: '0.02em',
@@ -54,10 +54,10 @@ export default function Logo({ tone = 'dark', className = '' }) {
             display: 'block',
             mt: 0.35,
             color: subTone,
-            fontSize: '0.6875rem',
+            fontSize: { xs: '0.54rem', sm: '0.62rem', md: '0.6875rem' },
             fontWeight: 700,
             lineHeight: 1.2,
-            letterSpacing: '0.14em',
+            letterSpacing: { xs: '0.08em', sm: '0.11em', md: '0.14em' },
             textTransform: 'uppercase',
           }}
         >

@@ -77,7 +77,7 @@ export default function MeetOurTeachers() {
             <Paper
               sx={{
                 p: { xs: 2.5, sm: 3.25 },
-                borderRadius: 4,
+                borderRadius: 1,
                 position: 'relative',
                 overflow: 'hidden',
                 background: 'linear-gradient(135deg, rgba(17,26,36,0.97), rgba(45,83,103,0.93))',
@@ -163,7 +163,7 @@ export default function MeetOurTeachers() {
                 minWidth: 0,
                 boxSizing: 'border-box',
                 p: { xs: 2, sm: 2.5 },
-                borderRadius: 4,
+                borderRadius: 1,
                 backgroundColor: 'rgba(255,255,255,0.78)',
                 border: '1px solid rgba(255,255,255,0.8)',
                 backdropFilter: 'blur(18px)',
@@ -179,17 +179,17 @@ export default function MeetOurTeachers() {
                     sx={{
                       width: {
                         xs: '100%',
-                        sm: 'calc((100% - 16px) / 2)',
+                        sm: 'calc((100% - 24px) / 2)',
                         lg: 'calc((100% - 48px) / 3)',
                       },
                       maxWidth: {
                         xs: '100%',
-                        sm: 'calc((100% - 16px) / 2)',
+                        sm: 'calc((100% - 24px) / 2)',
                         lg: 'calc((100% - 48px) / 3)',
                       },
                       flexBasis: {
                         xs: '100%',
-                        sm: 'calc((100% - 16px) / 2)',
+                        sm: 'calc((100% - 24px) / 2)',
                         lg: 'calc((100% - 48px) / 3)',
                       },
                       minWidth: 0,
@@ -202,7 +202,7 @@ export default function MeetOurTeachers() {
                       sx={{
                         height: '100%',
                         overflow: 'hidden',
-                        borderRadius: 3,
+                        borderRadius: 1,
                         boxShadow: '0 18px 42px -30px rgba(17, 26, 36, 0.22)',
                         backgroundColor: '#fff',
                         transition: 'transform .28s ease, box-shadow .28s ease',
@@ -240,7 +240,7 @@ export default function MeetOurTeachers() {
                           sx={{
                             width: '100%',
                             height: { xs: 224, sm: 256, lg: 272 },
-                            borderRadius: 2,
+                            borderRadius: 1,
                             bgcolor: '#d7eff6',
                             overflow: 'hidden',
                             '& .MuiAvatar-img': {
@@ -267,6 +267,8 @@ export default function MeetOurTeachers() {
                             fontWeight: 800,
                             letterSpacing: '0.04em',
                             maxWidth: 148,
+                            whiteSpace: 'normal',
+                            textAlign: 'center',
                           }}
                         >
                           {teacher.highlight}
@@ -326,6 +328,7 @@ export default function MeetOurTeachers() {
                             color: 'text.secondary',
                             fontSize: '0.88rem',
                             lineHeight: 1.72,
+                            wordBreak: 'break-word',
                           }}
                         >
                           {teacher.bio}

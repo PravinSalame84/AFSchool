@@ -11,8 +11,8 @@ export default function TopBar() {
     <Box
       sx={{
         display: { xs: 'none', lg: 'block' },
-        borderBottom: '1px solid rgba(255,255,255,0.4)',
-        backgroundColor: 'rgba(255,255,255,0.55)',
+        borderBottom: '1px solid rgba(255,255,255,0.22)',
+        backgroundColor: 'rgba(231,241,248,0.34)',
         backdropFilter: 'blur(24px)',
       }}
     >
@@ -35,8 +35,21 @@ export default function TopBar() {
           <Button
             type="button"
             onClick={() => openEnquiry('School Details Request')}
-            variant="contained"
-            sx={{ backgroundColor: 'primary.main', color: '#fff', fontSize: '0.7rem', px: 2, py: 0.85 }}
+            variant="outlined"
+            sx={{
+              backgroundColor: 'rgba(255,255,255,0.12)',
+              border: '1px solid rgba(255,255,255,0.22)',
+              backdropFilter: 'blur(18px)',
+              color: 'primary.main',
+              fontSize: '0.7rem',
+              px: 2,
+              py: 0.85,
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.22)',
+                borderColor: 'rgba(240,147,75,0.4)',
+                color: 'secondary.dark',
+              },
+            }}
           >
             {siteConfig.cta.brochure}
           </Button>

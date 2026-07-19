@@ -9,7 +9,7 @@ export default function Terms() {
       <PageHero crumb="Terms & Conditions" title="Terms & Conditions" />
       <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
         <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
-          <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 5, boxShadow: 2 }}>
+          <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 1, boxShadow: 2 }}>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem', lineHeight: 1.85 }}>
               By accessing this website, you agree to use it for lawful and informational purposes only. Content is
               provided to help families understand the school, facilities, admissions communication and contact

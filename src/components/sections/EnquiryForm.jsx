@@ -10,7 +10,7 @@ export default function EnquiryForm() {
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '2fr 3fr' }, gap: 6 }}>
           <RevealOnScroll>
-            <Box component="img" src="/media/school/teacher1.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 2, boxShadow: 5, mb: 3 }} />
+            <Box component="img" src="/media/school/teacher1.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5, mb: 3 }} />
             <SectionHeading
               eyebrow="Get in Touch"
               title="Ask your query — we'll get in touch with you soon"

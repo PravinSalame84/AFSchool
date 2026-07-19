@@ -25,7 +25,7 @@ export default function Alumni() {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
             {testimonials.map((t, i) => (
               <RevealOnScroll key={t.name} delay={i * 90}>
-                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 4, boxShadow: 2 }}>
+                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 1, boxShadow: 2 }}>
                   <Quote size={28} color="#f0934b" />
                   <Typography sx={{ mt: 2, color: 'primary.light', fontSize: '0.95rem', lineHeight: 1.8 }}>
                     "{t.quote}"
@@ -40,7 +40,7 @@ export default function Alumni() {
           </Box>
 
           <RevealOnScroll delay={200}>
-            <Paper sx={{ mt: 7, borderRadius: 5, bgcolor: 'primary.main', p: { xs: 4, sm: 5 }, textAlign: 'center', boxShadow: 5 }}>
+            <Paper sx={{ mt: 7, borderRadius: 1, bgcolor: 'primary.main', p: { xs: 4, sm: 5 }, textAlign: 'center', boxShadow: 5 }}>
               <SectionHeading
                 title="Are you a Airforce School graduate?"
                 subtitle="Join the alumni network to stay in touch with classmates, mentor current students, and hear about reunions first."

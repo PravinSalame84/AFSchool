@@ -9,12 +9,33 @@ import siteConfig from '../../data/siteConfig'
 
 export default function AboutSnapshot() {
   return (
-    <Box component="section" id="about-snapshot" sx={{ bgcolor: 'primary.main', py: { xs: 6, md: 10 } }}>
+    <Box
+      component="section"
+      id="about-snapshot"
+      sx={{
+        py: { xs: 6, md: 10 },
+        background:
+          'linear-gradient(180deg, rgba(17,26,36,0.96) 0%, rgba(35,58,75,0.92) 100%)',
+      }}
+    >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, alignItems: 'start', gap: 6 }}>
-          <Box component="img" src="/media/school/teacher4.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 2, boxShadow: 5 }} />
+          <Box component="img" src="/media/school/teacher4.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5 }} />
           <RevealOnScroll>
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gapX: 4, gapY: { xs: 5, sm: 6 }, mb: 3 }}>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gapX: 4,
+                gapY: { xs: 5, sm: 6 },
+                mb: 3,
+                p: { xs: 2.2, sm: 3 },
+                borderRadius: 4,
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                backdropFilter: 'blur(18px)',
+              }}
+            >
               {stats.map((stat, i) => (
                 <RevealOnScroll key={stat.label} delay={i * 90}>
                   <StatCounter {...stat} tone="light" />

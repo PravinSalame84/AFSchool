@@ -57,7 +57,7 @@ export default function About() {
                   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
                   gap: 3,
                   p: { xs: 3, sm: 4 },
-                  borderRadius: 5,
+                  borderRadius: 1,
                   bgcolor: 'primary.main',
                   boxShadow: '0 28px 70px -34px rgba(12,24,41,0.45)',
                 }}
@@ -113,7 +113,7 @@ export default function About() {
           <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
             {outreachPrograms.map((p, i) => (
               <RevealOnScroll key={p.title} delay={i * 100}>
-                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 4, boxShadow: 2 }}>
+                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 1, boxShadow: 2 }}>
                   <p.icon size={32} color="#d97a2e" />
                   <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700 }}>
                     {p.title}

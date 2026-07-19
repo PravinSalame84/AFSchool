@@ -16,7 +16,9 @@ export default function Input({ label, error, required, className, id, sx, ...re
           fontWeight: 600,
         },
         '& .MuiOutlinedInput-root': {
-          backgroundColor: '#ffffff',
+          backgroundColor: 'rgba(255,255,255,0.58)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: 3,
         },
         ...sx,
       }}

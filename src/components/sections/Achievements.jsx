@@ -24,8 +24,17 @@ export default function Achievements() {
           <Carousel ariaLabel="Awards and achievements">
             {achievements.map((item) => (
               <Box key={item.title} data-carousel-item sx={{ width: { xs: 260, sm: 300 }, flexShrink: 0, scrollSnapAlign: 'start' }}>
-                <Paper sx={{ p: 3, borderRadius: 4, boxShadow: 2 }}>
-                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.dark' }}>
+                <Paper
+                  sx={{
+                    p: 3,
+                    borderRadius: 1,
+                    boxShadow: '0 24px 60px -36px rgba(17,26,36,0.2)',
+                    backgroundColor: 'rgba(255,255,255,0.58)',
+                    border: '1px solid rgba(255,255,255,0.55)',
+                    backdropFilter: 'blur(18px)',
+                  }}
+                >
+                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.18)', color: 'secondary.dark' }}>
                     <Award size={24} />
                   </Box>
                   <Typography sx={{ mt: 2, color: 'secondary.dark', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{item.year}</Typography>
