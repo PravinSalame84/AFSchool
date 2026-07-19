@@ -21,8 +21,16 @@ export default function MeetOurTeachers() {
   const { openEnquiry } = useEnquiryModal()
 
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 } }}>
-      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 }, minWidth: 0 }}>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 6, md: 10 },
+        overflowX: 'clip',
+        background:
+          'radial-gradient(circle at top left, rgba(93,138,168,0.14), transparent 26%), linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%)',
+      }}
+    >
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 }, minWidth: 0, overflowX: 'clip' }}>
         <Box
           sx={{
             display: 'grid',
@@ -30,38 +38,46 @@ export default function MeetOurTeachers() {
             gap: { xs: 3, lg: 4 },
             alignItems: 'start',
             minWidth: 0,
+            overflowX: 'clip',
           }}
         >
+          <RevealOnScroll>
             <SectionHeading
               eyebrow="Meet Our Teachers"
               title="Guided by mentors who make learning feel disciplined, warm and deeply human"
               subtitle="Every classroom at Air Force School is shaped by teachers who combine structure, care and strong academic intent without losing the joy of learning."
             />
 
-            <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1.25} sx={{ mt: 3 }}>
+            <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.5 }}>
               {badges.map(({ icon: Icon, label }) => (
                 <Chip
                   key={label}
                   icon={<Icon style={{ fontSize: 18 }} />}
                   label={label}
                   sx={{
-                    px: 0.75,
-                    py: 0.6,
-                    height: 36,
+                    px: 0.4,
+                    py: 0.35,
+                    height: { xs: 32, sm: 36 },
                     borderRadius: '999px',
                     bgcolor: 'rgba(17,26,36,0.06)',
                     color: 'primary.main',
                     fontWeight: 700,
+                    maxWidth: '100%',
+                    '& .MuiChip-label': {
+                      px: { xs: 1.1, sm: 1.35 },
+                      whiteSpace: 'normal',
+                    },
                   }}
                 />
               ))}
             </Stack>
+          </RevealOnScroll>
 
+          <RevealOnScroll delay={40}>
             <Paper
               sx={{
-                mt: 3.5,
-                p: { xs: 2.75, sm: 3.25 },
-                borderRadius: 1,
+                p: { xs: 2.5, sm: 3.25 },
+                borderRadius: 4,
                 position: 'relative',
                 overflow: 'hidden',
                 background: 'linear-gradient(135deg, rgba(17,26,36,0.97), rgba(45,83,103,0.93))',
@@ -97,7 +113,7 @@ export default function MeetOurTeachers() {
                 sx={{
                   position: 'relative',
                   mt: 1.25,
-                  fontSize: { xs: '1.2rem', sm: '1.45rem' },
+                  fontSize: { xs: '1.15rem', sm: '1.45rem' },
                   fontWeight: 700,
                   lineHeight: 1.3,
                 }}
@@ -137,6 +153,7 @@ export default function MeetOurTeachers() {
                 <ArrowOutwardRoundedIcon sx={{ fontSize: 18 }} />
               </Box>
             </Paper>
+          </RevealOnScroll>
 
           <RevealOnScroll delay={80}>
             <Paper
@@ -144,8 +161,9 @@ export default function MeetOurTeachers() {
                 width: '100%',
                 maxWidth: '100%',
                 minWidth: 0,
+                boxSizing: 'border-box',
                 p: { xs: 2, sm: 2.5 },
-                borderRadius: 1,
+                borderRadius: 4,
                 backgroundColor: 'rgba(255,255,255,0.78)',
                 border: '1px solid rgba(255,255,255,0.8)',
                 backdropFilter: 'blur(18px)',
@@ -160,28 +178,31 @@ export default function MeetOurTeachers() {
                     data-carousel-item
                     sx={{
                       width: {
-                        xs: '88%',
-                        sm: '48%',
-                        md: '32%',
-                        lg: '30%',
+                        xs: '100%',
+                        sm: 'calc((100% - 16px) / 2)',
+                        lg: 'calc((100% - 48px) / 3)',
                       },
                       maxWidth: {
-                        xs: 320,
-                        sm: 320,
-                        md: 340,
-                        lg: 360,
+                        xs: '100%',
+                        sm: 'calc((100% - 16px) / 2)',
+                        lg: 'calc((100% - 48px) / 3)',
+                      },
+                      flexBasis: {
+                        xs: '100%',
+                        sm: 'calc((100% - 16px) / 2)',
+                        lg: 'calc((100% - 48px) / 3)',
                       },
                       minWidth: 0,
                       flexShrink: 0,
                       scrollSnapAlign: 'start',
-                      mr: { xs: 0, sm: 0 },
+                      boxSizing: 'border-box',
                     }}
                   >
                     <Paper
                       sx={{
                         height: '100%',
                         overflow: 'hidden',
-                        borderRadius: 1,
+                        borderRadius: 3,
                         boxShadow: '0 18px 42px -30px rgba(17, 26, 36, 0.22)',
                         backgroundColor: '#fff',
                         transition: 'transform .28s ease, box-shadow .28s ease',
@@ -218,8 +239,8 @@ export default function MeetOurTeachers() {
                           variant="rounded"
                           sx={{
                             width: '100%',
-                            height: { xs: 236, sm: 276 },
-                            borderRadius: 1,
+                            height: { xs: 224, sm: 256, lg: 272 },
+                            borderRadius: 2,
                             bgcolor: '#d7eff6',
                             overflow: 'hidden',
                             '& .MuiAvatar-img': {

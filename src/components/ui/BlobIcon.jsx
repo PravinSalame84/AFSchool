@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import iconMap from './iconMap'
 
 const tones = {
@@ -22,8 +23,8 @@ export default function BlobIcon({ icon, tone = 'primary', size = 96, blobIndex 
   const gradId = `blobGrad-${tone}-${blobIndex}`
 
   return (
-    <div className={`relative inline-flex items-center justify-center ${className}`} style={{ width: size, height: size }}>
-      <svg viewBox="-100 -100 200 200" width={size} height={size} className="absolute inset-0">
+    <Box className={className} sx={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: size, height: size }}>
+      <Box component="svg" viewBox="-100 -100 200 200" sx={{ position: 'absolute', inset: 0, width: size, height: size }}>
         <defs>
           <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={palette.blobFrom} />
@@ -31,7 +32,7 @@ export default function BlobIcon({ icon, tone = 'primary', size = 96, blobIndex 
           </linearGradient>
         </defs>
         <path d={path} fill={`url(#${gradId})`} />
-      </svg>
+      </Box>
       <Icon
         style={{ color: palette.iconColor }}
         className="relative z-10"
@@ -40,11 +41,11 @@ export default function BlobIcon({ icon, tone = 'primary', size = 96, blobIndex 
         strokeWidth={1.75}
         aria-hidden="true"
       />
-      <span
-        className="absolute -right-1 -top-1 h-3 w-3 rounded-full z-10"
-        style={{ backgroundColor: palette.ringColor }}
+      <Box
+        component="span"
+        sx={{ position: 'absolute', top: -4, right: -4, width: 12, height: 12, borderRadius: '50%', zIndex: 10, backgroundColor: palette.ringColor }}
         aria-hidden="true"
       />
-    </div>
+    </Box>
   )
 }
