@@ -26,6 +26,7 @@ export default function Layout() {
         component="main"
         sx={{
           flex: 1,
+          pt: { xs: '92px', sm: '108px', lg: '148px' },
           animation: 'pageEnter 420ms cubic-bezier(0.22, 1, 0.36, 1)',
           '@media (prefers-reduced-motion: reduce)': {
             animation: 'none',
