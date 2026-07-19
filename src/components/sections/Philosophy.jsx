@@ -23,7 +23,7 @@ export default function Philosophy() {
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 }, textAlign: 'center' }}>
         <RevealOnScroll>
           <Typography sx={{ mx: 'auto', maxWidth: 760, color: '#fff', fontSize: { xs: '1.8rem', sm: '2.2rem' }, fontWeight: 700, lineHeight: 1.3 }}>
-            <Box component="img" src="/media/school/teacher2.png" alt="About Snapshot" sx={{ width: '100%', maxWidth: 420, mb: 3, borderRadius: 3, boxShadow: 5 }} />
+            <Box component="img" src="/media/school/teacher2.png" alt="About Snapshot" sx={{ width: '100%', maxWidth: 750, mb: 3, borderRadius: 3, boxShadow: 5 }} />
             Because we believe your child is{' '}
             <Box component="span" sx={{ color: 'secondary.main' }}>our responsibility</Box> - we groom, we nurture.
           </Typography>
