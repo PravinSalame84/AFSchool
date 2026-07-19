@@ -1,3 +1,4 @@
+import { Box, Link as MuiLink, Stack } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Star, Rocket, MapPin, ExternalLink } from 'lucide-react'
 import Container from '../ui/Container'
@@ -12,34 +13,37 @@ const links = [
 
 export default function QuickLinksStrip() {
   return (
-    <section className="border-y border-primary-100/40 bg-skyback-soft py-8">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ borderTop: '1px solid rgba(17,26,36,0.08)', borderBottom: '1px solid rgba(17,26,36,0.08)', bgcolor: '#e8f1f6', py: 4 }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="center" spacing={4} rowGap={2}>
             {links.map(({ icon: Icon, label, to, external }) =>
               external ? (
-                <a
+                <MuiLink
                   key={label}
                   href={to}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-accent-dark"
+                  underline="none"
+                  sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: 'primary.light', fontSize: '0.9rem', fontWeight: 700, '&:hover': { color: 'secondary.dark' } }}
                 >
-                  <Icon className="h-4 w-4" /> {label}
-                </a>
+                  <Icon size={16} /> {label}
+                </MuiLink>
               ) : (
-                <Link
+                <MuiLink
                   key={label}
+                  component={Link}
                   to={to}
-                  className="focus-ring flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-accent-dark"
+                  underline="none"
+                  sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: 'primary.light', fontSize: '0.9rem', fontWeight: 700, '&:hover': { color: 'secondary.dark' } }}
                 >
-                  <Icon className="h-4 w-4" /> {label}
-                </Link>
+                  <Icon size={16} /> {label}
+                </MuiLink>
               ),
             )}
-          </div>
+          </Stack>
         </RevealOnScroll>
       </Container>
-    </section>
+    </Box>
   )
 }

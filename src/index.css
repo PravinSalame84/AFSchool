@@ -25,6 +25,7 @@ body {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -207,4 +208,20 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes marqueeFlow {
   0% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes pageEnter {
+  0% { opacity: 0; transform: translate3d(0, 10px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes splashLoad {
+  0% { transform: translateX(-18%); }
+  50% { transform: translateX(118%); }
+  100% { transform: translateX(-18%); }
+}
+
+@keyframes splashFloat {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -6px, 0); }
 }

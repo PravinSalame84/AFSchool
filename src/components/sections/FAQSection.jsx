@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import Accordion from '../ui/Accordion'
@@ -6,20 +7,19 @@ import faqs from '../../data/faqs'
 
 export default function FAQSection() {
   return (
-    <section id="faqs" className="section-pad bg-skyback-soft">
-      <Container className="max-w-3xl px-4 sm:px-6 lg:px-8">
+    <Box component="section" id="faqs" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#e8f1f6' }}>
+      <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
             eyebrow="Have Questions?"
             title="Frequently Asked Questions"
             align="center"
-            className="mx-auto"
           />
         </RevealOnScroll>
-        <RevealOnScroll delay={100} className="mt-10">
+        <RevealOnScroll delay={100} sx={{ mt: 5 }}>
           <Accordion items={faqs} />
         </RevealOnScroll>
       </Container>
-    </section>
+    </Box>
   )
 }

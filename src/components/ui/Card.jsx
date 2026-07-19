@@ -1,12 +1,25 @@
-export default function Card({ children, className = '', as: Tag = 'div', hover = true, ...rest }) {
+import { Paper } from '@mui/material'
+
+export default function Card({ children, className, hover = true, sx, ...rest }) {
   return (
-    <Tag
-      className={`rounded-xl2 bg-white shadow-soft ${
-        hover ? 'transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card' : ''
-      } ${className}`}
+    <Paper
+      className={className}
+      sx={{
+        p: 0,
+        backgroundColor: 'background.paper',
+        boxShadow: 2,
+        transition: hover ? 'transform 0.3s ease, box-shadow 0.3s ease' : undefined,
+        '&:hover': hover
+          ? {
+              transform: 'translateY(-6px)',
+              boxShadow: 5,
+            }
+          : undefined,
+        ...sx,
+      }}
       {...rest}
     >
       {children}
-    </Tag>
+    </Paper>
   )
 }

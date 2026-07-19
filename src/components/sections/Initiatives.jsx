@@ -1,3 +1,4 @@
+import { Box, Link, Typography } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import Card from '../ui/Card'
@@ -18,8 +19,8 @@ const iconForImage = {
 
 export default function Initiatives() {
   return (
-    <section className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
             eyebrow="Beyond the Classroom"
@@ -28,23 +29,23 @@ export default function Initiatives() {
           />
         </RevealOnScroll>
 
-        <div className="mt-10">
+        <Box sx={{ mt: 5 }}>
           <Carousel ariaLabel="Airforce School initiatives">
             {initiatives.map((item) => (
-              <div key={item.title} data-carousel-item className="w-[280px] flex-shrink-0 snap-start sm:w-[320px]">
-                <Card className="flex h-full flex-col p-7">
+              <Box key={item.title} data-carousel-item sx={{ width: { xs: 280, sm: 320 }, flexShrink: 0, scrollSnapAlign: 'start' }}>
+                <Card sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3.5 }}>
                   <BlobIcon icon={iconForImage[item.image] || 'Sparkles'} tone="primary" size={72} />
-                  <h3 className="mt-5 text-base font-bold text-primary-900">{item.title}</h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-primary-500">{item.description}</p>
-                  <a href={item.href} className="focus-ring mt-4 text-sm font-bold text-accent-dark hover:underline">
-                    Read More &rarr;
-                  </a>
+                  <Typography sx={{ mt: 2.5, color: 'primary.main', fontSize: '1rem', fontWeight: 700 }}>{item.title}</Typography>
+                  <Typography sx={{ mt: 1.5, flex: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.description}</Typography>
+                  <Link href={item.href} underline="hover" sx={{ mt: 2, color: 'secondary.dark', fontSize: '0.9rem', fontWeight: 700 }}>
+                    Read More →
+                  </Link>
                 </Card>
-              </div>
+              </Box>
             ))}
           </Carousel>
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

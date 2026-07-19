@@ -2,6 +2,7 @@ import Hero from '../components/sections/Hero'
 import InfoStrip from '../components/sections/InfoStrip'
 import AboutSnapshot from '../components/sections/AboutSnapshot'
 import EnquiryForm from '../components/sections/EnquiryForm'
+import MeetOurTeachers from '../components/sections/MeetOurTeachers'
 import StudentJourney from '../components/sections/StudentJourney'
 import Initiatives from '../components/sections/Initiatives'
 import Achievements from '../components/sections/Achievements'
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <InfoStrip />
       <AboutSnapshot />
+      <MeetOurTeachers />
       <EnquiryForm />
       <StudentJourney />
       <Initiatives />

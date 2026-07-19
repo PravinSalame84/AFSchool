@@ -1,3 +1,4 @@
+import { Box, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
@@ -41,81 +42,82 @@ export default function Contact() {
         subtitle="Questions about admissions, campuses or anything else — our team typically replies within one business day."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }, gap: 2.5 }}>
             {infoCards.map((card, i) => (
               <RevealOnScroll key={card.title} delay={i * 80}>
-                <div className="h-full rounded-xl2 bg-white p-6 shadow-soft">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-skyback-soft text-primary-700">
-                    <card.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 text-sm font-bold text-primary-900">{card.title}</h3>
+                <Paper sx={{ height: '100%', p: 3, boxShadow: 2 }}>
+                  <Box sx={{ display: 'inline-flex', width: 44, height: 44, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: '#d7eff6', color: 'primary.light' }}>
+                    <card.icon size={20} />
+                  </Box>
+                  <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '0.9rem', fontWeight: 700 }}>{card.title}</Typography>
                   {card.href ? (
-                    <a href={card.href} className="focus-ring mt-1 block text-sm text-primary-500 hover:text-accent-dark">
+                    <Link href={card.href} underline="none" sx={{ mt: 0.75, display: 'block', color: 'text.secondary', fontSize: '0.9rem', '&:hover': { color: 'secondary.dark' } }}>
                       {card.value}
-                    </a>
+                    </Link>
                   ) : (
-                    <p className="mt-1 text-sm leading-relaxed text-primary-500">{card.value}</p>
+                    <Typography sx={{ mt: 0.75, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{card.value}</Typography>
                   )}
-                </div>
+                </Paper>
               </RevealOnScroll>
             ))}
-          </div>
+          </Box>
 
-          <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <Box sx={{ mt: 7, display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 5 }}>
             <RevealOnScroll>
               <SectionHeading eyebrow="Send a Message" title="Drop us a line" />
               {sent ? (
-                <div className="mt-8 flex flex-col items-start gap-3 rounded-xl2 bg-white p-7 shadow-soft">
-                  <CheckCircle2 className="h-10 w-10 text-accent" />
-                  <h3 className="text-lg font-bold text-primary-900">Message sent — thank you!</h3>
-                  <p className="text-sm text-primary-500">We'll get back to you at {form.email} shortly.</p>
-                </div>
+                <Paper sx={{ mt: 4, p: 3.5, boxShadow: 2 }}>
+                  <Stack spacing={1.5} alignItems="flex-start">
+                    <CheckCircle2 size={40} color="#f0934b" />
+                    <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>Message sent - thank you!</Typography>
+                    <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>We'll get back to you at {form.email} shortly.</Typography>
+                  </Stack>
+                </Paper>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-7 space-y-4" noValidate>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3.5 }}>
                   <Input id="cname" label="Full Name" required value={form.name} onChange={update('name')} error={errors.name} />
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <Box sx={{ mt: 2, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
                     <Input id="cemail" type="email" label="Email" required value={form.email} onChange={update('email')} error={errors.email} />
                     <Input id="cphone" type="tel" label="Phone (optional)" value={form.phone} onChange={update('phone')} />
-                  </div>
-                  <div>
-                    <label htmlFor="cmessage" className="mb-1.5 block text-sm font-semibold text-primary-800">
-                      Message <span className="text-accent">*</span>
-                    </label>
-                    <textarea
-                      id="cmessage"
-                      rows={5}
-                      value={form.message}
-                      onChange={update('message')}
-                      className={`focus-ring w-full rounded-lg border px-4 py-2.5 text-[15px] text-primary-900 transition ${
-                        errors.message ? 'border-red-400 bg-red-50' : 'border-primary-100 bg-white focus:border-accent'
-                      }`}
-                      placeholder="How can we help?"
-                    />
-                    {errors.message && <p className="mt-1 text-xs font-medium text-red-500">{errors.message}</p>}
-                  </div>
-                  <Button type="submit" variant="primary" className="w-full">
+                  </Box>
+                  <TextField
+                    sx={{ mt: 2 }}
+                    label="Message"
+                    id="cmessage"
+                    required
+                    multiline
+                    rows={5}
+                    value={form.message}
+                    onChange={update('message')}
+                    placeholder="How can we help?"
+                    error={Boolean(errors.message)}
+                    helperText={errors.message || ' '}
+                    fullWidth
+                  />
+                  <Button type="submit" variant="primary" fullWidth>
                     Send Message
                   </Button>
-                </form>
+                </Box>
               )}
             </RevealOnScroll>
 
             <RevealOnScroll delay={100}>
               <SectionHeading eyebrow="Find Us" title="Head Office Location" />
-              <div className="mt-7 overflow-hidden rounded-xl2 shadow-soft">
-                <iframe
+              <Paper sx={{ mt: 3.5, overflow: 'hidden', boxShadow: 2 }}>
+                <Box
+                  component="iframe"
                   title="Airforce School head office map"
                   src="https://www.openstreetmap.org/export/embed.html?bbox=72.83%2C19.10%2C72.89%2C19.14&layer=mapnik"
-                  className="h-[360px] w-full border-0"
                   loading="lazy"
+                  sx={{ width: '100%', height: 360, border: 0 }}
                 />
-              </div>
+              </Paper>
             </RevealOnScroll>
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

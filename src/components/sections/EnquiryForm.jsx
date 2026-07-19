@@ -1,3 +1,4 @@
+import { Box, Paper } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import RevealOnScroll from '../ui/RevealOnScroll'
@@ -5,10 +6,11 @@ import EnquiryFormFields from '../forms/EnquiryFormFields'
 
 export default function EnquiryForm() {
   return (
-    <section id="enquiry" className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
-          <RevealOnScroll className="lg:col-span-2">
+    <Box component="section" id="enquiry" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#e8f1f6' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '2fr 3fr' }, gap: 6 }}>
+          <RevealOnScroll>
+            <Box component="img" src="/media/school/teacher1.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 2, boxShadow: 5, mb: 3 }} />
             <SectionHeading
               eyebrow="Get in Touch"
               title="Ask your query — we'll get in touch with you soon"
@@ -16,13 +18,13 @@ export default function EnquiryForm() {
             />
           </RevealOnScroll>
 
-          <RevealOnScroll delay={120} className="lg:col-span-3">
-            <div className="rounded-xl2 bg-white p-6 shadow-card sm:p-8">
+          <RevealOnScroll delay={120}>
+            <Paper sx={{ p: { xs: 3, sm: 4 }, boxShadow: 5 }}>
               <EnquiryFormFields context="General Enquiry" />
-            </div>
+            </Paper>
           </RevealOnScroll>
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

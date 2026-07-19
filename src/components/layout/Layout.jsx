@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { useEffect } from 'react'
 import { useLocation, Outlet } from 'react-router-dom'
 import Header from './Header'
@@ -19,13 +20,22 @@ export default function Layout() {
   }, [pathname, hash])
 
   return (
-    <div className="flex min-h-screen flex-col bg-skyback">
+    <Box sx={{ display: 'flex', minHeight: '100vh', flexDirection: 'column', bgcolor: 'background.default' }}>
       <Header />
-      <main className="flex-1">
+      <Box
+        component="main"
+        sx={{
+          flex: 1,
+          animation: 'pageEnter 420ms cubic-bezier(0.22, 1, 0.36, 1)',
+          '@media (prefers-reduced-motion: reduce)': {
+            animation: 'none',
+          },
+        }}
+      >
         <Outlet />
-      </main>
+      </Box>
       <Footer />
       <FloatingButtons />
-    </div>
+    </Box>
   )
 }

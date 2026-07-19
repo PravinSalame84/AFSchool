@@ -1,232 +1,478 @@
 import { useEffect, useState } from 'react'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  AppBar,
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Toolbar,
+} from '@mui/material'
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded'
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { ChevronDown, ExternalLink, Menu, X } from 'lucide-react'
 import Logo from './Logo'
-import Button from '../ui/Button'
 import navigation from '../../data/navigation'
 import siteConfig from '../../data/siteConfig'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 
-function DesktopItem({ item }) {
-  const [open, setOpen] = useState(false)
+const navButtonSx = {
+  minWidth: 'auto',
+  borderRadius: '999px',
+  px: 2.2,
+  py: 1.25,
+  color: '#2d5367',
+  fontSize: '0.875rem',
+  fontWeight: 700,
+  letterSpacing: '0.12em',
+  textTransform: 'uppercase',
+  whiteSpace: 'nowrap',
+  '&:hover': {
+    bgcolor: '#ffffff',
+    color: '#14222f',
+  },
+}
 
-  if (item.external) {
+const activeNavButtonSx = {
+  bgcolor: '#111a24',
+  color: '#ffffff',
+  '&:hover': {
+    bgcolor: '#1a2938',
+  },
+}
+
+function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor }) {
+  const hasChildren = Array.isArray(item.children) && item.children.length > 0
+  const isMenuOpen = menuAnchor?.label === item.label
+  const isChildActive =
+    hasChildren &&
+    item.children.some((child) => !child.external && (pathname === child.to || pathname.startsWith(`${child.to}/`)))
+
+  if (item.external && !hasChildren) {
     return (
-      <a
+      <Button
+        component="a"
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white hover:text-primary-900"
+        endIcon={<LaunchRoundedIcon sx={{ fontSize: 16 }} />}
+        sx={navButtonSx}
       >
-        {item.label} <ExternalLink className="h-3 w-3" />
-      </a>
+        {item.label}
+      </Button>
     )
   }
 
-  if (!item.children) {
+  if (!hasChildren) {
     return (
-      <NavLink
+      <Button
+        component={NavLink}
         to={item.to}
-        className={({ isActive }) =>
-          `focus-ring rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] transition ${
-            isActive ? 'bg-primary-900 text-white' : 'text-primary-700 hover:bg-white hover:text-primary-900'
-          }`
-        }
+        sx={{
+          ...navButtonSx,
+          '&.active': activeNavButtonSx,
+        }}
       >
         {item.label}
-      </NavLink>
+      </Button>
     )
   }
 
   return (
-    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        aria-expanded={open}
-        className="focus-ring flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-semibold uppercase tracking-[0.12em] text-primary-700 transition hover:bg-white hover:text-primary-900"
+    <>
+      <Button
+        onClick={(event) => onMenuOpen(event, item)}
+        aria-expanded={isMenuOpen ? 'true' : undefined}
+        aria-haspopup="menu"
+        endIcon={
+          <ExpandMoreRoundedIcon
+            sx={{
+              fontSize: 18,
+              transform: isMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease',
+            }}
+          />
+        }
+        sx={{
+          ...navButtonSx,
+          ...(isMenuOpen || isChildActive ? activeNavButtonSx : null),
+        }}
       >
         {item.label}
-        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      <div
-        className={`absolute left-0 top-full z-30 mt-3 min-w-[280px] rounded-[1.7rem] border border-white/70 bg-white/88 p-2 shadow-card backdrop-blur-xl transition-all duration-200 ${
-          open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
-        }`}
+      </Button>
+      <Menu
+        anchorEl={isMenuOpen ? menuAnchor.element : null}
+        open={isMenuOpen}
+        onClose={onMenuClose}
+        MenuListProps={{ 'aria-label': `${item.label} menu` }}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            mt: 1.5,
+            minWidth: 280,
+            p: 1,
+            borderRadius: '1.7rem',
+            border: '1px solid rgba(255,255,255,0.7)',
+            bgcolor: 'rgba(255,255,255,0.92)',
+            boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.4)',
+            backdropFilter: 'blur(24px)',
+          },
+        }}
       >
-        {item.children.map((child) =>
-          child.external ? (
-            <a
+        {item.children.map((child) => {
+          const childSelected = !child.external && (pathname === child.to || pathname.startsWith(`${child.to}/`))
+
+          return (
+            <MenuItem
               key={child.label}
-              href={child.to}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-700 transition hover:bg-skyback-soft hover:text-primary-900"
+              component={child.external ? 'a' : Link}
+              href={child.external ? child.to : undefined}
+              to={child.external ? undefined : child.to}
+              target={child.external ? '_blank' : undefined}
+              rel={child.external ? 'noopener noreferrer' : undefined}
+              onClick={onMenuClose}
+              selected={childSelected}
+              sx={{
+                borderRadius: '1rem',
+                px: 2,
+                py: 1.5,
+                color: '#2d5367',
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+                letterSpacing: '0.09em',
+                textTransform: 'uppercase',
+                '&.Mui-selected': {
+                  bgcolor: 'rgba(17,26,36,0.08)',
+                  color: '#111a24',
+                },
+                '&.Mui-selected:hover': {
+                  bgcolor: 'rgba(17,26,36,0.12)',
+                },
+              }}
             >
-              {child.label}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : (
-            <Link
-              key={child.label}
-              to={child.to}
-              className="focus-ring block rounded-2xl px-4 py-3 text-[13px] font-semibold uppercase tracking-[0.09em] text-primary-700 transition hover:bg-skyback-soft hover:text-primary-900"
-            >
-              {child.label}
-            </Link>
-          ),
-        )}
-      </div>
-    </div>
+              <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
+                {child.label}
+                {child.external ? <LaunchRoundedIcon sx={{ fontSize: 16 }} /> : null}
+              </Box>
+            </MenuItem>
+          )
+        })}
+      </Menu>
+    </>
   )
 }
 
-function MobileItem({ item, onNavigate }) {
-  const [open, setOpen] = useState(false)
+function MobileNavItem({ item, pathname, onNavigate }) {
+  const hasChildren = Array.isArray(item.children) && item.children.length > 0
+  const isChildActive =
+    hasChildren &&
+    item.children.some((child) => !child.external && (pathname === child.to || pathname.startsWith(`${child.to}/`)))
 
-  if (item.external) {
+  if (item.external && !hasChildren) {
     return (
-      <a
+      <ListItemButton
+        component="a"
         href={item.to}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring flex items-center justify-between border-b border-primary-50 px-1 py-3.5 text-[15px] font-semibold text-primary-800"
+        onClick={onNavigate}
+        sx={{
+          px: 0.5,
+          py: 1.7,
+          borderBottom: '1px solid rgba(17,26,36,0.08)',
+        }}
       >
-        {item.label}
-        <ExternalLink className="h-4 w-4 text-primary-300" />
-      </a>
+        <ListItemText
+          primary={item.label}
+          primaryTypographyProps={{ fontSize: '0.9375rem', fontWeight: 700, color: '#1e3848' }}
+        />
+        <ListItemIcon sx={{ minWidth: 'auto', color: '#8ea4b2' }}>
+          <LaunchRoundedIcon fontSize="small" />
+        </ListItemIcon>
+      </ListItemButton>
     )
   }
 
-  if (!item.children) {
+  if (!hasChildren) {
     return (
-      <Link
+      <ListItemButton
+        component={Link}
         to={item.to}
         onClick={onNavigate}
-        className="focus-ring block border-b border-primary-50 px-1 py-3.5 text-[15px] font-semibold text-primary-800"
+        selected={pathname === item.to || pathname.startsWith(`${item.to}/`)}
+        sx={{
+          px: 0.5,
+          py: 1.7,
+          borderBottom: '1px solid rgba(17,26,36,0.08)',
+          borderRadius: 0,
+          '&.Mui-selected': {
+            bgcolor: 'transparent',
+          },
+        }}
       >
-        {item.label}
-      </Link>
+        <ListItemText
+          primary={item.label}
+          primaryTypographyProps={{
+            fontSize: '0.9375rem',
+            fontWeight: 700,
+            color: pathname === item.to || pathname.startsWith(`${item.to}/`) ? '#111a24' : '#1e3848',
+          }}
+        />
+      </ListItemButton>
     )
   }
 
   return (
-    <div className="border-b border-primary-50">
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        aria-expanded={open}
-        className="focus-ring flex w-full items-center justify-between px-1 py-3.5 text-[15px] font-semibold text-primary-800"
+    <Accordion
+      disableGutters
+      elevation={0}
+      defaultExpanded={Boolean(isChildActive)}
+      sx={{
+        bgcolor: 'transparent',
+        '&::before': {
+          display: 'none',
+        },
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreRoundedIcon />}
+        sx={{
+          px: 0.5,
+          py: 0.5,
+          minHeight: 58,
+          borderBottom: '1px solid rgba(17,26,36,0.08)',
+          '& .MuiAccordionSummary-content': {
+            my: 1,
+          },
+        }}
       >
-        {item.label}
-        <ChevronDown className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-      <div className={`overflow-hidden transition-all ${open ? 'max-h-96 pb-2' : 'max-h-0'}`}>
-        {item.children.map((child) =>
-          child.external ? (
-            <a
-              key={child.label}
-              href={child.to}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between rounded-lg px-4 py-2 text-[14px] text-primary-600 hover:bg-skyback-soft"
-            >
-              {child.label}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : (
-            <Link
-              key={child.label}
-              to={child.to}
-              onClick={onNavigate}
-              className="focus-ring block rounded-lg px-4 py-2 text-[14px] text-primary-600 hover:bg-skyback-soft"
-            >
-              {child.label}
-            </Link>
-          ),
-        )}
-      </div>
-    </div>
+        <Box sx={{ fontSize: '0.9375rem', fontWeight: 700, color: isChildActive ? '#111a24' : '#1e3848' }}>{item.label}</Box>
+      </AccordionSummary>
+      <AccordionDetails sx={{ px: 0, pt: 0.5, pb: 1.5 }}>
+        <List disablePadding>
+          {item.children.map((child) => {
+            const childSelected = !child.external && (pathname === child.to || pathname.startsWith(`${child.to}/`))
+
+            return (
+              <ListItemButton
+                key={child.label}
+                component={child.external ? 'a' : Link}
+                href={child.external ? child.to : undefined}
+                to={child.external ? undefined : child.to}
+                target={child.external ? '_blank' : undefined}
+                rel={child.external ? 'noopener noreferrer' : undefined}
+                onClick={onNavigate}
+                selected={childSelected}
+                sx={{
+                  mx: 1,
+                  mb: 0.5,
+                  borderRadius: 2,
+                  px: 2,
+                  py: 1.1,
+                  '&.Mui-selected': {
+                    bgcolor: 'rgba(17,26,36,0.08)',
+                  },
+                  '&.Mui-selected:hover': {
+                    bgcolor: 'rgba(17,26,36,0.12)',
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={child.label}
+                  primaryTypographyProps={{
+                    fontSize: '0.875rem',
+                    color: childSelected ? '#111a24' : '#426277',
+                  }}
+                />
+                {child.external ? (
+                  <ListItemIcon sx={{ minWidth: 'auto', color: '#8ea4b2' }}>
+                    <LaunchRoundedIcon sx={{ fontSize: 16 }} />
+                  </ListItemIcon>
+                ) : null}
+              </ListItemButton>
+            )
+          })}
+        </List>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [menuAnchor, setMenuAnchor] = useState(null)
   const location = useLocation()
   const { openEnquiry } = useEnquiryModal()
 
-  useEffect(() => setMobileOpen(false), [location.pathname])
-
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-  }, [mobileOpen])
+    setMobileOpen(false)
+    setMenuAnchor(null)
+  }, [location.pathname])
+
+  const handleMenuOpen = (event, item) => {
+    setMenuAnchor({ element: event.currentTarget, label: item.label })
+  }
+
+  const handleMenuClose = () => {
+    setMenuAnchor(null)
+  }
 
   return (
-    <nav className="px-4 pb-4 pt-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto nav-curve flex items-center justify-between px-4 py-3 sm:px-5">
+    <AppBar
+      component="nav"
+      position="static"
+      elevation={0}
+      color="transparent"
+      sx={{ px: { xs: 2, sm: 3, lg: 4 }, pt: 2, pb: 2 }}
+    >
+      <Toolbar
+        disableGutters
+        sx={{
+          mx: 'auto',
+          width: '100%',
+          maxWidth: 1280,
+          minHeight: { xs: 76, sm: 84 },
+          justifyContent: 'space-between',
+          gap: 2,
+          px: { xs: 2, sm: 3, lg: 4 },
+          py: 1.5,
+          borderRadius: '999px',
+          bgcolor: 'rgba(255,255,255,0.7)',
+          border: '1px solid rgba(255,255,255,0.8)',
+          backdropFilter: 'blur(24px)',
+          boxShadow: '0 18px 40px -28px rgba(22, 30, 37, 0.55)',
+        }}
+      >
         <Logo />
 
-        <div className="hidden items-center gap-1 xl:flex">
+        <Box sx={{ display: { xs: 'none', xl: 'flex' }, alignItems: 'center', gap: 0.75 }}>
           {navigation.map((item) => (
-            <DesktopItem key={item.label} item={item} />
+            <DesktopNavItem
+              key={item.label}
+              item={item}
+              pathname={location.pathname}
+              onMenuOpen={handleMenuOpen}
+              onMenuClose={handleMenuClose}
+              menuAnchor={menuAnchor}
+            />
           ))}
-        </div>
+        </Box>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Button size="sm" variant="dark" onClick={() => openEnquiry('General Enquiry')} icon={false}>
-            {siteConfig.cta.enquire}
-          </Button>
-        </div>
-
-        <button
-          type="button"
-          className="focus-ring rounded-full bg-primary-900 p-2 text-white xl:hidden"
-          aria-label="Toggle menu"
-          onClick={() => setMobileOpen((prev) => !prev)}
-        >
-          {mobileOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-        </button>
-      </div>
-
-      <div className={`fixed inset-0 z-40 xl:hidden ${mobileOpen ? 'visible' : 'invisible'}`} aria-hidden={!mobileOpen}>
-        <div
-          className={`absolute inset-0 bg-primary-900/50 transition-opacity ${mobileOpen ? 'opacity-100' : 'opacity-0'}`}
-          onClick={() => setMobileOpen(false)}
-        />
-        <div
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white/96 p-5 shadow-card backdrop-blur-xl transition-transform duration-300 ${
-            mobileOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="mb-4 flex items-center justify-between">
-            <Logo />
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-              className="focus-ring rounded-lg p-2 text-primary-500"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-          <div>
-            {navigation.map((item) => (
-              <MobileItem key={item.label} item={item} onNavigate={() => setMobileOpen(false)} />
-            ))}
-          </div>
+        <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 1.5 }}>
           <Button
-            className="mt-5 w-full"
-            variant="dark"
-            onClick={() => {
-              setMobileOpen(false)
-              openEnquiry('General Enquiry')
+            variant="contained"
+            onClick={() => openEnquiry('General Enquiry')}
+            sx={{
+              minWidth: 'auto',
+              borderRadius: '999px',
+              px: 2.6,
+              py: 1.2,
+              bgcolor: '#111a24',
+              color: '#ffffff',
+              fontWeight: 700,
+              textTransform: 'none',
+              boxShadow: '0 12px 24px -16px rgba(17, 26, 36, 0.8)',
+              '&:hover': {
+                bgcolor: '#1a2938',
+              },
             }}
-            icon={false}
           >
             {siteConfig.cta.enquire}
           </Button>
-        </div>
-      </div>
-    </nav>
+        </Box>
+
+        <IconButton
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMobileOpen((prev) => !prev)}
+          sx={{
+            display: { xs: 'inline-flex', xl: 'none' },
+            bgcolor: '#111a24',
+            color: '#ffffff',
+            '&:hover': {
+              bgcolor: '#1a2938',
+            },
+          }}
+        >
+          {mobileOpen ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
+        </IconButton>
+      </Toolbar>
+
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        ModalProps={{
+          keepMounted: true,
+          BackdropProps: {
+            sx: {
+              bgcolor: 'rgba(17,26,36,0.5)',
+            },
+          },
+        }}
+        PaperProps={{
+          sx: {
+            width: 'min(85vw, 380px)',
+            p: 3,
+            bgcolor: 'rgba(255,255,255,0.96)',
+            backdropFilter: 'blur(24px)',
+            boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.45)',
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, mb: 2 }}>
+          <Logo />
+          <IconButton aria-label="Close menu" onClick={() => setMobileOpen(false)} sx={{ color: '#5d7484' }}>
+            <CloseRoundedIcon />
+          </IconButton>
+        </Box>
+
+        <Divider sx={{ mb: 1 }} />
+
+        <List disablePadding sx={{ mb: 2 }}>
+          {navigation.map((item) => (
+            <MobileNavItem
+              key={item.label}
+              item={item}
+              pathname={location.pathname}
+              onNavigate={() => setMobileOpen(false)}
+            />
+          ))}
+        </List>
+
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => {
+            setMobileOpen(false)
+            openEnquiry('General Enquiry')
+          }}
+          sx={{
+            mt: 'auto',
+            borderRadius: '999px',
+            py: 1.45,
+            bgcolor: '#111a24',
+            color: '#ffffff',
+            fontWeight: 700,
+            textTransform: 'none',
+            '&:hover': {
+              bgcolor: '#1a2938',
+            },
+          }}
+        >
+          {siteConfig.cta.enquire}
+        </Button>
+      </Drawer>
+    </AppBar>
   )
 }

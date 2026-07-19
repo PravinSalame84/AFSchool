@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { CheckCircle2 } from 'lucide-react'
@@ -27,52 +28,66 @@ export default function WhyUs() {
         crumb="Why Airforce School"
         eyebrow="The Airforce School Difference"
         title="Five reasons families choose Airforce School"
-        subtitle="Curriculum, faculty, environment, approach and skills — designed together, not bolted on."
+        subtitle="Curriculum, faculty, environment, approach and skills designed together, not bolted on."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[280px_1fr]">
-            {/* Tab list */}
-            <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '280px 1fr' }, gap: 4 }}>
+            <Box sx={{ display: 'flex', gap: 1.25, overflowX: 'auto', pb: 1, flexDirection: { lg: 'column' } }}>
               {whyUsTabs.map((tab) => (
-                <button
+                <Box
                   key={tab.id}
+                  component="button"
                   onClick={() => setActive(tab.id)}
-                  className={`focus-ring flex-shrink-0 rounded-xl px-5 py-3.5 text-left text-sm font-semibold transition lg:flex-shrink ${
-                    active === tab.id
-                      ? 'bg-primary-900 text-white shadow-soft'
-                      : 'bg-white text-primary-700 hover:bg-skyback-soft'
-                  }`}
+                  sx={{
+                    flexShrink: 0,
+                    border: 0,
+                    borderRadius: 3,
+                    px: 2.5,
+                    py: 1.6,
+                    textAlign: 'left',
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    color: active === tab.id ? '#fff' : 'primary.light',
+                    backgroundColor: active === tab.id ? 'primary.main' : '#fff',
+                    boxShadow: active === tab.id ? 3 : 0,
+                    cursor: 'pointer',
+                  }}
                 >
                   {tab.label}
-                </button>
+                </Box>
               ))}
-            </div>
+            </Box>
 
-            {/* Tab content */}
-            <RevealOnScroll key={current.id} className="rounded-xl2 bg-white p-8 shadow-card sm:p-10">
-              <div className="grid grid-cols-1 items-start gap-10 sm:grid-cols-[auto_1fr]">
-                <BlobIcon icon="Lightbulb" tone="accent" size={88} />
-                <div>
-                  <h2 className="text-2xl font-bold text-primary-900">{current.heading}</h2>
-                  <p className="mt-4 text-[15px] leading-relaxed text-primary-600">{current.description}</p>
-                  <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    {current.points.map((point) => (
-                      <li key={point} className="flex items-center gap-2.5 text-sm font-medium text-primary-800">
-                        <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-accent" /> {point}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="primary" className="mt-7" onClick={() => openEnquiry('Admissions Enquiry')}>
-                    Talk to an Admissions Counsellor
-                  </Button>
-                </div>
-              </div>
+            <RevealOnScroll key={current.id}>
+              <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 5, boxShadow: 5 }}>
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'auto 1fr' }, alignItems: 'start', gap: 4 }}>
+                  <BlobIcon icon="Lightbulb" tone="accent" size={88} />
+                  <Box>
+                    <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.6rem', sm: '2rem' }, fontWeight: 700 }}>
+                      {current.heading}
+                    </Typography>
+                    <Typography sx={{ mt: 2, color: 'text.secondary', fontSize: '0.95rem', lineHeight: 1.85 }}>
+                      {current.description}
+                    </Typography>
+                    <Box sx={{ mt: 3, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 1.5 }}>
+                      {current.points.map((point) => (
+                        <Box key={point} sx={{ display: 'flex', alignItems: 'center', gap: 1.25, color: 'primary.main', fontSize: '0.9rem', fontWeight: 600 }}>
+                          <CheckCircle2 size={16} color="#f0934b" /> {point}
+                        </Box>
+                      ))}
+                    </Box>
+                    <Button variant="primary" sx={{ mt: 3.5 }} onClick={() => openEnquiry('Admissions Enquiry')}>
+                      Talk to an Admissions Counsellor
+                    </Button>
+                  </Box>
+                </Box>
+              </Paper>
             </RevealOnScroll>
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

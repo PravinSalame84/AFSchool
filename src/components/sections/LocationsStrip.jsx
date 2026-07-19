@@ -1,3 +1,4 @@
+import { Box, Chip, Stack, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
 import Container from '../ui/Container'
@@ -6,25 +7,26 @@ import { states } from '../../data/locations'
 
 export default function LocationsStrip() {
   return (
-    <section className="bg-skyback py-10">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ bgcolor: 'background.default', py: 5 }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="flex items-center gap-2 text-sm font-bold text-primary-700">
-              <MapPin className="h-4 w-4 text-accent" /> Campuses in:
-            </span>
+          <Stack direction="row" useFlexGap flexWrap="wrap" alignItems="center" spacing={1.5}>
+            <Typography sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: 'primary.light', fontSize: '0.9rem', fontWeight: 700 }}>
+              <MapPin size={16} color="#f0934b" /> Campuses in:
+            </Typography>
             {states.map((state) => (
-              <Link
+              <Chip
                 key={state}
+                label={state}
+                component={Link}
                 to={`/locations?state=${encodeURIComponent(state)}`}
-                className="focus-ring rounded-full bg-white px-4 py-1.5 text-sm font-medium text-primary-600 shadow-soft transition hover:bg-primary-900 hover:text-white"
-              >
-                {state}
-              </Link>
+                clickable
+                sx={{ backgroundColor: '#fff', color: 'primary.light', boxShadow: 1, '&:hover': { backgroundColor: 'primary.main', color: '#fff' } }}
+              />
             ))}
-          </div>
+          </Stack>
         </RevealOnScroll>
       </Container>
-    </section>
+    </Box>
   )
 }

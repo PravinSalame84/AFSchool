@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
+import { Box, IconButton } from '@mui/material'
 
 export default function Carousel({ children, autoPlay = false, interval = 4000, ariaLabel = 'Carousel' }) {
   const trackRef = useRef(null)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current
@@ -31,6 +34,8 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
 
   useEffect(() => {
     if (!autoPlay) return
+    if (isPaused) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const id = setInterval(() => {
       const el = trackRef.current
       if (!el) return
@@ -41,37 +46,69 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
       }
     }, interval)
     return () => clearInterval(id)
-  }, [autoPlay, interval])
+  }, [autoPlay, interval, isPaused])
 
   return (
-    <div className="relative" role="region" aria-label={ariaLabel}>
-      <div
+    <Box sx={{ position: 'relative' }} role="region" aria-label={ariaLabel}>
+      <Box
         ref={trackRef}
-        className="no-scrollbar flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+        sx={{
+          display: 'flex',
+          gap: { xs: 2, sm: 3 },
+          overflowX: 'auto',
+          scrollBehavior: 'smooth',
+          scrollSnapType: 'x mandatory',
+          px: 0.25,
+          pb: 0.75,
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }}
       >
         {children}
-      </div>
+      </Box>
 
-      <div className="mt-6 flex items-center justify-center gap-3">
-        <button
-          type="button"
+      <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
+        <IconButton
           aria-label="Previous"
           disabled={atStart}
           onClick={() => scrollByCard(-1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-white text-primary-900 transition disabled:opacity-30 hover:bg-primary-900 hover:text-white disabled:hover:bg-white disabled:hover:text-primary-900"
+          sx={{
+            width: { xs: 40, sm: 44 },
+            height: { xs: 40, sm: 44 },
+            border: '1px solid rgba(17,26,36,0.12)',
+            backgroundColor: '#ffffff',
+            '&:hover': {
+              backgroundColor: 'primary.main',
+              color: '#ffffff',
+            },
+          }}
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
+          <ChevronLeftRoundedIcon />
+        </IconButton>
+        <IconButton
           aria-label="Next"
           disabled={atEnd}
           onClick={() => scrollByCard(1)}
-          className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-primary-200 bg-white text-primary-900 transition disabled:opacity-30 hover:bg-primary-900 hover:text-white disabled:hover:bg-white disabled:hover:text-primary-900"
+          sx={{
+            width: { xs: 40, sm: 44 },
+            height: { xs: 40, sm: 44 },
+            border: '1px solid rgba(17,26,36,0.12)',
+            backgroundColor: '#ffffff',
+            '&:hover': {
+              backgroundColor: 'primary.main',
+              color: '#ffffff',
+            },
+          }}
         >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
-    </div>
+          <ChevronRightRoundedIcon />
+        </IconButton>
+      </Box>
+    </Box>
   )
 }

@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import StatCounter from '../ui/StatCounter'
@@ -8,35 +9,35 @@ import siteConfig from '../../data/siteConfig'
 
 export default function AboutSnapshot() {
   return (
-    <section id="about-snapshot" className="bg-primary-900 section-pad">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+    <Box component="section" id="about-snapshot" sx={{ bgcolor: 'primary.main', py: { xs: 6, md: 10 } }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, alignItems: 'start', gap: 6 }}>
+          <Box component="img" src="/media/school/teacher4.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 2, boxShadow: 5 }} />
           <RevealOnScroll>
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gapX: 4, gapY: { xs: 5, sm: 6 }, mb: 3 }}>
+              {stats.map((stat, i) => (
+                <RevealOnScroll key={stat.label} delay={i * 90}>
+                  <StatCounter {...stat} tone="light" />
+                </RevealOnScroll>
+              ))}
+            </Box>
             <SectionHeading
               eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
               title="More than grades — we build well-rounded human beings"
               tone="light"
             />
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-skyback-light/80">
+            <Typography sx={{ mt: 3, maxWidth: 640, fontSize: '0.95rem', lineHeight: 1.9, color: 'rgba(215,239,246,0.8)' }}>
               Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
               of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
               is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
               society.
-            </p>
-            <Button to="/about" variant="light" className="mt-7">
+            </Typography>
+            <Button to="/about" variant="light" sx={{ mt: 3.5 }}>
               Read Our Story
             </Button>
           </RevealOnScroll>
-
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-y-12">
-            {stats.map((stat, i) => (
-              <RevealOnScroll key={stat.label} delay={i * 90}>
-                <StatCounter {...stat} tone="light" />
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

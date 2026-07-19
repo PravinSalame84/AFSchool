@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import { EnquiryModalProvider } from './context/EnquiryModalContext'
+import SplashScreen from './components/ui/SplashScreen'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -15,8 +17,17 @@ import Terms from './pages/Terms'
 import NotFound from './pages/NotFound'
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true)
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const timeout = window.setTimeout(() => setShowSplash(false), reducedMotion ? 120 : 820)
+    return () => window.clearTimeout(timeout)
+  }, [])
+
   return (
     <EnquiryModalProvider>
+      <SplashScreen visible={showSplash} />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

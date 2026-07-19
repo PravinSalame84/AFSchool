@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import Card from '../ui/Card'
@@ -8,35 +9,34 @@ import studentJourney from '../../data/studentJourney'
 
 export default function StudentJourney() {
   return (
-    <section className="section-pad bg-skyback">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
             eyebrow="A Glimpse Into Campus Life"
             title="A Airforce School education adapts to become whatever your child needs"
             align="center"
-            className="mx-auto"
           />
         </RevealOnScroll>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Box sx={{ mt: 6, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
           {studentJourney.map((item, i) => (
             <RevealOnScroll key={item.title} delay={(i % 3) * 90}>
-              <Card className="h-full p-7">
+              <Card sx={{ height: '100%', p: 3.5 }}>
                 <BlobIcon icon={item.icon} tone={i % 2 === 0 ? 'primary' : 'accent'} blobIndex={i} size={76} />
-                <h3 className="mt-5 text-lg font-bold text-primary-900">{item.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-primary-500">{item.description}</p>
+                <Typography sx={{ mt: 2.5, color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>{item.title}</Typography>
+                <Typography sx={{ mt: 1.5, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.description}</Typography>
               </Card>
             </RevealOnScroll>
           ))}
-        </div>
+        </Box>
 
-        <div className="mt-10 flex justify-center">
+        <Box sx={{ mt: 5, display: 'flex', justifyContent: 'center' }}>
           <Button to="/why-us" variant="dark">
             Enter the Student Journey
           </Button>
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

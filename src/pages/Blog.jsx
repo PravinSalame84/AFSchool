@@ -1,3 +1,4 @@
+import { Box, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 import { useMemo, useState } from 'react'
 import { Calendar } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
@@ -22,38 +23,55 @@ export default function Blog() {
         subtitle="Stories from our campuses, parenting advice and the latest in education research."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-                  active === cat ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <RevealOnScroll>
+            <ToggleButtonGroup
+              value={active}
+              exclusive
+              onChange={(_, value) => value && setActive(value)}
+              sx={{ gap: 1, flexWrap: 'wrap' }}
+            >
+              {categories.map((cat) => (
+                <ToggleButton
+                  key={cat}
+                  value={cat}
+                  sx={{
+                    border: '0 !important',
+                    borderRadius: '999px !important',
+                    px: 2,
+                    py: 0.85,
+                    bgcolor: active === cat ? 'primary.main' : '#fff',
+                    color: active === cat ? '#fff' : 'primary.light',
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    '&:hover': {
+                      bgcolor: active === cat ? 'primary.main' : '#eef3f8',
+                    },
+                  }}
+                >
+                  {cat}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           </RevealOnScroll>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
             {filtered.map((item, i) => (
               <RevealOnScroll key={item.id} delay={(i % 6) * 70}>
-                <Card className="flex h-full flex-col p-6">
+                <Card sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3 }}>
                   <Badge tone="accent">{item.category}</Badge>
-                  <h3 className="mt-4 text-base font-bold leading-snug text-primary-900">{item.title}</h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-primary-500">{item.excerpt}</p>
-                  <div className="mt-4 flex items-center gap-1.5 text-xs text-primary-400">
-                    <Calendar className="h-3.5 w-3.5" /> {item.date}
-                  </div>
+                  <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700, lineHeight: 1.4 }}>{item.title}</Typography>
+                  <Typography sx={{ mt: 1.5, flex: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.excerpt}</Typography>
+                  <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 0.75, color: 'text.secondary', fontSize: '0.75rem' }}>
+                    <Calendar size={14} /> {item.date}
+                  </Box>
                 </Card>
               </RevealOnScroll>
             ))}
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

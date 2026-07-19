@@ -1,3 +1,4 @@
+import { Box, Button, Link, Stack, Typography } from '@mui/material'
 import { Mail, MapPinned, Phone, ShieldCheck } from 'lucide-react'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
@@ -7,37 +8,40 @@ export default function TopBar() {
   const { openEnquiry } = useEnquiryModal()
 
   return (
-    <div className="hidden border-b border-white/40 bg-white/55 backdrop-blur-2xl lg:block">
-      <div className="container mx-auto flex items-center justify-between px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-primary-600 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-5">
-          <a href={`tel:${siteConfig.contact.phone}`} className="focus-ring flex items-center gap-1.5 transition hover:text-primary-900">
-            <Phone className="h-3.5 w-3.5" /> {siteConfig.contact.phone}
-          </a>
-          <a href={`mailto:${siteConfig.contact.email}`} className="focus-ring flex items-center gap-1.5 transition hover:text-primary-900">
-            <Mail className="h-3.5 w-3.5" /> {siteConfig.contact.email}
-          </a>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="h-3.5 w-3.5" /> {schoolContent.contact.affiliation}
-          </span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a
-            href={schoolContent.contact.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="focus-ring flex items-center gap-1.5 transition hover:text-primary-900"
-          >
-            <MapPinned className="h-3.5 w-3.5" /> Visit Campus
-          </a>
-          <button
+    <Box
+      sx={{
+        display: { xs: 'none', lg: 'block' },
+        borderBottom: '1px solid rgba(255,255,255,0.4)',
+        backgroundColor: 'rgba(255,255,255,0.55)',
+        backdropFilter: 'blur(24px)',
+      }}
+    >
+      <Box sx={{ maxWidth: 1536, mx: 'auto', px: { xs: 2, sm: 3, lg: 4 }, py: 1.25, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Stack direction="row" spacing={3} alignItems="center">
+          <Link href={`tel:${siteConfig.contact.phone}`} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary', '&:hover': { color: 'text.primary' } }}>
+            <Phone size={14} /> {siteConfig.contact.phone}
+          </Link>
+          <Link href={`mailto:${siteConfig.contact.email}`} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary', '&:hover': { color: 'text.primary' } }}>
+            <Mail size={14} /> {siteConfig.contact.email}
+          </Link>
+          <Typography sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary' }}>
+            <ShieldCheck size={14} /> {schoolContent.contact.affiliation}
+          </Typography>
+        </Stack>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Link href={schoolContent.contact.mapLink} target="_blank" rel="noopener noreferrer" underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'text.secondary', '&:hover': { color: 'text.primary' } }}>
+            <MapPinned size={14} /> Visit Campus
+          </Link>
+          <Button
             type="button"
             onClick={() => openEnquiry('School Details Request')}
-            className="focus-ring rounded-full bg-primary-900 px-4 py-1.5 text-[11px] text-white transition hover:bg-primary-800"
+            variant="contained"
+            sx={{ backgroundColor: 'primary.main', color: '#fff', fontSize: '0.7rem', px: 2, py: 0.85 }}
           >
             {siteConfig.cta.brochure}
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Stack>
+      </Box>
+    </Box>
   )
 }

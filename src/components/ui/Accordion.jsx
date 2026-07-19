@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
+import {
+  Accordion as MuiAccordion,
+  AccordionDetails,
+  AccordionSummary,
+  Paper,
+  Typography,
+} from '@mui/material'
 
 export default function Accordion({ items, allowMultiple = false }) {
   const [openIndexes, setOpenIndexes] = useState([0])
@@ -15,35 +22,35 @@ export default function Accordion({ items, allowMultiple = false }) {
   }
 
   return (
-    <div className="divide-y divide-primary-50 rounded-xl2 bg-white shadow-soft overflow-hidden">
+    <Paper sx={{ overflow: 'hidden', boxShadow: 2 }}>
       {items.map((item, i) => {
         const isOpen = openIndexes.includes(i)
         return (
-          <div key={item.question}>
-            <button
-              type="button"
-              onClick={() => toggle(i)}
-              aria-expanded={isOpen}
-              className="focus-ring flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7"
+          <MuiAccordion
+            key={item.question}
+            disableGutters
+            expanded={isOpen}
+            onChange={() => toggle(i)}
+            elevation={0}
+            sx={{
+              '&::before': { display: 'none' },
+              borderBottom: i === items.length - 1 ? 0 : '1px solid rgba(17,26,36,0.08)',
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreRoundedIcon sx={{ color: 'secondary.main' }} />}
+              sx={{ px: { xs: 2.5, sm: 3.5 }, py: 1.25 }}
             >
-              <span className="text-base font-semibold text-primary-900 sm:text-lg">{item.question}</span>
-              <ChevronDown
-                className={`h-5 w-5 flex-shrink-0 text-accent transition-transform duration-300 ${
-                  isOpen ? 'rotate-180' : ''
-                }`}
-                aria-hidden="true"
-              />
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                isOpen ? 'max-h-96' : 'max-h-0'
-              }`}
-            >
-              <p className="px-5 pb-5 text-[15px] leading-relaxed text-primary-500 sm:px-7">{item.answer}</p>
-            </div>
-          </div>
+              <Typography sx={{ fontSize: { xs: '1rem', sm: '1.1rem' }, fontWeight: 700, color: 'primary.main' }}>
+                {item.question}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ px: { xs: 2.5, sm: 3.5 }, pb: 3 }}>
+              <Typography sx={{ color: 'text.secondary', lineHeight: 1.8 }}>{item.answer}</Typography>
+            </AccordionDetails>
+          </MuiAccordion>
         )
       })}
-    </div>
+    </Paper>
   )
 }

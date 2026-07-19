@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { Award } from 'lucide-react'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
@@ -8,43 +9,40 @@ import achievements from '../../data/achievements'
 
 export default function Achievements() {
   return (
-    <section className="section-pad bg-skyback">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
             eyebrow="Recognition"
             title="Our Achievements"
             subtitle="We're honoured to be recognised for our commitment to quality, year after year."
             align="center"
-            className="mx-auto"
           />
         </RevealOnScroll>
 
-        <div className="mt-10">
+        <Box sx={{ mt: 5 }}>
           <Carousel ariaLabel="Awards and achievements">
             {achievements.map((item) => (
-              <div
-                key={item.title}
-                data-carousel-item
-                className="w-[260px] flex-shrink-0 snap-start rounded-xl2 bg-white p-6 shadow-soft sm:w-[300px]"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent-dark">
-                  <Award className="h-6 w-6" />
-                </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-wide text-accent-dark">{item.year}</p>
-                <h3 className="mt-1.5 text-[15px] font-bold leading-snug text-primary-900">{item.title}</h3>
-                <p className="mt-2 text-xs text-primary-400">{item.org}</p>
-              </div>
+              <Box key={item.title} data-carousel-item sx={{ width: { xs: 260, sm: 300 }, flexShrink: 0, scrollSnapAlign: 'start' }}>
+                <Paper sx={{ p: 3, borderRadius: 4, boxShadow: 2 }}>
+                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.dark' }}>
+                    <Award size={24} />
+                  </Box>
+                  <Typography sx={{ mt: 2, color: 'secondary.dark', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{item.year}</Typography>
+                  <Typography sx={{ mt: 0.75, color: 'primary.main', fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.4 }}>{item.title}</Typography>
+                  <Typography sx={{ mt: 1, color: 'text.secondary', fontSize: '0.75rem' }}>{item.org}</Typography>
+                </Paper>
+              </Box>
             ))}
           </Carousel>
-        </div>
+        </Box>
 
-        <div className="mt-8 flex justify-center">
+        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
           <Button to="/about#awards" variant="outline">
             View All Achievements
           </Button>
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

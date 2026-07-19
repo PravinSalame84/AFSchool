@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { Quote, Leaf, HeartHandshake, Users2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
@@ -23,98 +24,109 @@ export default function About() {
         crumb="About Us"
         eyebrow="Our Story"
         title={`About ${siteConfig.brandName} ${siteConfig.brandSuffix}`}
-        photo={""}
-        subtitle={`Established in ${siteConfig.yearFounded}, ${siteConfig.brandName} is registered with Indian Air Force Educational and Cultural Society New Delhi. It was established with an aim to provide quality education to the wards of Air Force personnel posted in the area.It has classes from LKG to IX with a current strength of 530 students. Classes are provided with Smartboards, child-safe and user-friendly furniture and fire-safety equipments. The school has state-of-the-art infrastructure with outdoor stage, play area, Synthetic court, Laboratory, Library, separate Music, Art-Craft, Sports, Counselling rooms, provision of safe drinking water and clean hygienic washrooms for staff and students. Regular co-curricular activities, educational trips, inter-school competitions are conducted for the holistic development of students. The school believes in the motto ‘Teaching is Learning’ as various staff orientation programmes and workshops are conducted for the upgradation of staff. The school strives to become an institution of excellence preparing children to become responsible citizens of the global community..`}
-        visionTitle="AIR FORCE SCHOOL VISION"
-        vision={"Our vision at Air Force School Vayusena Nagar is to inculcate the core values of life i.e. love, respect, tolerance and cooperation and to empower students to acquire, comprehend, apply and value knowledge and skills that will make them confident and self-sustaining individuals to serve the global community and attain their highest goals."}
-        missionTitle="AIR FORCE SCHOOL MISSION"
-        mission={"The mission of Air Force School Vayusena Nagar is to provide inclusive education and recognize each child as an individual with his or her potential and talent. The school respects the individual needs of children, provides a safe, caring and creative environment and emphasizes the social, emotional, physical and intellectual development of each child. The school gives emphasis to the overall development of a child's personality, inculcating in him/her values to become a worthy citizen."}
+        subtitle={`Established in ${siteConfig.yearFounded}, ${siteConfig.brandName} is registered with Indian Air Force Educational and Cultural Society New Delhi. The school serves students from LKG to IX with smart classrooms, child-friendly spaces, activity rooms, laboratories, library access, sports facilities and a strong culture of holistic growth.`}
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 6 }}>
             <RevealOnScroll>
-              <SectionHeading
-                eyebrow="Who We Are"
-                title="A network built one classroom at a time"
-              />
-              <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-primary-600">
-                <p>
+              <SectionHeading eyebrow="Who We Are" title="A network built one classroom at a time" />
+              <Box sx={{ mt: 2.5, display: 'grid', gap: 2, color: 'text.secondary' }}>
+                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
                   What began as a single campus in {siteConfig.yearFounded} has grown into a nationwide network
                   spanning {stats[1].value} owned campuses and {stats[2].value}+ partner schools, educating more
                   than two hundred thousand students every year.
-                </p>
-                <p>
-                  Our mission has stayed constant even as we've grown: to foster responsible, well-rounded,
-                  lifelong learners — not just strong exam results. That means equal investment in academics,
-                  arts, sport, emotional wellbeing and real-world skills.
-                </p>
-                <p>
+                </Typography>
+                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
+                  Our mission has stayed constant even as we have grown: to foster responsible, well-rounded,
+                  lifelong learners, not just strong exam results. That means equal investment in academics, arts,
+                  sport, emotional wellbeing and real-world skills.
+                </Typography>
+                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
                   Every campus operates under shared academic standards and curriculum support from our central
-                  Innovation Centre, while staying rooted in its own local community.
-                </p>
-              </div>
+                  innovation ecosystem while staying rooted in its own local community.
+                </Typography>
+              </Box>
             </RevealOnScroll>
 
             <RevealOnScroll delay={100}>
-              <div className="grid grid-cols-2 gap-6 rounded-xl2 bg-primary-900 p-8">
+              <Paper
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                  gap: 3,
+                  p: { xs: 3, sm: 4 },
+                  borderRadius: 5,
+                  bgcolor: 'primary.main',
+                  boxShadow: '0 28px 70px -34px rgba(12,24,41,0.45)',
+                }}
+              >
                 {stats.map((stat) => (
                   <StatCounter key={stat.label} {...stat} tone="light" />
                 ))}
-              </div>
+              </Paper>
             </RevealOnScroll>
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
 
-      <section id="message" className="section-pad bg-skyback-soft">
-        <Container className="max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <Box component="section" id="message" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
+        <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 }, textAlign: 'center' }}>
           <RevealOnScroll>
-            <Quote className="mx-auto h-10 w-10 text-accent" />
-            <p className="mt-5 text-xl font-medium italic leading-relaxed text-primary-800 sm:text-2xl">
-              "Education is not about filling a vessel — it's about lighting a fire. Every decision we make, from
+            <Box sx={{ display: 'inline-flex', width: 64, height: 64, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.main' }}>
+              <Quote size={28} />
+            </Box>
+            <Typography sx={{ mt: 3, color: 'primary.main', fontSize: { xs: '1.25rem', sm: '1.65rem' }, fontWeight: 600, fontStyle: 'italic', lineHeight: 1.7 }}>
+              "Education is not about filling a vessel, it is about lighting a fire. Every decision we make, from
               curriculum design to classroom layout, starts with the question: will this help a child think for
               themselves?"
-            </p>
-            <p className="mt-6 text-sm font-bold text-primary-900">Dr. Meera Kapoor</p>
-            <p className="text-xs text-primary-400">Chairperson, {siteConfig.brandName} {siteConfig.brandSuffix}</p>
+            </Typography>
+            <Typography sx={{ mt: 3, color: 'primary.main', fontSize: '0.9rem', fontWeight: 800 }}>
+              Dr. Meera Kapoor
+            </Typography>
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.78rem' }}>
+              Chairperson, {siteConfig.brandName} {siteConfig.brandSuffix}
+            </Typography>
           </RevealOnScroll>
         </Container>
-      </section>
+      </Box>
 
-      <div id="initiatives">
+      <Box id="initiatives">
         <Initiatives />
-      </div>
+      </Box>
 
-      <div id="awards">
+      <Box id="awards">
         <Achievements />
-      </div>
+      </Box>
 
-      <section id="outreach" className="section-pad bg-skyback-soft">
-        <Container className="px-4 sm:px-6 lg:px-8">
+      <Box component="section" id="outreach" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
           <RevealOnScroll>
             <SectionHeading
               eyebrow="Giving Back"
               title="Social Outreach"
               subtitle="Education works best when it reaches beyond our own gates."
               align="center"
-              className="mx-auto"
             />
           </RevealOnScroll>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
             {outreachPrograms.map((p, i) => (
               <RevealOnScroll key={p.title} delay={i * 100}>
-                <div className="h-full rounded-xl2 bg-white p-7 shadow-soft">
-                  <p.icon className="h-8 w-8 text-accent-dark" />
-                  <h3 className="mt-4 text-base font-bold text-primary-900">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary-500">{p.description}</p>
-                </div>
+                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 4, boxShadow: 2 }}>
+                  <p.icon size={32} color="#d97a2e" />
+                  <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700 }}>
+                    {p.title}
+                  </Typography>
+                  <Typography sx={{ mt: 1.25, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>
+                    {p.description}
+                  </Typography>
+                </Paper>
               </RevealOnScroll>
             ))}
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
 
       <FAQSection />
     </>

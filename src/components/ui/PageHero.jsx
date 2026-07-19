@@ -1,34 +1,61 @@
-import { Link } from 'react-router-dom'
-import { ChevronRight } from 'lucide-react'
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
+import { Box, Breadcrumbs, Link, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import Container from './Container'
 
 export default function PageHero({ eyebrow, title, subtitle, crumb, image }) {
   return (
-    <section className="relative overflow-hidden bg-primary-900 py-16 sm:py-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,147,75,0.25),transparent_28%),radial-gradient(circle_at_left,rgba(93,138,168,0.28),transparent_24%)]" />
-      <div className="contour-lines opacity-30" />
-      <Container className="relative px-4 sm:px-6 lg:px-8">
-        <nav className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-skyback-light/60">
-          <Link to="/" className="hover:text-white">
+    <Box
+      component="section"
+      sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        py: { xs: 8, sm: 10 },
+        background:
+          'radial-gradient(circle at top right, rgba(255,147,75,0.25), transparent 28%), radial-gradient(circle at left, rgba(93,138,168,0.28), transparent 24%), #111a24',
+      }}
+    >
+      <Container sx={{ position: 'relative', px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Breadcrumbs
+          separator={<ChevronRightRoundedIcon sx={{ fontSize: 16, color: 'rgba(215,239,246,0.7)' }} />}
+          sx={{
+            mb: 2,
+            '& .MuiBreadcrumbs-ol': {
+              alignItems: 'center',
+            },
+          }}
+        >
+          <Link component={RouterLink} to="/" underline="hover" sx={{ color: 'rgba(215,239,246,0.68)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
             Home
           </Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-skyback-light/90">{crumb}</span>
-        </nav>
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.7fr]">
-          <div>
-            {eyebrow && <span className="text-sm font-bold uppercase tracking-[0.28em] text-accent">{eyebrow}</span>}
-            <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-[0.95] text-white sm:text-5xl">{title}</h1>
-            {subtitle && <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-skyback-light/75">{subtitle}</p>}
-          </div>
+          <Typography sx={{ color: 'rgba(215,239,246,0.92)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+            {crumb}
+          </Typography>
+        </Breadcrumbs>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: image ? '1.05fr 0.7fr' : '1fr' }, alignItems: 'center', gap: 5 }}>
+          <Box>
+            {eyebrow ? (
+              <Typography sx={{ color: 'secondary.main', fontSize: '0.9rem', fontWeight: 800, letterSpacing: '0.28em', textTransform: 'uppercase' }}>
+                {eyebrow}
+              </Typography>
+            ) : null}
+            <Typography variant="h1" sx={{ mt: 1.5, maxWidth: 900, color: '#ffffff', fontSize: { xs: '2.5rem', sm: '3.3rem' }, lineHeight: 0.98 }}>
+              {title}
+            </Typography>
+            {subtitle ? (
+              <Typography sx={{ mt: 2, maxWidth: 760, color: 'rgba(215,239,246,0.78)', fontSize: '0.98rem', lineHeight: 1.8 }}>
+                {subtitle}
+              </Typography>
+            ) : null}
+          </Box>
           {image ? (
-            <div className="relative mx-auto w-full max-w-md">
-              <div className="absolute inset-0 rounded-[2rem] bg-white/10 blur-2xl" />
-              <img src={image} alt="" className="student-mask relative h-[280px] w-full rounded-[2rem] object-cover shadow-card sm:h-[320px]" />
-            </div>
+            <Box sx={{ position: 'relative', mx: 'auto', width: '100%', maxWidth: 420 }}>
+              <Box sx={{ position: 'absolute', inset: 0, borderRadius: '2rem', backgroundColor: 'rgba(255,255,255,0.12)', filter: 'blur(36px)' }} />
+              <Box component="img" src={image} alt="" sx={{ position: 'relative', width: '100%', height: { xs: 280, sm: 320 }, objectFit: 'cover', borderRadius: '2rem', boxShadow: 5 }} />
+            </Box>
           ) : null}
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

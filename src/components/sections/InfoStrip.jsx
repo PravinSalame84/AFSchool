@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { ClipboardList, Wallet, MapPinned, MailQuestion } from 'lucide-react'
 import Container from '../ui/Container'
 import RevealOnScroll from '../ui/RevealOnScroll'
@@ -15,41 +16,53 @@ export default function InfoStrip() {
   const { openEnquiry } = useEnquiryModal()
 
   return (
-    <section className="bg-skyback-soft pb-2">
-      <Container className="px-4 sm:px-6 lg:px-8">
+    <Box component="section" sx={{ bgcolor: '#e8f1f6', pb: 1, mt: { xs: -3, sm: -4, lg: -5 }, position: 'relative', zIndex: 3 }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
-          <div className="grid grid-cols-2 gap-4 rounded-xl2 bg-white p-4 shadow-soft sm:grid-cols-4 sm:p-6">
+          <Paper
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+              gap: 2,
+              p: { xs: 1.5, sm: 2.25, lg: 2.5 },
+              borderRadius: { xs: 4, md: 5 },
+              backgroundColor: 'rgba(255,255,255,0.86)',
+              boxShadow: '0 28px 64px -36px rgba(17, 26, 36, 0.34)',
+              backdropFilter: 'blur(24px)',
+            }}
+          >
             {items.map(({ icon: Icon, label, to, action }) => {
               const inner = (
-                <>
-                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-skyback-soft text-primary-700 transition group-hover:bg-accent group-hover:text-white">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="text-sm font-semibold text-primary-800">{label}</span>
-                </>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  <Box sx={{ display: 'flex', width: 46, height: 46, flexShrink: 0, alignItems: 'center', justifyContent: 'center', borderRadius: '18px', bgcolor: '#d7eff6', color: 'primary.light' }}>
+                    <Icon size={20} />
+                  </Box>
+                  <Typography sx={{ color: 'primary.main', fontSize: '0.92rem', fontWeight: 700 }}>{label}</Typography>
+                </Box>
               )
               return action ? (
-                <button
+                <Box
                   key={label}
-                  type="button"
+                  component="button"
                   onClick={() => openEnquiry('General Enquiry')}
-                  className="focus-ring group flex items-center gap-3 rounded-xl p-2 text-left transition hover:bg-skyback-soft"
+                  sx={{ display: 'flex', alignItems: 'center', border: 0, borderRadius: 3, background: 'transparent', p: 1.15, textAlign: 'left', cursor: 'pointer', '&:hover': { backgroundColor: '#eef3f8' } }}
                 >
                   {inner}
-                </button>
+                </Box>
               ) : (
-                <Link
+                <Box
                   key={label}
+                  component={Link}
                   to={to}
-                  className="focus-ring group flex items-center gap-3 rounded-xl p-2 transition hover:bg-skyback-soft"
+                  sx={{ display: 'flex', alignItems: 'center', borderRadius: 3, p: 1.15, textDecoration: 'none', '&:hover': { backgroundColor: '#eef3f8' } }}
                 >
                   {inner}
-                </Link>
+                </Box>
               )
             })}
-          </div>
+          </Paper>
         </RevealOnScroll>
       </Container>
-    </section>
+    </Box>
   )
 }

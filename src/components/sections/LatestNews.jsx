@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Calendar } from 'lucide-react'
 import Container from '../ui/Container'
@@ -12,9 +13,9 @@ export default function LatestNews() {
   const featured = news.slice(0, 3)
 
   return (
-    <section className="section-pad bg-skyback">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 3 }}>
           <RevealOnScroll>
             <SectionHeading eyebrow="Newsroom" title="Latest News" />
           </RevealOnScroll>
@@ -23,27 +24,22 @@ export default function LatestNews() {
               View All News
             </Button>
           </RevealOnScroll>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        </Box>
+        <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
           {featured.map((item, i) => (
             <RevealOnScroll key={item.id} delay={i * 90}>
-              <Card as={Link} to="/blog" className="flex h-full flex-col p-6">
+              <Card component={Link} to="/blog" sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3, textDecoration: 'none' }}>
                 <Badge tone="accent">{item.category}</Badge>
-                <h3 className="mt-4 line-clamp-2 text-base font-bold leading-snug text-primary-900">
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 line-clamp-3 flex-1 text-sm leading-relaxed text-primary-500">
-                  {item.excerpt}
-                </p>
-                <div className="mt-4 flex items-center gap-1.5 text-xs text-primary-400">
-                  <Calendar className="h-3.5 w-3.5" /> {item.date}
-                </div>
+                <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700, lineHeight: 1.4 }}>{item.title}</Typography>
+                <Typography sx={{ mt: 1.5, flex: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.excerpt}</Typography>
+                <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 0.75, color: 'rgba(88,112,132,0.8)', fontSize: '0.75rem' }}>
+                  <Calendar size={14} /> {item.date}
+                </Box>
               </Card>
             </RevealOnScroll>
           ))}
-        </div>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

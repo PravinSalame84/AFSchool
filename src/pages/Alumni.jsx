@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { Quote } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
 import Container from '../components/ui/Container'
@@ -19,37 +20,40 @@ export default function Alumni() {
         subtitle="Thousands of graduates, one shared foundation. Hear what life after Airforce School looks like."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
             {testimonials.map((t, i) => (
               <RevealOnScroll key={t.name} delay={i * 90}>
-                <div className="h-full rounded-xl2 bg-white p-7 shadow-soft">
-                  <Quote className="h-7 w-7 text-accent" />
-                  <p className="mt-4 text-[15px] leading-relaxed text-primary-700">"{t.quote}"</p>
-                  <p className="mt-5 text-sm font-bold text-primary-900">{t.name}</p>
-                  <p className="text-xs text-primary-400">{t.batch}</p>
-                </div>
+                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 4, boxShadow: 2 }}>
+                  <Quote size={28} color="#f0934b" />
+                  <Typography sx={{ mt: 2, color: 'primary.light', fontSize: '0.95rem', lineHeight: 1.8 }}>
+                    "{t.quote}"
+                  </Typography>
+                  <Typography sx={{ mt: 2.5, color: 'primary.main', fontSize: '0.9rem', fontWeight: 800 }}>
+                    {t.name}
+                  </Typography>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem' }}>{t.batch}</Typography>
+                </Paper>
               </RevealOnScroll>
             ))}
-          </div>
+          </Box>
 
           <RevealOnScroll delay={200}>
-            <div className="mt-14 rounded-xl2 bg-primary-900 p-10 text-center">
+            <Paper sx={{ mt: 7, borderRadius: 5, bgcolor: 'primary.main', p: { xs: 4, sm: 5 }, textAlign: 'center', boxShadow: 5 }}>
               <SectionHeading
                 title="Are you a Airforce School graduate?"
                 subtitle="Join the alumni network to stay in touch with classmates, mentor current students, and hear about reunions first."
                 align="center"
                 tone="light"
-                className="mx-auto"
               />
-              <Button variant="primary" className="mt-7" onClick={() => openEnquiry('Alumni Sign-up')}>
+              <Button variant="primary" sx={{ mt: 3.5 }} onClick={() => openEnquiry('Alumni Sign-up')}>
                 Join the Alumni Network
               </Button>
-            </div>
+            </Paper>
           </RevealOnScroll>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

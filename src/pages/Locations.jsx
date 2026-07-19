@@ -1,3 +1,4 @@
+import { Box, Chip, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { MapPin, Search } from 'lucide-react'
@@ -39,77 +40,90 @@ export default function Locations() {
         subtitle="142 campuses across 8 states and counting — find the one closest to you."
       />
 
-      <section className="section-pad bg-skyback">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <RevealOnScroll className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="relative w-full max-w-sm">
-              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-300" />
-              <input
+      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+          <RevealOnScroll>
+            <Stack spacing={2.5}>
+              <TextField
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by campus, city or state"
-                className="focus-ring w-full rounded-full border border-primary-100 bg-white py-2.5 pl-10 pr-4 text-sm text-primary-900 placeholder:text-primary-300"
+                sx={{ maxWidth: 380, '& .MuiOutlinedInput-root': { borderRadius: '999px', bgcolor: '#fff' } }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search size={16} />
+                    </InputAdornment>
+                  ),
+                }}
               />
-            </div>
 
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setParams({})}
-                className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-                  activeState === 'All' ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
-                }`}
-              >
-                All States
-              </button>
-              {states.map((state) => (
-                <button
-                  key={state}
-                  onClick={() => setParams({ state })}
-                  className={`focus-ring rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-                    activeState === state ? 'bg-primary-900 text-white' : 'bg-white text-primary-700 hover:bg-skyback-soft'
-                  }`}
-                >
-                  {state}
-                </button>
-              ))}
-            </div>
+              <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1}>
+                <Chip
+                  label="All States"
+                  clickable
+                  onClick={() => setParams({})}
+                  sx={{
+                    bgcolor: activeState === 'All' ? 'primary.main' : '#fff',
+                    color: activeState === 'All' ? '#fff' : 'primary.light',
+                    fontWeight: 700,
+                  }}
+                />
+                {states.map((state) => (
+                  <Chip
+                    key={state}
+                    label={state}
+                    clickable
+                    onClick={() => setParams({ state })}
+                    sx={{
+                      bgcolor: activeState === state ? 'primary.main' : '#fff',
+                      color: activeState === state ? '#fff' : 'primary.light',
+                      fontWeight: 700,
+                    }}
+                  />
+                ))}
+              </Stack>
+            </Stack>
           </RevealOnScroll>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 2.5 }}>
             {campuses.map((c, i) => (
               <RevealOnScroll key={`${c.school}-${i}`} delay={(i % 6) * 70}>
-                <div className="flex h-full flex-col rounded-xl2 bg-white p-6 shadow-soft">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-skyback-soft text-primary-700">
-                    <MapPin className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 text-[15px] font-bold leading-snug text-primary-900">{c.school}</h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-wide text-primary-400">
+                <Paper sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3, borderRadius: 4, boxShadow: 2 }}>
+                  <Box sx={{ display: 'inline-flex', width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: '#d7eff6', color: 'primary.light' }}>
+                    <MapPin size={20} />
+                  </Box>
+                  <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '0.95rem', fontWeight: 700, lineHeight: 1.4 }}>
+                    {c.school}
+                  </Typography>
+                  <Typography sx={{ mt: 1, color: 'text.secondary', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                     {c.city}, {c.state}
-                  </p>
-                  <button
+                  </Typography>
+                  <Box
+                    component="button"
                     onClick={() => openEnquiry('Campus Enquiry')}
-                    className="focus-ring mt-4 text-left text-sm font-bold text-accent-dark hover:underline"
+                    sx={{ mt: 2, border: 0, background: 'transparent', p: 0, textAlign: 'left', color: 'secondary.dark', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
                   >
-                    Enquire about this campus &rarr;
-                  </button>
-                </div>
+                    Enquire about this campus →
+                  </Box>
+                </Paper>
               </RevealOnScroll>
             ))}
 
             {campuses.length === 0 && (
-              <p className="col-span-full py-10 text-center text-sm text-primary-400">
+              <Typography sx={{ gridColumn: '1 / -1', py: 8, textAlign: 'center', color: 'text.secondary', fontSize: '0.9rem' }}>
                 No campuses match your search. Try a different city or state.
-              </p>
+              </Typography>
             )}
-          </div>
+          </Box>
 
-          <div className="mt-12 flex justify-center">
+          <Box sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
             <Button variant="primary" onClick={() => openEnquiry('General Enquiry')}>
               Can't find a campus near you? Ask us
             </Button>
-          </div>
+          </Box>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

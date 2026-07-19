@@ -1,25 +1,36 @@
+import { Box, Typography } from '@mui/material'
+
 export default function SectionHeading({
   eyebrow,
   title,
   subtitle,
   align = 'left',
   tone = 'dark',
-  className = '',
+  className,
+  sx,
 }) {
-  const alignment = align === 'center' ? 'text-center mx-auto' : 'text-left'
-  const titleTone = tone === 'light' ? 'text-white' : 'text-primary-900'
-  const subTone = tone === 'light' ? 'text-skyback-light/90' : 'text-primary-500'
+  const textAlign = align === 'center' ? 'center' : 'left'
+  const titleColor = tone === 'light' ? '#ffffff' : '#111a24'
+  const subColor = tone === 'light' ? 'rgba(215,239,246,0.9)' : '#587084'
 
   return (
-    <div className={`max-w-2xl ${alignment} ${className}`}>
+    <Box className={className} sx={{ maxWidth: 720, textAlign, mx: align === 'center' ? 'auto' : 0, ...sx }}>
       {eyebrow && (
-        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-dark">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-          {eyebrow}
-        </span>
+        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: 'secondary.dark' }}>
+          <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: 'secondary.main' }} />
+          <Typography sx={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+            {eyebrow}
+          </Typography>
+        </Box>
       )}
-      <h2 className={`mt-3 text-3xl sm:text-4xl font-bold leading-tight ${titleTone}`}>{title}</h2>
-      {subtitle && <p className={`mt-4 text-base sm:text-lg leading-relaxed ${subTone}`}>{subtitle}</p>}
-    </div>
+      <Typography variant="h2" sx={{ mt: 1.5, color: titleColor, fontSize: { xs: '2rem', sm: '2.6rem' }, lineHeight: 1.05 }}>
+        {title}
+      </Typography>
+      {subtitle ? (
+        <Typography sx={{ mt: 2, color: subColor, fontSize: { xs: '1rem', sm: '1.08rem' }, lineHeight: 1.7 }}>
+          {subtitle}
+        </Typography>
+      ) : null}
+    </Box>
   )
 }

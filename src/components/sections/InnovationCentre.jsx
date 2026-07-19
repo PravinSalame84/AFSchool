@@ -1,3 +1,4 @@
+import { Box, Paper, Typography } from '@mui/material'
 import { GraduationCap, Lightbulb, BookOpen, FlaskConical } from 'lucide-react'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
@@ -14,34 +15,34 @@ const pillars = [
 
 export default function InnovationCentre() {
   return (
-    <section className="section-pad bg-skyback-soft">
-      <Container className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#e8f1f6' }}>
+      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, alignItems: 'center', gap: 6 }}>
           <RevealOnScroll>
             <SectionHeading
               eyebrow={`${siteConfig.shortName} Innovation Centre`}
               title="Where our curriculum is built, tested and refined"
               subtitle="A team of academicians, technologists and subject experts work year-round so every classroom benefits from the latest in pedagogy and educational research."
             />
-            <Button to="/why-us#curriculum" variant="dark" className="mt-7">
+            <Button to="/why-us#curriculum" variant="dark" sx={{ mt: 3.5 }}>
               Explore the Innovation Centre
             </Button>
           </RevealOnScroll>
 
-          <div className="grid grid-cols-2 gap-5">
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2.5 }}>
             {pillars.map((p, i) => (
               <RevealOnScroll key={p.label} delay={i * 90}>
-                <div className="flex flex-col items-center gap-3 rounded-xl2 bg-white p-7 text-center shadow-soft">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-900 text-accent">
-                    <p.icon className="h-6 w-6" />
-                  </span>
-                  <span className="text-sm font-bold text-primary-800">{p.label}</span>
-                </div>
+                <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, p: 3.5, textAlign: 'center', boxShadow: 2 }}>
+                  <Box sx={{ display: 'flex', width: 56, height: 56, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'primary.main', color: 'secondary.main' }}>
+                    <p.icon size={24} />
+                  </Box>
+                  <Typography sx={{ color: 'primary.light', fontSize: '0.9rem', fontWeight: 700 }}>{p.label}</Typography>
+                </Paper>
               </RevealOnScroll>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Container>
-    </section>
+    </Box>
   )
 }

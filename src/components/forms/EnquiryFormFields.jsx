@@ -1,3 +1,12 @@
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { useMemo, useState } from 'react'
 import { CheckCircle2, RefreshCw } from 'lucide-react'
 import Input from '../ui/Input'
@@ -81,19 +90,21 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center gap-3 py-8 text-center">
-        <CheckCircle2 className="h-14 w-14 text-accent" />
-        <h4 className="text-lg font-bold text-primary-900">Thank you, {form.firstName}!</h4>
-        <p className="max-w-sm text-sm text-primary-500">
+      <Stack alignItems="center" spacing={1.5} sx={{ py: 4, textAlign: 'center' }}>
+        <CheckCircle2 size={56} color="#f0934b" />
+        <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>
+          Thank you, {form.firstName}!
+        </Typography>
+        <Typography sx={{ maxWidth: 380, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>
           Your {context.toLowerCase()} has been received. Our admissions team will reach out to you on{' '}
-          <span className="font-semibold text-primary-700">{form.phone}</span> within 24 hours.
-        </p>
-      </div>
+          <Box component="span" sx={{ color: 'primary.light', fontWeight: 700 }}>{form.phone}</Box> within 24 hours.
+        </Typography>
+      </Stack>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2" noValidate>
+    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' }, gap: 2 }}>
       <Select
         id="state"
         label="State"
@@ -124,7 +135,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         value={form.school}
         onChange={update('school')}
         disabled={!form.city}
-        className="sm:col-span-2"
+        sx={{ gridColumn: { sm: 'span 2' } }}
         error={errors.school}
       />
       <Input
@@ -171,55 +182,60 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         placeholder="10-digit number"
         value={form.phone}
         onChange={update('phone')}
-        className="sm:col-span-2"
+        sx={{ gridColumn: { sm: 'span 2' } }}
         error={errors.phone}
       />
 
-      <div className="sm:col-span-2">
-        <label htmlFor="captcha" className="mb-1.5 block text-sm font-semibold text-primary-800">
-          Quick check — what is {challenge.a} + {challenge.b}? <span className="text-accent">*</span>
-        </label>
-        <div className="flex gap-2">
-          <input
+      <Box sx={{ gridColumn: { sm: 'span 2' } }}>
+        <Typography component="label" htmlFor="captcha" sx={{ mb: 1, display: 'block', color: 'primary.main', fontSize: '0.92rem', fontWeight: 600 }}>
+          Quick check - what is {challenge.a} + {challenge.b}? <Box component="span" sx={{ color: 'secondary.main' }}>*</Box>
+        </Typography>
+        <Stack direction="row" spacing={1}>
+          <TextField
             id="captcha"
             inputMode="numeric"
             value={form.captcha}
             onChange={update('captcha')}
-            className={`focus-ring w-full rounded-lg border px-4 py-2.5 text-[15px] text-primary-900 transition ${
-              errors.captcha ? 'border-red-400 bg-red-50' : 'border-primary-100 bg-white focus:border-accent'
-            }`}
             placeholder="Your answer"
+            error={Boolean(errors.captcha)}
+            fullWidth
           />
-          <button
+          <IconButton
             type="button"
             onClick={refreshChallenge}
             aria-label="Get a new question"
-            className="focus-ring flex-shrink-0 rounded-lg border border-primary-100 px-3 text-primary-500 transition hover:bg-skyback-soft"
+            sx={{ border: '1px solid rgba(17,26,36,0.12)', borderRadius: 2 }}
           >
-            <RefreshCw className="h-4 w-4" />
-          </button>
-        </div>
-        {errors.captcha && <p className="mt-1 text-xs font-medium text-red-500">{errors.captcha}</p>}
-      </div>
+            <RefreshCw size={16} />
+          </IconButton>
+        </Stack>
+        {errors.captcha ? (
+          <Typography sx={{ mt: 0.75, color: 'error.main', fontSize: '0.75rem', fontWeight: 500 }}>
+            {errors.captcha}
+          </Typography>
+        ) : null}
+      </Box>
 
-      <div className="sm:col-span-2">
-        <label className="flex items-start gap-2.5 text-sm text-primary-600">
-          <input
-            type="checkbox"
-            checked={form.agree}
-            onChange={update('agree')}
-            className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-primary-300 text-accent focus:ring-accent"
-          />
-          <span>
+      <Box sx={{ gridColumn: { sm: 'span 2' } }}>
+        <FormControlLabel
+          control={<Checkbox checked={form.agree} onChange={update('agree')} />}
+          label={
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.7 }}>
             By submitting, you agree to be contacted by Airforce School Educational & Cultural Society regarding this {context.toLowerCase()}.
-          </span>
-        </label>
-        {errors.agree && <p className="mt-1 text-xs font-medium text-red-500">{errors.agree}</p>}
-      </div>
+            </Typography>
+          }
+          sx={{ alignItems: 'flex-start', m: 0 }}
+        />
+        {errors.agree ? (
+          <Typography sx={{ mt: 0.75, color: 'error.main', fontSize: '0.75rem', fontWeight: 500 }}>
+            {errors.agree}
+          </Typography>
+        ) : null}
+      </Box>
 
-      <Button type="submit" variant="primary" className="sm:col-span-2 w-full">
+      <Button type="submit" variant="primary" fullWidth sx={{ gridColumn: { sm: 'span 2' } }}>
         Send {context.includes('Brochure') ? 'and Get Brochure' : 'Enquiry'}
       </Button>
-    </form>
+    </Box>
   )
 }
