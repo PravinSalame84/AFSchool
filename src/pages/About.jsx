@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@mui/material'
 import { Quote, Leaf, HeartHandshake, Users2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
 import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import StatCounter from '../components/ui/StatCounter'
@@ -10,6 +10,7 @@ import Achievements from '../components/sections/Achievements'
 import FAQSection from '../components/sections/FAQSection'
 import stats from '../data/stats'
 import siteConfig from '../data/siteConfig'
+import appContent from '../data/appContent'
 
 const outreachPrograms = [
   { icon: Leaf, title: 'Green Campus Initiative', description: 'Student-led recycling, composting and tree-planting drives across every campus.' },
@@ -21,14 +22,10 @@ export default function About() {
   return (
     <>
       <PageHero
-        crumb="About Us"
-        eyebrow="Our Story"
-        title={`About ${siteConfig.brandName} ${siteConfig.brandSuffix}`}
-        subtitle={`Established in ${siteConfig.yearFounded}, ${siteConfig.brandName} is registered with Indian Air Force Educational and Cultural Society New Delhi. The school serves students from LKG to IX with smart classrooms, child-friendly spaces, activity rooms, laboratories, library access, sports facilities and a strong culture of holistic growth.`}
+        {...appContent.pageHeroes.about}
       />
 
-      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 6 }}>
             <RevealOnScroll>
               <SectionHeading eyebrow="Who We Are" title="A network built one classroom at a time" />
@@ -68,11 +65,9 @@ export default function About() {
               </Paper>
             </RevealOnScroll>
           </Box>
-        </Container>
-      </Box>
+      </Section>
 
-      <Box component="section" id="message" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
-        <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 }, textAlign: 'center' }}>
+      <Section id="message" background="soft" containerMaxWidth="md" containerSx={{ textAlign: 'center' }}>
           <RevealOnScroll>
             <Box sx={{ display: 'inline-flex', width: 64, height: 64, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.main' }}>
               <Quote size={28} />
@@ -82,15 +77,14 @@ export default function About() {
               curriculum design to classroom layout, starts with the question: will this help a child think for
               themselves?"
             </Typography>
-            <Typography sx={{ mt: 3, color: 'primary.main', fontSize: '0.9rem', fontWeight: 800 }}>
+            <Typography sx={{ mt: 3, color: 'secondary.main', fontSize: '1.5rem', fontWeight: 800 }}>
               Dr. Meera Kapoor
             </Typography>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.78rem' }}>
               Chairperson, {siteConfig.brandName} {siteConfig.brandSuffix}
             </Typography>
           </RevealOnScroll>
-        </Container>
-      </Box>
+      </Section>
 
       <Box id="initiatives">
         <Initiatives />
@@ -100,8 +94,7 @@ export default function About() {
         <Achievements />
       </Box>
 
-      <Box component="section" id="outreach" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section id="outreach" background="sky">
           <RevealOnScroll>
             <SectionHeading
               eyebrow="Giving Back"
@@ -125,8 +118,7 @@ export default function About() {
               </RevealOnScroll>
             ))}
           </Box>
-        </Container>
-      </Box>
+      </Section>
 
       <FAQSection />
     </>

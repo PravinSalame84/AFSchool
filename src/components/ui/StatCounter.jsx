@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import useOnScreen from '../../hooks/useOnScreen'
 import useCountUp from '../../hooks/useCountUp'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 function formatValue(value, format) {
   if (format === 'compact') {
@@ -12,8 +13,8 @@ function formatValue(value, format) {
 export default function StatCounter({ value, suffix = '', label, format, tone = 'light' }) {
   const [ref, isVisible] = useOnScreen({ threshold: 0.4 })
   const animated = useCountUp(value, isVisible)
-  const textTone = tone === 'light' ? '#ffffff' : '#111a24'
-  const labelTone = tone === 'light' ? 'rgba(215,239,246,0.85)' : '#587084'
+  const textTone = tone === 'light' ? BRAND_NEUTRALS.white : BRAND_NEUTRALS.ink
+  const labelTone = tone === 'light' ? BRAND_ALPHA.sky85 : BRAND_NEUTRALS.slate
 
   return (
     <Box ref={ref} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>

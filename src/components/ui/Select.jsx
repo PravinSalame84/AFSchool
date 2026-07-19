@@ -15,7 +15,7 @@ export default function Select({ label, error, required, options = [], placehold
         '& .MuiOutlinedInput-root': {
           backgroundColor: 'rgba(255,255,255,0.58)',
           backdropFilter: 'blur(16px)',
-          borderRadius: 3,
+          borderRadius: 1,
         },
         ...sx,
       }}

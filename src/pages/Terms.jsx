@@ -1,14 +1,14 @@
-import { Box, Link, Paper, Typography } from '@mui/material'
+import { Link, Paper, Typography } from '@mui/material'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
+import appContent from '../data/appContent'
 import siteConfig from '../data/siteConfig'
 
 export default function Terms() {
   return (
     <>
-      <PageHero crumb="Terms & Conditions" title="Terms & Conditions" />
-      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
-        <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <PageHero {...appContent.pageHeroes.terms} />
+      <Section containerMaxWidth="md">
           <Paper sx={{ p: { xs: 3, sm: 4.5 }, borderRadius: 1, boxShadow: 2 }}>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem', lineHeight: 1.85 }}>
               By accessing this website, you agree to use it for lawful and informational purposes only. Content is
@@ -39,8 +39,7 @@ export default function Terms() {
               </Link>.
             </Typography>
           </Paper>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

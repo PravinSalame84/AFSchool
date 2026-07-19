@@ -1,12 +1,20 @@
 import { Box, Button, Chip, Container, Stack, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import afsCutoutGroup from '../../assets/images/afs-cutout-group.png'
+import { sharedImages } from '../../assets/images'
 import schoolContent from '../../data/schoolContent'
 import siteConfig from '../../data/siteConfig'
+import OptimizedImage from '../ui/OptimizedImage'
+import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS } from '../../constants/brand'
+import {
+  HERO_BADGE_CHIP_SX,
+  HERO_PRIMARY_BUTTON_SX,
+  HERO_SECONDARY_BUTTON_SX,
+  HERO_STAT_PANEL_SX,
+} from '../../constants/uiStyles'
 
 const heroCutouts = [
   {
-    src: afsCutoutGroup,
+    src: sharedImages.afsCutoutGroup,
     alt: 'Air Force School student with books',
     sx: {
       right: { xs: '50%', lg: '2%' },
@@ -62,8 +70,8 @@ export default function Hero() {
           <Box sx={{ pt: { xs: 6, sm: 8, md: 13 }, pb: { xs: 2, sm: 2, lg: 6 }, maxWidth: { xs: '100%', lg: 760 }, textAlign: { xs: 'center', lg: 'left' }, minWidth: 0 }}>
             <Typography
               sx={{
-                color: 'rgba(255,255,255,0.72)',
-                fontSize: { xs: '0.68rem', sm: '0.82rem' },
+                color: BRAND_ALPHA.white72,
+                fontSize: { xs: '0.75rem', sm: '0.82rem' },
                 fontWeight: 800,
                 letterSpacing: { xs: '0.14em', sm: '0.24em' },
                 textTransform: 'uppercase',
@@ -74,7 +82,7 @@ export default function Hero() {
             <Typography
               sx={{
                 maxWidth: 700,
-                color: '#ffffff',
+                color: BRAND_NEUTRALS.white,
                 mx: { xs: 'auto', lg: 0 },
                 mt: 1.5,
                 fontSize: { xs: '1.72rem', sm: '2.55rem', md: '4rem', xl: '5rem' },
@@ -92,7 +100,7 @@ export default function Hero() {
                 mt: 2.5,
                 maxWidth: 620,
                 mx: { xs: 'auto', lg: 0 },
-                color: 'rgba(255,255,255,0.78)',
+                color: BRAND_ALPHA.white78,
                 fontSize: { xs: '0.88rem', sm: '1rem', md: '1.05rem' },
                 lineHeight: { xs: 1.7, sm: 1.8 },
               }}
@@ -114,13 +122,9 @@ export default function Hero() {
                   label={badge}
                   sx={{
                     height: { xs: 32, sm: 34 },
-                    borderRadius: '999px',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.18)',
-                    color: '#fff',
-                    fontSize: { xs: '0.7rem', sm: '0.78rem' },
+                    ...HERO_BADGE_CHIP_SX,
+                    fontSize: { xs: '0.75rem', sm: '0.82rem' },
                     fontWeight: 700,
-                    backdropFilter: 'blur(18px)',
                     maxWidth: '100%',
                     '& .MuiChip-label': {
                       px: { xs: 1.1, sm: 1.5 },
@@ -147,18 +151,11 @@ export default function Hero() {
                   maxWidth: { xs: '100%', sm: 'none' },
                   px: { xs: 2.2, sm: 3.5 },
                   py: { xs: 1.4, md: 1.8 },
-                  bgcolor: '#ffffff',
-                  color: '#d27d05',
                   borderRadius: '0.95rem',
-                  boxShadow: '0 16px 34px rgba(12, 24, 41, 0.22)',
-                  border: '1px solid rgba(255,255,255,0.28)',
+                  ...HERO_PRIMARY_BUTTON_SX,
                   fontSize: { xs: '0.95rem', sm: '1rem', md: '1.05rem' },
                   fontWeight: 700,
                   textTransform: 'none',
-                  '&:hover': {
-                    bgcolor: '#fff8ee',
-                    color: '#a56f0d',
-                  },
                 }}
               >
                 Admissions Open for AY 2026-27
@@ -174,15 +171,7 @@ export default function Hero() {
                   maxWidth: { xs: '100%', sm: 'none' },
                   px: 3.25,
                   py: 1.55,
-                  borderRadius: '0.95rem',
-                  borderColor: 'rgba(255,255,255,0.32)',
-                  color: '#ffffff',
-                  backgroundColor: 'rgba(255,255,255,0.06)',
-                  backdropFilter: 'blur(16px)',
-                  '&:hover': {
-                    borderColor: 'rgba(255,255,255,0.54)',
-                    backgroundColor: 'rgba(255,255,255,0.12)',
-                  },
+                  ...HERO_SECONDARY_BUTTON_SX,
                 }}
               >
                 Contact School Office
@@ -222,12 +211,13 @@ export default function Hero() {
               }}
             />
 
-            {heroCutouts.map((item) => (
-              <Box
+            {heroCutouts.map((item, index) => (
+              <OptimizedImage
                 key={item.src}
-                component="img"
                 src={item.src}
                 alt={item.alt}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : undefined}
                 sx={{
                   position: 'absolute',
                   bottom: 0,
@@ -253,15 +243,13 @@ function PaperStat({ label, value }) {
         px: 2,
         py: 1.6,
         borderRadius: 1,
-        backgroundColor: 'rgba(255,255,255,0.1)',
-        border: '1px solid rgba(255,255,255,0.16)',
-        backdropFilter: 'blur(18px)',
+        ...HERO_STAT_PANEL_SX,
       }}
     >
-      <Typography sx={{ color: '#fff', fontSize: { xs: '1rem', sm: '1.15rem' }, fontWeight: 700 }}>
+      <Typography sx={{ color: BRAND_NEUTRALS.white, fontSize: { xs: '1rem', sm: '1.15rem' }, fontWeight: 700 }}>
         {value}
       </Typography>
-      <Typography sx={{ mt: 0.35, color: 'rgba(255,255,255,0.68)', fontSize: '0.76rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+      <Typography sx={{ mt: 0.35, color: BRAND_ALPHA.white68, fontSize: '0.76rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
         {label}
       </Typography>
     </Box>

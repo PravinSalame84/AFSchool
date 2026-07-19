@@ -1,9 +1,10 @@
 import { Chip } from '@mui/material'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 const tones = {
-  accent: { backgroundColor: 'rgba(240,147,75,0.14)', color: 'secondary.dark' },
-  sky: { backgroundColor: '#d7eff6', color: 'primary.light' },
-  dark: { backgroundColor: 'primary.main', color: 'common.white' },
+  accent: { backgroundColor: BRAND_ALPHA.accent14, color: 'secondary.dark' },
+  sky: { backgroundColor: BRAND_NEUTRALS.sectionSky, color: 'primary.light' },
+  dark: { backgroundColor: 'primary.main', color: BRAND_NEUTRALS.white },
 }
 
 export default function Badge({ children, tone = 'accent', className, sx }) {

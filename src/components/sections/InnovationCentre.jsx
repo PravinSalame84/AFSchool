@@ -5,6 +5,7 @@ import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import siteConfig from '../../data/siteConfig'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 const pillars = [
   { icon: GraduationCap, label: 'Teacher Training' },
@@ -15,7 +16,7 @@ const pillars = [
 
 export default function InnovationCentre() {
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#e8f1f6' }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.sectionSoft }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, alignItems: 'center', gap: 6 }}>
           <RevealOnScroll>

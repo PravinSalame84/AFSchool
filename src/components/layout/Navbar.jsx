@@ -26,34 +26,19 @@ import Logo from './Logo'
 import navigation from '../../data/navigation'
 import siteConfig from '../../data/siteConfig'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import {
+  BACKDROP_DARK_SX,
+  DARK_FILLED_BUTTON_SX,
+  MOBILE_DRAWER_PAPER_SX,
+  NAV_ACTIVE_PILL_SX,
+  NAV_MENU_PAPER_SX,
+  NAV_PILL_BUTTON_SX,
+  NAV_TOOLBAR_SX,
+} from '../../constants/uiStyles'
+import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS } from '../../constants/brand'
 
-const navButtonSx = {
-  minWidth: 'auto',
-  borderRadius: '999px',
-  px: 2.2,
-  py: 1.25,
-  color: '#2d5367',
-  fontSize: '0.875rem',
-  fontWeight: 700,
-  letterSpacing: '0.12em',
-  textTransform: 'uppercase',
-  whiteSpace: 'nowrap',
-  backgroundColor: 'rgba(255,255,255,0.18)',
-  border: '1px solid rgba(255,255,255,0.18)',
-  backdropFilter: 'blur(18px)',
-  '&:hover': {
-    bgcolor: 'rgba(255,255,255,0.3)',
-    color: '#14222f',
-  },
-}
-
-const activeNavButtonSx = {
-  bgcolor: '#111a24',
-  color: '#ffffff',
-  '&:hover': {
-    bgcolor: '#1a2938',
-  },
-}
+const navButtonSx = NAV_PILL_BUTTON_SX
+const activeNavButtonSx = NAV_ACTIVE_PILL_SX
 
 function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor }) {
   const hasChildren = Array.isArray(item.children) && item.children.length > 0
@@ -125,11 +110,7 @@ function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor })
             mt: 1.5,
             minWidth: 280,
             p: 1,
-            borderRadius: '1.7rem',
-            border: '1px solid rgba(255,255,255,0.24)',
-            bgcolor: 'rgba(231,241,248,0.72)',
-            boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.4)',
-            backdropFilter: 'blur(24px)',
+            ...NAV_MENU_PAPER_SX,
           },
         }}
       >
@@ -150,17 +131,17 @@ function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor })
                 borderRadius: '1rem',
                 px: 2,
                 py: 1.5,
-                color: '#2d5367',
+                color: BRAND_NEUTRALS.slateSoft,
                 fontSize: '0.8125rem',
                 fontWeight: 700,
                 letterSpacing: '0.09em',
                 textTransform: 'uppercase',
                 '&.Mui-selected': {
-                  bgcolor: 'rgba(17,26,36,0.08)',
-                  color: '#111a24',
+                  bgcolor: BRAND_ALPHA.ink08,
+                  color: BRAND_NEUTRALS.ink,
                 },
                 '&.Mui-selected:hover': {
-                  bgcolor: 'rgba(17,26,36,0.12)',
+                  bgcolor: BRAND_ALPHA.ink12,
                 },
               }}
             >
@@ -191,16 +172,15 @@ function MobileNavItem({ item, pathname, onNavigate }) {
         rel="noopener noreferrer"
         onClick={onNavigate}
         sx={{
-          px: 0.5,
           py: 1.7,
-          borderBottom: '1px solid rgba(17,26,36,0.08)',
+          borderBottom: `1px solid ${BRAND_ALPHA.ink08}`,
         }}
       >
         <ListItemText
           primary={item.label}
-          primaryTypographyProps={{ fontSize: '0.9375rem', fontWeight: 700, color: '#1e3848' }}
+          primaryTypographyProps={{ fontSize: '0.9375rem', fontWeight: 700, color: BRAND_NEUTRALS.inkSoft }}
         />
-        <ListItemIcon sx={{ minWidth: 'auto', color: '#8ea4b2' }}>
+        <ListItemIcon sx={{ minWidth: 'auto', color: BRAND_NEUTRALS.slateLight }}>
           <LaunchRoundedIcon fontSize="small" />
         </ListItemIcon>
       </ListItemButton>
@@ -217,7 +197,7 @@ function MobileNavItem({ item, pathname, onNavigate }) {
         sx={{
           px: 0.5,
           py: 1.7,
-          borderBottom: '1px solid rgba(17,26,36,0.08)',
+          borderBottom: `1px solid ${BRAND_ALPHA.ink08}`,
           borderRadius: 0,
           '&.Mui-selected': {
             bgcolor: 'transparent',
@@ -229,7 +209,7 @@ function MobileNavItem({ item, pathname, onNavigate }) {
           primaryTypographyProps={{
             fontSize: '0.9375rem',
             fontWeight: 700,
-            color: pathname === item.to || pathname.startsWith(`${item.to}/`) ? '#111a24' : '#1e3848',
+            color: pathname === item.to || pathname.startsWith(`${item.to}/`) ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkSoft,
           }}
         />
       </ListItemButton>
@@ -254,13 +234,13 @@ function MobileNavItem({ item, pathname, onNavigate }) {
           px: 0.5,
           py: 0.5,
           minHeight: 58,
-          borderBottom: '1px solid rgba(17,26,36,0.08)',
+          borderBottom: `1px solid ${BRAND_ALPHA.ink08}`,
           '& .MuiAccordionSummary-content': {
             my: 1,
           },
         }}
       >
-        <Box sx={{ fontSize: '0.9375rem', fontWeight: 700, color: isChildActive ? '#111a24' : '#1e3848' }}>{item.label}</Box>
+        <Box sx={{ fontSize: '0.9375rem', fontWeight: 700, color: isChildActive ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkSoft }}>{item.label}</Box>
       </AccordionSummary>
       <AccordionDetails sx={{ px: 0, pt: 0.5, pb: 1.5 }}>
         <List disablePadding>
@@ -284,10 +264,10 @@ function MobileNavItem({ item, pathname, onNavigate }) {
                   px: 2,
                   py: 1.1,
                   '&.Mui-selected': {
-                    bgcolor: 'rgba(17,26,36,0.08)',
+                    bgcolor: BRAND_ALPHA.ink08,
                   },
                   '&.Mui-selected:hover': {
-                    bgcolor: 'rgba(17,26,36,0.12)',
+                    bgcolor: BRAND_ALPHA.ink12,
                   },
                 }}
               >
@@ -295,11 +275,11 @@ function MobileNavItem({ item, pathname, onNavigate }) {
                   primary={child.label}
                   primaryTypographyProps={{
                     fontSize: '0.875rem',
-                    color: childSelected ? '#111a24' : '#426277',
+                    color: childSelected ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkMuted,
                   }}
                 />
                 {child.external ? (
-                  <ListItemIcon sx={{ minWidth: 'auto', color: '#8ea4b2' }}>
+                  <ListItemIcon sx={{ minWidth: 'auto', color: BRAND_NEUTRALS.slateLight }}>
                     <LaunchRoundedIcon sx={{ fontSize: 16 }} />
                   </ListItemIcon>
                 ) : null}
@@ -344,17 +324,13 @@ export default function Navbar() {
         sx={{
           mx: 'auto',
           width: '100%',
-          maxWidth: 1280,
+          maxWidth: 1480,
           minHeight: { xs: 68, sm: 84 },
           justifyContent: 'space-between',
           gap: { xs: 1, sm: 2 },
-          px: { xs: 1.25, sm: 3, lg: 4 },
+          px: { xs: 1, sm: 2, lg: 3 },
           py: { xs: 1, sm: 1.5 },
-          borderRadius: '999px',
-          bgcolor: 'rgba(231,241,248,0.4)',
-          border: '1px solid rgba(255,255,255,0.24)',
-          backdropFilter: 'blur(24px)',
-          boxShadow: '0 18px 40px -28px rgba(22, 30, 37, 0.55)',
+          ...NAV_TOOLBAR_SX,
         }}
       >
         <Logo />
@@ -381,14 +357,14 @@ export default function Navbar() {
               borderRadius: '999px',
               px: 2.6,
               py: 1.2,
-              bgcolor: '#111a24',
-              color: '#ffffff',
+              bgcolor: 'secondary.main',
+              color: BRAND_NEUTRALS.white,
+              '&:hover': {
+                bgcolor: 'secondary.light',
+              },
               fontWeight: 700,
               textTransform: 'none',
               boxShadow: '0 12px 24px -16px rgba(17, 26, 36, 0.8)',
-              '&:hover': {
-                bgcolor: '#1a2938',
-              },
             }}
           >
             {siteConfig.cta.enquire}
@@ -402,11 +378,7 @@ export default function Navbar() {
             display: { xs: 'inline-flex', xl: 'none' },
             width: { xs: 46, sm: 52 },
             height: { xs: 46, sm: 52 },
-            bgcolor: '#111a24',
-            color: '#ffffff',
-            '&:hover': {
-              bgcolor: '#1a2938',
-            },
+            ...DARK_FILLED_BUTTON_SX,
           }}
         >
           {mobileOpen ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
@@ -421,7 +393,7 @@ export default function Navbar() {
           keepMounted: true,
           BackdropProps: {
             sx: {
-              bgcolor: 'rgba(17,26,36,0.5)',
+              ...BACKDROP_DARK_SX,
             },
           },
         }}
@@ -429,23 +401,20 @@ export default function Navbar() {
           sx: {
             width: 'min(92vw, 380px)',
             p: { xs: 2.25, sm: 3 },
-            bgcolor: 'rgba(235,243,249,0.78)',
-            borderLeft: '1px solid rgba(255,255,255,0.26)',
-            backdropFilter: 'blur(24px)',
-            boxShadow: '0 24px 60px -32px rgba(12, 24, 41, 0.45)',
+            ...MOBILE_DRAWER_PAPER_SX,
           },
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, mb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, mx: 1, my: 2 }}>
           <Logo />
-          <IconButton aria-label="Close menu" onClick={() => setMobileOpen(false)} sx={{ color: '#5d7484' }}>
+          <IconButton aria-label="Close menu" onClick={() => setMobileOpen(false)} sx={{ color: BRAND_NEUTRALS.slateSoft }}>
             <CloseRoundedIcon />
           </IconButton>
         </Box>
 
         <Divider sx={{ mb: 1 }} />
 
-        <List disablePadding sx={{ mb: 2 }}>
+        <List disablePadding sx={{ ml: 1, mb: 2 }}>
           {navigation.map((item) => (
             <MobileNavItem
               key={item.label}
@@ -467,13 +436,9 @@ export default function Navbar() {
             mt: 'auto',
             borderRadius: '999px',
             py: 1.45,
-            bgcolor: '#111a24',
-            color: '#ffffff',
+            ...DARK_FILLED_BUTTON_SX,
             fontWeight: 700,
             textTransform: 'none',
-            '&:hover': {
-              bgcolor: '#1a2938',
-            },
           }}
         >
           {siteConfig.cta.enquire}

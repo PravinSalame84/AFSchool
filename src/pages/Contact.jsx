@@ -2,12 +2,15 @@ import { Box, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
 import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Input from '../components/ui/Input'
 import Button from '../components/ui/Button'
 import siteConfig from '../data/siteConfig'
+import appContent from '../data/appContent'
+import schoolContent from '../data/schoolContent'
+import { BRAND_NEUTRALS } from '../constants/brand'
 
 const infoCards = [
   { icon: MapPin, title: 'Head Office', value: siteConfig.contact.address },
@@ -35,20 +38,14 @@ export default function Contact() {
 
   return (
     <>
-      <PageHero
-        crumb="Contact Us"
-        eyebrow="We're Here to Help"
-        title="Get in Touch with Airforce School"
-        subtitle="Questions about admissions, campuses or anything else — our team typically replies within one business day."
-      />
+      <PageHero {...appContent.pageHeroes.contact} />
 
-      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section sx={{ py: { xs: 6, md: 10 } }}>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }, gap: 2.5 }}>
             {infoCards.map((card, i) => (
               <RevealOnScroll key={card.title} delay={i * 80}>
                 <Paper sx={{ height: '100%', p: 3, boxShadow: 2 }}>
-                  <Box sx={{ display: 'inline-flex', width: 44, height: 44, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: '#d7eff6', color: 'primary.light' }}>
+                  <Box sx={{ display: 'inline-flex', width: 44, height: 44, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: BRAND_NEUTRALS.sectionSky, color: 'primary.light' }}>
                     <card.icon size={20} />
                   </Box>
                   <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '0.9rem', fontWeight: 700 }}>{card.title}</Typography>
@@ -66,12 +63,14 @@ export default function Contact() {
 
           <Box sx={{ mt: 7, display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 5 }}>
             <RevealOnScroll>
-              <SectionHeading eyebrow="Send a Message" title="Drop us a line" />
+              <SectionHeading {...appContent.sections.contact.message} />
               {sent ? (
                 <Paper sx={{ mt: 4, p: 3.5, boxShadow: 2 }}>
                   <Stack spacing={1.5} alignItems="flex-start">
-                    <CheckCircle2 size={40} color="#f0934b" />
-                    <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>Message sent - thank you!</Typography>
+                    <CheckCircle2 size={40} color={BRAND_NEUTRALS.accentStrong} />
+                    <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>
+                      {appContent.sections.contact.successTitle}
+                    </Typography>
                     <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>We'll get back to you at {form.email} shortly.</Typography>
                   </Stack>
                 </Paper>
@@ -104,20 +103,19 @@ export default function Contact() {
             </RevealOnScroll>
 
             <RevealOnScroll delay={100}>
-              <SectionHeading eyebrow="Find Us" title="Head Office Location" />
+              <SectionHeading {...appContent.sections.contact.location} />
               <Paper sx={{ mt: 3.5, overflow: 'hidden', boxShadow: 2 }}>
                 <Box
                   component="iframe"
                   title="Airforce School head office map"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=72.83%2C19.10%2C72.89%2C19.14&layer=mapnik"
+                  src={schoolContent.contact.mapEmbed}
                   loading="lazy"
                   sx={{ width: '100%', height: 360, border: 0 }}
                 />
               </Paper>
             </RevealOnScroll>
           </Box>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

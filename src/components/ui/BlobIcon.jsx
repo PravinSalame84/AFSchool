@@ -34,8 +34,11 @@ export default function BlobIcon({ icon, tone = 'primary', size = 96, blobIndex 
         <path d={path} fill={`url(#${gradId})`} />
       </Box>
       <Icon
-        style={{ color: palette.iconColor }}
-        className="relative z-10"
+        style={{
+          color: palette.iconColor,
+          position: 'relative',
+          zIndex: 10,
+        }}
         width={size * 0.38}
         height={size * 0.38}
         strokeWidth={1.75}

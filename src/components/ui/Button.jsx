@@ -1,18 +1,19 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
 import { Button as MuiButton } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 const variants = {
   primary: {
     backgroundColor: 'secondary.main',
-    color: 'common.white',
+    color: BRAND_NEUTRALS.white,
     '&:hover': {
       backgroundColor: 'secondary.dark',
     },
   },
   dark: {
     backgroundColor: 'primary.main',
-    color: 'common.white',
+    color: BRAND_NEUTRALS.white,
     '&:hover': {
       backgroundColor: 'primary.light',
     },
@@ -24,24 +25,24 @@ const variants = {
     borderColor: 'primary.main',
     '&:hover': {
       backgroundColor: 'primary.main',
-      color: 'common.white',
+      color: BRAND_NEUTRALS.white,
       borderColor: 'primary.main',
     },
   },
   ghost: {
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    color: 'common.white',
-    border: '1px solid rgba(255,255,255,0.35)',
+    backgroundColor: BRAND_ALPHA.white1,
+    color: BRAND_NEUTRALS.white,
+    border: `1px solid ${BRAND_ALPHA.white35}`,
     '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.18)',
-      borderColor: 'rgba(255,255,255,0.55)',
+      backgroundColor: BRAND_ALPHA.white18,
+      borderColor: BRAND_ALPHA.white55,
     },
   },
   light: {
-    backgroundColor: 'common.white',
+    backgroundColor: BRAND_NEUTRALS.white,
     color: 'primary.main',
     '&:hover': {
-      backgroundColor: '#e8f1f6',
+      backgroundColor: BRAND_NEUTRALS.sectionSoft,
     },
   },
 }

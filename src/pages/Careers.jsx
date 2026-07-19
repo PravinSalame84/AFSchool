@@ -14,12 +14,14 @@ import {
   Sparkles,
   UsersRound,
 } from 'lucide-react'
-import Container from '../components/ui/Container'
 import PageHero from '../components/ui/PageHero'
 import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Button from '../components/ui/Button'
+import Section from '../components/ui/Section'
 import siteConfig from '../data/siteConfig'
+import appContent from '../data/appContent'
+import { BRAND_NEUTRALS } from '../constants/brand'
 
 const culturePoints = [
   {
@@ -73,15 +75,9 @@ const processSteps = [
 export default function Careers() {
   return (
     <>
-      <PageHero
-        crumb="Careers"
-        eyebrow="Join Our Team"
-        title={`Build a meaningful career with ${siteConfig.shortName}`}
-        subtitle="We are always interested in thoughtful teachers, dependable coordinators and committed school professionals who want to contribute to a disciplined, caring learning environment."
-      />
+      <PageHero {...appContent.pageHeroes.careers} />
 
-      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#eef5fa' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section background="pale" sx={{ py: { xs: 6, md: 10 } }}>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.05fr 0.95fr' }, gap: { xs: 3, md: 5 } }}>
             <RevealOnScroll>
               <SectionHeading
@@ -116,7 +112,7 @@ export default function Careers() {
                   boxShadow: '0 24px 60px -38px rgba(17,26,36,0.2)',
                 }}
               >
-                <Typography sx={{ color: 'primary.main', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                <Typography sx={{ color: 'secondary.main', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
                   What We Look For
                 </Typography>
                 <Typography sx={{ mt: 1.2, color: 'primary.main', fontSize: { xs: '1.2rem', sm: '1.45rem' }, fontWeight: 700, lineHeight: 1.25 }}>
@@ -135,11 +131,9 @@ export default function Careers() {
               </Paper>
             </RevealOnScroll>
           </Box>
-        </Container>
-      </Box>
+      </Section>
 
-      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#dfeef7' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section background="sky" sx={{ py: { xs: 6, md: 10 } }}>
           <RevealOnScroll>
             <SectionHeading
               eyebrow="Culture"
@@ -165,11 +159,9 @@ export default function Careers() {
               </RevealOnScroll>
             ))}
           </Box>
-        </Container>
-      </Box>
+      </Section>
 
-      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#eef5fa' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section background="pale" sx={{ py: { xs: 6, md: 10 } }}>
           <RevealOnScroll>
             <SectionHeading
               eyebrow="Current Roles"
@@ -227,11 +219,9 @@ export default function Careers() {
               </RevealOnScroll>
             ))}
           </Box>
-        </Container>
-      </Box>
+      </Section>
 
-      <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#dfeef7' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section background="sky" sx={{ py: { xs: 6, md: 10 } }}>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr auto' }, gap: { xs: 3, md: 4 }, alignItems: 'start' }}>
             <RevealOnScroll>
               <SectionHeading
@@ -262,7 +252,7 @@ export default function Careers() {
                         justifyContent: 'center',
                         borderRadius: '50%',
                         bgcolor: 'primary.main',
-                        color: '#fff',
+                        color: BRAND_NEUTRALS.white,
                         fontSize: '0.85rem',
                         fontWeight: 800,
                       }}
@@ -285,11 +275,11 @@ export default function Careers() {
                   maxWidth: { lg: 360 },
                   borderRadius: 1,
                   background: 'linear-gradient(135deg, rgba(17,26,36,0.96), rgba(45,83,103,0.92))',
-                  color: '#fff',
+                  color: BRAND_NEUTRALS.white,
                   boxShadow: '0 28px 70px -36px rgba(17, 26, 36, 0.52)',
                 }}
               >
-                <Typography sx={{ fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.68)' }}>
+                <Typography sx={{ fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'secondary.main' }}>
                   Send Your Profile
                 </Typography>
                 <Typography sx={{ mt: 1.25, fontSize: { xs: '1.15rem', sm: '1.35rem' }, fontWeight: 700, lineHeight: 1.3 }}>
@@ -325,8 +315,7 @@ export default function Careers() {
               </Paper>
             </RevealOnScroll>
           </Box>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

@@ -6,6 +6,7 @@ import BlobIcon from '../ui/BlobIcon'
 import Carousel from '../ui/Carousel'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import initiatives from '../../data/initiatives'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 const iconForImage = {
   campus: 'Building2',
@@ -19,7 +20,7 @@ const iconForImage = {
 
 export default function Initiatives() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: '#e8f1f6' }}>
+    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: BRAND_NEUTRALS.sectionSoft }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading

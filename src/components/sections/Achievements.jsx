@@ -6,10 +6,11 @@ import Carousel from '../ui/Carousel'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import achievements from '../../data/achievements'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function Achievements() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
+    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: BRAND_NEUTRALS.page }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
@@ -28,13 +29,13 @@ export default function Achievements() {
                   sx={{
                     p: 3,
                     borderRadius: 1,
-                    boxShadow: '0 24px 60px -36px rgba(17,26,36,0.2)',
-                    backgroundColor: 'rgba(255,255,255,0.58)',
-                    border: '1px solid rgba(255,255,255,0.55)',
+                    boxShadow: `0 24px 60px -36px ${BRAND_ALPHA.ink2}`,
+                    backgroundColor: BRAND_ALPHA.white58,
+                    border: `1px solid ${BRAND_ALPHA.white55}`,
                     backdropFilter: 'blur(18px)',
                   }}
                 >
-                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.18)', color: 'secondary.dark' }}>
+                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: BRAND_ALPHA.accent18, color: 'secondary.dark' }}>
                     <Award size={24} />
                   </Box>
                   <Typography sx={{ mt: 2, color: 'secondary.dark', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{item.year}</Typography>

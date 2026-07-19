@@ -204,7 +204,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
             type="button"
             onClick={refreshChallenge}
             aria-label="Get a new question"
-            sx={{ border: '1px solid rgba(17,26,36,0.12)', borderRadius: 2 }}
+            sx={{ border: '1px solid rgba(17,26,36,0.12)', borderRadius: 1 }}
           >
             <RefreshCw size={16} />
           </IconButton>

@@ -137,6 +137,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
 import { Box, IconButton } from '@mui/material'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function Carousel({ children, autoPlay = false, interval = 4000, ariaLabel = 'Carousel' }) {
   const trackRef = useRef(null)
@@ -250,7 +251,7 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
             backdropFilter: 'blur(16px)',
             '&:hover': {
               backgroundColor: 'rgba(17,26,36,0.88)',
-              color: '#ffffff',
+              color: BRAND_NEUTRALS.white,
             },
           }}
         >
@@ -268,7 +269,7 @@ export default function Carousel({ children, autoPlay = false, interval = 4000, 
             backdropFilter: 'blur(16px)',
             '&:hover': {
               backgroundColor: 'rgba(17,26,36,0.88)',
-              color: '#ffffff',
+              color: BRAND_NEUTRALS.white,
             },
           }}
         >

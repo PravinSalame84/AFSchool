@@ -2,11 +2,13 @@ import { Box, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 import { useMemo, useState } from 'react'
 import { Calendar } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Card from '../components/ui/Card'
 import Badge from '../components/ui/Badge'
 import news from '../data/news'
+import appContent from '../data/appContent'
+import { BRAND_NEUTRALS } from '../constants/brand'
 
 export default function Blog() {
   const categories = useMemo(() => ['All', ...new Set(news.map((n) => n.category))], [])
@@ -16,15 +18,9 @@ export default function Blog() {
 
   return (
     <>
-      <PageHero
-        crumb="Blog"
-        eyebrow="Newsroom & Insights"
-        title="Airforce School Blog"
-        subtitle="Stories from our campuses, parenting advice and the latest in education research."
-      />
+      <PageHero {...appContent.pageHeroes.blog} />
 
-      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section>
           <RevealOnScroll>
             <ToggleButtonGroup
               value={active}
@@ -41,12 +37,12 @@ export default function Blog() {
                     borderRadius: '999px !important',
                     px: 2,
                     py: 0.85,
-                    bgcolor: active === cat ? 'primary.main' : '#fff',
-                    color: active === cat ? '#fff' : 'primary.light',
+                    bgcolor: active === cat ? 'primary.main' : BRAND_NEUTRALS.whiteSoft,
+                    color: active === cat ? BRAND_NEUTRALS.whiteSoft : 'primary.light',
                     fontSize: '0.9rem',
                     fontWeight: 700,
                     '&:hover': {
-                      bgcolor: active === cat ? 'primary.main' : '#eef3f8',
+                      bgcolor: active === cat ? 'primary.main' : BRAND_NEUTRALS.sectionHover,
                     },
                   }}
                 >
@@ -70,8 +66,7 @@ export default function Blog() {
               </RevealOnScroll>
             ))}
           </Box>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

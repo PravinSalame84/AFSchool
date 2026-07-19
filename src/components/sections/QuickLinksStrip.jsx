@@ -1,38 +1,41 @@
 import { Box, Link as MuiLink, Stack } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Star, Rocket, MapPin, ExternalLink } from 'lucide-react'
-import Container from '../ui/Container'
 import RevealOnScroll from '../ui/RevealOnScroll'
+import appContent from '../../data/appContent'
+import { BRAND_NEUTRALS, SECTION_BACKGROUNDS } from '../../constants/brand'
+import Section from '../ui/Section'
 
-const links = [
-  { icon: Star, label: 'About Us', to: '/about' },
-  { icon: Rocket, label: 'Airforce School Initiatives', to: '/about#initiatives' },
-  { icon: MapPin, label: 'Locations', to: '/locations' },
-  { icon: ExternalLink, label: 'Careers', to: '/careers' },
-]
+const iconMap = {
+  about: Star,
+  initiatives: Rocket,
+  locations: MapPin,
+  careers: ExternalLink,
+}
 
 export default function QuickLinksStrip() {
   return (
-    <Box
-      component="section"
+    <Section
+      background={SECTION_BACKGROUNDS.sky}
       sx={{
         borderTop: '1px solid rgba(17,26,36,0.08)',
         borderBottom: '1px solid rgba(17,26,36,0.08)',
-        bgcolor: '#dfeef7',
         py: { xs: 3.25, sm: 4 },
       }}
     >
-      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
-        <RevealOnScroll>
-          <Stack
-            direction="row"
-            useFlexGap
-            flexWrap="wrap"
-            justifyContent="center"
-            spacing={{ xs: 1.1, sm: 1.6, md: 2.5 }}
-            rowGap={1.1}
-          >
-            {links.map(({ icon: Icon, label, to }) => (
+      <RevealOnScroll>
+        <Stack
+          direction="row"
+          useFlexGap
+          flexWrap="wrap"
+          justifyContent="center"
+          spacing={{ xs: 1.1, sm: 1.6, md: 2.5 }}
+          rowGap={1.1}
+        >
+          {appContent.sections.quickLinksStrip.links.map(({ key, label, to }) => {
+            const Icon = iconMap[key] || ExternalLink
+
+            return (
               <MuiLink
                 key={label}
                 component={Link}
@@ -57,17 +60,17 @@ export default function QuickLinksStrip() {
                   transition: 'transform .24s ease, background-color .24s ease, color .24s ease',
                   '&:hover': {
                     color: 'secondary.dark',
-                    bgcolor: '#ffffff',
+                    bgcolor: BRAND_NEUTRALS.white,
                     transform: 'translateY(-2px)',
                   },
                 }}
               >
                 <Icon size={16} /> {label}
               </MuiLink>
-            ))}
-          </Stack>
-        </RevealOnScroll>
-      </Container>
-    </Box>
+            )
+          })}
+        </Stack>
+      </RevealOnScroll>
+    </Section>
   )
 }

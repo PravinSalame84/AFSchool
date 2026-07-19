@@ -1,10 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import siteConfig from '../../data/siteConfig'
+import OptimizedImage from '../ui/OptimizedImage'
+import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS } from '../../constants/brand'
 
 export default function Logo({ tone = 'dark', className = '' }) {
-  const textTone = tone === 'light' ? '#ffffff' : '#111a24'
-  const subTone = tone === 'light' ? 'rgba(255,255,255,0.65)' : '#5d7484'
+  const textTone = tone === 'light' ? BRAND_NEUTRALS.white : BRAND_NEUTRALS.ink
+  const subTone = tone === 'light' ? BRAND_ALPHA.white65 : BRAND_NEUTRALS.slateSoft
 
   return (
     <Box
@@ -19,17 +21,27 @@ export default function Logo({ tone = 'dark', className = '' }) {
         textDecoration: 'none',
       }}
     >
-      <Box component="svg" viewBox="0 0 72 72" sx={{ width: 44, height: 44, flexShrink: 0 }}>
-        <defs>
-          <linearGradient id="logoSky" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4d88aa" />
-            <stop offset="100%" stopColor="#111a24" />
-          </linearGradient>
-        </defs>
-        <circle cx="36" cy="36" r="34" fill="url(#logoSky)" />
-        <path d="M36 15l16 10-16 10-16-10 16-10Z" fill="#ffd707" />
-        <path d="M24 29v12c0 5 6 10 12 10s12-5 12-10V29l-12 6-12-6Z" fill="#eef6fb" />
-        <path d="M15 40c4 1 8 1 12 0M45 40c4 1 8 1 12 0" stroke="#ff671f" strokeWidth="3" strokeLinecap="round" />
+      <Box
+        sx={{
+          width: { xs: 42, sm: 44 },
+          height: { xs: 42, sm: 44 },
+          flexShrink: 0,
+          borderRadius: '50%',
+          overflow: 'hidden',
+          boxShadow: tone === 'light' ? BRAND_SHADOWS.darkSm : BRAND_SHADOWS.sm,
+        }}
+      >
+        <OptimizedImage
+          src="/favicon.png"
+          alt={`${siteConfig.brandName} logo`}
+          loading="eager"
+          fetchPriority="high"
+          sx={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
       </Box>
 
       <Box sx={{ lineHeight: 1 }}>

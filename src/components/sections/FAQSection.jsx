@@ -4,10 +4,11 @@ import SectionHeading from '../ui/SectionHeading'
 import Accordion from '../ui/Accordion'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import faqs from '../../data/faqs'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function FAQSection() {
   return (
-    <Box component="section" id="faqs" sx={{ py: { xs: 6, md: 10 }, bgcolor: '#e8f1f6' }}>
+    <Box component="section" id="faqs" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.sectionSoft }}>
       <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading

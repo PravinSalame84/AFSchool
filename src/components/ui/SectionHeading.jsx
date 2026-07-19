@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function SectionHeading({
   eyebrow,
@@ -10,8 +11,8 @@ export default function SectionHeading({
   sx,
 }) {
   const textAlign = align === 'center' ? 'center' : 'left'
-  const titleColor = tone === 'light' ? '#ffffff' : '#111a24'
-  const subColor = tone === 'light' ? 'rgba(215,239,246,0.9)' : '#587084'
+  const titleColor = tone === 'light' ? BRAND_NEUTRALS.white : BRAND_NEUTRALS.ink
+  const subColor = tone === 'light' ? BRAND_ALPHA.sky9 : BRAND_NEUTRALS.slate
 
   return (
     <Box className={className} sx={{ maxWidth: 720, textAlign, mx: align === 'center' ? 'auto' : 0, ...sx }}>

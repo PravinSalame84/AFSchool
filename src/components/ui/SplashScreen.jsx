@@ -1,5 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import siteConfig from '../../data/siteConfig'
+import OptimizedImage from '../ui/OptimizedImage'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function SplashScreen({ visible }) {
   return (
@@ -19,14 +21,31 @@ export default function SplashScreen({ visible }) {
         pointerEvents: visible ? 'auto' : 'none',
       }}
     >
-      <Box sx={{ position: 'relative', textAlign: 'center', px: 3 }}>
+      <Box sx={{ position: 'relative', width: '100%', maxWidth: 430, px: 3, textAlign: 'center' }}>
         <Box
           sx={{
+            position: 'absolute',
+            left: '50%',
+            top: 12,
+            width: { xs: 180, sm: 220 },
+            height: { xs: 180, sm: 220 },
+            borderRadius: '50%',
+            transform: 'translateX(-50%)',
+            background: 'radial-gradient(circle, rgba(240,147,75,0.22) 0%, rgba(240,147,75,0.1) 36%, rgba(240,147,75,0) 74%)',
+            filter: 'blur(10px)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <Box
+          sx={{
+            position: 'relative',
             mx: 'auto',
-            width: 84,
-            height: 84,
-            borderRadius: '28px',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06))',
+            width: { xs: 112, sm: 132 },
+            height: { xs: 112, sm: 132 },
+            p: 1.2,
+            borderRadius: '32px',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08))',
             border: '1px solid rgba(255,255,255,0.18)',
             backdropFilter: 'blur(18px)',
             boxShadow: '0 24px 60px -26px rgba(0,0,0,0.42)',
@@ -35,18 +54,38 @@ export default function SplashScreen({ visible }) {
             animation: visible ? 'splashFloat 1.2s ease-in-out infinite alternate' : 'none',
           }}
         >
-          <Box component="span" sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#f0934b', boxShadow: '0 0 0 12px rgba(240,147,75,0.18)' }} />
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 10px 24px rgba(0,0,0,0.18)',
+            }}
+          >
+            <OptimizedImage
+              src="/favicon.png"
+              alt={`${siteConfig.brandName} logo`}
+              loading="eager"
+              fetchPriority="high"
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </Box>
         </Box>
 
         <Typography
           sx={{
-            mt: 3,
-            color: '#fff',
+            mt: 3.25,
+            color: BRAND_NEUTRALS.white,
             fontFamily: '"Rajdhani", "Segoe UI", sans-serif',
-            fontSize: { xs: '2rem', sm: '2.5rem' },
+            fontSize: { xs: '1.85rem', sm: '2.35rem' },
             fontWeight: 700,
             lineHeight: 1,
-            letterSpacing: '0.03em',
+            letterSpacing: '0.04em',
             textTransform: 'uppercase',
           }}
         >
@@ -54,20 +93,31 @@ export default function SplashScreen({ visible }) {
         </Typography>
         <Typography
           sx={{
-            mt: 0.8,
+            mt: 0.9,
             color: 'rgba(255,255,255,0.72)',
-            fontSize: '0.82rem',
+            fontSize: { xs: '0.74rem', sm: '0.82rem' },
             fontWeight: 700,
-            letterSpacing: '0.18em',
+            letterSpacing: { xs: '0.14em', sm: '0.18em' },
             textTransform: 'uppercase',
           }}
         >
           {siteConfig.brandSuffix}
         </Typography>
 
+        <Typography
+          sx={{
+            mt: 1.35,
+            color: 'rgba(215,239,246,0.74)',
+            fontSize: { xs: '0.88rem', sm: '0.92rem' },
+            lineHeight: 1.65,
+          }}
+        >
+          {siteConfig.tagline}
+        </Typography>
+
         <Box
           sx={{
-            mt: 3,
+            mt: 2.6,
             mx: 'auto',
             width: { xs: 180, sm: 220 },
             height: 6,

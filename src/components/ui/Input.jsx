@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material'
+import { BRAND_ALPHA } from '../../constants/brand'
 
 export default function Input({ label, error, required, className, id, sx, ...rest }) {
   return (
@@ -16,9 +17,9 @@ export default function Input({ label, error, required, className, id, sx, ...re
           fontWeight: 600,
         },
         '& .MuiOutlinedInput-root': {
-          backgroundColor: 'rgba(255,255,255,0.58)',
+          backgroundColor: BRAND_ALPHA.white58,
           backdropFilter: 'blur(16px)',
-          borderRadius: 3,
+          borderRadius: 1,
         },
         ...sx,
       }}

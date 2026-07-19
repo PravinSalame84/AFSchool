@@ -4,8 +4,10 @@ import SectionHeading from '../ui/SectionHeading'
 import StatCounter from '../ui/StatCounter'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
+import OptimizedImage from '../ui/OptimizedImage'
 import stats from '../../data/stats'
 import siteConfig from '../../data/siteConfig'
+import { sharedImages } from '../../assets/images'
 
 export default function AboutSnapshot() {
   return (
@@ -20,7 +22,7 @@ export default function AboutSnapshot() {
     >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, alignItems: 'start', gap: 6 }}>
-          <Box component="img" src="/media/school/teacher4.png" alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5 }} />
+          <OptimizedImage src={sharedImages.teacherImageFour} alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5 }} />
           <RevealOnScroll>
             <Box
               sx={{
@@ -30,7 +32,7 @@ export default function AboutSnapshot() {
                 gapY: { xs: 5, sm: 6 },
                 mb: 3,
                 p: { xs: 2.2, sm: 3 },
-                borderRadius: 4,
+                borderRadius: 1,
                 backgroundColor: 'rgba(255,255,255,0.08)',
                 border: '1px solid rgba(255,255,255,0.12)',
                 backdropFilter: 'blur(18px)',

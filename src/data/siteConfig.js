@@ -20,9 +20,14 @@ const siteConfig = {
   },
 
   social: {
-    website: 'https://www.airforce.skoolmate.in/',
+    website: '/',
     maps: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7',
-    gallery: 'https://www.airforce.skoolmate.in/photo-gallery/',
+    gallery: '/photo-gallery/',
+    facebook: 'https://www.facebook.com/airforceschoolvsn',
+    instagram: 'https://www.instagram.com/airforceschoolvsn/',
+    x: 'https://x.com/vayusenanagar',
+    youtube: 'https://www.youtube.com/@airforceschoolvsnnagpur4141',
+    linkedIn: 'https://www.linkedin.com/in/airforceschoolvsnnagpur/',
   },
 
   cta: {

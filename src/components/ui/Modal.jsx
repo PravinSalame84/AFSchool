@@ -1,5 +1,7 @@
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
-import { Dialog, DialogContent, DialogTitle, IconButton, Stack } from '@mui/material'
+import { Dialog, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material'
+import { BRAND_NEUTRALS } from '../../constants/brand'
+import { MODAL_BACKDROP_SX, MODAL_CLOSE_BUTTON_SX, MODAL_PAPER_SX } from '../../constants/uiStyles'
 
 export default function Modal({ open, onClose, title, children }) {
   return (
@@ -10,32 +12,30 @@ export default function Modal({ open, onClose, title, children }) {
       fullWidth
       BackdropProps={{
         sx: {
-          backgroundColor: 'rgba(17,26,36,0.42)',
-          backdropFilter: 'blur(8px)',
+          ...MODAL_BACKDROP_SX,
         },
       }}
       PaperProps={{
         sx: {
           borderRadius: 1,
           p: { xs: 1, sm: 2 },
-          border: '1px solid rgba(255,255,255,0.34)',
-          background:
-            'linear-gradient(180deg, rgba(246,250,253,0.88) 0%, rgba(226,238,246,0.82) 100%)',
-          boxShadow: '0 28px 70px -32px rgba(12, 24, 41, 0.38)',
-          backdropFilter: 'blur(24px)',
+          ...MODAL_PAPER_SX,
         },
       }}
     >
       <DialogTitle sx={{ pb: 1, color: 'primary.main' }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2}>
-          <span>{title}</span>
+          <Typography sx={{ my: 1, color: BRAND_NEUTRALS.ink, fontSize: '1.25rem', fontWeight: 700, textTransform: 'uppercase' }}>
+            {title}
+          </Typography>
           <IconButton
             onClick={onClose}
             aria-label="Close dialog"
             sx={{
-              border: '1px solid rgba(17,26,36,0.1)',
-              backgroundColor: 'rgba(255,255,255,0.26)',
-              backdropFilter: 'blur(16px)',
+              right: 10,
+              top: 10,
+              position: 'absolute',
+              ...MODAL_CLOSE_BUTTON_SX,
             }}
           >
             <CloseRoundedIcon />

@@ -26,21 +26,21 @@ const schoolContent = {
       title: 'Academics',
       value: 'Smart Classrooms',
       description: 'Digital boards, child-friendly furniture and structured learning support.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-28-at-2.42.11-PM.jpeg',
+      image: '/media/quickstats/academics.jpg',
       accent: 'from-[#ff7b3d] to-[#ffb16a]',
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
       description: 'Co-curricular events, educational trips and inter-school participation.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/UNITY-RUN-COLLAGE-2.png',
+      image: '/media/quickstats/campus-life.jpg',
       accent: 'from-[#5b44ff] to-[#9a64ff]',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
       description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2023/11/DSC00069-scaled-e1700192856657.jpg',
+      image: '/media/quickstats/wellbeing.jpg',
       accent: 'from-[#1fd3d2] to-[#76f6d4]',
     },
   ],
@@ -111,22 +111,22 @@ const schoolContent = {
     {
       title: 'Campus Moments',
       caption: 'Student experiences and day-to-day learning energy across the campus.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2023/11/DSC00069-scaled-e1700192856657.jpg',
+      image: '/media/school/gallary1.jpg',
     },
     {
       title: 'Unity & Participation',
       caption: 'Community-driven events that shape teamwork, discipline and shared pride.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/UNITY-RUN-COLLAGE-2.png',
+      image: '/media/school/gallary2.jpg',
     },
     {
       title: 'Recognition & Achievement',
       caption: 'Celebrating milestones, effort and student accomplishment.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2020/03/BEST-AWARD.png',
+      image: '/media/school/gallary3.jpg',
     },
     {
       title: 'Leadership & Guidance',
       caption: 'A culture of mentorship, responsibility and values-based growth.',
-      image: 'https://www.airforce.skoolmate.in/wp-content/uploads/2021/11/CHIEF.jpg',
+      image: '/media/school/gallary4.jpg',
     },
   ],
 
@@ -145,19 +145,19 @@ const schoolContent = {
   resources: [
     {
       label: 'Mandatory Public Disclosure',
-      href: 'https://www.airforce.skoolmate.in/important-documents/',
+      href: '/important-documents/',
     },
     {
       label: 'Parent Corner',
-      href: 'https://www.airforce.skoolmate.in/parent-corner/',
+      href: '/parent-corner/',
     },
     {
       label: 'Pay Fee',
-      href: 'https://www.airforce.skoolmate.in/payfee/',
+      href: '/payfee/',
     },
     {
       label: 'Photo Gallery',
-      href: 'https://www.airforce.skoolmate.in/photo-gallery/',
+      href: '/photo-gallery/',
     },
   ],
 

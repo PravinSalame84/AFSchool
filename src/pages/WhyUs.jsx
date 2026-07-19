@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import BlobIcon from '../components/ui/BlobIcon'
 import Button from '../components/ui/Button'
 import whyUsTabs from '../data/whyUsTabs'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import appContent from '../data/appContent'
+import { BRAND_NEUTRALS } from '../constants/brand'
 
 export default function WhyUs() {
   const { hash } = useLocation()
@@ -24,15 +26,9 @@ export default function WhyUs() {
 
   return (
     <>
-      <PageHero
-        crumb="Why Airforce School"
-        eyebrow="The Airforce School Difference"
-        title="Five reasons families choose Airforce School"
-        subtitle="Curriculum, faculty, environment, approach and skills designed together, not bolted on."
-      />
+      <PageHero {...appContent.pageHeroes.whyUs} />
 
-      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '280px 1fr' }, gap: 4 }}>
             <Box sx={{ display: 'flex', gap: 1.25, overflowX: 'auto', pb: 1, flexDirection: { lg: 'column' } }}>
               {whyUsTabs.map((tab) => (
@@ -49,8 +45,8 @@ export default function WhyUs() {
                     textAlign: 'left',
                     fontSize: '0.9rem',
                     fontWeight: 700,
-                    color: active === tab.id ? '#fff' : 'primary.light',
-                    backgroundColor: active === tab.id ? 'primary.main' : '#fff',
+                    color: active === tab.id ? BRAND_NEUTRALS.white : 'primary.light',
+                    backgroundColor: active === tab.id ? 'primary.main' : BRAND_NEUTRALS.white,
                     boxShadow: active === tab.id ? 3 : 0,
                     cursor: 'pointer',
                   }}
@@ -79,15 +75,14 @@ export default function WhyUs() {
                       ))}
                     </Box>
                     <Button variant="primary" sx={{ mt: 3.5 }} onClick={() => openEnquiry('Admissions Enquiry')}>
-                      Talk to an Admissions Counsellor
+                      {appContent.sections.whyUs.ctaLabel}
                     </Button>
                   </Box>
                 </Box>
               </Paper>
             </RevealOnScroll>
           </Box>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

@@ -10,6 +10,7 @@ import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import teachers from '../../data/teachers'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import { BRAND_NEUTRALS } from '../../constants/brand'
 
 const badges = [
   { icon: SchoolRoundedIcon, label: 'Experienced mentors' },
@@ -81,7 +82,7 @@ export default function MeetOurTeachers() {
                 position: 'relative',
                 overflow: 'hidden',
                 background: 'linear-gradient(135deg, rgba(17,26,36,0.97), rgba(45,83,103,0.93))',
-                color: '#fff',
+                color: BRAND_NEUTRALS.white,
                 boxShadow: '0 28px 70px -36px rgba(17, 26, 36, 0.55)',
               }}
             >
@@ -142,7 +143,7 @@ export default function MeetOurTeachers() {
                   gap: 0.75,
                   border: 0,
                   background: 'transparent',
-                  color: '#fff',
+                  color: BRAND_NEUTRALS.white,
                   fontSize: '0.88rem',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -204,7 +205,7 @@ export default function MeetOurTeachers() {
                         overflow: 'hidden',
                         borderRadius: 1,
                         boxShadow: '0 18px 42px -30px rgba(17, 26, 36, 0.22)',
-                        backgroundColor: '#fff',
+                        backgroundColor: BRAND_NEUTRALS.white,
                         transition: 'transform .28s ease, box-shadow .28s ease',
                         '&:hover': {
                           transform: 'translateY(-5px)',
@@ -260,7 +261,7 @@ export default function MeetOurTeachers() {
                             right: 14,
                             px: 1.1,
                             py: 0.55,
-                            borderRadius: '999px',
+                            borderRadius: 1,
                             bgcolor: 'rgba(255,255,255,0.84)',
                             color: 'secondary.dark',
                             fontSize: '0.68rem',
@@ -351,9 +352,9 @@ export default function MeetOurTeachers() {
                 Want to know how your child will be supported in class? Talk to our admissions team and we’ll walk you through the learning environment.
               </Typography>
               <Button
-                variant="dark"
+                variant="contained"
                 onClick={() => openEnquiry('Faculty & Classroom Enquiry')}
-                sx={{ alignSelf: { xs: 'stretch', sm: 'center' } }}
+                sx={{ alignSelf: { xs: 'stretch', sm: 'center' }, backgroundColor: 'secondary.main', '&:hover': { backgroundColor: 'secondary.light' } }}
               >
                 Talk to Our Team
               </Button>

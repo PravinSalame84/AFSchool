@@ -1,17 +1,20 @@
 import { Box, Chip, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material'
-import { useMemo, useState } from 'react'
+import { useDeferredValue, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { MapPin, Search } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
-import Container from '../components/ui/Container'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import Button from '../components/ui/Button'
+import Section from '../components/ui/Section'
 import locations, { states } from '../data/locations'
 import { useEnquiryModal } from '../context/EnquiryModalContext'
+import appContent from '../data/appContent'
+import { BRAND_NEUTRALS } from '../constants/brand'
 
 export default function Locations() {
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
+  const deferredQuery = useDeferredValue(query)
   const activeState = params.get('state') || 'All'
   const { openEnquiry } = useEnquiryModal()
 
@@ -24,31 +27,25 @@ export default function Locations() {
         schools.forEach((school) => list.push({ state, city, school }))
       })
     })
-    if (!query.trim()) return list
-    const q = query.toLowerCase()
+    if (!deferredQuery.trim()) return list
+    const q = deferredQuery.toLowerCase()
     return list.filter(
       (c) => c.school.toLowerCase().includes(q) || c.city.toLowerCase().includes(q) || c.state.toLowerCase().includes(q),
     )
-  }, [filteredStates, query])
+  }, [deferredQuery, filteredStates])
 
   return (
     <>
-      <PageHero
-        crumb="Locations"
-        eyebrow="Find a Campus"
-        title="Airforce School Campuses Near You"
-        subtitle="142 campuses across 8 states and counting — find the one closest to you."
-      />
+      <PageHero {...appContent.pageHeroes.locations} />
 
-      <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: 'background.default' }}>
-        <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+      <Section>
           <RevealOnScroll>
             <Stack spacing={2.5}>
               <TextField
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by campus, city or state"
-                sx={{ maxWidth: 380, '& .MuiOutlinedInput-root': { borderRadius: '999px', bgcolor: '#fff' } }}
+                sx={{ maxWidth: 380, '& .MuiOutlinedInput-root': { borderRadius: '999px', bgcolor: BRAND_NEUTRALS.white } }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -64,8 +61,8 @@ export default function Locations() {
                   clickable
                   onClick={() => setParams({})}
                   sx={{
-                    bgcolor: activeState === 'All' ? 'primary.main' : '#fff',
-                    color: activeState === 'All' ? '#fff' : 'primary.light',
+                    bgcolor: activeState === 'All' ? 'primary.main' : BRAND_NEUTRALS.white,
+                    color: activeState === 'All' ? BRAND_NEUTRALS.white : 'primary.light',
                     fontWeight: 700,
                   }}
                 />
@@ -76,8 +73,8 @@ export default function Locations() {
                     clickable
                     onClick={() => setParams({ state })}
                     sx={{
-                      bgcolor: activeState === state ? 'primary.main' : '#fff',
-                      color: activeState === state ? '#fff' : 'primary.light',
+                      bgcolor: activeState === state ? 'primary.main' : BRAND_NEUTRALS.white,
+                      color: activeState === state ? BRAND_NEUTRALS.white : 'primary.light',
                       fontWeight: 700,
                     }}
                   />
@@ -122,8 +119,7 @@ export default function Locations() {
               Can't find a campus near you? Ask us
             </Button>
           </Box>
-        </Container>
-      </Box>
+      </Section>
     </>
   )
 }

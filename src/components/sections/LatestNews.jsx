@@ -8,12 +8,13 @@ import Badge from '../ui/Badge'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import news from '../../data/news'
+import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function LatestNews() {
   const featured = news.slice(0, 3)
 
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: 'background.default' }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.page }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 3 }}>
           <RevealOnScroll>
@@ -32,7 +33,7 @@ export default function LatestNews() {
                 <Badge tone="accent">{item.category}</Badge>
                 <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700, lineHeight: 1.4 }}>{item.title}</Typography>
                 <Typography sx={{ mt: 1.5, flex: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.excerpt}</Typography>
-                <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 0.75, color: 'rgba(88,112,132,0.8)', fontSize: '0.75rem' }}>
+                <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 0.75, color: BRAND_ALPHA.sky8, fontSize: '0.75rem' }}>
                   <Calendar size={14} /> {item.date}
                 </Box>
               </Card>

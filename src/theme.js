@@ -1,31 +1,16 @@
 import { createTheme } from '@mui/material/styles'
+import { BRAND_ALPHA, BRAND_COLORS, BRAND_GRADIENTS, BRAND_NEUTRALS, BRAND_SHADOWS } from './constants/brand'
+
+const palette = {
+  ...BRAND_COLORS,
+  background: {
+    default: BRAND_NEUTRALS.page,
+    paper: BRAND_NEUTRALS.paper,
+  },
+}
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#111a24',
-      light: '#2d5367',
-      dark: '#0b1118',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      main: '#f0934b',
-      light: '#ffb173',
-      dark: '#d97a2e',
-      contrastText: '#111a24',
-    },
-    background: {
-      default: '#eef3f8',
-      paper: '#ffffff',
-    },
-    text: {
-      primary: '#111a24',
-      secondary: '#587084',
-    },
-    success: {
-      main: '#25d366',
-    },
-  },
+  palette,
   typography: {
     fontFamily: '"Manrope", "Segoe UI", sans-serif',
     h1: {
@@ -55,12 +40,12 @@ const theme = createTheme({
   },
   shadows: [
     'none',
-    '0 8px 24px rgba(17, 26, 36, 0.06)',
-    '0 10px 28px rgba(17, 26, 36, 0.08)',
-    '0 14px 34px rgba(17, 26, 36, 0.1)',
-    '0 18px 40px rgba(17, 26, 36, 0.12)',
-    '0 22px 46px rgba(17, 26, 36, 0.14)',
-    ...Array(19).fill('0 24px 60px -32px rgba(12, 24, 41, 0.4)'),
+    `0 8px 24px ${BRAND_ALPHA.ink06}`,
+    `0 10px 28px ${BRAND_ALPHA.ink08}`,
+    `0 14px 34px ${BRAND_ALPHA.ink1}`,
+    `0 18px 40px ${BRAND_ALPHA.ink12}`,
+    `0 22px 46px ${BRAND_ALPHA.ink14}`,
+    ...Array(19).fill(BRAND_SHADOWS.lg),
   ],
   components: {
     MuiCssBaseline: {
@@ -70,10 +55,10 @@ const theme = createTheme({
         },
         html: {
           scrollBehavior: 'smooth',
+          scrollPaddingTop: '96px',
         },
         body: {
-          background:
-            'radial-gradient(circle at top left, rgba(93, 138, 168, 0.18), transparent 30%), radial-gradient(circle at top right, rgba(255, 103, 31, 0.08), transparent 24%), linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%)',
+          background: BRAND_GRADIENTS.page,
         },
         '*': {
           boxSizing: 'border-box',
