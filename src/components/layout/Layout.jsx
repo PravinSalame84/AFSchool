@@ -11,6 +11,7 @@ const PAGE_BACKGROUND_INDEX = Object.freeze({
   '/about': 1,
   '/why-us': 0,
   '/admissions': 1,
+  '/brochure': 0,
   '/locations': 0,
   '/blog': 1,
   '/alumni': 0,
@@ -30,6 +31,7 @@ export default function Layout() {
   const { pathname, hash } = useLocation()
   const pageBaseBackground =
     PAGE_BACKGROUND_SEQUENCE[PAGE_BACKGROUND_INDEX[pathname] ?? 0]
+  const showFloatingButtons = pathname !== '/brochure'
 
   useEffect(() => {
     if (hash) {
@@ -65,7 +67,7 @@ export default function Layout() {
         <Outlet />
       </Box>
       <Footer />
-      <FloatingButtons />
+      {showFloatingButtons ? <FloatingButtons /> : null}
     </Box>
   )
 }

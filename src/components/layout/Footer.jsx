@@ -126,14 +126,14 @@ export default function Footer() {
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        background:
-          `linear-gradient(180deg, rgba(17,26,36,0.94) 50%, rgba(28,47,61,0.95) 100%)`,
+        background: BRAND_NEUTRALS.inkSoft,
+          // `linear-gradient(180deg, rgba(17,26,36,0.94) 50%, rgba(28,47,61,0.95) 100%)`,
         color: BRAND_NEUTRALS.whiteSoft,
       }}
     >
-      <Box sx={{ position: 'absolute', insetInline: 0, top: 0, height: 1, background: `linear-gradient(90deg, transparent, ${BRAND_ALPHA.accent4}, transparent)` }} />
-      <Box sx={FOOTER_PANEL_GLOW_SX} />
-      <Box sx={FOOTER_PANEL_GLOW_SECONDARY_SX} />
+      {/* <Box sx={{ position: 'absolute', insetInline: 0, top: 0, height: 1, background: `linear-gradient(90deg, transparent, ${BRAND_ALPHA.sky8}, transparent)` }} /> */}
+      {/* <Box sx={FOOTER_PANEL_GLOW_SX} /> 
+      <Box sx={FOOTER_PANEL_GLOW_SECONDARY_SX} />  */}
       <Container sx={{ position: 'relative', px: { xs: 2, sm: 3, lg: 4 }, py: { xs: 6, sm: 7, lg: 9 } }}>
         <Box
           sx={{

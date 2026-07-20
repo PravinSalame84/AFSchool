@@ -4,7 +4,7 @@ import Container from '../ui/Container'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import { Link } from 'react-router-dom'
-import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS } from '../../constants/brand'
+import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS, SECTION_BACKGROUNDS } from '../../constants/brand'
 
 const items = [
   { icon: ClipboardList, label: 'Admission Process', to: '/admissions' },
@@ -17,8 +17,8 @@ export default function InfoStrip() {
   const { openEnquiry } = useEnquiryModal()
 
   return (
-    <Box component="section" sx={{ bgcolor: BRAND_NEUTRALS.sectionSoft, pb: 1, mt: { xs: -3, sm: -4, lg: -5 }, position: 'relative', zIndex: 3 }}>
-      <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
+    <Box component="section" sx={{ bgcolor: SECTION_BACKGROUNDS.strip, pb: 1, mt: { xs: -3, sm: -4, lg: -5 }, position: 'relative', zIndex: 3 }}>
+      <Container sx={{ px: { xs: 1, sm: 1, lg: 1 } }}>
         <RevealOnScroll>
           <Paper
             sx={{
@@ -26,7 +26,7 @@ export default function InfoStrip() {
               gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
               gap: 2,
               p: { xs: 1.5, sm: 2.25, lg: 2.5 },
-              borderRadius: { xs: 4, md: 5 },
+              borderRadius: { xs: 1, md: 1 },
               backgroundColor: BRAND_ALPHA.white86,
               boxShadow: BRAND_SHADOWS.float,
               backdropFilter: 'blur(24px)',

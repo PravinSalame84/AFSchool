@@ -16,7 +16,7 @@ const iconMap = {
 export default function QuickLinksStrip() {
   return (
     <Section
-      background={SECTION_BACKGROUNDS.sky}
+      background={SECTION_BACKGROUNDS.strip}
       sx={{
         borderTop: '1px solid rgba(17,26,36,0.08)',
         borderBottom: '1px solid rgba(17,26,36,0.08)',

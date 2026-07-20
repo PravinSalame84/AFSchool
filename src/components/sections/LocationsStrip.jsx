@@ -8,7 +8,7 @@ import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function LocationsStrip() {
   return (
-    <Box component="section" sx={{ bgcolor: BRAND_NEUTRALS.page, py: 5 }}>
+    <Box component="section" sx={{ bgcolor: BRAND_NEUTRALS.sectionSoft, py: 5 }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <Stack direction="row" useFlexGap flexWrap="wrap" alignItems="center" spacing={1.5}>

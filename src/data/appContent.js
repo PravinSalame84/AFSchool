@@ -31,6 +31,14 @@ const appContent = {
       title: 'Airforce School Blog',
       subtitle: 'Stories from our campuses, parenting advice and the latest in education research.',
     },
+    brochure: {
+      crumb: 'Brochure',
+      eyebrow: 'Interactive Prospectus',
+      title: 'Air Force School Brochure',
+      subtitle:
+        'Explore the school through a responsive digital brochure with smooth paging, quick campus highlights and a print-friendly format for families.',
+      image: sharedImages.heroImage,
+    },
     careers: {
       crumb: 'Careers',
       eyebrow: 'Join Our Team',
@@ -51,7 +59,7 @@ const appContent = {
       crumb: 'Locations',
       eyebrow: 'Find a Campus',
       title: 'Airforce School Campuses Near You',
-      subtitle: '142 campuses across 8 states and counting - find the one closest to you.',
+      subtitle: 'find the one closest to you.',
     },
     whyUs: {
       crumb: 'Why Airforce School',

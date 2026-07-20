@@ -8,13 +8,13 @@ import Badge from '../ui/Badge'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import news from '../../data/news'
-import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
+import { BRAND_ALPHA, BRAND_NEUTRALS, SECTION_BACKGROUNDS } from '../../constants/brand'
 
 export default function LatestNews() {
   const featured = news.slice(0, 3)
 
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.page }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: SECTION_BACKGROUNDS.strip }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 3 }}>
           <RevealOnScroll>

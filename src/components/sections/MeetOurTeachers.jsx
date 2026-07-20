@@ -25,10 +25,10 @@ export default function MeetOurTeachers() {
     <Box
       component="section"
       sx={{
-        py: { xs: 6, md: 10 },
+        py: { xs: 3, md: 5 },
         overflowX: 'clip',
         background:
-          'radial-gradient(circle at top left, rgba(93,138,168,0.14), transparent 26%), linear-gradient(180deg, #f7fafc 0%, #edf3f8 100%)',
+          'radial-gradient(circle at top left, rgba(93,138,168,0.14), transparent 26%), linear-gradient(180deg, #c8e6fb 0%, #edf3f8 100%)',
       }}
     >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 }, minWidth: 0, overflowX: 'clip' }}>
@@ -72,88 +72,6 @@ export default function MeetOurTeachers() {
                 />
               ))}
             </Stack>
-          </RevealOnScroll>
-
-          <RevealOnScroll delay={40}>
-            <Paper
-              sx={{
-                p: { xs: 2.5, sm: 3.25 },
-                borderRadius: 1,
-                position: 'relative',
-                overflow: 'hidden',
-                background: 'linear-gradient(135deg, rgba(17,26,36,0.97), rgba(45,83,103,0.93))',
-                color: BRAND_NEUTRALS.white,
-                boxShadow: '0 28px 70px -36px rgba(17, 26, 36, 0.55)',
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -40,
-                  right: -30,
-                  width: 220,
-                  height: 220,
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(240,147,75,0.34), rgba(240,147,75,0))',
-                  pointerEvents: 'none',
-                }}
-              />
-              <Typography
-                sx={{
-                  position: 'relative',
-                  fontSize: '0.78rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.64)',
-                }}
-              >
-                Teacher Culture
-              </Typography>
-              <Typography
-                sx={{
-                  position: 'relative',
-                  mt: 1.25,
-                  fontSize: { xs: '1.15rem', sm: '1.45rem' },
-                  fontWeight: 700,
-                  lineHeight: 1.3,
-                }}
-              >
-                Workshops, mentoring and reflective practice help our faculty keep learning too.
-              </Typography>
-              <Typography
-                sx={{
-                  position: 'relative',
-                  mt: 1.5,
-                  color: 'rgba(255,255,255,0.78)',
-                  lineHeight: 1.75,
-                  fontSize: '0.92rem',
-                }}
-              >
-                That means students benefit from classrooms that are more engaging, more responsive and better aligned with the needs of each age group.
-              </Typography>
-              <Box
-                component="button"
-                onClick={() => openEnquiry('Faculty & Classroom Enquiry')}
-                sx={{
-                  position: 'relative',
-                  mt: 2.5,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 0.75,
-                  border: 0,
-                  background: 'transparent',
-                  color: BRAND_NEUTRALS.white,
-                  fontSize: '0.88rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  p: 0,
-                }}
-              >
-                Explore the learning environment
-                <ArrowOutwardRoundedIcon sx={{ fontSize: 18 }} />
-              </Box>
-            </Paper>
           </RevealOnScroll>
 
           <RevealOnScroll delay={80}>
@@ -341,20 +259,103 @@ export default function MeetOurTeachers() {
               </Carousel>
             </Paper>
 
+            <RevealOnScroll delay={40}>
+              <Paper
+                sx={{
+                  p: { xs: 2.5, sm: 3.25 },
+                  mt: 2,
+                  borderRadius: 1,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(135deg, rgba(17,26,36,0.97), rgba(45,83,103,0.93))',
+                  color: BRAND_NEUTRALS.white,
+                  boxShadow: '0 28px 70px -36px rgba(17, 26, 36, 0.55)',
+                }}
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: -40,
+                    right: -30,
+                    width: 220,
+                    height: 220,
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle, rgba(240,147,75,0.34), rgba(240,147,75,0))',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <Typography
+                  sx={{
+                    position: 'relative',
+                    fontSize: '0.78rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.64)',
+                  }}
+                >
+                  Teacher Culture
+                </Typography>
+                <Typography
+                  sx={{
+                    position: 'relative',
+                    mt: 1.25,
+                    fontSize: { xs: '1.15rem', sm: '1.45rem' },
+                    fontWeight: 700,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  Workshops, mentoring and reflective practice help our faculty keep learning too.
+                </Typography>
+                <Typography
+                  sx={{
+                    position: 'relative',
+                    mt: 1.5,
+                    color: 'rgba(255,255,255,0.78)',
+                    lineHeight: 1.75,
+                    fontSize: '0.92rem',
+                  }}
+                >
+                  That means students benefit from classrooms that are more engaging, more responsive and better aligned with the needs of each age group.
+                </Typography>
+                <Box
+                  component="button"
+                  onClick={() => openEnquiry('Faculty & Classroom Enquiry')}
+                  sx={{
+                    position: 'relative',
+                    mt: 2.5,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 0.75,
+                    border: 0,
+                    background: 'transparent',
+                    color: BRAND_NEUTRALS.white,
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    p: 0,
+                  }}
+                >
+                  Explore the learning environment
+                  <ArrowOutwardRoundedIcon sx={{ fontSize: 18 }} />
+                </Box>
+              </Paper>
+            </RevealOnScroll>
+
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
               spacing={1.5}
               alignItems={{ xs: 'stretch', sm: 'center' }}
               justifyContent="space-between"
-              sx={{ mt: 3, width: '100%' }}
+              sx={{ mt: 5, width: '100%' }}
             >
-              <Typography sx={{ color: 'text.secondary', fontSize: '0.92rem', lineHeight: 1.7 }}>
+              <Typography sx={{ pt: 1.5, color: 'text.secondary', fontSize: '0.92rem', lineHeight: 1.7 }}>
                 Want to know how your child will be supported in class? Talk to our admissions team and we’ll walk you through the learning environment.
               </Typography>
               <Button
                 variant="contained"
                 onClick={() => openEnquiry('Faculty & Classroom Enquiry')}
-                sx={{ alignSelf: { xs: 'stretch', sm: 'center' }, backgroundColor: 'secondary.main', '&:hover': { backgroundColor: 'secondary.light' } }}
+                sx={{ alignSelf: { xs: 'stretch', sm: 'center' }, color: 'white', backgroundColor: 'secondary.main', '&:hover': { backgroundColor: 'secondary.light' } }}
               >
                 Talk to Our Team
               </Button>

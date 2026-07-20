@@ -6,11 +6,11 @@ import Carousel from '../ui/Carousel'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import achievements from '../../data/achievements'
-import { BRAND_ALPHA, BRAND_NEUTRALS } from '../../constants/brand'
+import { BRAND_ALPHA, BRAND_NEUTRALS, SECTION_BACKGROUNDS } from '../../constants/brand'
 
 export default function Achievements() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: BRAND_NEUTRALS.page }}>
+    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: SECTION_BACKGROUNDS.mist }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading

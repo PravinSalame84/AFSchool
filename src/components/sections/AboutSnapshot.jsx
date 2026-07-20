@@ -15,7 +15,7 @@ export default function AboutSnapshot() {
       component="section"
       id="about-snapshot"
       sx={{
-        py: { xs: 6, md: 10 },
+        py: { xs: 6, md: 6, lg: 8 },
         background:
           'linear-gradient(180deg, rgba(17,26,36,0.96) 0%, rgba(35,58,75,0.92) 100%)',
       }}
@@ -24,13 +24,24 @@ export default function AboutSnapshot() {
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, alignItems: 'start', gap: 6 }}>
           <OptimizedImage src={sharedImages.teacherImageFour} alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5 }} />
           <RevealOnScroll>
+            <SectionHeading
+              eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
+              title="More than grades — we build well-rounded human beings"
+              tone="light"
+            />
+            <Typography sx={{ mt: 3, maxWidth: 640, fontSize: '0.95rem', lineHeight: 1.9, color: 'rgba(215,239,246,0.8)' }}>
+              Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
+              of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
+              is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
+              society.
+            </Typography>
             <Box
               sx={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
                 gapX: 4,
                 gapY: { xs: 5, sm: 6 },
-                mb: 3,
+                my: 1,
                 p: { xs: 2.2, sm: 3 },
                 borderRadius: 1,
                 backgroundColor: 'rgba(255,255,255,0.08)',
@@ -44,18 +55,7 @@ export default function AboutSnapshot() {
                 </RevealOnScroll>
               ))}
             </Box>
-            <SectionHeading
-              eyebrow={`${siteConfig.brandName} ${siteConfig.brandSuffix}`}
-              title="More than grades — we build well-rounded human beings"
-              tone="light"
-            />
-            <Typography sx={{ mt: 3, maxWidth: 640, fontSize: '0.95rem', lineHeight: 1.9, color: 'rgba(215,239,246,0.8)' }}>
-              Since {siteConfig.yearFounded}, {siteConfig.brandName} {siteConfig.brandSuffix} has grown into one
-              of the country's most trusted school networks. Our aim has never been just to impart knowledge — it
-              is to foster responsible, well-rounded, lifelong learners who go on to contribute positively to
-              society.
-            </Typography>
-            <Button to="/about" variant="light" sx={{ mt: 3.5 }}>
+            <Button to="/about" variant="light" sx={{ mt: 2.5 }}>
               Read Our Story
             </Button>
           </RevealOnScroll>

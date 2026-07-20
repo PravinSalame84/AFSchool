@@ -55,7 +55,6 @@ export default function PageHero({ eyebrow, title, subtitle, crumb, image }) {
           </Box>
           {image ? (
             <Box sx={{ position: 'relative', mx: 'auto', width: '100%', maxWidth: 420 }}>
-              <Box sx={{ position: 'absolute', inset: 0, ...PAGE_HERO_IMAGE_GLOW_SX }} />
               <OptimizedImage src={image} alt="" sx={{ position: 'relative', width: '100%', height: { xs: 280, sm: 320 }, objectFit: 'cover', borderRadius: '2rem', boxShadow: 5 }} />
             </Box>
           ) : null}

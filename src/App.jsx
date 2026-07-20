@@ -12,6 +12,7 @@ const loadWhyUs = () => import('./pages/WhyUs')
 const loadAdmissions = () => import('./pages/Admissions')
 const loadLocations = () => import('./pages/Locations')
 const loadBlog = () => import('./pages/Blog')
+const loadBrochure = () => import('./pages/Brochure')
 const loadAlumni = () => import('./pages/Alumni')
 const loadCareers = () => import('./pages/Careers')
 const loadContact = () => import('./pages/Contact')
@@ -24,6 +25,7 @@ const WhyUs = lazy(loadWhyUs)
 const Admissions = lazy(loadAdmissions)
 const Locations = lazy(loadLocations)
 const Blog = lazy(loadBlog)
+const Brochure = lazy(loadBrochure)
 const Alumni = lazy(loadAlumni)
 const Careers = lazy(loadCareers)
 const Contact = lazy(loadContact)
@@ -50,6 +52,7 @@ export default function App() {
         loadAdmissions,
         loadLocations,
         loadBlog,
+        loadBrochure,
         loadAlumni,
         loadCareers,
         loadContact,
@@ -79,6 +82,7 @@ export default function App() {
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/brochure" element={<Brochure />} />
             <Route path="/alumni" element={<Alumni />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />

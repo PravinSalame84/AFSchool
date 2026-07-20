@@ -5,6 +5,7 @@ export const siteNavigation = [
   { label: 'About', to: '/about' },
   { label: 'Campus Life', to: '/why-us' },
   { label: 'Admissions', to: '/admissions' },
+  // { label: 'Brochure', to: '/brochure' },
   { label: 'Careers', to: '/careers' },
   {
     label: 'Resources',
@@ -22,6 +23,7 @@ export const footerQuickLinks = [
   { label: 'About Us', to: '/about' },
   { label: 'Campus Life', to: '/why-us' },
   { label: 'Admissions', to: '/admissions' },
+  { label: 'Brochure', to: '/brochure' },
   { label: 'Careers', to: '/careers' },
   { label: 'Contact', to: '/contact' },
 ]

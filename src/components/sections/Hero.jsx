@@ -19,8 +19,9 @@ const heroCutouts = [
     sx: {
       right: { xs: '50%', lg: '2%' },
       transform: { xs: 'translateX(50%)', lg: 'none' },
-      width: { xs: 220, sm: 320, md: 420, lg: 560, xl: 760 },
+      width: { xs: 300, sm: 320, md: 420, lg: 560, xl: 760 },
       zIndex: 2,
+      bottom: -25
     },
   },
   // {

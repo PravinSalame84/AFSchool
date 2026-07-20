@@ -10,7 +10,7 @@ import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function StudentJourney() {
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.page }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.sectionSky }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading

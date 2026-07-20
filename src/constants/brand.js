@@ -35,9 +35,12 @@ export const BRAND_NEUTRALS = {
   slateLight: '#8ea4b2',
   paper: '#ffffff',
   page: '#eef3f8',
+  sectionBase: '#eef6fb',
   sectionSoft: '#e8f1f6',
   sectionSky: '#d7eff6',
   sectionPale: '#dfeef7',
+  sectionMist: '#f4f9fc',
+  sectionStrip: '#e3eff7',
   sectionHover: '#eef3f8',
   accentStrong: '#d97a2e',
   accentButton: '#d27d05',
@@ -135,10 +138,12 @@ export const SOCIAL_COLORS = {
 }
 
 export const SECTION_BACKGROUNDS = {
-  base: `var(--page-base-bg, ${BRAND_NEUTRALS.page})`,
-  soft: '#d9f0fc',
-  sky: '#cfebfc',
-  pale: '#c1e5ff',
+  base: `var(--page-base-bg, ${BRAND_NEUTRALS.sectionBase})`,
+  soft: BRAND_NEUTRALS.sectionSoft,
+  sky: BRAND_NEUTRALS.sectionSky,
+  pale: BRAND_NEUTRALS.sectionPale,
+  mist: BRAND_NEUTRALS.sectionMist,
+  strip: BRAND_NEUTRALS.sectionStrip,
   dark: 'primary.main',
 }
 
