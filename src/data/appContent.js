@@ -45,7 +45,7 @@ const appContent = {
       title: `Build a meaningful career with ${siteConfig.shortName}`,
       subtitle:
         'We are always interested in thoughtful teachers, dependable coordinators and committed school professionals who want to contribute to a disciplined, caring learning environment.',
-      image: sharedImages.teacherImageTwo,
+      image: sharedImages.teacherImageFour,
     },
     contact: {
       crumb: 'Contact Us',
@@ -67,7 +67,7 @@ const appContent = {
       title: 'Five reasons families choose Airforce School',
       subtitle:
         'Curriculum, faculty, environment, approach and skills designed together, not bolted on.',
-        image: sharedImages.teacherImageFour,
+      image: sharedImages.teacherImageFour,
     },
     privacyPolicy: {
       crumb: 'Privacy Policy',

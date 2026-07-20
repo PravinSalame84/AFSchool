@@ -117,6 +117,7 @@ export default function Hero() {
               justifyContent={{ xs: 'center', lg: 'flex-start' }}
               sx={{ mt: 3 }}
             >
+              
               {schoolContent.hero.badges.map((badge) => (
                 <Chip
                   key={badge}

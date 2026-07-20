@@ -18,7 +18,7 @@ export default function EnquiryForm() {
               title="Ask your query — we'll get in touch with you soon"
               subtitle="Fill in the form and our admissions team will reach out with campus details, fee structure and seat availability for the grade you're enquiring about."
             />
-            <OptimizedImage src={sharedImages.teacherImageOne} alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5, mb: 0 }} />
+            <OptimizedImage src={sharedImages.teacherImageOne} alt="About Snapshot" sx={{ width: '100%', borderRadius: 1, boxShadow: 5, my: 1 }} />
           </RevealOnScroll>
 
           <RevealOnScroll delay={120}>

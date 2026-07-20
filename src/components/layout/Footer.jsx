@@ -40,6 +40,7 @@ import {
   FOOTER_PANEL_GLOW_SX,
   FOOTER_SECTION_CARD_SX,
   FOOTER_SOCIAL_BUTTON_SX,
+  HERO_BADGE_CHIP_SX,
 } from '../../constants/uiStyles'
 
 const socialLinks = [
@@ -138,7 +139,7 @@ export default function Footer() {
         <Box
           sx={{
             display: 'grid',
-            gap: { xs: 4, sm: 5 },
+            gap: { xs: 1.5, sm: 2 },
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))', lg: 'minmax(0, 1.25fr) repeat(3, minmax(0, 0.9fr))' },
             alignItems: 'start',
           }}
@@ -150,6 +151,23 @@ export default function Footer() {
             </Typography>
             <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 3, maxWidth: 460 }}>
               {schoolContent.hero.badges.map((badge) => (
+                <Chip
+                  key={badge}
+                  label={badge}
+                  sx={{
+                    height: { xs: 40, sm: 50 },
+                    ...HERO_BADGE_CHIP_SX,
+                    fontSize: { xs: '0.75rem', sm: '0.82rem' },
+                    fontWeight: 700,
+                    maxWidth: '100%',
+                    '& .MuiChip-label': {
+                      px: { xs: 1.1, sm: 1.5 },
+                      whiteSpace: 'normal',
+                    },
+                  }}
+                />
+              ))}
+              {/* {schoolContent.hero.badges.map((badge) => (
                 <Chip
                   key={badge}
                   label={badge}
@@ -169,7 +187,7 @@ export default function Footer() {
                     },
                   }}
                 />
-              ))}
+              ))} */}
             </Stack>
             <Stack direction="row" spacing={1.2} useFlexGap flexWrap="wrap" sx={{ mt: 3 }}>
               {socialLinks.map(({ label, href, icon: Icon, color, isMuiIcon }) => (
