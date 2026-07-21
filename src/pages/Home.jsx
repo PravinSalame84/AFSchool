@@ -3,7 +3,9 @@ import InfoStrip from '../components/sections/InfoStrip'
 import AboutSnapshot from '../components/sections/AboutSnapshot'
 import EnquiryForm from '../components/sections/EnquiryForm'
 import MeetOurTeachers from '../components/sections/MeetOurTeachers'
+import StudentGalleryCarousel from '../components/sections/StudentGalleryCarousel'
 import StudentJourney from '../components/sections/StudentJourney'
+import SchoolGalleryShowcase from '../components/sections/SchoolGalleryShowcase'
 import Initiatives from '../components/sections/Initiatives'
 import Achievements from '../components/sections/Achievements'
 import Philosophy from '../components/sections/Philosophy'
@@ -20,8 +22,10 @@ export default function Home() {
       <InfoStrip />
       <AboutSnapshot />
       <MeetOurTeachers />
+      <StudentGalleryCarousel />
       <EnquiryForm />
       <StudentJourney />
+      <SchoolGalleryShowcase />
       <Initiatives />
       <Achievements />
       <Philosophy />

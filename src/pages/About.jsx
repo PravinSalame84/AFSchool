@@ -1,126 +1,182 @@
-import { Box, Paper, Typography } from '@mui/material'
-import { Quote, Leaf, HeartHandshake, Users2 } from 'lucide-react'
+import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded'
+import MilitaryTechRoundedIcon from '@mui/icons-material/MilitaryTechRounded'
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded'
+import { Box, Paper, Stack, Typography } from '@mui/material'
 import PageHero from '../components/ui/PageHero'
 import Section from '../components/ui/Section'
-import SectionHeading from '../components/ui/SectionHeading'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
-import StatCounter from '../components/ui/StatCounter'
-import Initiatives from '../components/sections/Initiatives'
-import Achievements from '../components/sections/Achievements'
-import FAQSection from '../components/sections/FAQSection'
-import stats from '../data/stats'
-import siteConfig from '../data/siteConfig'
-import appContent from '../data/appContent'
+import campusLifeContent from '../data/campusLifeContent'
+import schoolContent from '../data/schoolContent'
+import { sharedImages } from '../assets/images'
 
-const outreachPrograms = [
-  { icon: Leaf, title: 'Green Campus Initiative', description: 'Student-led recycling, composting and tree-planting drives across every campus.' },
-  { icon: HeartHandshake, title: 'Scholarship & Access Fund', description: 'Need-based scholarships that have supported over 4,000 students since inception.' },
-  { icon: Users2, title: 'Community Learning Days', description: 'Free weekend workshops opening our labs and libraries to neighbourhood children.' },
+const focusAreas = [
+  {
+    icon: HistoryEduRoundedIcon,
+    title: 'A legacy since 1968',
+    description:
+      'Air Force School, VayuSena Nagar, Nagpur has served generations of learners through a balanced culture of discipline, care and academic grounding.',
+    value: '58+ years',
+  },
+  {
+    icon: VisibilityRoundedIcon,
+    title: 'Clear vision and mission',
+    description:
+      'The school focuses on inclusive education, values-led growth and practical learning that helps every child become capable and responsible.',
+    value: 'LKG to IX',
+  },
+  {
+    icon: MilitaryTechRoundedIcon,
+    title: 'Air Force spirit',
+    description:
+      'A sense of order, dignity, punctuality and community service shapes the school experience in classrooms, assemblies and events.',
+    value: 'CBSE 1130860',
+  },
 ]
 
 export default function About() {
   return (
     <>
       <PageHero
-        {...appContent.pageHeroes.about}
+        eyebrow="About The School"
+        crumb="About"
+        title="A disciplined, caring and aspirational school community rooted in values"
+        subtitle="This refreshed about page focuses on the actual campus story, leadership voices and the educational philosophy families expect to see from a strong school website."
+        image={sharedImages.teacherImageFour}
       />
 
       <Section>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 6 }}>
-            <RevealOnScroll>
-              <SectionHeading eyebrow="Who We Are" title="A network built one classroom at a time" />
-              <Box sx={{ mt: 2.5, display: 'grid', gap: 2, color: 'text.secondary' }}>
-                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
-                  What began as a single campus in {siteConfig.yearFounded} has grown into a nationwide network
-                  spanning {stats[1].value} owned campuses and {stats[2].value}+ partner schools, educating more
-                  than two hundred thousand students every year.
-                </Typography>
-                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
-                  Our mission has stayed constant even as we have grown: to foster responsible, well-rounded,
-                  lifelong learners, not just strong exam results. That means equal investment in academics, arts,
-                  sport, emotional wellbeing and real-world skills.
-                </Typography>
-                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.85 }}>
-                  Every campus operates under shared academic standards and curriculum support from our central
-                  innovation ecosystem while staying rooted in its own local community.
-                </Typography>
-              </Box>
-            </RevealOnScroll>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.05fr 0.95fr' }, gap: 3 }}>
+          <RevealOnScroll>
+            <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.8rem', sm: '2.2rem' }, fontWeight: 800 }}>
+              A campus designed for strong academics and confident character
+            </Typography>
+            <Typography sx={{ mt: 1.5, color: 'text.secondary', lineHeight: 1.82 }}>
+              {schoolContent.about.narrative}
+            </Typography>
+            <Typography sx={{ mt: 1.3, color: 'text.secondary', lineHeight: 1.82 }}>
+              {schoolContent.about.extended}
+            </Typography>
+          </RevealOnScroll>
 
-            <RevealOnScroll delay={100}>
+          <RevealOnScroll delay={100}>
+            <Paper
+              sx={{
+                p: { xs: 2.5, sm: 3.2 },
+                borderRadius: '1.8rem',
+                background: 'linear-gradient(135deg, #10324d 0%, #1f5a7d 100%)',
+                color: '#fff',
+              }}
+            >
+              <Typography sx={{ color: '#9fd6ff', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+                Vision
+              </Typography>
+              <Typography sx={{ mt: 1, lineHeight: 1.8, color: 'rgba(255,255,255,0.82)' }}>
+                {schoolContent.about.vision}
+              </Typography>
+              <Typography sx={{ mt: 2.2, color: '#ffd48d', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+                Mission
+              </Typography>
+              <Typography sx={{ mt: 1, lineHeight: 1.8, color: 'rgba(255,255,255,0.82)' }}>
+                {schoolContent.about.mission}
+              </Typography>
+            </Paper>
+          </RevealOnScroll>
+        </Box>
+      </Section>
+
+      <Section background="soft">
+        <RevealOnScroll>
+          <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.75rem', sm: '2.1rem' }, fontWeight: 800, textAlign: 'center' }}>
+            Speech and quotes from the director and principal
+          </Typography>
+        </RevealOnScroll>
+
+        <Box sx={{ mt: 4, display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 2.2 }}>
+          {campusLifeContent.leadershipVoices.map((voice, index) => (
+            <RevealOnScroll key={voice.role} delay={index * 100}>
               <Paper
                 sx={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                  gap: 3,
-                  p: { xs: 3, sm: 4 },
-                  borderRadius: 1,
-                  bgcolor: 'primary.main',
-                  boxShadow: '0 28px 70px -34px rgba(12,24,41,0.45)',
+                  height: '100%',
+                  p: { xs: 2.5, sm: 3.2 },
+                  borderRadius: '1.8rem',
+                  background: index === 0
+                    ? 'linear-gradient(135deg, #fff3e5 0%, #ffffff 100%)'
+                    : 'linear-gradient(135deg, #eaf6fd 0%, #ffffff 100%)',
                 }}
               >
-                {stats.map((stat) => (
-                  <StatCounter key={stat.label} {...stat} tone="light" />
-                ))}
+                <Typography sx={{ color: 'secondary.dark', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                  {voice.role}
+                </Typography>
+                <Typography sx={{ mt: 1.4, color: 'primary.main', fontSize: { xs: '1.2rem', sm: '1.45rem' }, fontWeight: 700, lineHeight: 1.55 }}>
+                  "{voice.quote}"
+                </Typography>
+                <Typography sx={{ mt: 2.2, color: 'primary.main', fontSize: '1rem', fontWeight: 800 }}>
+                  {voice.name}
+                </Typography>
+                <Typography sx={{ mt: 0.5, color: 'text.secondary', fontSize: '0.88rem' }}>
+                  {voice.role}
+                </Typography>
               </Paper>
             </RevealOnScroll>
-          </Box>
+          ))}
+        </Box>
       </Section>
 
-      <Section id="message" background="soft" containerMaxWidth="md" containerSx={{ textAlign: 'center' }}>
-          <RevealOnScroll>
-            <Box sx={{ display: 'inline-flex', width: 64, height: 64, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: 'rgba(240,147,75,0.14)', color: 'secondary.main' }}>
-              <Quote size={28} />
-            </Box>
-            <Typography sx={{ mt: 3, color: 'primary.main', fontSize: { xs: '1.25rem', sm: '1.65rem' }, fontWeight: 600, fontStyle: 'italic', lineHeight: 1.7 }}>
-              "Education is not about filling a vessel, it is about lighting a fire. Every decision we make, from
-              curriculum design to classroom layout, starts with the question: will this help a child think for
-              themselves?"
-            </Typography>
-            <Typography sx={{ mt: 3, color: 'secondary.main', fontSize: '1.5rem', fontWeight: 800 }}>
-              Dr. Meera Kapoor
-            </Typography>
-            <Typography sx={{ color: 'text.secondary', fontSize: '0.78rem' }}>
-              Chairperson, {siteConfig.brandName} {siteConfig.brandSuffix}
-            </Typography>
-          </RevealOnScroll>
-      </Section>
+      <Section>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(3, 1fr)' }, gap: 2.2 }}>
+          {focusAreas.map((item, index) => (
+            <RevealOnScroll key={item.title} delay={index * 80}>
+              <Paper sx={{ height: '100%', p: 2.5, borderRadius: '1.6rem' }}>
+                <Box
+                  sx={{
+                    display: 'inline-flex',
+                    width: 52,
+                    height: 52,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '18px',
+                    bgcolor: 'rgba(17,26,36,0.06)',
+                    color: 'primary.main',
+                  }}
+                >
+                  <item.icon />
+                </Box>
+                <Typography sx={{ mt: 1.7, color: 'secondary.dark', fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                  {item.value}
+                </Typography>
+                <Typography sx={{ mt: 0.8, color: 'primary.main', fontSize: '1.16rem', fontWeight: 800 }}>
+                  {item.title}
+                </Typography>
+                <Typography sx={{ mt: 1.1, color: 'text.secondary', lineHeight: 1.75 }}>
+                  {item.description}
+                </Typography>
+              </Paper>
+            </RevealOnScroll>
+          ))}
+        </Box>
 
-      <Box id="initiatives">
-        <Initiatives />
-      </Box>
-
-      <Box id="awards">
-        <Achievements />
-      </Box>
-
-      <Section id="outreach" background="sky">
-          <RevealOnScroll>
-            <SectionHeading
-              eyebrow="Giving Back"
-              title="Social Outreach"
-              subtitle="Education works best when it reaches beyond our own gates."
-              align="center"
-            />
-          </RevealOnScroll>
-          <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
-            {outreachPrograms.map((p, i) => (
-              <RevealOnScroll key={p.title} delay={i * 100}>
-                <Paper sx={{ height: '100%', p: 3.5, borderRadius: 1, boxShadow: 2 }}>
-                  <p.icon size={32} color="#d97a2e" />
-                  <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700 }}>
-                    {p.title}
+        <RevealOnScroll delay={140}>
+          <Paper sx={{ mt: 3, p: { xs: 2.5, sm: 3.2 }, borderRadius: '1.8rem', bgcolor: 'rgba(16,50,77,0.04)' }}>
+            <Stack direction={{ xs: 'column', lg: 'row' }} spacing={2.5} sx={{ justifyContent: 'space-between' }}>
+              <Box>
+                <Typography sx={{ color: 'primary.main', fontSize: '1.3rem', fontWeight: 800 }}>
+                  What makes the school feel practical and parent-friendly
+                </Typography>
+                <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.78 }}>
+                  Families can now explore richer campus-life content, gallery sections, leadership messages, a live download centre and a direct ratings-and-feedback page from the website itself.
+                </Typography>
+              </Box>
+              <Box sx={{ minWidth: { lg: 280 } }}>
+                {schoolContent.facilities.slice(0, 4).map((item) => (
+                  <Typography key={item} sx={{ color: 'primary.main', fontWeight: 700, lineHeight: 1.9 }}>
+                    {item}
                   </Typography>
-                  <Typography sx={{ mt: 1.25, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>
-                    {p.description}
-                  </Typography>
-                </Paper>
-              </RevealOnScroll>
-            ))}
-          </Box>
+                ))}
+              </Box>
+            </Stack>
+          </Paper>
+        </RevealOnScroll>
       </Section>
-
-      <FAQSection />
     </>
   )
 }

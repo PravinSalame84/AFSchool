@@ -9,6 +9,8 @@ import Home from './pages/Home'
 
 const loadAbout = () => import('./pages/About')
 const loadWhyUs = () => import('./pages/WhyUs')
+const loadRatingsFeedback = () => import('./pages/RatingsFeedback')
+const loadDownloads = () => import('./pages/Downloads')
 const loadAdmissions = () => import('./pages/Admissions')
 const loadLocations = () => import('./pages/Locations')
 const loadBlog = () => import('./pages/Blog')
@@ -22,6 +24,8 @@ const loadNotFound = () => import('./pages/NotFound')
 
 const About = lazy(loadAbout)
 const WhyUs = lazy(loadWhyUs)
+const RatingsFeedback = lazy(loadRatingsFeedback)
+const Downloads = lazy(loadDownloads)
 const Admissions = lazy(loadAdmissions)
 const Locations = lazy(loadLocations)
 const Blog = lazy(loadBlog)
@@ -49,6 +53,8 @@ export default function App() {
       ;[
         loadAbout,
         loadWhyUs,
+        loadRatingsFeedback,
+        loadDownloads,
         loadAdmissions,
         loadLocations,
         loadBlog,
@@ -79,6 +85,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/why-us" element={<WhyUs />} />
+            <Route path="/ratings-feedback" element={<RatingsFeedback />} />
+            <Route path="/downloads" element={<Downloads />} />
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/blog" element={<Blog />} />

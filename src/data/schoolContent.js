@@ -144,20 +144,20 @@ const schoolContent = {
 
   resources: [
     {
-      label: 'Mandatory Public Disclosure',
-      href: '/important-documents/',
+      label: 'Download Centre',
+      href: '/downloads',
     },
     {
-      label: 'Parent Corner',
-      href: '/parent-corner/',
+      label: 'Ratings & Feedback',
+      href: '/ratings-feedback',
     },
     {
-      label: 'Pay Fee',
-      href: '/payfee/',
+      label: 'Campus Life',
+      href: '/why-us',
     },
     {
-      label: 'Photo Gallery',
-      href: '/photo-gallery/',
+      label: 'Contact School',
+      href: '/contact',
     },
   ],
 

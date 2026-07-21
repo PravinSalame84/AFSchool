@@ -24,12 +24,14 @@ const appContent = {
       title: 'The Airforce School Alumni Community',
       subtitle:
         'Thousands of graduates, one shared foundation. Hear what life after Airforce School looks like.',
+      image: sharedImages.teacherImageFour,
     },
     blog: {
       crumb: 'Blog',
       eyebrow: 'Newsroom & Insights',
       title: 'Airforce School Blog',
       subtitle: 'Stories from our campuses, parenting advice and the latest in education research.',
+      image:sharedImages.teacherImageOne,
     },
     brochure: {
       crumb: 'Brochure',

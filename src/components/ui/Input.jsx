@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import { BRAND_ALPHA } from '../../constants/brand'
 
-export default function Input({ label, error, required, className, id, sx, ...rest }) {
+export default function Input({ label, error, required, className, id, sx, children, ...rest }) {
   return (
     <TextField
       id={id}
@@ -24,6 +24,8 @@ export default function Input({ label, error, required, className, id, sx, ...re
         ...sx,
       }}
       {...rest}
-    />
+    >
+      {children}
+    </TextField>
   )
 }
