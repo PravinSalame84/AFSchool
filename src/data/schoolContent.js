@@ -2,15 +2,15 @@ const schoolContent = {
   meta: {
     title: 'Air Force School, VayuSena Nagar, Nagpur',
     description:
-      'Air Force School, VayuSena Nagar, Nagpur is a CBSE-affiliated campus focused on disciplined, inclusive, future-ready learning from LKG to Class IX.',
+      'Air Force School, VayuSena Nagar, Nagpur is a CBSE-affiliated campus rooted in discipline, humility and holistic learning from LKG to Class IX.',
   },
 
   hero: {
     eyebrow: 'Air Force School, Nagpur',
-    title: 'Modern learning with discipline, creativity and an Air Force spirit.',
+    title: 'Education with humility, discipline and a strong sense of purpose.',
     subtitle:
-      'Established in 1968, Air Force School VayuSena Nagar blends strong academics, caring mentorship and vibrant student life for the wards of Air Force personnel and the wider community.',
-    motto: 'Teaching is Learning',
+      'Established in 1968, Air Force School VayuSena Nagar builds confident, responsible learners through strong academics, caring mentorship, co-curricular exposure and the spirit of the Indian Air Force.',
+    motto: 'Vidya Dadati Vinayam',
     badges: ['Established 1968', 'CBSE Affiliation 1130860', 'Classes LKG to IX'],
   },
 
@@ -24,22 +24,22 @@ const schoolContent = {
   quickStats: [
     {
       title: 'Academics',
-      value: 'Smart Classrooms',
-      description: 'Digital boards, child-friendly furniture and structured learning support.',
+      value: 'Strong Foundations',
+      description: 'Play-way learning, structured classroom teaching and regular remedial support.',
       image: '/media/quickstats/academics.jpg',
       accent: 'from-[#ff7b3d] to-[#ffb16a]',
     },
     {
       title: 'Campus Life',
       value: 'Holistic Activities',
-      description: 'Co-curricular events, educational trips and inter-school participation.',
+      description: 'Assemblies, clubs, celebrations, visits and inter-school participation.',
       image: '/media/quickstats/campus-life.jpg',
       accent: 'from-[#5b44ff] to-[#9a64ff]',
     },
     {
       title: 'Wellbeing',
       value: 'Safe & Supportive',
-      description: 'Counselling, clean washrooms, safe drinking water and supervised play.',
+      description: 'Safe campus systems, regular PTMs, health checks and child-friendly spaces.',
       image: '/media/quickstats/wellbeing.jpg',
       accent: 'from-[#1fd3d2] to-[#76f6d4]',
     },
@@ -47,63 +47,63 @@ const schoolContent = {
 
   about: {
     narrative:
-      'Air Force School is registered with the Indian Air Force Educational and Cultural Society, New Delhi. The school was established to provide quality education with a broad, well-balanced and relevant curriculum. Students benefit from Smartboards, child-safe classrooms, fire-safety equipment and a campus designed to support both strong academics and joyful exploration.',
+      'Air Force School VayuSena Nagar functions under the aegis of the Indian Air Force Educational and Cultural Society, New Delhi, and is administered in accordance with the Education Code for Air Force Schools. The school was established in 1968 as a kindergarten school, grew into a junior school and was upgraded to the secondary level in 2018-19 with CBSE affiliation.',
     extended:
-      'The campus includes an outdoor stage, play area, synthetic court, laboratory, library, dedicated music and art-craft rooms, sports facilities and counselling support. Regular co-curricular activities, educational trips and inter-school competitions are organised for holistic development, while staff orientation programmes and workshops strengthen teaching excellence.',
+      'The school believes in a stress-free environment that supports holistic development. Pre-primary learners grow through play-way methods and phonics, primary classes build strong conceptual foundations through interactive learning, and the secondary section combines academic rigour with character building, social responsibility, clubs, cultural exposure and regular parent-teacher engagement.',
     vision:
-      'To inculcate love, respect, tolerance and cooperation, while empowering students to acquire, comprehend, apply and value knowledge and skills that help them become confident, self-sustaining individuals who can serve the global community.',
+      'To build young learners who combine knowledge with humility, confidence with discipline and ambition with a deep sense of responsibility toward society and the nation.',
     mission:
-      'To provide inclusive education that recognises the potential and talent of every child, supports social, emotional, physical and intellectual growth, and nurtures values needed to become a worthy citizen.',
+      'To provide inclusive, value-based education that strengthens academics, expression, fitness, character and service so every child can grow into a capable and compassionate citizen.',
   },
 
   pillars: [
     {
       title: 'Disciplined Academic Foundation',
-      description: 'A broad, well-balanced curriculum delivered with consistency, care and clarity.',
+      description: 'A balanced curriculum delivered with consistency, structure and close teacher support.',
     },
     {
       title: 'Holistic Development',
-      description: 'Students are encouraged through arts, clubs, trips, competitions and collaborative experiences.',
+      description: 'Students grow through arts, clubs, assemblies, trips, sports and collaborative experiences.',
     },
     {
       title: 'Safe Learning Environment',
-      description: 'Clean, child-friendly, supervised spaces support comfort, confidence and wellbeing.',
+      description: 'Clean, child-friendly, supervised spaces support safety, comfort and everyday wellbeing.',
     },
     {
       title: 'Modern Infrastructure',
-      description: 'Smartboards, laboratories, library spaces and activity rooms enhance daily learning.',
+      description: 'Smart boards, practical labs, library spaces and activity rooms strengthen classroom learning.',
     },
     {
       title: 'Teacher Growth Culture',
-      description: 'Workshops and orientation programmes keep staff learning, reflecting and improving.',
+      description: 'Workshops, PTMs and reflective teaching practices keep the staff learning and improving.',
     },
   ],
 
   facilities: [
-    'Smart classrooms with digital learning support',
-    'Laboratory and library for hands-on exploration',
-    'Outdoor stage, play area and synthetic court',
-    'Dedicated music, art-craft, sports and counselling rooms',
-    'Safe drinking water and hygienic washrooms',
-    'Child-safe, user-friendly furniture and fire-safety provisions',
+    'Smart boards, a modern science lab and a library that support structured classroom learning',
+    'Dedicated music, art and sports spaces alongside indoor play and outdoor recreation areas',
+    'Traffic park, herbal garden and activity-led campus areas for practical exposure',
+    'Aqua-UV drinking water, hygienic child-friendly washrooms and supervised wellbeing systems',
+    'Safe electrical fittings, secure boundaries and regular drills for emergency preparedness',
+    'Regular PTMs, remedial support and student clubs that strengthen the learning ecosystem',
   ],
 
   activities: [
     {
       title: 'Curricular Activities',
-      description: 'Structured classroom learning that builds concepts, confidence and academic habits.',
+      description: 'Structured classroom learning that builds concepts, confidence and sound academic habits.',
     },
     {
       title: 'Co-Curricular Activities',
-      description: 'Assemblies, celebrations, clubs and creativity-led opportunities that broaden perspective.',
+      description: 'Assemblies, celebrations, clubs and expression-led opportunities that broaden perspective.',
     },
     {
       title: 'Sports Activities',
-      description: 'Physical training, games and team spirit that support endurance, coordination and resilience.',
+      description: 'Physical training, games, yoga and team spirit that support endurance and resilience.',
     },
     {
       title: 'Educational Trips & Competitions',
-      description: 'Inter-school exposure and learning beyond the classroom strengthen communication and confidence.',
+      description: 'Visits, competitions and learning beyond the classroom strengthen curiosity and confidence.',
     },
   ],
 
@@ -167,7 +167,7 @@ const schoolContent = {
     'CBSE Affiliation 1130860',
     'Classes from LKG to IX',
     'Holistic development through academics, sports and co-curricular activities',
-    'Teaching is Learning',
+    'Vidya Dadati Vinayam',
   ],
 
   contact: {

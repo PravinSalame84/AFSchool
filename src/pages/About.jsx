@@ -7,7 +7,7 @@ import Section from '../components/ui/Section'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import campusLifeContent from '../data/campusLifeContent'
 import schoolContent from '../data/schoolContent'
-import { sharedImages } from '../assets/images'
+import { campusImages } from '../assets/images'
 
 const focusAreas = [
   {
@@ -40,16 +40,17 @@ export default function About() {
         eyebrow="About The School"
         crumb="About"
         title="A disciplined, caring and aspirational school community rooted in values"
-        subtitle="This refreshed about page focuses on the actual campus story, leadership voices and the educational philosophy families expect to see from a strong school website."
-        image={sharedImages.teacherImageFour}
+        subtitle="The story of Air Force School VayuSena Nagar is built on humility, structure, service-minded values and a learning culture that has grown steadily since 1968."
+        // image={sharedImages.teacherImageFour}
+        image={campusImages.teacherMusic}
       />
 
       <Section>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.05fr 0.95fr' }, gap: 3 }}>
           <RevealOnScroll>
-            <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.8rem', sm: '2.2rem' }, fontWeight: 800 }}>
-              A campus designed for strong academics and confident character
-            </Typography>
+          <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.8rem', sm: '2.2rem' }, fontWeight: 800 }}>
+            A campus designed for strong academics and confident character
+          </Typography>
             <Typography sx={{ mt: 1.5, color: 'text.secondary', lineHeight: 1.82 }}>
               {schoolContent.about.narrative}
             </Typography>
@@ -87,7 +88,7 @@ export default function About() {
       <Section background="soft">
         <RevealOnScroll>
           <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.75rem', sm: '2.1rem' }, fontWeight: 800, textAlign: 'center' }}>
-            Speech and quotes from the director and principal
+            School voice and guiding philosophy
           </Typography>
         </RevealOnScroll>
 
@@ -160,10 +161,10 @@ export default function About() {
             <Stack direction={{ xs: 'column', lg: 'row' }} spacing={2.5} sx={{ justifyContent: 'space-between' }}>
               <Box>
                 <Typography sx={{ color: 'primary.main', fontSize: '1.3rem', fontWeight: 800 }}>
-                  What makes the school feel practical and parent-friendly
+                  What makes the school feel grounded and parent-friendly
                 </Typography>
                 <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.78 }}>
-                  Families can now explore richer campus-life content, gallery sections, leadership messages, a live download centre and a direct ratings-and-feedback page from the website itself.
+                  Families can now understand the school through its real strengths: a disciplined culture, meaningful activities, practical facilities, regular communication and visible student participation.
                 </Typography>
               </Box>
               <Box sx={{ minWidth: { lg: 280 } }}>

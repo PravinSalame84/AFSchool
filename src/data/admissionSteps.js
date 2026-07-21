@@ -1,32 +1,32 @@
 const admissionSteps = [
   {
     step: 1,
-    title: 'Submit the Enquiry Form',
-    description: 'Share your child\u2019s details and preferred campus — our admissions team responds within 24 hours.',
+    title: 'Registration and Enquiry',
+    description: 'Submit the registration or enquiry form with the required student and parent details for the class in which admission is sought.',
   },
   {
     step: 2,
-    title: 'Campus Tour & Counselling',
-    description: 'Visit the campus (in person or virtually) and meet the admissions counsellor for a guided walkthrough.',
+    title: 'Vacancy and Eligibility Review',
+    description: 'Admission to a particular class is subject to the availability of vacancies in the respective class and the eligibility of the candidate.',
   },
   {
     step: 3,
-    title: 'Application & Documentation',
-    description: 'Complete the application form and submit the required documents through our admissions portal.',
+    title: 'Submission of Documents',
+    description: 'Parents are required to submit the admission form along with all prescribed supporting documents for verification.',
   },
   {
     step: 4,
-    title: 'Assessment / Interaction',
-    description: 'An age-appropriate interaction (for older grades) helps us understand your child\u2019s strengths.',
+    title: 'Preference and Verification',
+    description: 'Wards of Defence personnel and old students are given preference, subject to school rules, vacancies and eligibility norms.',
   },
   {
     step: 5,
-    title: 'Offer & Enrolment',
-    description: 'Receive your admission offer, complete the fee formalities, and welcome to Airforce School!',
+    title: 'Admission Confirmation',
+    description: 'Submission of the registration form is not a guarantee of admission. Final admission is confirmed only after school review and approval.',
   },
 ]
 
 export const feeStructureNote =
-  'Fees vary by campus, grade and curriculum board. Use the enquiry form to receive a detailed, campus-specific fee structure from our admissions team.'
+  'For fee details, payment formalities and bank-related guidance, parents are advised to contact the school office for the latest instructions.'
 
 export default admissionSteps

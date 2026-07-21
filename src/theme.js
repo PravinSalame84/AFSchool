@@ -74,13 +74,14 @@ const theme = createTheme({
           borderRadius: 999,
           paddingInline: 24,
           paddingBlock: 11,
+          fontWeight: 800,
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         rounded: {
-          borderRadius: 20,
+          borderRadius: 28,
         },
       },
     },

@@ -8,12 +8,14 @@ export default function Card({ children, className, hover = true, sx, ...rest })
       sx={{
         p: 0,
         ...GLASS_SURFACE_SX,
-        boxShadow: 2,
+        borderRadius: '1.8rem',
+        border: '1px solid rgba(255, 205, 120, 0.24)',
+        boxShadow: '0 22px 48px -34px rgba(17,26,36,0.22)',
         transition: hover ? 'transform 0.3s ease, box-shadow 0.3s ease' : undefined,
         '&:hover': hover
           ? {
               transform: 'translateY(-6px)',
-              boxShadow: 5,
+              boxShadow: '0 28px 58px -30px rgba(17,26,36,0.24)',
             }
           : undefined,
         ...sx,

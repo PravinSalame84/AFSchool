@@ -10,7 +10,15 @@ import { BRAND_NEUTRALS } from '../../constants/brand'
 
 export default function StudentJourney() {
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: BRAND_NEUTRALS.sectionSky }}>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 6, md: 10 },
+        bgcolor: BRAND_NEUTRALS.sectionSky,
+        background:
+          'radial-gradient(circle at top right, rgba(255,196,72,0.18), transparent 24%), linear-gradient(180deg, #f3fbff 0%, #fffdf8 100%)',
+      }}
+    >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
@@ -23,7 +31,17 @@ export default function StudentJourney() {
         <Box sx={{ mt: 6, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
           {studentJourney.map((item, i) => (
             <RevealOnScroll key={item.title} delay={(i % 3) * 90}>
-              <Card sx={{ height: '100%', p: 3.5 }}>
+              <Card
+                sx={{
+                  height: '100%',
+                  p: 3.5,
+                  background: i % 3 === 0
+                    ? 'linear-gradient(180deg, rgba(255,250,236,0.96) 0%, rgba(255,255,255,0.92) 100%)'
+                    : i % 3 === 1
+                      ? 'linear-gradient(180deg, rgba(238,249,255,0.96) 0%, rgba(255,255,255,0.92) 100%)'
+                      : 'linear-gradient(180deg, rgba(242,255,239,0.96) 0%, rgba(255,255,255,0.92) 100%)',
+                }}
+              >
                 <BlobIcon icon={item.icon} tone={i % 2 === 0 ? 'primary' : 'accent'} blobIndex={i} size={76} />
                 <Typography sx={{ mt: 2.5, color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>{item.title}</Typography>
                 <Typography sx={{ mt: 1.5, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.description}</Typography>

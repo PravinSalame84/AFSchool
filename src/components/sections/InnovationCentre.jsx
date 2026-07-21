@@ -4,14 +4,14 @@ import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
 import RevealOnScroll from '../ui/RevealOnScroll'
-import siteConfig from '../../data/siteConfig'
+import schoolContent from '../../data/schoolContent'
 import { BRAND_NEUTRALS } from '../../constants/brand'
 
 const pillars = [
-  { icon: GraduationCap, label: 'Teacher Training' },
-  { icon: Lightbulb, label: 'Innovation Lab' },
-  { icon: BookOpen, label: 'Teaching Methodology' },
-  { icon: FlaskConical, label: 'Curriculum R&D' },
+  { icon: GraduationCap, label: 'Play-Way Foundation' },
+  { icon: Lightbulb, label: 'Interactive Teaching' },
+  { icon: BookOpen, label: 'Clubs & Expression' },
+  { icon: FlaskConical, label: 'Practical Science' },
 ]
 
 export default function InnovationCentre() {
@@ -21,12 +21,12 @@ export default function InnovationCentre() {
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, alignItems: 'center', gap: 6 }}>
           <RevealOnScroll>
             <SectionHeading
-              eyebrow={`${siteConfig.shortName} Innovation Centre`}
-              title="Where our curriculum is built, tested and refined"
-              subtitle="A team of academicians, technologists and subject experts work year-round so every classroom benefits from the latest in pedagogy and educational research."
+              eyebrow="Academic Approach"
+              title="How the school turns classroom learning into confident, practical growth"
+              subtitle="From play-way foundations to interactive primary teaching and practical secondary learning, the academic journey is designed to support both understanding and character."
             />
             <Button to="/why-us#curriculum" variant="dark" sx={{ mt: 3.5 }}>
-              Explore the Innovation Centre
+              Explore Campus Life
             </Button>
           </RevealOnScroll>
 

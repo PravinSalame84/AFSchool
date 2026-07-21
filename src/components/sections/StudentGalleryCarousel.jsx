@@ -1,48 +1,45 @@
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Chip, Paper, Typography } from '@mui/material'
 import Container from '../ui/Container'
 import SectionHeading from '../ui/SectionHeading'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import campusLifeContent from '../../data/campusLifeContent'
-import { BRAND_NEUTRALS } from '../../constants/brand'
+import { BRAND_ALPHA, BRAND_COLORS, BRAND_NEUTRALS } from '../../constants/brand'
+// import SyncRoundedIcon from '@mui/icons-material/SyncRounded'
 
-function MotionRow({ items, reverse = false, speed = 24 }) {
-  const animationName = reverse ? 'studentGalleryDriftReverse' : 'studentGalleryDrift'
+function RoundRobinTrack({ items, speed = 24 }) {
+  const loopItems = [...items, ...items]
 
   return (
-    <Box sx={{ overflow: 'hidden' }}>
+    <Box sx={{ overflow: 'hidden', width: '100%' }}>
       <Box
         sx={{
           display: 'flex',
-          gap: { xs: 1.4, sm: 2 },
+          alignItems: 'center',
+          gap: { xs: 1.4, sm: 1.8, lg: 2.2 },
           width: 'max-content',
-          animation: `${animationName} ${speed}s linear infinite`,
-          '@keyframes studentGalleryDrift': {
+          animation: `studentGalleryRoundRobin ${speed}s linear infinite`,
+          '@keyframes studentGalleryRoundRobin': {
             from: { transform: 'translate3d(0, 0, 0)' },
             to: { transform: 'translate3d(-50%, 0, 0)' },
-          },
-          '@keyframes studentGalleryDriftReverse': {
-            from: { transform: 'translate3d(-50%, 0, 0)' },
-            to: { transform: 'translate3d(0, 0, 0)' },
           },
           '&:hover': {
             animationPlayState: 'paused',
           },
         }}
       >
-        {[...items, ...items].map((item, index) => (
+        {loopItems.map((item, index) => (
           <Paper
             key={`${item.name}-${index}`}
             sx={{
               position: 'relative',
-              width: { xs: 210, sm: 250, lg: 280 },
-              minWidth: { xs: 210, sm: 250, lg: 280 },
+              width: { xs: 220, sm: 250, lg: 270 },
+              minWidth: { xs: 220, sm: 250, lg: 270 },
+              height: { xs: 320, sm: 360, lg: 390 },
               overflow: 'hidden',
-              borderRadius: '1.7rem',
+              borderRadius: '50px',
+              border: '8px solid rgba(255,255,255,0.72)',
               boxShadow: '0 24px 54px -34px rgba(17,26,36,0.34)',
-              transform: {
-                xs: 'none',
-                sm: index % 3 === 0 ? 'translateY(20px)' : index % 3 === 1 ? 'translateY(-8px)' : 'translateY(10px)',
-              },
+              flexShrink: 0,
             }}
           >
             <Box
@@ -51,11 +48,10 @@ function MotionRow({ items, reverse = false, speed = 24 }) {
               alt={item.name}
               sx={{
                 width: '100%',
-                height: { xs: 260, sm: 310, lg: 340 },
+                height: '100%',
                 display: 'block',
                 objectFit: 'cover',
                 objectPosition: 'center top',
-                transition: 'transform .45s ease',
               }}
             />
 
@@ -63,7 +59,7 @@ function MotionRow({ items, reverse = false, speed = 24 }) {
               sx={{
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(180deg, rgba(4,11,18,0.02) 30%, rgba(4,11,18,0.74) 100%)',
+                background: 'linear-gradient(180deg, rgba(4,11,18,0.06) 34%, rgba(4,11,18,0.76) 100%)',
               }}
             />
 
@@ -75,15 +71,15 @@ function MotionRow({ items, reverse = false, speed = 24 }) {
                 bottom: 0,
                 p: 2,
                 color: BRAND_NEUTRALS.white,
+                backgroundColor: BRAND_ALPHA.black18,
+                textAlign: 'center',
               }}
             >
-              <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#b8e6ff' }}>
-                Student Gallery
-              </Typography>
-              <Typography sx={{ mt: 0.7, fontSize: '1.08rem', fontWeight: 700 }}>
+              <Typography sx={{ fontSize: '1.02rem', fontWeight: 800, lineHeight: 1.2 }}>
                 {item.name}
               </Typography>
-              <Typography sx={{ mt: 0.7, color: 'rgba(255,255,255,0.8)', fontSize: '0.88rem', lineHeight: 1.65 }}>
+              <Chip sx={{mt: 1, fontSize: '1rem'}} label={item.role} color='warning' />
+              <Typography sx={{ height: 50, mt: 0.7, color: 'rgba(255,255,255,0.82)', fontSize: '0.8rem', lineHeight: 1.6 }}>
                 {item.caption}
               </Typography>
             </Box>
@@ -95,8 +91,7 @@ function MotionRow({ items, reverse = false, speed = 24 }) {
 }
 
 export default function StudentGalleryCarousel() {
-  const firstRow = campusLifeContent.studentGallery.slice(0, 4)
-  const secondRow = campusLifeContent.studentGallery.slice(4)
+  const items = campusLifeContent.studentGallery
 
   return (
     <Box
@@ -112,8 +107,8 @@ export default function StudentGalleryCarousel() {
         <RevealOnScroll>
           <SectionHeading
             eyebrow="Student Gallery"
-            title="A continuous moving gallery with a more Pinterest-style animation feel"
-            subtitle="The student section now uses looping motion rows instead of a regular carousel so it feels more alive and closer to the reference animation."
+            title="Student life at Air Force School in moments of confidence, joy and participation"
+            subtitle="A glimpse of our learners taking part in classroom experiences, co-curricular engagement, school events and daily campus life."
             align="center"
           />
         </RevealOnScroll>
@@ -130,10 +125,7 @@ export default function StudentGalleryCarousel() {
               backdropFilter: 'blur(18px)',
             }}
           >
-            <Box sx={{ display: 'grid', gap: { xs: 1.4, sm: 2.2 } }}>
-              <MotionRow items={firstRow} speed={26} />
-              <MotionRow items={secondRow} reverse speed={30} />
-            </Box>
+            <RoundRobinTrack items={items} speed={24} />
           </Paper>
         </RevealOnScroll>
       </Container>

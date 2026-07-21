@@ -14,7 +14,15 @@ export default function LatestNews() {
   const featured = news.slice(0, 3)
 
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 }, bgcolor: SECTION_BACKGROUNDS.strip }}>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 6, md: 10 },
+        bgcolor: SECTION_BACKGROUNDS.strip,
+        background:
+          'radial-gradient(circle at top right, rgba(255,178,44,0.14), transparent 22%), linear-gradient(180deg, #fff9ee 0%, #ffffff 100%)',
+      }}
+    >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 3 }}>
           <RevealOnScroll>
@@ -29,7 +37,22 @@ export default function LatestNews() {
         <Box sx={{ mt: 5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
           {featured.map((item, i) => (
             <RevealOnScroll key={item.id} delay={i * 90}>
-              <Card component={Link} to="/blog" sx={{ display: 'flex', height: '100%', flexDirection: 'column', p: 3, textDecoration: 'none' }}>
+              <Card
+                component={Link}
+                to="/blog"
+                sx={{
+                  display: 'flex',
+                  height: '100%',
+                  flexDirection: 'column',
+                  p: 3,
+                  textDecoration: 'none',
+                  background: i === 0
+                    ? 'linear-gradient(180deg, rgba(255,244,218,0.96) 0%, rgba(255,255,255,0.94) 100%)'
+                    : i === 1
+                      ? 'linear-gradient(180deg, rgba(232,247,255,0.96) 0%, rgba(255,255,255,0.94) 100%)'
+                      : 'linear-gradient(180deg, rgba(240,255,236,0.96) 0%, rgba(255,255,255,0.94) 100%)',
+                }}
+              >
                 <Badge tone="accent">{item.category}</Badge>
                 <Typography sx={{ mt: 2, color: 'primary.main', fontSize: '1rem', fontWeight: 700, lineHeight: 1.4 }}>{item.title}</Typography>
                 <Typography sx={{ mt: 1.5, flex: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.8 }}>{item.excerpt}</Typography>

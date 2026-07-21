@@ -15,8 +15,9 @@ const appContent = {
       crumb: 'Admissions',
       eyebrow: 'Join Airforce School',
       title: 'Admissions Open for AY 2026-27',
-      subtitle: "A simple, transparent process from your first enquiry to your child's first day.",
-      image: sharedImages.teacherImageTwo,
+      subtitle:
+        "Find the admission process, required documents, eligibility notes and contact details needed to begin your child's admission journey with clarity.",
+      image: sharedImages.teacherImageThree,
     },
     alumni: {
       crumb: 'Alumni',
@@ -24,14 +25,14 @@ const appContent = {
       title: 'The Airforce School Alumni Community',
       subtitle:
         'Thousands of graduates, one shared foundation. Hear what life after Airforce School looks like.',
-      image: sharedImages.teacherImageFour,
+      image: sharedImages.teacherImageFive,
     },
     blog: {
       crumb: 'Blog',
       eyebrow: 'Newsroom & Insights',
       title: 'Airforce School Blog',
       subtitle: 'Stories from our campuses, parenting advice and the latest in education research.',
-      image:sharedImages.teacherImageOne,
+      image: sharedImages.teacherImageSix,
     },
     brochure: {
       crumb: 'Brochure',
@@ -55,7 +56,7 @@ const appContent = {
       title: 'Get in Touch with Airforce School',
       subtitle:
         'Questions about admissions, campuses or anything else - our team typically replies within one business day.',
-      image: sharedImages.teacherImageOne,
+      image: sharedImages.teacherImageSeven,
     },
     locations: {
       crumb: 'Locations',
@@ -84,13 +85,13 @@ const appContent = {
     admissions: {
       process: {
         eyebrow: 'How It Works',
-        title: 'The Admissions Process',
+        title: 'Admission Process and Important Guidelines',
       },
       enquiry: {
-        eyebrow: 'Start Today',
-        title: "Begin your child's application",
+        eyebrow: 'Registration Enquiry',
+        title: "Begin your child's admission enquiry",
         subtitle:
-          'Tell us a little about your child and preferred campus and we will take it from there.',
+          'Share your child and contact details so the school office can guide you further regarding vacancies, eligibility and formalities.',
       },
     },
     alumni: {

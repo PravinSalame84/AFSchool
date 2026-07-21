@@ -10,7 +10,8 @@ import Section from '../components/ui/Section'
 import Button from '../components/ui/Button'
 import RevealOnScroll from '../components/ui/RevealOnScroll'
 import campusLifeContent from '../data/campusLifeContent'
-import { sharedImages } from '../assets/images'
+import { campusImages } from '../assets/images'
+import { BRAND_ALPHA } from '../constants/brand'
 
 const facilityIcons = {
   'Physics, Chemistry & Computer Labs': ScienceRoundedIcon,
@@ -24,9 +25,9 @@ export default function WhyUs() {
       <PageHero
         eyebrow="Curricular Activities"
         crumb="Campus Life"
-        title="Music, art, sports, celebrations and practical learning in one vibrant campus-life page"
-        subtitle="This page brings together the school’s curricular and co-curricular strengths, labs, security, library and initiatives in a more attractive and campus-specific format."
-        image={sharedImages.teacherImageFour}
+        title="Campus life that balances academics, expression, safety and active participation"
+        subtitle="This page brings together the school’s real classroom practices, facilities, cultural rhythm, safety systems and student-facing initiatives without relying on template content."
+        image={campusImages.chemistryLab}
       />
 
       <Section background="soft">
@@ -35,14 +36,14 @@ export default function WhyUs() {
             Curricular activities that make learning visible, practical and joyful
           </Typography>
           <Typography sx={{ mt: 1.1, maxWidth: 860, mx: 'auto', color: 'text.secondary', textAlign: 'center', lineHeight: 1.78 }}>
-            Air Force School supports classroom excellence with music, art, indoor and outdoor sports, school events, cultural programs, gardening, festival celebrations and hands-on learning spaces that help children grow with confidence.
+            Air Force School supports classroom excellence with foundational learning, art, music, practical science, physical activity, school events and assemblies that help children grow with confidence.
           </Typography>
         </RevealOnScroll>
 
         <Box sx={{ mt: 4.5, display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' }, gap: 2.2 }}>
           {campusLifeContent.curricularPrograms.map((item, index) => (
             <RevealOnScroll key={item.title} delay={(index % 2) * 100}>
-              <Paper sx={{ height: '100%', overflow: 'hidden', borderRadius: '1.8rem' }}>
+              <Paper sx={{ height: '100%', overflow: 'hidden', borderRadius: '1.8rem', border: `8px solid ${BRAND_ALPHA.white92}` }}>
                 <Box
                   component="img"
                   src={item.image}
@@ -129,6 +130,76 @@ export default function WhyUs() {
         </Box>
       </Section>
 
+      <Section background="soft">
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, gap: 3 }}>
+          <RevealOnScroll>
+            <Paper sx={{ p: { xs: 2.5, sm: 3.2 }, borderRadius: '1.8rem', height: '100%' }}>
+              <Typography sx={{ color: 'primary.main', fontSize: '1.35rem', fontWeight: 800 }}>
+                Building and layout
+              </Typography>
+              <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.72 }}>
+                The school campus is designed to provide safety, comfort, visibility and child-friendly support for daily learning.
+              </Typography>
+              <Box sx={{ mt: 2.2, display: 'grid', gap: 0.95 }}>
+                {campusLifeContent.infrastructureHighlights.map((item) => (
+                  <Stack key={item} direction="row" spacing={1} sx={{ alignItems: 'flex-start' }}>
+                    <CheckCircleRoundedIcon sx={{ mt: 0.2, color: 'secondary.main', fontSize: 18 }} />
+                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.7 }}>{item}</Typography>
+                  </Stack>
+                ))}
+              </Box>
+            </Paper>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={90}>
+            <Paper sx={{ p: { xs: 2.5, sm: 3.2 }, borderRadius: '1.8rem', height: '100%' }}>
+              <Typography sx={{ color: 'primary.main', fontSize: '1.35rem', fontWeight: 800 }}>
+                Drinking water and toilet facilities
+              </Typography>
+              <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.72 }}>
+                Clean sanitation, safe drinking water and child-friendly modifications support student wellbeing through the school day.
+              </Typography>
+              <Box sx={{ mt: 2.2, display: 'grid', gap: 0.95 }}>
+                {campusLifeContent.waterAndToiletFacilities.map((item) => (
+                  <Stack key={item} direction="row" spacing={1} sx={{ alignItems: 'flex-start' }}>
+                    <CheckCircleRoundedIcon sx={{ mt: 0.2, color: 'secondary.main', fontSize: 18 }} />
+                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.7 }}>{item}</Typography>
+                  </Stack>
+                ))}
+              </Box>
+            </Paper>
+          </RevealOnScroll>
+        </Box>
+      </Section>
+
+      <Section>
+        <RevealOnScroll>
+          <Typography sx={{ color: 'primary.main', fontSize: { xs: '1.7rem', sm: '2.15rem' }, fontWeight: 800, textAlign: 'center' }}>
+            Special campus spaces and activity areas
+          </Typography>
+          <Typography sx={{ mt: 1.1, maxWidth: 860, mx: 'auto', color: 'text.secondary', textAlign: 'center', lineHeight: 1.78 }}>
+            Purposeful spaces across the campus support academics, recreation, creativity, safety awareness and holistic development.
+          </Typography>
+        </RevealOnScroll>
+
+        <Box sx={{ mt: 4.5, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 2 }}>
+          {campusLifeContent.campusSpaces.map((item, index) => (
+            <RevealOnScroll key={item} delay={(index % 3) * 80}>
+              <Paper
+                sx={{
+                  p: 2.2,
+                  borderRadius: '1.4rem',
+                  background: 'linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%)',
+                  boxShadow: '0 18px 36px -30px rgba(17,26,36,0.18)',
+                }}
+              >
+                <Typography sx={{ color: 'primary.main', fontWeight: 700 }}>{item}</Typography>
+              </Paper>
+            </RevealOnScroll>
+          ))}
+        </Box>
+      </Section>
+
       <Section background="sky">
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 0.92fr' }, gap: 3 }}>
           <RevealOnScroll>
@@ -143,7 +214,7 @@ export default function WhyUs() {
               <Stack direction="row" spacing={1.2} sx={{ alignItems: 'center' }}>
                 <SportsSoccerRoundedIcon sx={{ color: '#ffd48d' }} />
                 <Typography sx={{ fontSize: '0.82rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#9fd6ff' }}>
-                  Airforce School Initiatives
+                  Air Force School Initiatives
                 </Typography>
               </Stack>
               <Typography sx={{ mt: 1.3, fontSize: { xs: '1.55rem', sm: '1.95rem' }, fontWeight: 800 }}>

@@ -1,10 +1,8 @@
-import siteConfig from './siteConfig'
-
 const stats = [
-  { value: siteConfig.yearsOfExperience, suffix: '+', label: 'Years of Experience' },
-  { value: 142, suffix: '', label: 'Campuses Nationwide' },
-  { value: 96, suffix: '+', label: 'Partner Schools' },
-  { value: 210000, suffix: '+', label: 'Students Enrolled', format: 'compact' },
+  { value: 530, suffix: '+', label: 'Students' },
+  { value: 27, suffix: '', label: 'Teachers' },
+  { value: 2, suffix: '', label: 'Admin Staff' },
+  { value: 9, suffix: '', label: 'Support Staff' },
 ]
 
 export default stats

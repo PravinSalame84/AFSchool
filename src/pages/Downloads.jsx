@@ -137,8 +137,8 @@ export default function Downloads() {
       <PageHero
         eyebrow="Download Centre"
         crumb="Downloads"
-        title="Live notices, events, downloads and public updates from the school spreadsheet"
-        subtitle="This page reads the public Google Sheet directly, so visitors can view current sheet-backed tabs without needing Drive access."
+        title="Notices, events, results and important downloads in one convenient place"
+        subtitle="Parents and students can use this section to view school updates, public notices, event information and available downloads."
         image={sharedImages.teacherImageFour}
       />
 
@@ -155,13 +155,13 @@ export default function Downloads() {
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ justifyContent: 'space-between' }}>
               <Box>
                 <Typography sx={{ fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#a8daf8' }}>
-                  Public Google Sheet
+                  School Updates
                 </Typography>
                 <Typography sx={{ mt: 1, fontSize: { xs: '1.4rem', sm: '1.8rem' }, fontWeight: 800 }}>
-                  Results, notices and download tabs are connected to the live spreadsheet
+                  Results, notices and downloadable information are updated here for easy access
                 </Typography>
                 <Typography sx={{ mt: 1.1, maxWidth: 800, color: 'rgba(255,255,255,0.75)', lineHeight: 1.75 }}>
-                  Source spreadsheet ID: {PUBLIC_SHEET_ID}. Tabs currently surfaced from the public file include site status, actions, marquee, notices, events, downloads and one additional shared tab.
+                  Families can quickly access school notices, event details, announcements and downloadable resources from this regularly updated section.
                 </Typography>
               </Box>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
@@ -169,15 +169,17 @@ export default function Downloads() {
                   href={`https://docs.google.com/spreadsheets/d/${PUBLIC_SHEET_ID}/edit?gid=0#gid=0`}
                   variant="light"
                   icon={false}
+                  sx={{height: 60}}
                 >
-                  Open Source Sheet
+                  Open Update Sheet
                 </Button>
                 <Button
                   href={`https://docs.google.com/spreadsheets/d/${PUBLIC_SHEET_ID}/export?format=xlsx`}
                   variant="ghost"
                   icon={false}
+                  sx={{height: 60}}
                 >
-                  Export Sheet
+                  Download Excel File
                 </Button>
               </Stack>
             </Stack>
@@ -216,7 +218,7 @@ export default function Downloads() {
               {loading ? (
                 <Stack direction="row" spacing={1.2} sx={{ mt: 3, alignItems: 'center', color: 'primary.main' }}>
                   <CircularProgress size={22} />
-                  <Typography>Loading live public sheet data...</Typography>
+                  <Typography>Loading the latest school information...</Typography>
                 </Stack>
               ) : null}
 
@@ -229,9 +231,9 @@ export default function Downloads() {
               {!loading && !error ? (
                 <>
                   <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.5 }}>
-                    <Chip icon={<SyncRoundedIcon />} label={`${visibleRows.length} live rows`} color="primary" />
-                    <Chip icon={<DownloadRoundedIcon />} label={`${currentData?.columns?.length || 0} columns`} variant="outlined" />
-                    <Chip icon={<LinkRoundedIcon />} label="Public access only" variant="outlined" />
+                    <Chip icon={<SyncRoundedIcon />} label={`${visibleRows.length} current entries`} color="primary" />
+                    <Chip icon={<DownloadRoundedIcon />} label={`${currentData?.columns?.length || 0} information fields`} variant="outlined" />
+                    <Chip icon={<LinkRoundedIcon />} label="Accessible for all visitors" variant="outlined" />
                   </Stack>
 
                   <Divider sx={{ my: 2.5 }} />
@@ -244,7 +246,7 @@ export default function Downloads() {
                     </Box>
                   ) : (
                     <Typography sx={{ color: 'text.secondary' }}>
-                      No published rows are available in this tab right now.
+                      No information is available in this section at the moment.
                     </Typography>
                   )}
                 </>

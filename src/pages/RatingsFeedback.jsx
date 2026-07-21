@@ -124,7 +124,7 @@ export default function RatingsFeedback() {
                 Community trust at a glance
               </Typography>
               <Typography sx={{ mt: 1.1, color: 'text.secondary', lineHeight: 1.75 }}>
-                This section combines published parent impressions with new website submissions to make the experience feel active and useful rather than static.
+                This page brings together parent appreciation, suggestions and participation so families can understand how the school community experiences campus life.
               </Typography>
 
               <Box sx={{ mt: 3, display: 'grid', gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(4, 1fr)' }, gap: 1.4 }}>
@@ -159,12 +159,12 @@ export default function RatingsFeedback() {
                 Parents feedbacks and suggestions
               </Typography>
               <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.72 }}>
-                Visitors can leave quick feedback here. It saves locally in the browser, which keeps the page interactive without requiring a backend setup.
+                Parents and guardians may share their views, encouragement and suggestions for the continued growth of the school community.
               </Typography>
 
               {submitted ? (
                 <Alert severity="success" sx={{ mt: 2.2 }}>
-                  Thank you. Your feedback has been added on this device.
+                  Thank you for sharing your feedback and suggestions.
                 </Alert>
               ) : null}
 
@@ -231,7 +231,7 @@ export default function RatingsFeedback() {
             Parent feedback wall
           </Typography>
           <Typography sx={{ mt: 1, color: 'text.secondary', textAlign: 'center', lineHeight: 1.72 }}>
-            A mix of seeded parent testimonials and new submissions keeps the page trustworthy, warm and useful.
+            Words from parents reflect the trust, support and partnership that strengthen the school environment.
           </Typography>
         </RevealOnScroll>
 

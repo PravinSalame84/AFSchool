@@ -10,7 +10,15 @@ import { BRAND_ALPHA, BRAND_NEUTRALS, SECTION_BACKGROUNDS } from '../../constant
 
 export default function Achievements() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: SECTION_BACKGROUNDS.mist }}>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 7, md: 10 },
+        bgcolor: SECTION_BACKGROUNDS.mist,
+        background:
+          'radial-gradient(circle at top left, rgba(255,214,128,0.2), transparent 22%), linear-gradient(180deg, #fffef8 0%, #f8fbff 100%)',
+      }}
+    >
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
           <SectionHeading
@@ -27,15 +35,27 @@ export default function Achievements() {
               <Box key={item.title} data-carousel-item sx={{ width: { xs: 260, sm: 300 }, flexShrink: 0, scrollSnapAlign: 'start' }}>
                 <Paper
                   sx={{
+                    position: 'relative',
                     p: 3,
-                    borderRadius: 1,
+                    borderRadius: '1.8rem',
                     boxShadow: `0 24px 60px -36px ${BRAND_ALPHA.ink2}`,
-                    backgroundColor: BRAND_ALPHA.white58,
-                    border: `1px solid ${BRAND_ALPHA.white55}`,
+                    background: 'linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,248,231,0.95) 100%)',
+                    border: '1px solid rgba(255,201,108,0.22)',
                     backdropFilter: 'blur(18px)',
+                    overflow: 'hidden',
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      top: -18,
+                      right: -18,
+                      width: 90,
+                      height: 90,
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, rgba(255,178,44,0.18), transparent 70%)',
+                    },
                   }}
                 >
-                  <Box sx={{ display: 'flex', width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: '50%', bgcolor: BRAND_ALPHA.accent18, color: 'secondary.dark' }}>
+                  <Box sx={{ display: 'flex', width: 54, height: 54, alignItems: 'center', justifyContent: 'center', borderRadius: '18px 18px 18px 6px', bgcolor: BRAND_ALPHA.accent18, color: 'secondary.dark' }}>
                     <Award size={24} />
                   </Box>
                   <Typography sx={{ mt: 2, color: 'secondary.dark', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{item.year}</Typography>
