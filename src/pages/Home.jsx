@@ -1,4 +1,5 @@
 import Hero from '../components/sections/Hero'
+import MarqueeStrip from '../components/dynamic/MarqueeStrip'
 import InfoStrip from '../components/sections/InfoStrip'
 import AboutSnapshot from '../components/sections/AboutSnapshot'
 import EnquiryForm from '../components/sections/EnquiryForm'
@@ -18,6 +19,7 @@ import LocationsStrip from '../components/sections/LocationsStrip'
 export default function Home() {
   return (
     <>
+      <MarqueeStrip />
       <Hero />
       <InfoStrip />
       <AboutSnapshot />

@@ -30,6 +30,8 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 #root {
@@ -42,6 +44,13 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Rajdhani', 'Segoe UI', sans-serif;
   letter-spacing: 0.01em;
+}
+
+img,
+[data-protected-image="true"] {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: auto;
 }
 
 /* Custom scrollbar */
@@ -95,4 +104,9 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes floatSoft {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes marqueeTicker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }

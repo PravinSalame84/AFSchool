@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import { EnquiryModalProvider } from './context/EnquiryModalContext'
+import { RemoteSiteDataProvider } from './context/RemoteSiteDataContext'
 import SplashScreen from './components/ui/SplashScreen'
 import RouteLoader from './components/ui/RouteLoader'
 
@@ -77,29 +78,31 @@ export default function App() {
   }, [showSplash])
 
   return (
-    <EnquiryModalProvider>
-      <SplashScreen visible={showSplash} />
-      <Suspense fallback={<RouteLoader />}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/why-us" element={<WhyUs />} />
-            <Route path="/ratings-feedback" element={<RatingsFeedback />} />
-            <Route path="/downloads" element={<Downloads />} />
-            <Route path="/admissions" element={<Admissions />} />
-            <Route path="/locations" element={<Locations />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/brochure" element={<Brochure />} />
-            <Route path="/alumni" element={<Alumni />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </EnquiryModalProvider>
+    <RemoteSiteDataProvider>
+      <EnquiryModalProvider>
+        <SplashScreen visible={showSplash} />
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/why-us" element={<WhyUs />} />
+              <Route path="/ratings-feedback" element={<RatingsFeedback />} />
+              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/locations" element={<Locations />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/brochure" element={<Brochure />} />
+              <Route path="/alumni" element={<Alumni />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </EnquiryModalProvider>
+    </RemoteSiteDataProvider>
   )
 }

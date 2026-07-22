@@ -5,6 +5,9 @@ import Header from './Header'
 import Footer from './Footer'
 import FloatingButtons from './FloatingButtons'
 import { BRAND_NEUTRALS, PAGE_BACKGROUND_SEQUENCE } from '../../constants/brand'
+import { useRemoteSiteData } from '../../context/RemoteSiteDataContext'
+import MaintenanceView from '../dynamic/MaintenanceView'
+import { isSiteInMaintenance, SiteStatusBanner } from '../dynamic/SiteStatusBanner'
 
 const PAGE_BACKGROUND_INDEX = Object.freeze({
   '/': 0,
@@ -29,9 +32,11 @@ function getHeaderOffset(width) {
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
+  const { siteStatus } = useRemoteSiteData()
   const pageBaseBackground =
     PAGE_BACKGROUND_SEQUENCE[PAGE_BACKGROUND_INDEX[pathname] ?? 0]
-  const showFloatingButtons = pathname !== '/brochure'
+  const maintenanceMode = isSiteInMaintenance(siteStatus)
+  const showFloatingButtons = pathname !== '/brochure' && !maintenanceMode
 
   useEffect(() => {
     if (hash) {
@@ -64,7 +69,12 @@ export default function Layout() {
           },
         }}
       >
-        <Outlet />
+        <SiteStatusBanner />
+        {maintenanceMode && pathname !== '/downloads' && pathname !== '/contact' ? (
+          <MaintenanceView siteStatus={siteStatus} />
+        ) : (
+          <Outlet />
+        )}
       </Box>
       <Footer />
       {showFloatingButtons ? <FloatingButtons /> : null}

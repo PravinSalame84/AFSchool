@@ -3,12 +3,12 @@ import { Dialog, DialogContent, DialogTitle, IconButton, Stack, Typography } fro
 import { BRAND_NEUTRALS } from '../../constants/brand'
 import { MODAL_BACKDROP_SX, MODAL_CLOSE_BUTTON_SX, MODAL_PAPER_SX } from '../../constants/uiStyles'
 
-export default function Modal({ open, onClose, title, children }) {
+export default function Modal({ open, onClose, title, children, maxWidth = 'sm' }) {
   return (
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth="sm"
+      maxWidth={maxWidth}
       fullWidth
       slotProps={{
         backdrop: {

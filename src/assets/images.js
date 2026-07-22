@@ -7,12 +7,14 @@ import teacherImageFour from './other/teacher4.png'
 import teacherImageFive from './other/teacher5.png'
 import teacherImageSix from './other/teacher6.png'
 import teacherImageSeven from './other/teacher7.png'
+
 import teacherMusic from './other/teacher-music.png'
 import activityOne from './other/activity1.png'
 import activityTwo from './other/activity2.png'
 import artRoom from './other/art.png'
 import chemistryLab from './other/chemistryLab.png'
 import playground from './other/playground.png'
+import underMaintainance from './other/underMaintainance.png'
 
 import studentOne from './students/student1.png'
 import studentBase from './students/student.png'
@@ -63,6 +65,7 @@ export const campusImages = {
   chemistryLab,
   playground,
   teacherMusic,
+  underMaintainance,
 }
 
 export const teacherImages = {

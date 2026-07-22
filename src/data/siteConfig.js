@@ -8,6 +8,7 @@ const siteConfig = {
   brandName: 'Air Force School',
   brandSuffix: 'Vayusena Nagar, Nagpur',
   shortName: 'AFS Nagpur',
+  siteUrl: 'https://www.airforceschoolvsnngp.org',
   tagline: 'Discipline, dignity and future-ready learning for every child',
   yearsOfExperience: 58,
   yearFounded: 1968,
@@ -42,6 +43,11 @@ const siteConfig = {
     floatingWhatsapp: true,
     floatingEnquire: true,
     announcementBar: true,
+  },
+
+  remoteContent: {
+    provider: 'public-google-sheet',
+    allowPublicGoogleFetch: true,
   },
 }
 

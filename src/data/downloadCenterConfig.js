@@ -1,6 +1,6 @@
 export const PUBLIC_SHEET_ID = '1nNPZsKiOtODyXZsSs6Za0Mu_YX-RiZoD1nVVQm5ffBc'
 
-export const downloadCenterTabs = [
+export const sheetSections = [
   {
     gid: '0',
     key: 'site_status',
@@ -44,3 +44,5 @@ export const downloadCenterTabs = [
     description: 'Additional shared school information available in the update sheet.',
   },
 ]
+
+export const publicDownloadsSection = sheetSections.find((section) => section.key === 'downloads')
