@@ -55,7 +55,7 @@ export default function Locations() {
                 }}
               />
 
-              <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1}>
+              <Stack direction="row" useFlexGap spacing={1} sx={{ flexWrap: 'wrap' }}>
                 <Chip
                   label="All States"
                   clickable

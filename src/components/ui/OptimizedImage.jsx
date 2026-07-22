@@ -9,6 +9,8 @@ export default function OptimizedImage({
   sx,
   ...rest
 }) {
+  const priorityProps = fetchPriority ? { fetchpriority: fetchPriority } : {}
+
   return (
     <Box
       component="img"
@@ -16,7 +18,7 @@ export default function OptimizedImage({
       alt={alt}
       loading={loading}
       decoding={decoding}
-      fetchPriority={fetchPriority}
+      {...priorityProps}
       sx={{
         display: 'block',
         maxWidth: '100%',

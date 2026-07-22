@@ -90,7 +90,7 @@ function PageCard({ page, pageNumber, compact = false }) {
             },
           }}
         >
-          <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.5}>
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography
               sx={{
                 fontSize: '0.72rem',
@@ -248,7 +248,7 @@ function PageCard({ page, pageNumber, compact = false }) {
           ) : null}
          
           {page.people?.length ? (
-            <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.1, alignItems: 'flex-start' }}>
+            <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 2.1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
               {page.people.map((person) => (
                 <Chip
                   key={person}
@@ -438,11 +438,10 @@ export default function Brochure() {
           <Stack
             direction={{ xs: 'column', lg: 'row' }}
             spacing={2.5}
-            alignItems={{ xs: 'flex-start', lg: 'center' }}
-            justifyContent="space-between"
+            sx={{ alignItems: { xs: 'flex-start', lg: 'center' }, justifyContent: 'space-between' }}
           >
             <Box sx={{ maxWidth: 760 }}>
-              <Stack direction="row" spacing={1} alignItems="center">
+              <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                 <MenuBookRoundedIcon sx={{ color: 'secondary.main' }} />
                 <Typography sx={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'secondary.dark' }}>
                   Interactive Brochure
@@ -526,7 +525,7 @@ export default function Brochure() {
               </Typography>
             </Box>
 
-          <Stack direction="row" spacing={1.1} alignItems="center">
+          <Stack direction="row" spacing={1.1} sx={{ alignItems: 'center' }}>
             <IconButton
               aria-label="Previous brochure pages"
               onClick={() => setCurrentSpread((previous) => Math.max(previous - 1, 0))}
@@ -590,13 +589,13 @@ export default function Brochure() {
               },
             }}
           >
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
               <PaletteRoundedIcon sx={{ color: 'primary.light', fontSize: 18 }} />
               <Typography sx={{ color: 'primary.main', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
                 Spread {currentSpread + 1} of {spreads.length}
               </Typography>
             </Stack>
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
               <SchoolRoundedIcon sx={{ color: 'secondary.main', fontSize: 18 }} />
               <Typography sx={{ color: 'text.secondary', fontSize: '0.82rem', fontWeight: 700 }}>
                 {isDesktop ? 'Desktop spread view' : 'Mobile single-page view'}
@@ -716,10 +715,10 @@ export default function Brochure() {
         <Stack
           direction="row"
           useFlexGap
-          flexWrap="wrap"
           spacing={1}
           sx={{
             mt: 2,
+            flexWrap: 'wrap',
             justifyContent: { xs: 'flex-start', md: 'center' },
             '@media print': {
               display: 'none',

@@ -49,7 +49,7 @@ export default function MeetOurTeachers() {
               subtitle="Every classroom at Air Force School is shaped by teachers who combine structure, care and strong academic intent without losing the joy of learning."
             />
 
-            <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.5 }}>
+            <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 2.5, flexWrap: 'wrap' }}>
               {badges.map(({ icon: Icon, label }) => (
                 <Chip
                   key={label}
@@ -193,7 +193,7 @@ export default function MeetOurTeachers() {
                           {teacher.highlight}
                         </Box>
 
-                        <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 1.1, pb: 1.2 }}>
+                        <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 1.1, pb: 1.2, flexWrap: 'wrap' }}>
                           <Chip label="Experienced Faculty" size="small" color="warning" />
                           <Chip label="CBSE" size="small" color="primary" />
                         </Stack>
@@ -223,7 +223,7 @@ export default function MeetOurTeachers() {
                           {teacher.name}
                         </Typography>
 
-                        <Stack direction="row" useFlexGap flexWrap="wrap" spacing={0.9} sx={{ mt: 1.6 }}>
+                        <Stack direction="row" useFlexGap spacing={0.9} sx={{ mt: 1.6, flexWrap: 'wrap' }}>
                           {teacher.subjects.map((subject) => (
                             <Chip
                               key={subject}
@@ -345,9 +345,7 @@ export default function MeetOurTeachers() {
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
               spacing={1.5}
-              alignItems={{ xs: 'stretch', sm: 'center' }}
-              justifyContent="space-between"
-              sx={{ mt: 5, width: '100%' }}
+              sx={{ mt: 5, width: '100%', alignItems: { xs: 'stretch', sm: 'center' }, justifyContent: 'space-between' }}
             >
               <Typography sx={{ pt: 1.5, color: 'text.secondary', fontSize: '0.92rem', lineHeight: 1.7 }}>
                 Want to know how your child will be supported in class? Talk to our admissions team and we’ll walk you through the learning environment.

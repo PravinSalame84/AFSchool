@@ -66,7 +66,7 @@ export default function Contact() {
               <SectionHeading {...appContent.sections.contact.message} />
               {sent ? (
                 <Paper sx={{ mt: 4, p: 3.5, boxShadow: 2 }}>
-                  <Stack spacing={1.5} alignItems="flex-start">
+                  <Stack spacing={1.5} sx={{ alignItems: 'flex-start' }}>
                     <CheckCircle2 size={40} color={BRAND_NEUTRALS.accentStrong} />
                     <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>
                       {appContent.sections.contact.successTitle}

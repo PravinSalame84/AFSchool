@@ -10,21 +10,23 @@ export default function Modal({ open, onClose, title, children }) {
       onClose={onClose}
       maxWidth="sm"
       fullWidth
-      BackdropProps={{
-        sx: {
-          ...MODAL_BACKDROP_SX,
+      slotProps={{
+        backdrop: {
+          sx: {
+            ...MODAL_BACKDROP_SX,
+          },
         },
-      }}
-      PaperProps={{
-        sx: {
-          borderRadius: 1,
-          p: { xs: 1, sm: 2 },
-          ...MODAL_PAPER_SX,
+        paper: {
+          sx: {
+            borderRadius: 1,
+            p: { xs: 1, sm: 2 },
+            ...MODAL_PAPER_SX,
+          },
         },
       }}
     >
       <DialogTitle sx={{ pb: 1, color: 'primary.main' }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2}>
+        <Stack direction="row" gap={2} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography sx={{ my: 1, color: BRAND_NEUTRALS.ink, fontSize: '1.25rem', fontWeight: 700, textTransform: 'uppercase' }}>
             {title}
           </Typography>

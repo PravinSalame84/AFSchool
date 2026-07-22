@@ -86,7 +86,7 @@ export default function Careers() {
                 subtitle="We believe great schools are built by adults who keep learning, communicate with empathy and show up reliably for students every day."
               />
 
-              <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.5 }}>
+              <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 2.5, flexWrap: 'wrap' }}>
                 {['Teacher development', 'Structured culture', 'Student wellbeing', 'Professional respect'].map((item) => (
                   <Chip
                     key={item}
@@ -181,7 +181,7 @@ export default function Careers() {
                     boxShadow: '0 18px 42px -32px rgba(17,26,36,0.18)',
                   }}
                 >
-                  <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 2 }}>
+                  <Stack direction="row" spacing={1} useFlexGap sx={{ mb: 2, flexWrap: 'wrap' }}>
                     <Chip
                       icon={<BriefcaseBusiness size={14} />}
                       label={role.type}
@@ -201,7 +201,7 @@ export default function Careers() {
                     {role.summary}
                   </Typography>
 
-                  <Stack direction="row" useFlexGap flexWrap="wrap" spacing={0.9} sx={{ mt: 2 }}>
+                  <Stack direction="row" useFlexGap spacing={0.9} sx={{ mt: 2, flexWrap: 'wrap' }}>
                     {role.skills.map((skill) => (
                       <Chip
                         key={skill}

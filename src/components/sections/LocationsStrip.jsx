@@ -11,7 +11,7 @@ export default function LocationsStrip() {
     <Box component="section" sx={{ bgcolor: BRAND_NEUTRALS.sectionSoft, py: 5 }}>
       <Container sx={{ px: { xs: 2, sm: 3, lg: 4 } }}>
         <RevealOnScroll>
-          <Stack direction="row" useFlexGap flexWrap="wrap" alignItems="center" spacing={1.5}>
+          <Stack direction="row" useFlexGap spacing={1.5} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
             <Typography sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, color: 'primary.light', fontSize: '0.9rem', fontWeight: 700 }}>
               <MapPin size={16} color="currentColor" /> Campuses in:
             </Typography>

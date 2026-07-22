@@ -6,8 +6,8 @@ const schoolContent = {
   },
 
   hero: {
-    eyebrow: 'Air Force School, Nagpur',
-    title: 'Education with humility, discipline and a strong sense of purpose.',
+    // eyebrow: 'Air Force School, Nagpur',
+    title: 'Air Force School, Nagpur', //'Education with humility, discipline and a strong sense of purpose.',
     subtitle:
       'Established in 1968, Air Force School VayuSena Nagar builds confident, responsible learners through strong academics, caring mentorship, co-curricular exposure and the spirit of the Indian Air Force.',
     motto: 'Vidya Dadati Vinayam',

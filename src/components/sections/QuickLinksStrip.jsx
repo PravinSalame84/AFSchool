@@ -27,10 +27,12 @@ export default function QuickLinksStrip() {
         <Stack
           direction="row"
           useFlexGap
-          flexWrap="wrap"
-          justifyContent="center"
           spacing={{ xs: 1.1, sm: 1.6, md: 2.5 }}
-          rowGap={1.1}
+          sx={{
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            rowGap: 1.1,
+          }}
         >
           {appContent.sections.quickLinksStrip.links.map(({ key, label, to }) => {
             const Icon = iconMap[key] || ExternalLink

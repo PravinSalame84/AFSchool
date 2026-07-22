@@ -145,7 +145,7 @@ export default function RatingsFeedback() {
                 ))}
               </Box>
 
-              <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 3 }}>
+              <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 3, flexWrap: 'wrap' }}>
                 <Chip icon={<StarRoundedIcon />} label="Parent voices visible on site" color="warning" />
                 <Chip label="Suggestions supported" variant="outlined" />
                 <Chip label="Counts update with each submission" variant="outlined" />

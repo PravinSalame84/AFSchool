@@ -109,13 +109,15 @@ function DesktopNavItem({ item, pathname, onMenuOpen, onMenuClose, menuAnchor })
         open={isMenuOpen}
         onClose={onMenuClose}
         MenuListProps={{ 'aria-label': `${item.label} menu` }}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            mt: 1.5,
-            minWidth: 280,
-            p: 1,
-            ...NAV_MENU_PAPER_SX,
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              mt: 1.5,
+              minWidth: 280,
+              p: 1,
+              ...NAV_MENU_PAPER_SX,
+            },
           },
         }}
       >
@@ -189,7 +191,9 @@ function MobileNavItem({ item, pathname, onNavigate }) {
       >
         <ListItemText
           primary={item.label}
-          primaryTypographyProps={{ fontSize: '0.9375rem', fontWeight: 700, color: BRAND_NEUTRALS.inkSoft }}
+          slotProps={{
+            primary: { fontSize: '0.9375rem', fontWeight: 700, color: BRAND_NEUTRALS.inkSoft },
+          }}
         />
         <ListItemIcon sx={{ minWidth: 'auto', color: BRAND_NEUTRALS.slateLight }}>
           <LaunchRoundedIcon fontSize="small" />
@@ -223,10 +227,12 @@ function MobileNavItem({ item, pathname, onNavigate }) {
       >
         <ListItemText
           primary={item.label}
-          primaryTypographyProps={{
-            fontSize: '0.9375rem',
-            fontWeight: 700,
-            color: pathname === item.to || pathname.startsWith(`${item.to}/`) ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkSoft,
+          slotProps={{
+            primary: {
+              fontSize: '0.9375rem',
+              fontWeight: 700,
+              color: pathname === item.to || pathname.startsWith(`${item.to}/`) ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkSoft,
+            },
           }}
         />
       </ListItemButton>
@@ -297,9 +303,11 @@ function MobileNavItem({ item, pathname, onNavigate }) {
               >
                 <ListItemText
                   primary={child.label}
-                  primaryTypographyProps={{
-                    fontSize: '0.875rem',
-                    color: childSelected ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkMuted,
+                  slotProps={{
+                    primary: {
+                      fontSize: '0.875rem',
+                      color: childSelected ? BRAND_NEUTRALS.ink : BRAND_NEUTRALS.inkMuted,
+                    },
                   }}
                 />
                 {child.external ? (
@@ -439,25 +447,27 @@ export default function Navbar() {
         onClose={() => setMobileOpen(false)}
         ModalProps={{
           keepMounted: true,
-          BackdropProps: {
+        }}
+        slotProps={{
+          backdrop: {
             sx: {
               ...BACKDROP_DARK_SX,
             },
           },
-        }}
-        PaperProps={{
-          sx: {
-            width: 'min(92vw, 380px)',
-            p: { xs: 2.25, sm: 3 },
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            overflowY: 'auto',
-            overscrollBehavior: 'contain',
-            background:
-              'linear-gradient(180deg, rgba(236,243,248,0.42) 0%, rgba(219,232,241,0.28) 100%)',
-            backdropFilter: 'blur(34px) saturate(140%)',
-            ...MOBILE_DRAWER_PAPER_SX,
+          paper: {
+            sx: {
+              width: 'min(92vw, 380px)',
+              p: { xs: 2.25, sm: 3 },
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              overscrollBehavior: 'contain',
+              background:
+                'linear-gradient(180deg, rgba(236,243,248,0.42) 0%, rgba(219,232,241,0.28) 100%)',
+              backdropFilter: 'blur(34px) saturate(140%)',
+              ...MOBILE_DRAWER_PAPER_SX,
+            },
           },
         }}
       >
@@ -609,14 +619,16 @@ export default function Navbar() {
                           <ListItemText
                             primary={item.label}
                             secondary={item.to ? 'Open brochure' : item.external ? 'Open map' : 'Tap to connect'}
-                            primaryTypographyProps={{
-                              fontSize: '0.88rem',
-                              fontWeight: 700,
-                              color: BRAND_NEUTRALS.ink,
-                            }}
-                            secondaryTypographyProps={{
-                              fontSize: '0.74rem',
-                              color: BRAND_NEUTRALS.slateSoft,
+                            slotProps={{
+                              primary: {
+                                fontSize: '0.88rem',
+                                fontWeight: 700,
+                                color: BRAND_NEUTRALS.ink,
+                              },
+                              secondary: {
+                                fontSize: '0.74rem',
+                                color: BRAND_NEUTRALS.slateSoft,
+                              },
                             }}
                           />
                           {item.external ? (

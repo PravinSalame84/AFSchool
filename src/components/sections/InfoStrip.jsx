@@ -3,6 +3,7 @@ import { ClipboardList, Wallet, MapPinned, MailQuestion } from 'lucide-react'
 import Container from '../ui/Container'
 import RevealOnScroll from '../ui/RevealOnScroll'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
+import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded'
 import { Link } from 'react-router-dom'
 import { BRAND_ALPHA, BRAND_NEUTRALS, BRAND_SHADOWS, SECTION_BACKGROUNDS } from '../../constants/brand'
 
@@ -10,6 +11,7 @@ const items = [
   { icon: ClipboardList, label: 'Admission Process', to: '/admissions' },
   { icon: Wallet, label: 'Fee Structure', to: '/admissions#fees' },
   { icon: MapPinned, label: 'Locations', to: '/locations' },
+  { icon: PlaceRoundedIcon, label: 'Visit Campus', to: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7' },
   { icon: MailQuestion, label: 'Enquiry Form', action: 'enquiry' },
 ]
 
@@ -17,14 +19,14 @@ export default function InfoStrip() {
   const { openEnquiry } = useEnquiryModal()
 
   return (
-    <Box component="section" sx={{ bgcolor: SECTION_BACKGROUNDS.strip, pb: 1, mt: { xs: -3, sm: -4, lg: -5 }, position: 'relative', zIndex: 3 }}>
-      <Container sx={{ px: { xs: 1, sm: 1, lg: 1 } }}>
+    <Box component="section" sx={{ bgcolor: SECTION_BACKGROUNDS.strip, py: 0, mt: { xs: -3, sm: -4, lg: -5 }, position: 'relative', zIndex: 3 }}>
+      <Container>
         <RevealOnScroll>
           <Paper
             sx={{
               position: 'relative',
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)' },
               gap: 2,
               p: { xs: 1.5, sm: 2.25, lg: 2.5 },
               borderRadius: '2rem',
@@ -46,6 +48,7 @@ export default function InfoStrip() {
             }}
           >
             {items.map(({ icon: Icon, label, to, action }) => {
+              const isExternal = typeof to === 'string' && /^https?:\/\//.test(to)
               const inner = (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                   <Box
@@ -79,8 +82,11 @@ export default function InfoStrip() {
               ) : (
                 <Box
                   key={label}
-                  component={Link}
-                  to={to}
+                  component={isExternal ? 'a' : Link}
+                  to={isExternal ? undefined : to}
+                  href={isExternal ? to : undefined}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
                   sx={{ display: 'flex', alignItems: 'center', borderRadius: '1.4rem', p: 1.15, textDecoration: 'none', '&:hover': { backgroundColor: 'rgba(255,248,230,0.9)' } }}
                 >
                   {inner}

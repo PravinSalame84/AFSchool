@@ -42,7 +42,7 @@ function RowCard({ row }) {
         boxShadow: '0 20px 42px -34px rgba(17,26,36,0.22)',
       }}
     >
-      <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ alignItems: 'center' }}>
+      <Stack direction="row" useFlexGap spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
         {category ? <Chip size="small" label={category} color="warning" /> : null}
         {row.updatedAt || row.date ? <Chip size="small" label={row.updatedAt || row.date} variant="outlined" /> : null}
       </Stack>
@@ -230,7 +230,7 @@ export default function Downloads() {
 
               {!loading && !error ? (
                 <>
-                  <Stack direction="row" useFlexGap flexWrap="wrap" spacing={1} sx={{ mt: 2.5 }}>
+                  <Stack direction="row" useFlexGap spacing={1} sx={{ mt: 2.5, flexWrap: 'wrap' }}>
                     <Chip icon={<SyncRoundedIcon />} label={`${visibleRows.length} current entries`} color="primary" />
                     <Chip icon={<DownloadRoundedIcon />} label={`${currentData?.columns?.length || 0} information fields`} variant="outlined" />
                     <Chip icon={<LinkRoundedIcon />} label="Accessible for all visitors" variant="outlined" />

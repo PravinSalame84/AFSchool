@@ -20,18 +20,18 @@ const heroCutouts = [
     sx: {
       right: { xs: '50%', lg: '2%' },
       transform: { xs: 'translateX(50%)', lg: 'none' },
-      width: { xs: 300, sm: 320, md: 420, lg: 560, xl: 760 },
+      width: { xs: 400, sm: 420, md: 480, lg: 560, xl: 760 },
       zIndex: 2,
       bottom: -25,
     },
   },
   {
-    src: studentImages[13],
+    src: studentImages[14],
     alt: 'Air Force School classroom hero visual',
     sx: {
       right: { xs: '50%', lg: '5%' },
       transform: { xs: 'translateX(50%)', lg: 'none' },
-      width: { xs: 400, sm: 450, md: 530, lg: 660, xl: 860 },
+      width: { xs: 300, sm: 380, md: 430, lg: 560, xl: 680 },
       zIndex: 2,
       bottom: -25,
     },
@@ -48,12 +48,12 @@ const heroCutouts = [
     },
   },
   {
-    src: studentImages[10],
+    src: studentImages[7],
     alt: 'Air Force School mentor visual',
     sx: {
       right: { xs: '50%', lg: '7%' },
       transform: { xs: 'translateX(50%)', lg: 'none' },
-      width: { xs: 350, sm: 385, md: 480, lg: 560, xl: 720 },
+      width: { xs: 250, sm: 285, md: 380, lg: 460, xl: 520 },
       zIndex: 2,
       bottom: -25,
     },
@@ -174,10 +174,8 @@ export default function Hero() {
             <Stack
               direction="row"
               useFlexGap
-              flexWrap="wrap"
               spacing={1.2}
-              justifyContent={{ xs: 'center', lg: 'flex-start' }}
-              sx={{ mt: 3 }}
+              sx={{ mt: 3, flexWrap: 'wrap', justifyContent: { xs: 'center', lg: 'flex-start' } }}
             >
               
               {schoolContent.hero.badges.map((badge) => (
@@ -205,8 +203,7 @@ export default function Hero() {
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
               spacing={1.75}
-              justifyContent={{ xs: 'center', lg: 'flex-start' }}
-              sx={{ mt: { xs: 3.5, md: 5 } }}
+              sx={{ mt: { xs: 3.5, md: 5 }, justifyContent: { xs: 'center', lg: 'flex-start' } }}
             >
               <Button
                 component={Link}
@@ -298,7 +295,7 @@ export default function Hero() {
               }}
             >
               <Typography sx={{ fontSize: '0.74rem', fontWeight: 800, lineHeight: 1.2 }}>
-                Smart
+                2026
               </Typography>
               <Typography sx={{ fontSize: '0.9rem', fontWeight: 800, lineHeight: 1.2 }}>
                 Admissions Open

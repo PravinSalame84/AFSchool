@@ -149,7 +149,7 @@ export default function Footer() {
             <Typography sx={{ mt: 2.5, maxWidth: 420, fontSize: { xs: '0.9rem', sm: '0.95rem' }, lineHeight: 1.9, color: BRAND_ALPHA.white8 }}>
               {appContent.sections.footer.description}
             </Typography>
-            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 3, maxWidth: 460 }}>
+            <Stack direction="row" spacing={1} useFlexGap sx={{ mt: 3, maxWidth: 460, flexWrap: 'wrap' }}>
               {schoolContent.hero.badges.map((badge) => (
                 <Chip
                   key={badge}
@@ -189,7 +189,7 @@ export default function Footer() {
                 />
               ))} */}
             </Stack>
-            <Stack direction="row" spacing={1.2} useFlexGap flexWrap="wrap" sx={{ mt: 3 }}>
+            <Stack direction="row" spacing={1.2} useFlexGap sx={{ mt: 3, flexWrap: 'wrap' }}>
               {socialLinks.map(({ label, href, icon: Icon, color, isMuiIcon }) => (
                 <IconButton
                   key={label}
@@ -209,7 +209,7 @@ export default function Footer() {
                 </IconButton>
               ))}
             </Stack>
-            <Stack direction="row" spacing={1.1} useFlexGap flexWrap="wrap" sx={{ mt: 2 }}>
+            <Stack direction="row" spacing={1.1} useFlexGap sx={{ mt: 2, flexWrap: 'wrap' }}>
               {connectLinks.map(({ label, href, icon: Icon }) => (
                 <MuiLink
                   key={label}
@@ -263,17 +263,17 @@ export default function Footer() {
               {appContent.sections.footer.headings.contact}
             </Typography>
             <Stack spacing={2} sx={{ color: BRAND_ALPHA.white84, fontSize: '0.92rem' }}>
-              <Stack direction="row" spacing={1.5} alignItems="flex-start">
+              <Stack direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}>
                 <MapPin size={18} color={BRAND_NEUTRALS.accentStrong} style={{ marginTop: 4, flexShrink: 0 }} />
                 <Typography sx={{ wordBreak: 'break-word' }}>{siteConfig.contact.address}</Typography>
               </Stack>
-              <Stack direction="row" spacing={1.5} alignItems="center">
+              <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                 <Phone size={18} color={BRAND_NEUTRALS.accentStrong} />
                 <MuiLink href={`tel:${siteConfig.contact.phone}`} underline="none" sx={{ color: BRAND_NEUTRALS.white, fontWeight: 700, wordBreak: 'break-word', '&:hover': { color: 'secondary.main' } }}>
                   {siteConfig.contact.phone}
                 </MuiLink>
               </Stack>
-              <Stack direction="row" spacing={1.5} alignItems="center">
+              <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                 <Mail size={18} color={BRAND_NEUTRALS.accentStrong} />
                 <MuiLink href={`mailto:${siteConfig.contact.email}`} underline="none" sx={{ color: BRAND_NEUTRALS.white, fontWeight: 700, wordBreak: 'break-word', '&:hover': { color: 'secondary.main' } }}>
                   {siteConfig.contact.email}
@@ -291,7 +291,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {siteConfig.brandName},{' '}
             {siteConfig.brandSuffix}. All rights reserved.
           </Typography>
-          <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
+          <Stack direction="row" spacing={3} useFlexGap sx={{ flexWrap: 'wrap' }}>
             <MuiLink component={Link} to="/privacy-policy" underline="none" sx={{ fontSize: '0.78rem', color: BRAND_NEUTRALS.white, fontWeight: 700, '&:hover': { color: 'secondary.main' } }}>
               {appContent.sections.footer.legal.privacy}
             </MuiLink>

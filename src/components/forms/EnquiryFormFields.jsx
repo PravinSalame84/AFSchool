@@ -90,7 +90,7 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
 
   if (submitted) {
     return (
-      <Stack alignItems="center" spacing={1.5} sx={{ py: 4, textAlign: 'center' }}>
+      <Stack spacing={1.5} sx={{ py: 4, textAlign: 'center', alignItems: 'center' }}>
         <CheckCircle2 size={56} color="#f0934b" />
         <Typography sx={{ color: 'primary.main', fontSize: '1.125rem', fontWeight: 700 }}>
           Thank you, {form.firstName}!
