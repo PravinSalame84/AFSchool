@@ -13,6 +13,10 @@ export default function Input({ label, error, required, className, id, sx, child
       size="medium"
       className={className}
       sx={{
+        '& .MuiFormHelperText-root': {
+          mt: 0.35,
+          minHeight: '1em',
+        },
         '& .MuiInputLabel-root': {
           fontWeight: 600,
         },

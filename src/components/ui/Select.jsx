@@ -12,6 +12,10 @@ export default function Select({ label, error, required, options = [], placehold
       fullWidth
       className={className}
       sx={{
+        '& .MuiFormHelperText-root': {
+          mt: 0.35,
+          minHeight: '1em',
+        },
         '& .MuiOutlinedInput-root': {
           backgroundColor: 'rgba(255,255,255,0.58)',
           backdropFilter: 'blur(16px)',
