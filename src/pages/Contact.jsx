@@ -110,6 +110,7 @@ export default function Contact() {
           subject: `Website Contact Enquiry from ${form.name.trim()}`,
           replyTo: form.email.trim(),
           formName: form.name.trim(),
+          formUrl: window.location.href,
           fields: {
             fullName: form.name.trim(),
             email: form.email.trim(),

@@ -25,7 +25,7 @@ export function buildMailtoUrl({ subject = '', lines = [] } = {}) {
   return `mailto:${recipients.join(',')}${query ? `?${query}` : ''}`
 }
 
-export async function submitEmailForm({ subject = '', replyTo = '', fields = {}, formName = '' } = {}) {
+export async function submitEmailForm({ subject = '', replyTo = '', fields = {}, formName = '', formUrl = '' } = {}) {
   const recipients = getContactEmailRecipients()
   const [primaryRecipient, ...ccRecipients] = recipients
 
@@ -37,6 +37,7 @@ export async function submitEmailForm({ subject = '', replyTo = '', fields = {},
     _subject: subject,
     _cc: ccRecipients.join(','),
     _template: 'table',
+    ...(formUrl ? { _url: formUrl } : {}),
     ...(replyTo ? { _replyto: replyTo, email: replyTo } : {}),
     ...(formName ? { name: formName } : {}),
     ...fields,

@@ -101,9 +101,10 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
       setIsSubmitting(true)
       try {
         await submitEmailForm({
-        subject: `${context} from ${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+          subject: `${context} from ${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
           replyTo: form.email.trim(),
           formName: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+          formUrl: window.location.href,
           fields: {
             enquiryType: context,
             state: form.state,
