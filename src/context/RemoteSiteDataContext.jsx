@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { fetchPublicSheetByGid } from '../utils/googleSheets'
 import { sheetSections } from '../data/downloadCenterConfig'
-import { driveGalleryManifests } from '../data/driveGalleryManifests'
 import secureContent from '../data/secureContent'
 import siteConfig from '../data/siteConfig'
 
 const RemoteSiteDataContext = createContext(null)
+const REMOTE_REFRESH_INTERVAL_MS = 60 * 1000
 
 function isTrue(value) {
   return value === true || String(value).toLowerCase() === 'true'
@@ -49,6 +49,16 @@ function extractDriveId(value) {
 function toDriveImageUrl(value) {
   const id = extractDriveId(value)
   return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1600` : ''
+}
+
+function resolveGalleryImageUrl(value) {
+  if (!isNonEmpty(value)) return ''
+
+  const input = String(value).trim()
+  const driveImageUrl = toDriveImageUrl(input)
+  if (driveImageUrl) return driveImageUrl
+
+  return sanitizeUrl(input)
 }
 
 function toEmbeddedFolderUrl(value) {
@@ -155,20 +165,15 @@ function normalizePublishedRows(rows) {
       ]
 
       const galleryImages = galleryCandidates
-        .map((item) => sanitizeUrl(item) || toDriveImageUrl(item))
+        .map((item) => resolveGalleryImageUrl(item))
         .filter(Boolean)
 
       const driveFolderUrl = sanitizeUrl(row.publicLinkFromDrive || row.folderLink || row.galleryFolder)
       const driveFolderId = extractDriveId(driveFolderUrl)
-      const manifestImages = (driveGalleryManifests[driveFolderId] || []).map((item) => ({
-        src: toDriveImageUrl(item.id),
-        name: item.name,
-      }))
       const configuredImages = galleryImages.map((image, index) => ({
         src: image,
         name: `Gallery image ${index + 1}`,
       }))
-      const resolvedGalleryImages = configuredImages.length ? configuredImages : manifestImages
 
       return {
         ...row,
@@ -177,8 +182,8 @@ function normalizePublishedRows(rows) {
         showPageUnderDialogBox: sanitizeUrl(row.showPageUnderDialogBox),
         publicLinkFromDrive: driveFolderUrl,
         dialog,
-        galleryImages: resolvedGalleryImages,
-        galleryImageCount: resolvedGalleryImages.length,
+        galleryImages: configuredImages,
+        galleryImageCount: configuredImages.length,
         driveFolderId,
         driveFolderEmbedUrl: toEmbeddedFolderUrl(driveFolderUrl),
       }
@@ -275,8 +280,30 @@ export function RemoteSiteDataProvider({ children }) {
 
     loadRemoteSiteData()
 
+    if (siteConfig.remoteContent.provider === 'local-secure') {
+      return () => {
+        ignore = true
+      }
+    }
+
+    const intervalId = window.setInterval(() => {
+      loadRemoteSiteData()
+    }, REMOTE_REFRESH_INTERVAL_MS)
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        loadRemoteSiteData()
+      }
+    }
+
+    window.addEventListener('focus', loadRemoteSiteData)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
     return () => {
       ignore = true
+      window.clearInterval(intervalId)
+      window.removeEventListener('focus', loadRemoteSiteData)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
 

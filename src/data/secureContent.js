@@ -67,7 +67,7 @@ const secureContent = {
         to: '/gallery',
         publicLinkFromDrive: '',
         galleryAnnouncement:
-          'This event gallery is secured. Publish site-managed images or use a protected backend media proxy to display them here.',
+          'This event gallery is currently available through the school’s protected content setup.',
         galleryImages: [],
         isPublished: true,
       },

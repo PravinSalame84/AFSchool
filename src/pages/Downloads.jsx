@@ -157,7 +157,6 @@ function EventGalleryCard({ row, onOpen }) {
 
   return (
     <Paper
-      data-carousel-item
       sx={{
         width: { xs: '100%', md: 440 },
         p: 2.4,
@@ -184,14 +183,15 @@ function EventGalleryCard({ row, onOpen }) {
 
       {hasImages ? (
         <Box sx={{ mt: 2, display: 'grid', gap: 1.2 }}>
-          <Carousel ariaLabel={`${row.title || 'Event'} images`}>
+          <Carousel ariaLabel={`${row.title || 'Event'} images`} showCount>
             {row.galleryImages.map((image, index) => (
               <Box
                 key={`${row.title || 'event'}-${index}`}
                 data-carousel-item
                 sx={{
-                  width: { xs: '100%', md: 360 },
-                  height: 250,
+                  width: '100%',
+                  minWidth: '100%',
+                  height: { xs: 230, sm: 250, md: 270 },
                   borderRadius: '1.2rem',
                   backgroundImage: `url(${image.src})`,
                   backgroundSize: 'cover',

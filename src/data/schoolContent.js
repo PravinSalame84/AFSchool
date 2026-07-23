@@ -144,16 +144,28 @@ const schoolContent = {
 
   resources: [
     {
+      label: 'The Right Curriculum',
+      href: '/the-right-curriculum',
+    },
+    {
+      label: 'The Right Faculty',
+      href: '/the-right-faculty',
+    },
+    {
+      label: 'The Right Environment',
+      href: '/the-right-environment',
+    },
+    {
+      label: 'Scholarship Program',
+      href: '/scholarship-program',
+    },
+    {
       label: 'Download Centre',
       href: '/downloads',
     },
     {
       label: 'Ratings & Feedback',
       href: '/ratings-feedback',
-    },
-    {
-      label: 'Campus Life',
-      href: '/why-us',
     },
     {
       label: 'Contact School',

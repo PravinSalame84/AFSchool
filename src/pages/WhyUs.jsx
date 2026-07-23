@@ -26,7 +26,7 @@ export default function WhyUs() {
         eyebrow="Curricular Activities"
         crumb="Campus Life"
         title="Campus life that balances academics, expression, safety and active participation"
-        subtitle="This page brings together the school’s real classroom practices, facilities, cultural rhythm, safety systems and student-facing initiatives without relying on template content."
+        subtitle="Explore how the school brings together academics, facilities, safety, culture and student participation in a balanced everyday learning environment."
         image={campusImages.chemistryLab}
       />
 

@@ -49,7 +49,10 @@ function parseGoogleVisualizationResponse(text) {
 
 export async function fetchPublicSheetByGid(gid) {
   const response = await fetch(
-    `https://docs.google.com/spreadsheets/d/${PUBLIC_SHEET_ID}/gviz/tq?gid=${gid}&tqx=out:json`,
+    `https://docs.google.com/spreadsheets/d/${PUBLIC_SHEET_ID}/gviz/tq?gid=${gid}&tqx=out:json&cacheBust=${Date.now()}`,
+    {
+      cache: 'no-store',
+    },
   )
 
   if (!response.ok) {

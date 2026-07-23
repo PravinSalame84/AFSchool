@@ -1,33 +1,53 @@
 const faqs = [
   {
-    question: 'What boards/curricula does Airforce School offer?',
+    question: 'What classes does Air Force School Vayusena Nagar currently serve?',
     answer:
-      'Our campuses offer CBSE, ICSE (CISCE), the state SSC board, Cambridge International (IGCSE) and the International Baccalaureate (IB), depending on the campus — so families can choose the pathway that fits their child best.',
+      'Air Force School Vayusena Nagar currently serves students from LKG to Class IX under the CBSE framework, with strong focus on academics, discipline, co-curricular engagement and child-friendly development.',
   },
   {
-    question: 'How many campuses does Airforce School operate?',
+    question: 'What makes Air Force School different for families looking at admissions?',
     answer:
-      'Airforce School Educational & Cultural Society runs 142 owned campuses and partners with 96 additional schools across India, offering programmes from Pre-Nursery through Grade 12.',
+      'Families usually value the school’s blend of disciplined academic routines, caring faculty, practical facilities, co-curricular participation and a culture rooted in humility, responsibility and confidence-building.',
   },
   {
-    question: 'Is Airforce School International School privately owned?',
+    question: 'Do students get access to labs, sports and creative activities?',
     answer:
-      'Yes — all Airforce School campuses are privately owned and managed, while following the academic standards and curriculum frameworks of the network.',
+      'Yes. Students benefit from practical learning spaces, sports and PT opportunities, cultural participation, art and music exposure, assemblies, clubs and event-based learning across the school year.',
   },
   {
     question: 'How do I start the admissions process?',
     answer:
-      'Admissions are rolling and processed on a first-come, first-served basis. Use the enquiry form on this site or visit the Admissions page to start an application for your nearest campus.',
+      'You can begin by submitting an enquiry through the website or by contacting the school office directly. The team will guide you on availability, eligibility, required documents and the next admission steps.',
   },
   {
-    question: 'Do you offer transport and other facilities?',
+    question: 'Do you offer parent interaction and academic support during the year?',
     answer:
-      'Most campuses offer supervised transport on fixed routes, along with labs, libraries, sports facilities and after-school care. Availability varies by campus — check with your local school office for specifics.',
+      'Yes. Parent-teacher meetings, routine communication, class-wise guidance and academic reinforcement are all important parts of the school’s approach so that families stay informed and children receive timely support.',
   },
   {
-    question: 'Can I transfer my child between Airforce School campuses?',
+    question: 'How does the fee structure vary across different boards at Air Force School?',
     answer:
-      'Yes. Our Inter-Network Transfer programme makes it simple for families relocating between cities to re-enrol their child at another Airforce School campus with minimal paperwork.',
+      'Air Force School Vayusena Nagar currently follows the CBSE framework. Fee structure is generally guided by class level, facilities and the school’s approved schedule rather than multiple boards on the same campus.',
+  },
+  {
+    question: 'Can parents pay the fees in monthly instalments?',
+    answer:
+      'Fee payment flexibility depends on the school’s current policy for the academic year. Parents are advised to confirm the available instalment pattern, due dates and payment schedule with the school office or accounts team.',
+  },
+  {
+    question: 'Can I pay the school fees online? How do I access the payment portal?',
+    answer:
+      'Yes, when the school enables online fee collection, parents can use the approved payment portal or link shared by the school office. If you do not yet have access, please contact the school directly for the latest payment instructions.',
+  },
+  {
+    question: 'Does the fee structure differ for various Air Force School branches?',
+    answer:
+      'Yes, fee structure can differ from one branch or campus to another based on location, class range, facilities, local administration and the services offered at that specific school.',
+  },
+  {
+    question: 'Is there a discount for paying the annual fee in a single instalment?',
+    answer:
+      'Yes, there is a 5% discount if the parent pays the full year fees before the due date of 1st term.',
   },
 ]
 

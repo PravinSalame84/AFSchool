@@ -112,7 +112,7 @@ const appContent = {
     },
     footer: {
       description:
-        'A redesigned school experience for Air Force School VayuSena Nagar with modern visuals, better accessibility, and improved parent engagement.',
+        'Air Force School VayuSena Nagar’s website experience is designed to help families find trusted information, school updates and useful resources with ease.',
       headings: {
         quickLinks: 'Quick Links',
         resources: 'Resources',

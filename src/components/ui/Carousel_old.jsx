@@ -133,51 +133,23 @@
 //     </Box>
 //   )
 // }
-import { Children, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
-import { Box, IconButton, Typography } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { BRAND_NEUTRALS } from '../../constants/brand'
 
-export default function Carousel({
-  children,
-  autoPlay = false,
-  interval = 4000,
-  ariaLabel = 'Carousel',
-  showCount = false,
-}) {
+export default function Carousel({ children, autoPlay = false, interval = 4000, ariaLabel = 'Carousel' }) {
   const trackRef = useRef(null)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const items = Children.toArray(children).filter(Boolean)
-  const itemCount = items.length
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current
     if (!el) return
     setAtStart(el.scrollLeft <= 4)
     setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
-
-    const cards = Array.from(el.querySelectorAll('[data-carousel-item]'))
-    if (!cards.length) {
-      setActiveIndex(0)
-      return
-    }
-
-    let closestIndex = 0
-    let closestDistance = Number.POSITIVE_INFINITY
-
-    cards.forEach((card, index) => {
-      const distance = Math.abs(card.offsetLeft - el.scrollLeft)
-      if (distance < closestDistance) {
-        closestDistance = distance
-        closestIndex = index
-      }
-    })
-
-    setActiveIndex(closestIndex)
   }, [])
 
   const scrollByCard = useCallback((dir) => {
@@ -274,35 +246,17 @@ export default function Carousel({
           sx={{
             width: { xs: 40, sm: 44 },
             height: { xs: 40, sm: 44 },
-            border: '1px solid rgba(17,26,36,0.12)',
-            backgroundColor: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.48)',
+            backgroundColor: 'rgba(255,255,255,0.58)',
+            backdropFilter: 'blur(16px)',
             '&:hover': {
-              backgroundColor: 'primary.main',
+              backgroundColor: 'rgba(17,26,36,0.88)',
               color: BRAND_NEUTRALS.white,
             },
           }}
         >
           <ChevronLeftRoundedIcon />
         </IconButton>
-        {showCount && itemCount ? (
-          <Typography
-            sx={{
-              minWidth: 68,
-              px: 1.5,
-              py: 0.8,
-              borderRadius: '999px',
-              border: '1px solid rgba(17,26,36,0.12)',
-              backgroundColor: '#ffffff',
-              color: 'primary.main',
-              fontSize: '0.82rem',
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textAlign: 'center',
-            }}
-          >
-            {activeIndex + 1} / {itemCount}
-          </Typography>
-        ) : null}
         <IconButton
           aria-label="Next"
           disabled={atEnd}
@@ -310,10 +264,11 @@ export default function Carousel({
           sx={{
             width: { xs: 40, sm: 44 },
             height: { xs: 40, sm: 44 },
-            border: '1px solid rgba(17,26,36,0.12)',
-            backgroundColor: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.48)',
+            backgroundColor: 'rgba(255,255,255,0.58)',
+            backdropFilter: 'blur(16px)',
             '&:hover': {
-              backgroundColor: 'primary.main',
+              backgroundColor: 'rgba(17,26,36,0.88)',
               color: BRAND_NEUTRALS.white,
             },
           }}
