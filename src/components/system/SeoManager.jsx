@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import schoolContent from '../../data/schoolContent'
 import siteConfig from '../../data/siteConfig'
+import { getContactEmailRecipients } from '../../utils/contact'
 
 const pageSeo = {
   '/': {
@@ -97,7 +98,7 @@ function buildSchoolSchema(url) {
     url,
     description: schoolContent.meta.description,
     foundingDate: String(siteConfig.yearFounded),
-    email: siteConfig.contact.email,
+    email: getContactEmailRecipients()[0] || siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
     address: {
       '@type': 'PostalAddress',

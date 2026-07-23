@@ -9,10 +9,12 @@ import {
 } from '@mui/material'
 import { useMemo, useState } from 'react'
 import { CheckCircle2, RefreshCw } from 'lucide-react'
+import { Alert } from '@mui/material'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
 import Button from '../ui/Button'
 import { states, citiesForState, schoolsForCity } from '../../data/locations'
+import { submitEmailForm } from '../../utils/contact'
 
 const standards = ['Playgroup', 'Nursery', 'Jr. KG', 'Sr. KG', ...Array.from({ length: 12 }, (_, i) => `Grade ${i + 1}`)]
 const defaultState = states.length === 1 ? states[0] : ''
@@ -45,6 +47,8 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [challenge, setChallenge] = useState(randomMathChallenge)
+  const [submitError, setSubmitError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const cities = useMemo(() => citiesForState(form.state), [form.state])
   const schools = useMemo(() => schoolsForCity(form.state, form.city), [form.state, form.city])
@@ -87,13 +91,37 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
     setForm((prev) => ({ ...prev, captcha: '' }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const next = validate()
     setErrors(next)
+    setSubmitError('')
+
     if (Object.keys(next).length === 0) {
-      setSubmitted(true)
-      onSuccess && setTimeout(onSuccess, 1800)
+      setIsSubmitting(true)
+      try {
+        await submitEmailForm({
+        subject: `${context} from ${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+          replyTo: form.email.trim(),
+          formName: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+          fields: {
+            enquiryType: context,
+            state: form.state,
+            city: form.city,
+            preferredCampus: form.school,
+            childName: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+            gradeApplyingFor: form.standard,
+            parentEmail: form.email.trim(),
+            parentMobile: form.phone.trim(),
+          },
+        })
+        setSubmitted(true)
+        onSuccess && setTimeout(onSuccess, 1800)
+      } catch (error) {
+        setSubmitError(error.message || 'We could not send your enquiry right now.')
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -124,6 +152,11 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         gap: { xs: 0.5, sm: 0.75 },
       }}
     >
+      {submitError ? (
+        <Alert severity="warning" sx={{ gridColumn: { sm: 'span 2' }, mb: 1 }}>
+          {submitError}
+        </Alert>
+      ) : null}
       <Select
         id="state"
         label="State"
@@ -264,8 +297,8 @@ export default function EnquiryFormFields({ context = 'General Enquiry', onSucce
         ) : null}
       </Box>
 
-      <Button type="submit" variant="primary" fullWidth sx={{ gridColumn: { sm: 'span 2' } }}>
-        Send {context.includes('Brochure') ? 'and Get Brochure' : 'Enquiry'}
+      <Button type="submit" variant="primary" fullWidth disabled={isSubmitting} sx={{ gridColumn: { sm: 'span 2' } }}>
+        {isSubmitting ? 'Sending...' : `Send ${context.includes('Brochure') ? 'and Get Brochure' : 'Enquiry'}`}
       </Button>
     </Box>
   )

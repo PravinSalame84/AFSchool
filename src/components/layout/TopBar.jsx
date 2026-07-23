@@ -3,6 +3,7 @@ import { Mail, MapPinned, Phone, ShieldCheck } from 'lucide-react'
 import { Link as RouterLink } from 'react-router-dom'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
+import { getContactEmailDisplay, getContactMailto } from '../../utils/contact'
 
 export default function TopBar() {
   return (
@@ -19,8 +20,8 @@ export default function TopBar() {
           <Link href={`tel:${siteConfig.contact.phone}`} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'secondary.dark', '&:hover': { color: 'text.primary' } }}>
             <Phone size={14} /> {siteConfig.contact.phone}
           </Link>
-          <Link href={`mailto:${siteConfig.contact.email}`} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', color: 'secondary.dark', '&:hover': { color: 'text.primary' } }}>
-            <Mail size={14} /> {siteConfig.contact.email}
+          <Link href={getContactMailto()} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', color: 'secondary.dark', '&:hover': { color: 'text.primary' } }}>
+            <Mail size={14} /> {getContactEmailDisplay()}
           </Link>
           <Typography sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'secondary.dark' }}>
             <ShieldCheck size={14} /> {schoolContent.contact.affiliation}

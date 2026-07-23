@@ -1,3 +1,5 @@
+import siteConfig from './siteConfig'
+
 const schoolContent = {
   meta: {
     title: 'Air Force School, VayuSena Nagar, Nagpur',
@@ -185,7 +187,7 @@ const schoolContent = {
   contact: {
     address: 'Air Force School House, Air Force School VayuSena Nagar, Nagpur - 440007, Maharashtra, India',
     phone: '0712-2511407',
-    email: 'airforceschoolvsn@gmail.com',
+    email: siteConfig.contact.emailDisplay,
     affiliation: 'CBSE Affiliation No. 1130860',
     mapLink: 'https://maps.app.goo.gl/LT2Ls78TT3M81j9N7',
     mapEmbed: 'https://www.google.com/maps?q=Air%20Force%20School%20VayuSena%20Nagar%20Nagpur&z=15&output=embed',

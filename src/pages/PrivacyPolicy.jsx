@@ -3,6 +3,7 @@ import PageHero from '../components/ui/PageHero'
 import Section from '../components/ui/Section'
 import appContent from '../data/appContent'
 import siteConfig from '../data/siteConfig'
+import { getContactEmailDisplay, getContactMailto } from '../utils/contact'
 
 export default function PrivacyPolicy() {
   return (
@@ -33,8 +34,8 @@ export default function PrivacyPolicy() {
             <Typography sx={{ mt: 3, color: 'primary.main', fontSize: '1.2rem', fontWeight: 700 }}>Contact</Typography>
             <Typography sx={{ mt: 1.25, color: 'text.secondary', fontSize: '0.95rem', lineHeight: 1.85 }}>
               Questions about this policy can be sent to{' '}
-              <Link href={`mailto:${siteConfig.contact.email}`} underline="hover" sx={{ fontWeight: 700, color: 'secondary.dark' }}>
-                {siteConfig.contact.email}
+              <Link href={getContactMailto()} underline="hover" sx={{ fontWeight: 700, color: 'secondary.dark' }}>
+                {getContactEmailDisplay()}
               </Link>.
             </Typography>
           </Paper>

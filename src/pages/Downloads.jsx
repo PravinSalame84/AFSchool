@@ -24,13 +24,65 @@ function formatKey(key) {
     .replace(/^./, (value) => value.toUpperCase())
 }
 
+function extractDriveId(value) {
+  if (!value) return ''
+
+  const input = String(value).trim()
+  const patterns = [
+    /\/d\/([a-zA-Z0-9_-]+)/,
+    /[?&]id=([a-zA-Z0-9_-]+)/,
+    /\/folders\/([a-zA-Z0-9_-]+)/,
+  ]
+
+  for (const pattern of patterns) {
+    const match = input.match(pattern)
+    if (match?.[1]) return match[1]
+  }
+
+  return ''
+}
+
+function resolveDownloadLink(value) {
+  if (!value) return ''
+
+  try {
+    const url = new URL(String(value))
+    if (!url.hostname.includes('drive.google.com')) return url.toString()
+
+    const fileId = extractDriveId(url.toString())
+    if (!fileId || url.pathname.includes('/folders/')) return url.toString()
+
+    return `https://drive.google.com/uc?export=download&id=${fileId}`
+  } catch {
+    return ''
+  }
+}
+
 function ActionButton({ row, onOpen }) {
-  const label = row.label || row.title || 'Open item'
+  const label = row.actionLabel || row.label || row.title || 'Open details'
   const openInDialog = row.dialog?.mode === 'dialog' || row.dialog?.mode === 'details'
+  const externalHref = row.dialog?.fallbackUrl || row.href
+  const internalTo = !externalHref && row.to?.startsWith('/') ? row.to : ''
 
   if (openInDialog) {
     return (
       <Button onClick={() => onOpen(row)} variant="outline" size="sm" icon={false}>
+        {label}
+      </Button>
+    )
+  }
+
+  if (externalHref) {
+    return (
+      <Button href={externalHref} variant="outline" size="sm" icon={false}>
+        {label}
+      </Button>
+    )
+  }
+
+  if (internalTo) {
+    return (
+      <Button to={internalTo} variant="outline" size="sm" icon={false}>
         {label}
       </Button>
     )
@@ -120,6 +172,9 @@ function ResourceCard({ row, onOpen }) {
 }
 
 function DownloadCard({ row }) {
+  const previewHref = row.showPageUnderDialogBox || row.href || ''
+  const downloadHref = resolveDownloadLink(row.href || row.showPageUnderDialogBox || '')
+
   return (
     <Paper
       sx={{
@@ -138,15 +193,40 @@ function DownloadCard({ row }) {
         {row.label || row.title || 'Download'}
       </Typography>
 
-      {row.href ? (
+      {(row.message || row.description || row.excerpt) ? (
         <Typography sx={{ mt: 1.1, color: 'text.secondary', fontSize: '0.88rem', lineHeight: 1.7 }}>
-          Directly open or download this file using the public Google Drive link configured by the school.
+          {row.message || row.description || row.excerpt}
+        </Typography>
+      ) : null}
+
+      {previewHref ? (
+        <Typography sx={{ mt: 1.1, color: 'text.secondary', fontSize: '0.88rem', lineHeight: 1.7 }}>
+          Open the attachment to review it online, or use the download button to save a copy to your device.
         </Typography>
       ) : null}
 
       <Typography sx={{ mt: 2, color: 'text.secondary', fontSize: '0.82rem' }}>
-        Public direct download buttons are hidden to reduce unauthorised sharing. Use the managed preview flow where required.
+        Please make sure pop-ups are allowed in your browser if the file opens in a new tab.
       </Typography>
+
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.1} sx={{ mt: 2.2 }}>
+        {previewHref ? (
+          <Button href={previewHref} variant="outline" size="sm" icon={false}>
+            Open attachment
+          </Button>
+        ) : null}
+        {downloadHref ? (
+          <Button href={downloadHref} variant="primary" size="sm" icon={false}>
+            Download file
+          </Button>
+        ) : null}
+      </Stack>
+
+      {!previewHref && !downloadHref ? (
+        <Alert severity="info" sx={{ mt: 2.2 }}>
+          This file link will appear here as soon as the school publishes the attachment.
+        </Alert>
+      ) : null}
     </Paper>
   )
 }
@@ -176,9 +256,11 @@ function EventGalleryCard({ row, onOpen }) {
       </Typography>
 
       <Typography sx={{ mt: 1, color: 'text.secondary', fontSize: '0.9rem', lineHeight: 1.7 }}>
-        {row.galleryImageCount
-          ? `Gallery announcement: ${row.galleryImageCount} photos are available in this event carousel.`
-          : 'Gallery announcement: photos will appear here when image items are configured for this event.'}
+        {row.galleryAnnouncement ||
+          row.message ||
+          (row.galleryImageCount
+            ? `Browse ${row.galleryImageCount} photos from this event in the gallery below.`
+            : 'Event photos will appear here once the school publishes them.')}
       </Typography>
 
       {hasImages ? (
@@ -222,7 +304,7 @@ function EventGalleryCard({ row, onOpen }) {
         </Box>
       ) : (
         <Alert severity="info" sx={{ mt: 2 }}>
-          Add `galleryImages`, `galleryImageUrls`, `photoLinks`, or Drive file IDs in the sheet to show a full image carousel here.
+          Event photos have not been published for this item yet.
         </Alert>
       )}
 
@@ -250,7 +332,7 @@ export default function Downloads() {
         eyebrow="Download Centre"
         crumb="Downloads"
         title="Public downloads, notices, results links and event updates in one place"
-        subtitle="Visitors only see the public download centre here, while the other spreadsheet tabs now work behind the scenes as safe site settings and content feeds."
+        subtitle="Use this page to read important school notices, view event updates, and open or download published documents."
         image={sharedImages.teacherImageFour}
       />
 
@@ -270,10 +352,10 @@ export default function Downloads() {
                   School Updates
                 </Typography>
                 <Typography sx={{ mt: 1, fontSize: { xs: '1.4rem', sm: '1.8rem' }, fontWeight: 800 }}>
-                  The public downloads page is now powered by configurable spreadsheet content
+                  Important school notices, forms and event highlights in one place
                 </Typography>
                 <Typography sx={{ mt: 1.1, maxWidth: 800, color: 'rgba(255,255,255,0.75)', lineHeight: 1.75 }}>
-                  Admin-managed notices, results, announcements, downloads and event galleries can now be published safely without exposing internal sheet edit shortcuts to website visitors.
+                  Families and visitors can check the latest updates here, open shared attachments, and download published forms whenever needed.
                 </Typography>
               </Box>
             </Stack>
@@ -292,7 +374,7 @@ export default function Downloads() {
 
         {loading ? (
           <Alert severity="info" sx={{ mt: 3 }}>
-            Loading the latest school updates from the public sheet.
+            Loading the latest school updates and attachments.
           </Alert>
         ) : null}
 
@@ -304,7 +386,7 @@ export default function Downloads() {
 
         {contentProvider === 'local-secure' ? (
           <Alert severity="info" sx={{ mt: 3 }}>
-            Secure content mode is enabled. This site is no longer reading public Google Sheet or Drive links directly. To keep admin-only access secure, published website content should be updated through site-managed content or a protected backend service.
+            Some school updates are temporarily being shown from the protected site source.
           </Alert>
         ) : null}
 
@@ -327,7 +409,7 @@ export default function Downloads() {
                   Notice links and public actions
                 </Typography>
                 <Typography sx={{ mt: 0.8, color: 'text.secondary', lineHeight: 1.75 }}>
-                  These items are managed from the sheet and can open public links directly or inside a dialog preview when `showPageUnderDialogBox` is configured.
+                  Open important notices, school updates and useful links shared for students, parents and visitors.
                 </Typography>
 
                 <Box sx={{ mt: 2.4, display: 'grid', gridTemplateColumns: { xs: '1fr', lg: 'repeat(3, 1fr)' }, gap: 2 }}>
@@ -347,7 +429,7 @@ export default function Downloads() {
                   Event gallery and announcements
                 </Typography>
                 <Typography sx={{ mt: 0.8, color: 'text.secondary', lineHeight: 1.75 }}>
-                  Event entries can show an embedded Drive folder now, and they also support full image carousels when you add direct image URLs or Drive file IDs in the sheet.
+                  Browse recent school events, announcements and photo highlights shared by the school.
                 </Typography>
 
                 {events.length ? (
@@ -360,7 +442,7 @@ export default function Downloads() {
                   </Box>
                 ) : (
                   <Alert severity="info" sx={{ mt: 2.4 }}>
-                    No public event gallery has been published yet.
+                    Event updates will appear here when they are published.
                   </Alert>
                 )}
               </Box>
@@ -372,7 +454,7 @@ export default function Downloads() {
                   Downloads
                 </Typography>
                 <Typography sx={{ mt: 0.8, color: 'text.secondary', lineHeight: 1.75 }}>
-                  Only the downloads section is shown publicly here. Other spreadsheet tabs now behave as admin-controlled site settings and content sources.
+                  Find published forms, circulars and documents here. You can open each attachment in a new tab or download it directly to your device.
                 </Typography>
 
                 {downloads.length ? (
@@ -383,7 +465,7 @@ export default function Downloads() {
                   </Box>
                 ) : (
                   <Alert severity="info" sx={{ mt: 2.4 }}>
-                    No downloads are currently published.
+                    Downloadable files will appear here once they are published.
                   </Alert>
                 )}
               </Box>

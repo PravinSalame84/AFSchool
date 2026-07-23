@@ -26,6 +26,7 @@ import Container from '../ui/Container'
 import Logo from './Logo'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
+import { getContactEmailDisplay, getContactMailto } from '../../utils/contact'
 import appContent from '../../data/appContent'
 import { footerQuickLinks, resourceLinks } from '../../data/siteLinks'
 import {
@@ -275,8 +276,8 @@ export default function Footer() {
               </Stack>
               <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                 <Mail size={18} color={BRAND_NEUTRALS.accentStrong} />
-                <MuiLink href={`mailto:${siteConfig.contact.email}`} underline="none" sx={{ color: BRAND_NEUTRALS.white, fontWeight: 700, wordBreak: 'break-word', '&:hover': { color: 'secondary.main' } }}>
-                  {siteConfig.contact.email}
+                <MuiLink href={getContactMailto()} underline="none" sx={{ color: BRAND_NEUTRALS.white, fontWeight: 700, wordBreak: 'break-word', '&:hover': { color: 'secondary.main' } }}>
+                  {getContactEmailDisplay()}
                 </MuiLink>
               </Stack>
               <MuiLink href={schoolContent.contact.mapLink} target="_blank" rel="noopener noreferrer" underline="none" sx={{ display: 'inline-flex', alignSelf: 'flex-start', mt: 1, px: 2.5, py: 1.15, borderRadius: '999px', border: `1px solid ${BRAND_ALPHA.white22}`, backgroundColor: BRAND_ALPHA.white12, backdropFilter: 'blur(18px)', color: BRAND_NEUTRALS.white, fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', '&:hover': { borderColor: 'secondary.main', color: 'secondary.main', backgroundColor: BRAND_ALPHA.accent16 } }}>

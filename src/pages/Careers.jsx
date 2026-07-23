@@ -22,6 +22,7 @@ import Section from '../components/ui/Section'
 import siteConfig from '../data/siteConfig'
 import appContent from '../data/appContent'
 import { BRAND_NEUTRALS } from '../constants/brand'
+import { buildMailtoUrl } from '../utils/contact'
 
 const culturePoints = [
   {
@@ -73,6 +74,18 @@ const processSteps = [
 ]
 
 export default function Careers() {
+  const careerMailto = buildMailtoUrl({
+    subject: 'Career Application for Air Force School',
+    lines: [
+      'Name:',
+      'Phone:',
+      'Role applying for:',
+      'Years of experience:',
+      '',
+      'Brief note:',
+    ],
+  })
+
   return (
     <>
       <PageHero {...appContent.pageHeroes.careers} />
@@ -122,7 +135,7 @@ export default function Careers() {
                   Whether you teach, coordinate or support operations, we value people who can work with discipline, warmth and clarity in a school setting.
                 </Typography>
                 <Button
-                  href={`mailto:${siteConfig.contact.email}?subject=Career%20Application%20for%20Air%20Force%20School`}
+                  href={careerMailto}
                   variant="dark"
                   sx={{ mt: 3, width: { xs: '100%', sm: 'auto' } }}
                 >
@@ -290,7 +303,7 @@ export default function Careers() {
                 </Typography>
                 <Stack spacing={1.2} sx={{ mt: 2.5 }}>
                   <Button
-                    href={`mailto:${siteConfig.contact.email}?subject=Career%20Application%20for%20Air%20Force%20School`}
+                    href={careerMailto}
                     variant="light"
                     sx={{ width: '100%' }}
                   >

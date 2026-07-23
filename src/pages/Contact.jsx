@@ -1,4 +1,4 @@
-import { Box, Link, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Box, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/ui/PageHero'
@@ -11,11 +11,12 @@ import siteConfig from '../data/siteConfig'
 import appContent from '../data/appContent'
 import schoolContent from '../data/schoolContent'
 import { BRAND_NEUTRALS } from '../constants/brand'
+import { getContactEmailDisplay, getContactMailto, submitEmailForm } from '../utils/contact'
 
 const infoCards = [
   { icon: MapPin, title: 'Head Office', value: siteConfig.contact.address },
   { icon: Phone, title: 'Call Us', value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone}` },
-  { icon: Mail, title: 'Email Us', value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+  { icon: Mail, title: 'Email Us', value: getContactEmailDisplay(), href: getContactMailto() },
   { icon: Clock, title: 'Office Hours', value: 'Mon – Sat, 9:00 AM – 5:30 PM' },
 ]
 
@@ -89,17 +90,40 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const update = (field) => (e) => setForm((p) => ({ ...p, [field]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your name'
     if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email'
     if (!form.message.trim()) next.message = 'Please enter a message'
     setErrors(next)
-    if (Object.keys(next).length === 0) setSent(true)
+    setSubmitError('')
+    if (Object.keys(next).length === 0) {
+      setIsSubmitting(true)
+      try {
+        await submitEmailForm({
+          subject: `Website Contact Enquiry from ${form.name.trim()}`,
+          replyTo: form.email.trim(),
+          formName: form.name.trim(),
+          fields: {
+            fullName: form.name.trim(),
+            email: form.email.trim(),
+            phone: form.phone.trim() || 'Not provided',
+            message: form.message.trim(),
+          },
+        })
+        setSent(true)
+      } catch (error) {
+        setSubmitError(error.message || 'We could not send your message right now.')
+      } finally {
+        setIsSubmitting(false)
+      }
+    }
   }
 
   return (
@@ -142,6 +166,11 @@ export default function Contact() {
                 </Paper>
               ) : (
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3.5 }}>
+                  {submitError ? (
+                    <Alert severity="warning" sx={{ mb: 2 }}>
+                      {submitError}
+                    </Alert>
+                  ) : null}
                   <Input id="cname" label="Full Name" required value={form.name} onChange={update('name')} error={errors.name} />
                   <Box sx={{ mt: 2, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
                     <Input id="cemail" type="email" label="Email" required value={form.email} onChange={update('email')} error={errors.email} />
@@ -161,8 +190,8 @@ export default function Contact() {
                     helperText={errors.message || ' '}
                     fullWidth
                   />
-                  <Button type="submit" variant="primary" fullWidth>
-                    Send Message
+                  <Button type="submit" variant="primary" fullWidth disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </Box>
               )}

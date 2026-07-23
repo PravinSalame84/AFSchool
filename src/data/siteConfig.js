@@ -4,6 +4,8 @@
 // contact info, socials, CTAs) without touching any component code.
 // ─────────────────────────────────────────────────────────────────────────
 
+const enquiryEmailRecipients = ['pravinsalame10@gmail.com', 'airforceschoolvsn@gmail.com']
+
 const siteConfig = {
   brandName: 'Air Force School',
   brandSuffix: 'Vayusena Nagar, Nagpur',
@@ -15,7 +17,10 @@ const siteConfig = {
 
   contact: {
     address: 'Airforce School House, Air Force School VayuSena Nagar, Nagpur - 440007, Maharashtra, India',
-    email: 'airforceschoolvsn@gmail.com',
+    email: enquiryEmailRecipients[0],
+    emailRecipients: enquiryEmailRecipients,
+    emailDisplay: enquiryEmailRecipients.join(', '),
+    mailto: `mailto:${enquiryEmailRecipients.join(',')}`,
     phone: '0712-2511407',
     whatsapp: '9146071487', // digits only, with country code
   },

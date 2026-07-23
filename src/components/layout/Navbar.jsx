@@ -30,6 +30,7 @@ import Logo from './Logo'
 import navigation from '../../data/navigation'
 import siteConfig from '../../data/siteConfig'
 import schoolContent from '../../data/schoolContent'
+import { getContactEmailDisplay, getContactMailto } from '../../utils/contact'
 import { useEnquiryModal } from '../../context/EnquiryModalContext'
 import {
   BACKDROP_DARK_SX,
@@ -331,8 +332,8 @@ const mobileTopBarLinks = [
     icon: LocalPhoneRoundedIcon,
   },
   {
-    label: siteConfig.contact.email,
-    href: `mailto:${siteConfig.contact.email}`,
+    label: getContactEmailDisplay(),
+    href: getContactMailto(),
     icon: EmailRoundedIcon,
   },
   {
